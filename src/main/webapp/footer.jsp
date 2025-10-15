@@ -18,6 +18,7 @@
                                 <p>Offering Open Discount</p>
                             </div>
                         </li>
+                        
                         <li class="tg-quality">
                             <span class="tg-clientserviceicon"><i class="icon-leaf"></i></span>
                             <div class="tg-titlesubtitle">
@@ -148,7 +149,6 @@
 <!--************************************
                 Footer End
 *************************************-->
-</div>
 <!--************************************
                 Wrapper End
 *************************************-->
