@@ -1,10 +1,10 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+    <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
     <head>
-        <title>Book Library</title>
+        <title>Book Library | Quản lý danh mục - Admin</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -105,15 +105,15 @@
                     </div>
                 </div>
             </header>
-            <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-07.jpg">
+            <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="../images/parallax/bgparallax-07.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="tg-innerbannercontent">
-                                <h1>Tất cả sách</h1>
+                                <h1 style="margin-bottom: 20px;">Quản lý Danh mục</h1>
                                 <ol class="tg-breadcrumb">
                                     <li><a href="javascript:void(0);">Trang chủ</a></li>
-                                    <li class="tg-active">Sách</li>
+                                    <li class="tg-active">Danh mục</li>
                                 </ol>
                             </div>
                         </div>
@@ -121,94 +121,90 @@
                 </div>
             </div>
             <main id="tg-main" class="tg-main tg-haslayout">
-                <div class="tg-sectionspace tg-haslayout">
+                <div class="tg-sectionspace tg-haslayout" style="padding-top: 50px;">
                     <div class="container">
                         <div class="row">
-                            <div id="tg-twocolumns" class="tg-twocolumns">
-                                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9 pull-right">
+                            <div>
+                                <div> 
+                                    <!-- <h2>Thông tin khách hàng</h2> -->
                                     <div id="tg-content" class="tg-content">
                                         <div class="tg-products">
                                             <div class="tg-productgrid">
-                                                <div class="tg-refinesearch">
-
-                                                    <form class="tg-formtheme tg-formsortshoitems" th:action="@{/products}">
-                                                        <fieldset>
-                                                            <div class="form-group">
-                                                                <label>Sắp xếp theo:</label>
-                                                                <span class="tg-select" style="padding-left: 40px; ">
-                                                                    <select name="sortBy" id="sortBy" onchange="submitForm()">
-                                                                        <option value="">---Chọn sắp xếp---</option>
-                                                                        <option value="title">Tên sách</option>
-                                                                        <option value="price">Đơn giá</option>
-                                                                    </select>
-                                                                </span>
-                                                            </div>
-                                                        </fieldset>
-                                                    </form>
+                                                <button type="button" class="btn btn-primary" style="margin-bottom: 5px;"
+                                                        data-toggle="modal" th:data-target="${'#myModal_add'}">Thêm danh mục mới</button>
+                                                <div class="row">
+                                                    <table class="table table-bordered">
+                                                        <tr>
+                                                            <th>STT</th>
+                                                            <th>Tên danh mục</th>
+                                                            <th>Số lượng sách</th>
+                                                            <th>Ngày tạo</th>
+                                                            <th>Ngày cập nhật</th>
+                                                            <th>Hành động</th>
+                                                        </tr>
+                                                        <%--												<th:block th:each="category: ${categoryList}">
+                                                                                                                                                        <tr class="active-row">
+                                                                                                                                                                <td th:text="${categoryList.indexOf(category)+1}"></td>
+                                                                                                                                                                <td th:text="${category.name}"></td>
+                                                                                                                                                                <td th:text="${category.bookList.size()}"></td>
+                                                                                                                                                                <td th:text="${category.created_at}"></td>
+                                                                                                                                                                <td th:text="${category.updated_at}"></td>
+                                                                                                                                                                <td>
+                                                                                                                                                                        <button type="button" class="btn btn-warning" data-toggle="modal" th:data-target="${'#myModal_edit'+category.id}">Sửa</button>
+                                                                                                                                                                        <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="${'#myModal_delete'+category.id}">Xóa</button>
+                                                                                                                                                                </td>
+                                                                                                                                                        </tr>
+                                                                                                                                                        <div class="modal fade" th:id="${'myModal_edit'+category.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                                                                                                                                <div class="modal-dialog" role="document">
+                                                                                                                                                                        <div class="modal-content">
+                                                                                                                                                                                <div class="modal-header">
+                                                                                                                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                                                                                                                                        <h4 class="modal-title" id="myModalLabel" style="text-transform: none;">Bạn chắc chắn muốn sửa danh mục này?</h4>
+                                                                                                                                                                                </div>
+                                                                                                                                                                                <div class="modal-body">
+                                                                                                                                                                                        <form th:action="@{/edit-category}" method="post">
+                                                                                                                                                                                        <input type="hidden" name="id" th:value="${category.id}">
+                                                                                                                                                                                        <div class="form-group" >
+                                                                                                                                                                                                <label for="categoryname" ><span style="color: red;">*</span>Tên danh mục</label>
+                                                                                                                                                                                                <input type="text" th:value="${category.name}" class="form-control" name="name" id="bookname" required >
+                                                                                                                                                                                        </div>
+                                                                                                                                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                                                                                                                                                                                        <a href="#"><button type="submit" class="btn btn-primary">Xác nhận</button></a>
+                                                                                                                                                                                        </form>
+                                                                                                                                                                                </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                </div>
+                                                                                                                                                        </div>
+                                                                                                                                                        <div class="modal fade" th:id="${'myModal_delete'+category.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                                                                                                                                <div class="modal-dialog" role="document">
+                                                                                                                                                                        <div class="modal-content">
+                                                                                                                                                                                <div th:if="${category.bookList.size()==0}" class="modal-header">
+                                                                                                                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                                                                                                                                                                        aria-hidden="true">&times;</span></button>
+                                                                                                                                                                                        <h4 class="modal-title" id="myModalLabel" style="text-transform: none;">Bạn chắc chắn muốn xóa danh mục này?</h4>
+                                                                                                                                                                                </div>
+                                                                                                                                                                                <div th:if="${category.bookList.size()!=0}" class="modal-header">
+                                                                                                                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                                                                                                                                                                        aria-hidden="true">&times;</span></button>
+                                                                                                                                                                                        <h4 class="modal-title" id="myModalLabel" style="text-transform: none;">Không thể xóa tác giả đang có sách</h4>
+                                                                                                                                                                                </div>
+                                                                                                                                                                                <div class="modal-body">
+                                                                                                                                                                                        <form>
+                                                                                                                                                                                        <button th:if="${category.bookList.size()==0}" type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                                                                                                                                                                                        <button th:if="${category.bookList.size()!=0}" type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                                                                                                                                                                                        <a th:if="${category.bookList.size()==0}" th:href="@{|/delete-category?id=${category.id}|}">
+                                                                                                                                                                                                <button type="button" class="btn btn-primary">Xác nhận</button></a>
+                                                                                                                                                                                        </form>
+                                                                                                                                                                                </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                </div>
+                                                                                                                                                        </div>
+                                                                                                                                                </th:block> --%>
+                                                    </table>
                                                 </div>
-                                                <div th:each="book: ${bookList}">
-                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="tg-postbook" >
-                                                            <figure class="tg-featureimg">
-                                                                <div class="tg-bookimg">
-                                                                    <a th:href ="@{|/detail-product?id=${book.id}|}"><div class="tg-frontcover"><img th:src ="@{|/bookImage?id=${book.id}|}" alt="image description"></div></a>
-                                                                    <div class="tg-backcover"><img th:src ="@{|/bookImage?id=${book.id}|}" alt="image description"></div>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="tg-postbookcontent" >
-                                                                <ul class="tg-bookscategories">
-                                                                    <li><a href="javascript:void(0);"><span th:text="${book.category.name}"></span> </a></li>
-                                                                </ul>
-                                                                <div class="tg-booktitle">
-                                                                    <h3><a th:href ="@{|/detail-product?id=${book.id}|}" th:text="${book.title}"></a></h3>
-                                                                </div>
-                                                                <span class="tg-bookwriter" style="margin-bottom: 5px;">Tác giả: <a href="javascript:void(0);" th:text="${book.author.name}"></a></span>
-                                                                <span class="tg-bookwriter">Đã bán: <a href="javascript:void(0);" th:text="${book.number_sold}" ></a></span>
-                                                                <span class="tg-bookwriter">Còn: <a href="javascript:void(0);" th:text="${book.number_in_stock}" ></a></span>
-                                                                <span class="tg-bookprice" >
-                                                                    <ins><span th:text="${book.price}"></span> VNĐ</ins>
-                                                                </span>
-                                                                <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);" th:href ="@{|/detail-product?id=${book.id}|}">
-                                                                    <i class="fa fa-shopping-basket"></i>
-                                                                    <em>Thêm vào giỏ</em>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 pull-left">
-                                    <aside id="tg-sidebar" class="tg-sidebar">
-                                        <div class="tg-widget tg-widgetsearch">
-                                            <form class="tg-formtheme tg-formsearch" th:action="@{/search}">
-                                                <div class="form-group">
-                                                    <button type="submit"><i class="icon-magnifier"></i></button>
-                                                    <input type="search" th:value="${keyword}" name="keyword" class="form-group" style = "width: 270px; "
-                                                           placeholder="Tìm kiếm với ... ">
-
-                                                </div>
-                                                <select name="type" class="form-group" style = "width: 130px; margin-top: 3px;" id="searchBy">
-                                                    <option value="title">Tiêu đề</option>
-                                                    <option value="author">Tác giả</option>
-                                                </select>
-                                            </form>
-                                        </div>
-                                        <div class="tg-widget tg-catagories">
-                                            <div class="tg-widgettitle">
-                                                <h3>Thể loại</h3>
-                                            </div>
-                                            <div class="tg-widgetcontent">
-                                                <ul th:each="category: ${categoryList}">
-                                                    <li><a th:href="@{|/search?keyword=${category.name}&type=category|}"><span th:text="${category.name}" ></span>
-                                                            <em th:text="${category.bookList.size()}"></em></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </aside>
                                 </div>
                             </div>
                         </div>
@@ -220,11 +216,11 @@
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li><a th:href="@{/products?page=1}">1</a></li>
-                            <li><a th:href="@{/products?page=2}">2</a></li>
-                            <li><a th:href="@{/products?page=3}">3</a></li>
-                            <li><a th:href="@{/products?page=4}">4</a></li>
-                            <li><a th:href="@{/products?page=5}">5</a></li>
+                            <li><a th:href="@{/manage-category?page=1}">1</a></li>
+                            <li><a th:href="@{/manage-category?page=2}">2</a></li>
+                            <li><a th:href="@{/manage-category?page=3}">3</a></li>
+                            <li><a th:href="@{/manage-category?page=4}">4</a></li>
+                            <li><a th:href="@{/manage-category?page=5}">5</a></li>
                             <li>
                                 <a href="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
@@ -234,6 +230,27 @@
                     </nav>
                 </div>
             </main>
+            <div class="modal fade" id="myModal_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel" style="text-transform: none;">Bạn chắc chắn muốn thêm tác giả này?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form th:action="@{/create-category}" method="post">
+                                <div class="form-group">
+                                    <label for="categoryname"><span style="color: red;">*</span>Tên danh mục</label>
+                                    <input name="name" type="text" class="form-control" id="categoryname" required>
+                                </div>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-primary">Xác nhận</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <footer id="tg-footer" class="tg-footer tg-haslayout">
                 <div class="tg-footerarea">
                     <div class="container">
@@ -273,7 +290,7 @@
                             <div class="tg-threecolumns">
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                     <div class="tg-footercol">
-                                        <strong class="tg-logo"><a href="javascript:void(0);"><img src="images/flogo.png" alt="image description"></a></strong>
+                                        <strong class="tg-logo"><a href="javascript:void(0);"><img src="../images/flogo.png" alt="image description"></a></strong>
                                         <ul class="tg-contactinfo">
                                             <li>
                                                 <i class="icon-apartment"></i>
@@ -342,25 +359,24 @@
                     </div>
                 </div>
             </footer>
-        </div>
-        <script src="js/vendor/jquery-library.js"></script>
-        <script src="js/vendor/bootstrap.min.js"></script>
-        <script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/jquery.vide.min.js"></script>
-        <script src="js/countdown.js"></script>
-        <script src="js/jquery-ui.js"></script>
-        <script src="js/parallax.js"></script>
-        <script src="js/countTo.js"></script>
-        <script src="js/appear.js"></script>
-        <script src="js/gmap3.js"></script>
-        <script src="js/main.js"></script>
-        <script>
-                                                                        function submitForm() {
-                                                                            document.querySelector('.tg-formsortshoitems').submit();
-                                                                        }
+            <script src="../js/vendor/jquery-library.js"></script>
+            <script src="../js/vendor/bootstrap.min.js"></script>
+            <script src="../https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
+            <script src="../js/owl.carousel.min.js"></script>
+            <script src="../js/jquery.vide.min.js"></script>
+            <script src="../js/countdown.js"></script>
+            <script src="../js/jquery-ui.js"></script>
+            <script src="../js/parallax.js"></script>
+            <script src="../js/countTo.js"></script>
+            <script src="../js/appear.js"></script>
+            <script src="../js/gmap3.js"></script>
+            <script src="../js/main.js"></script>
+            <script>
+                function submitForm() {
+                    document.querySelector('.tg-formsortshoitems').submit();
+                }
 
-        </script>
+            </script>	
     </body>
 
 </html>
