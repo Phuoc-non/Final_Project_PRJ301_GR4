@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -53,7 +55,7 @@
                                     <ul class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-currenty">
                                         <li>
                                             <a href="javascript:void(0);">
-                                                <i>£</i>
+                                                <i>Â£</i>
                                                 <span>British Pound</span>
                                             </a>
                                         </li>

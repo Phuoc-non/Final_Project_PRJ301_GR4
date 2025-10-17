@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import DAO.CategoryDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import model.Category;
 
 /**
  *
@@ -57,7 +60,10 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+          CategoryDao dao = new  CategoryDao();
+        ArrayList< Category> list =  dao.getAll();
+       request.setAttribute("category", list);
+       request.getRequestDispatcher("/WEB-INF/admin/category.jsp").forward(request, response);
     }
 
     /**
