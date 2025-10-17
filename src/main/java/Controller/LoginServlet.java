@@ -4,8 +4,8 @@
  */
 package Controller;
 
+import entity.GoogleAccount;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,10 +14,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Asus
+ * @author DELL
  */
-@WebServlet(name = "LIB_Server", urlPatterns = {"/LIB_Server"})
-public class LIB_Server extends HttpServlet {
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,18 +31,16 @@ public class LIB_Server extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LIB_Server</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LIB_Server at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String code = request.getParameter("code");
+        String error = request.getParameter("error");
+        //neu nguoi dung huy uy quyen
+        if(error != null) {
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
+        GoogleLogin gg = new GoogleLogin();
+        String accessToken = gg.getToken(code);
+        GoogleAccount acc = gg.getUserInfo(accessToken);
+        //check tk da dky chua
     }
 
     /**
@@ -56,9 +54,7 @@ public class LIB_Server extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-                
-
+        request.getRequestDispatcher("/WEB-INF/logins/login.jsp").forward(request, response);//
     }
 
     /**
@@ -72,7 +68,29 @@ public class LIB_Server extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        String u = request.getParameter("username");
+//        String p = request.getParameter("password");
+//
+//        UserDAO dao = new UserDAO();
+//        String passMD5 = MD5Util.md5(p);
+//        Users user = dao.login(u, passMD5);
+//
+//        if (user != null) {
+//            HttpSession session = request.getSession();
+//            session.setAttribute("user", user);
+//
+//            Cookie cookieUser = new Cookie("username", u);
+//            Cookie cookiePass = new Cookie("password", p);
+//            cookieUser.setMaxAge(24 * 60 * 60);
+//            cookiePass.setMaxAge(24 * 60 * 60);
+//            response.addCookie(cookieUser);
+//            response.addCookie(cookiePass);
+//
+//            response.sendRedirect(getServletContext().getContextPath() + "/...");
+//        } else {
+//            request.setAttribute("error", "Username or password invalid!");
+//            request.getRequestDispatcher("/WEB-INF/logins/login.jsp").forward(request, response);//
+//        }
     }
 
     /**
