@@ -16,8 +16,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Asus
  */
-@WebServlet(name = "LIB_Server", urlPatterns = {"/LIB_Server"})
-public class LIB_Server extends HttpServlet {
+@WebServlet(name = "ProductDetail", urlPatterns = {"/ProductDetail"})
+public class ProductDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +36,10 @@ public class LIB_Server extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LIB_Server</title>");
+            out.println("<title>Servlet ProductDetail</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LIB_Server at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ProductDetail at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,9 +56,7 @@ public class LIB_Server extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-                
-
+       request.getRequestDispatcher("/WEB-INF/User/productdetail.jsp").forward(request, response);   
     }
 
     /**
