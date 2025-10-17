@@ -17,7 +17,7 @@
                             <div class="tg-innerbannercontent">
                                 <h1>All Products</h1>
                                 <ol class="tg-breadcrumb">
-                                    <li><a href="javascript:void(0);">home</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/assets/index.html">home</a></li>
                                     <li><a href="javascript:void(0);">Products</a></li>
                                     <li class="tg-active">Product Title Here</li>
                                 </ol>
