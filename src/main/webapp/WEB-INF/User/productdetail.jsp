@@ -3,6 +3,7 @@
     Created on : Oct 15, 2025, 2:33:11 PM
     Author     : Asus
 --%>
+<<<<<<< HEAD
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
 
@@ -10,6 +11,8 @@
                             Inner Banner Start
             *************************************-->
             <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="${pageContext.request.contextPath}/assets/images/parallax/bgparallax-07.jpg">
+
+
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -48,7 +51,9 @@
                                             <div class="tg-featureditm">
                                                 <div class="row">
                                                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-sm hidden-xs">
+<<<<<<< HEAD
                                                         <figure><img src="${pageContext.request.contextPath}/assets/images/img-04.jpg" alt="image description"></figure>
+
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                                         <div class="tg-featureditmcontent">
@@ -77,7 +82,9 @@
                                             <div class="row">
                                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                                     <div class="tg-postbook">
+<<<<<<< HEAD
                                                         <figure class="tg-featureimg"><img src="${pageContext.request.contextPath}/assets/images/books/img-07.jpg" alt="image description"></figure>
+
                                                         <div class="tg-postbookcontent">
                                                             <span class="tg-bookprice">
                                                                 <ins>$25.18</ins>
@@ -95,7 +102,9 @@
                                                                 <em class="plus">+</em>
                                                             </div>
                                                             <a class="tg-btn tg-active tg-btn-lg" href="javascript:void(0);">Add To Basket</a>
+<<<<<<< HEAD
                                                             <a class="tg-btnaddtowishlist" href="#">
+
                                                                 <span>add to wishlist</span>
                                                             </a>
                                                         </div>
@@ -144,7 +153,9 @@
                                                         </ul>
                                                         <div class="tg-alsoavailable">
                                                             <figure>
+<<<<<<< HEAD
                                                                 <img src="${pageContext.request.contextPath}/assets/images/img-02.jpg" alt="image description">
+
                                                                 <figcaption>
                                                                     <h3>Also Available in:</h3>
                                                                     <ul>
@@ -165,7 +176,9 @@
                                                         </div>
                                                         <div class="tg-authorbox">
                                                             <figure class="tg-authorimg">
+<<<<<<< HEAD
                                                                 <img src="${pageContext.request.contextPath}/assets/images/author/imag-24.jpg" alt="image description">
+
                                                             </figure>
                                                             <div class="tg-authorinfo">
                                                                 <div class="tg-authorhead">
@@ -206,8 +219,10 @@
                                                                 <div class="tg-postbook">
                                                                     <figure class="tg-featureimg">
                                                                         <div class="tg-bookimg">
+<<<<<<< HEAD
                                                                             <div class="tg-frontcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-01.jpg" alt="image description"></div>
                                                                             <div class="tg-backcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-01.jpg" alt="image description"></div>
+
                                                                         </div>
                                                                         <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                                             <i class="icon-heart"></i>
@@ -240,8 +255,10 @@
                                                                 <div class="tg-postbook">
                                                                     <figure class="tg-featureimg">
                                                                         <div class="tg-bookimg">
+<<<<<<< HEAD
                                                                             <div class="tg-frontcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-02.jpg" alt="image description"></div>
                                                                             <div class="tg-backcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-02.jpg" alt="image description"></div>
+
                                                                         </div>
                                                                         <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                                             <i class="icon-heart"></i>
@@ -274,8 +291,10 @@
                                                                 <div class="tg-postbook">
                                                                     <figure class="tg-featureimg">
                                                                         <div class="tg-bookimg">
+<<<<<<< HEAD
                                                                             <div class="tg-frontcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-03.jpg" alt="image description"></div>
                                                                             <div class="tg-backcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-03.jpg" alt="image description"></div>
+
                                                                         </div>
                                                                         <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                                             <i class="icon-heart"></i>
@@ -308,8 +327,10 @@
                                                                 <div class="tg-postbook">
                                                                     <figure class="tg-featureimg">
                                                                         <div class="tg-bookimg">
+<<<<<<< HEAD
                                                                             <div class="tg-frontcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-04.jpg" alt="image description"></div>
                                                                             <div class="tg-backcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-04.jpg" alt="image description"></div>
+
                                                                         </div>
                                                                         <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                                             <i class="icon-heart"></i>
@@ -342,8 +363,10 @@
                                                                 <div class="tg-postbook">
                                                                     <figure class="tg-featureimg">
                                                                         <div class="tg-bookimg">
+<<<<<<< HEAD
                                                                             <div class="tg-frontcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-05.jpg" alt="image description"></div>
                                                                             <div class="tg-backcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-05.jpg" alt="image description"></div>
+
                                                                         </div>
                                                                         <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                                             <i class="icon-heart"></i>
@@ -376,8 +399,10 @@
                                                                 <div class="tg-postbook">
                                                                     <figure class="tg-featureimg">
                                                                         <div class="tg-bookimg">
+<<<<<<< HEAD
                                                                             <div class="tg-frontcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-06.jpg" alt="image description"></div>
                                                                             <div class="tg-backcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-06.jpg" alt="image description"></div>
+
                                                                         </div>
                                                                         <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                                             <i class="icon-heart"></i>
@@ -410,8 +435,10 @@
                                                                 <div class="tg-postbook">
                                                                     <figure class="tg-featureimg">
                                                                         <div class="tg-bookimg">
+<<<<<<< HEAD
                                                                             <div class="tg-frontcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-03.jpg" alt="image description"></div>
                                                                             <div class="tg-backcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-03.jpg" alt="image description"></div>
+
                                                                         </div>
                                                                         <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                                             <i class="icon-heart"></i>
@@ -493,4 +520,5 @@
             <!--************************************
                             Main End
             *************************************-->
+<<<<<<< HEAD
             <%@include file="../includes/footer.jsp" %>
