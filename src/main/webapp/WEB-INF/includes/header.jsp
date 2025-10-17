@@ -7,19 +7,19 @@
         <title>Book Library</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
-        <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../../assets/css/normalize.css">
-        <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../../assets/css/icomoon.css">
-        <link rel="stylesheet" href="../../assets/css/jquery-ui.css">
-        <link rel="stylesheet" href="../../assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="../../assets/css/transitions.css">
-        <link rel="stylesheet" href="../../assets/css/main.css">
-        <link rel="stylesheet" href="../../assets/css/color.css">
-        <link rel="stylesheet" href="../../assets/css/responsive.css">
+        <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/assets/apple-touch-icon.png">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/normalize.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/icomoon.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jquery-ui.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/transitions.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/color.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
         
-        <script src="../../assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
         <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
@@ -72,7 +72,7 @@
                                     </ul>
                                 </div>
                                 <div class="tg-userlogin">
-                                    <figure><a href="javascript:void(0);"><img src="../../assets/images/users/img-01.jpg" alt="image description"></a></figure>
+                                    <figure><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/assets/images/users/img-01.jpg" alt="image description"></a></figure>
                                     <span>Hi, John</span>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <strong class="tg-logo"><a href="index-2.html"><img src="../../assets/images/logo.png" alt="company name here"></a></strong>
+                                <strong class="tg-logo"><a href="index-2.html"><img src="${pageContext.request.contextPath}/assets/images/logo.png" alt="company name here"></a></strong>
                                 <div class="tg-wishlistandcart">
                                     <div class="dropdown tg-themedropdown tg-wishlistdropdown">
                                         <a href="javascript:void(0);" id="tg-wishlisst" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -105,7 +105,7 @@
                                             <div class="tg-minicartbody">
                                                 <div class="tg-minicarproduct">
                                                     <figure>
-                                                        <img src="../../assets/images/users/img-01.jpg" alt="image description">
+                                                        <img src="${pageContext.request.contextPath}/assets/images/users/img-01.jpg" alt="image description">
 
                                                     </figure>
                                                     <div class="tg-minicarproductdata">
@@ -115,7 +115,7 @@
                                                 </div>
                                                 <div class="tg-minicarproduct">
                                                     <figure>
-                                                        <img src="../../images/products/img-02.jpg" alt="image description">
+                                                        <img src="${pageContext.request.contextPath}/images/products/img-02.jpg" alt="image description">
 
                                                     </figure>
                                                     <div class="tg-minicarproductdata">
@@ -125,7 +125,7 @@
                                                 </div>
                                                 <div class="tg-minicarproduct">
                                                     <figure>
-                                                        <img src="../../images/products/img-03.jpg" alt="image description">
+                                                        <img src="${pageContext.request.contextPath}/images/products/img-03.jpg" alt="image description">
 
                                                     </figure>
                                                     <div class="tg-minicarproductdata">
