@@ -38,7 +38,7 @@
                 <div class="tg-threecolumns">
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                         <div class="tg-footercol">
-                            <strong class="tg-logo"><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/assets/images/flogo.png" alt="image description"></a></strong>
+                            <strong class="tg-logo"><a href="javascript:void(0);"><img src="../../assets/images/flogo.png" alt="image description"></a></strong>
                             <ul class="tg-contactinfo">
                                 <li>
                                     <i class="icon-apartment"></i>
@@ -174,7 +174,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/transitions.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/color.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath} /assets/css/responsive.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
 </body>
 
 </html>
