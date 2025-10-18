@@ -60,10 +60,10 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          CategoryDao dao = new  CategoryDao();
-        ArrayList< Category> list =  dao.getAll();
-       request.setAttribute("category", list);
-       request.getRequestDispatcher("/WEB-INF/admin/category.jsp").forward(request, response);
+        CategoryDao dao = new CategoryDao();
+        ArrayList< Category> list = dao.getAll();
+        request.setAttribute("category", list);
+        request.getRequestDispatcher("/WEB-INF/admin/category.jsp").forward(request, response);
     }
 
     /**
@@ -77,7 +77,66 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String action = request.getParameter("action");
+
+        if (action.equals("create")) {
+            String name = request.getParameter("name");
+            CategoryDao dao = new CategoryDao();
+           
+            if (dao.checkNameCategory(name)) {
+                int id = dao.getAll().size()+1;
+                int checkCreate = dao.create(id,name);
+                if (checkCreate == 0) { // lỗi
+                    request.setAttribute("messageType", "error");
+                    request.setAttribute("message", "Add category failed! Please try again.");
+                } else { // thành công
+                    request.setAttribute("messageType", "success");
+                    request.setAttribute("message", "Category added successfully!");
+                }
+
+                request.setAttribute("category", dao.getAll());
+                request.getRequestDispatcher("/WEB-INF/admin/category.jsp").forward(request, response);
+            } else {
+                request.setAttribute("messageType", "error");
+                request.setAttribute("message", "Category Name is already in use! Please try again.");
+                request.setAttribute("category", dao.getAll());
+                request.getRequestDispatcher("/WEB-INF/admin/category.jsp").forward(request, response);
+            }
+        } else if (action.equals("edit")) {
+            String id = request.getParameter("id");
+            String newName = request.getParameter("name");
+
+            CategoryDao dao = new CategoryDao();
+            int checkEdit = dao.edit(Integer.parseInt(id), newName);
+            if (checkEdit == 0) {
+                request.setAttribute("messageType", "error");
+                request.setAttribute("message", "Category edit failed! Please try again.");
+
+            } else {
+                request.setAttribute("messageType", "success");
+                request.setAttribute("message", "Category edited successfully!");
+            }
+            request.setAttribute("category", dao.getAll());
+            request.getRequestDispatcher("/WEB-INF/admin/category.jsp").forward(request, response);
+        }
+        else if(action.equals("delete")){
+            String id = request.getParameter("id");
+             CategoryDao dao = new CategoryDao();
+             int checkDelete = dao.delete(Integer.parseInt(id));
+             if(checkDelete == 0){
+                 request.setAttribute("messageType", "error");
+                request.setAttribute("message", "Category deletion failed! Please try again.");
+                 
+             }else{
+                  request.setAttribute("messageType", "success");
+                request.setAttribute("message", "Category deleted successfully!");
+                 
+             }
+            
+                request.setAttribute("category", dao.getAll());
+            request.getRequestDispatcher("/WEB-INF/admin/category.jsp").forward(request, response);
+        }
     }
 
     /**

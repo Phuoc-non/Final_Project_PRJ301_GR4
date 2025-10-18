@@ -18,7 +18,7 @@
                                 <p>Offering Open Discount</p>
                             </div>
                         </li>
-<<<<<<< HEAD
+
 
                         <li class="tg-quality">
                             <span class="tg-clientserviceicon"><i class="icon-leaf"></i></span>
@@ -161,12 +161,12 @@
                 Footer End
 *************************************-->
 <<<<<<< HEAD
-</div>
+
 <!--************************************
                 Wrapper End
 *************************************-->
-<script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap.min.js"></script>
+ 
+
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
 <script src="${pageContext.request.contextPath}/assets/js/owl.carousel.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/jquery.vide.min.js"></script>
@@ -177,16 +177,7 @@
 <script src="${pageContext.request.contextPath}/assets/js/appear.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/gmap3.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/normalize.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/font-awesome.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/icomoon.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jquery-ui.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/owl.carousel.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/transitions.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/color.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
+
 
 </body>
 

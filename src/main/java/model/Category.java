@@ -4,26 +4,32 @@
  */
 package model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author Admin
  */
 public class Category {
-   private int id;
-   private String name;
-   private int quantity;
-   private String dayCreate;
-   private String dayUpdate;
+
+    private int id;
+    private String name;
+    private int quantity;
+    private Date dayCreate;
+    private Date dayUpdate;
 
     public Category() {
     }
 
-    public Category(int id, String name, int quantity/*, String dayCreate, String dayUpdate*/) {
+    public Category(int id, String name, int quantity, Date dayCreate, Date dayUpdate) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
-//        this.dayCreate = dayCreate;
-//        this.dayUpdate = dayUpdate;
+        this.dayCreate = dayCreate;
+        this.dayUpdate = dayUpdate;
+       
+      
     }
 
     public int getId() {
@@ -50,22 +56,24 @@ public class Category {
         this.quantity = quantity;
     }
 
-    public String getDayCreate() {
+    public Date getDayCreate() {
         return dayCreate;
     }
 
-    public void setDayCreate(String dayCreate) {
+    public void setDayCreate(Date dayCreate) {
         this.dayCreate = dayCreate;
     }
 
-    public String getDayUpdate() {
+    public Date getDayUpdate() {
         return dayUpdate;
     }
 
-    public void setDayUpdate(String dayUpdate) {
+    public void setDayUpdate(Date dayUpdate) {
         this.dayUpdate = dayUpdate;
     }
-    
-   
-   
+
+  
 }
+
+
+
