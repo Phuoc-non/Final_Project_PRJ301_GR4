@@ -1,0 +1,9 @@
+Controller\LoginServlet.class
+dao\TestLogin.class
+com\mycompany\lib\resources\JakartaEE11Resource.class
+Util\MD5Util.class
+com\mycompany\lib\JakartaRestConfiguration.class
+model\Registration.class
+Controller\LogoutServlet.class
+db\DBContext.class
+dao\RegistrationDAO.class

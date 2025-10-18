@@ -18,7 +18,6 @@
                                 <p>Offering Open Discount</p>
                             </div>
                         </li>
-<<<<<<< HEAD
 
                         <li class="tg-quality">
                             <span class="tg-clientserviceicon"><i class="icon-leaf"></i></span>
@@ -39,7 +38,6 @@
                 <div class="tg-threecolumns">
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                         <div class="tg-footercol">
-<<<<<<< HEAD
                             <strong class="tg-logo"><a href="javascript:void(0);"><img src="../../assets/images/flogo.png" alt="image description"></a></strong>
 
                             <ul class="tg-contactinfo">
@@ -109,7 +107,6 @@
                             <div class="tg-widgetcontent">
                                 <ul>
                                     <li>
-<<<<<<< HEAD
                                         <figure><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/assets/images/author/imag-09.jpg" alt="image description"></a></figure>
 
                                         <div class="tg-authornamebooks">
@@ -118,7 +115,6 @@
                                         </div>
                                     </li>
                                     <li>
-<<<<<<< HEAD
                                         <figure><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/assets/images/author/imag-10.jpg" alt="image description"></a></figure>
 
                                         <div class="tg-authornamebooks">
@@ -127,7 +123,6 @@
                                         </div>
                                     </li>
                                     <li>
-<<<<<<< HEAD
                                         <figure><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/assets/images/author/imag-11.jpg" alt="image description"></a></figure>
 
                                         <div class="tg-authornamebooks">
@@ -148,7 +143,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-<<<<<<< HEAD
                     <span class="tg-paymenttype"><img src="${pageContext.request.contextPath}/assets/images/paymenticon.png" alt="image description"></span>
 
                     <span class="tg-copyright">2017 All Rights Reserved By &copy; Book Library</span>

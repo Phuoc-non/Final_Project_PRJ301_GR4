@@ -20,10 +20,11 @@ public class DBContext {
     private final String DB_USER = "sa";
     private final String DB_PWD = "123456";
 
+
     public DBContext() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            this.conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
+            this.conn = (Connection) DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
