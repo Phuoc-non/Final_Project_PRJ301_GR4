@@ -62,6 +62,20 @@
                         </div>
                     </div>
 
+                    <!-- Address -->
+                    <div class="user-box">
+                        <div class="input-with-icon">
+                            <input type="text" name="address" required />
+                            <label>Address</label>
+                            <!-- 🏠 Icon ngôi nhà -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V12H9v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+
                     <!-- Password -->
                     <div class="user-box">
                         <div class="input-with-icon">
@@ -103,22 +117,6 @@
                     </div>
 
                     <button type="submit">Register</button>
-                    <!-- Social login section -->
-                    <div class="social-login">
-                        <div class="divider">
-                            <span>Or</span>
-                        </div>
-                        <div class="social-buttons">
-                            <a href="login-facebook" class="social-btn facebook">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="">
-                                Facebook
-                            </a>
-                            <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid&redirect_uri=http://localhost:8080/Lib/login&response_type=code&client_id=28124643077-1jjekr9l68gv8ach2fpf1qji2l7ktb5p.apps.googleusercontent.com&approval_prompt=force"" class="social-btn google">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="">
-                                Google
-                            </a>
-                        </div>
-                    </div>
 
                 </form>
             </div>
@@ -126,11 +124,11 @@
 
             <!-- Login -->
             <div class="form-container login-container">
-                <form action="login" method="post">
+                <form action="login" method="post" onsubmit="return validateLogin();">
                     <h1>Login here.</h1>
                     <div class="user-box">
                         <div class="input-with-icon">
-                            <input type="text" name="username" required />
+                            <input type="text" id="username" name="username" required />
                             <label>Username</label>
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -142,7 +140,7 @@
                     </div>
                     <div class="user-box">
                         <div class="input-with-icon" style="position: relative;">
-                            <input type="password" name="password" id="login-password" required />
+                            <input type="password" name="password" id="password" required />
                             <label>Password</label>
                             <!-- Nút con mắt -->
                             <span class="toggle-password" onclick="togglePassword('login-password', this)">
@@ -163,32 +161,18 @@
                             </span>
                         </div>
                     </div>
+                    <%-- lỗi js--%>
+                    <small id="error-msg" class="text-danger d-block mb-2"></small>
 
-                    <%
-                        if (request.getAttribute("errorLogin") != null) {
-                            String res = (String) request.getAttribute("errorLogin");
-                            out.println("<p>" + res + "</p>");
-                        }
-                    %>
+                    <%-- lỗi sai acc--%>
 
-                    <button type="submit">Login</button>
+                    <% if (request.getAttribute("error") != null) {%>
+                    <small class="text-danger d-block mb-2">
+                        <%= request.getAttribute("error")%>
+                    </small>
+                    <% }%>
 
-                    <!-- Social login section -->
-                    <div class="social-login">
-                        <div class="divider">
-                            <span>Or</span>
-                        </div>
-                        <div class="social-buttons">
-                            <a href="login-facebook" class="social-btn facebook">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="">
-                                Facebook
-                            </a>
-                            <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid&redirect_uri=http://localhost:8080/Lib/login&response_type=code&client_id=28124643077-1jjekr9l68gv8ach2fpf1qji2l7ktb5p.apps.googleusercontent.com&approval_prompt=force"" class="social-btn google">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="">
-                                Google
-                            </a>
-                        </div>
-                    </div>
+                    <button type="submit">Login</button>                  
                 </form>
             </div>
 
@@ -212,6 +196,7 @@
             </div>
         </div>
         <script src="http://localhost:8080/Lib/assets/js/login/index.js"></script>
+        <script src="http://localhost:8080/Lib/assets/js/login/login_validation.js"></script>
         <script src="http://localhost:8080/Lib/assets/js/login/register-validation.js"></script>
     </body>
 
