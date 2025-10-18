@@ -3,7 +3,6 @@
     Created on : Oct 15, 2025, 2:33:11 PM
     Author     : Asus
 --%>
-<<<<<<< HEAD
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
 
@@ -44,45 +43,12 @@
                             <div id="tg-twocolumns" class="tg-twocolumns">
                                 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9 pull-right">
                                     <div id="tg-content" class="tg-content">
-                                        <div class="tg-featurebook alert" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            <div class="tg-featureditm">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-sm hidden-xs">
-<<<<<<< HEAD
-                                                        <figure><img src="${pageContext.request.contextPath}/assets/images/img-04.jpg" alt="image description"></figure>
-
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                                                        <div class="tg-featureditmcontent">
-                                                            <div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
-                                                            <div class="tg-booktitle">
-                                                                <h3><a href="javascript:void(0);">Things To Know About Green Flat Design</a></h3>
-                                                            </div>
-                                                            <span class="tg-bookwriter">By: <a href="javascript:void(0);">Farrah Whisenhunt</a></span>
-                                                            <span class="tg-stars"><span></span></span>
-                                                            <div class="tg-priceandbtn">
-                                                                <span class="tg-bookprice">
-                                                                    <ins>$23.18</ins>
-                                                                    <del>$30.20</del>
-                                                                </span>
-                                                                <a class="tg-btn tg-btnstyletwo tg-active" href="javascript:void(0);">
-                                                                    <i class="fa fa-shopping-basket"></i>
-                                                                    <em>Add To Basket</em>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="tg-productdetail">
                                             <div class="row">
                                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                                     <div class="tg-postbook">
-<<<<<<< HEAD
+
                                                         <figure class="tg-featureimg"><img src="${pageContext.request.contextPath}/assets/images/books/img-07.jpg" alt="image description"></figure>
 
                                                         <div class="tg-postbookcontent">
@@ -102,7 +68,7 @@
                                                                 <em class="plus">+</em>
                                                             </div>
                                                             <a class="tg-btn tg-active tg-btn-lg" href="javascript:void(0);">Add To Basket</a>
-<<<<<<< HEAD
+
                                                             <a class="tg-btnaddtowishlist" href="#">
 
                                                                 <span>add to wishlist</span>
@@ -146,26 +112,8 @@
                                                             <li><span>Publication Date:</span><span>June 27, 2017</span></li>
                                                             <li><span>Publisher:</span><span>Sunshine Orlando</span></li>
                                                             <li><span>Language:</span><span>English</span></li>
-                                                            <li><span>Illustrations note:</span><span>b&amp;w images thru-out; 1 x 16pp colour plates</span></li>
-                                                            <li><span>ISBN10:</span><span>1234567890</span></li>
-                                                            <li><span>ISBN13:</span><span>1234567890000</span></li>
-                                                            <li><span>Other Fomate:</span><span>CD-Audio, Paperback, E-Book</span></li>
                                                         </ul>
-                                                        <div class="tg-alsoavailable">
-                                                            <figure>
-<<<<<<< HEAD
-                                                                <img src="${pageContext.request.contextPath}/assets/images/img-02.jpg" alt="image description">
-
-                                                                <figcaption>
-                                                                    <h3>Also Available in:</h3>
-                                                                    <ul>
-                                                                        <li><span>CD-Audio $18.30</span></li>
-                                                                        <li><span>Paperback $20.10</span></li>
-                                                                        <li><span>E-Book $11.30</span></li>
-                                                                    </ul>
-                                                                </figcaption>
-                                                            </figure>
-                                                        </div>
+                                                       
                                                     </div>
                                                 </div>
                                                 
