@@ -39,29 +39,6 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                                <div class="dropdown tg-themedropdown tg-currencydropdown">
-
-                                    <ul class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-currenty">
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <i>£</i>
-                                                <span>British Pound</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <i>$</i>
-                                                <span>Us Dollar</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <i>€</i>
-                                                <span>Euro</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
                                 <div class="tg-userlogin">
                                     <figure><a href="javascript:void(0);"><img src="images/users/img-01.jpg" alt="image description"></a></figure>
                                     <span>Hi, John</span>
@@ -76,16 +53,6 @@
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <strong class="tg-logo"><a href="index-2.html"><img src="images/logo.png" alt="company name here"></a></strong>
                                 <div class="tg-wishlistandcart">
-                                    <div class="dropdown tg-themedropdown tg-wishlistdropdown">
-                                        <a href="javascript:void(0);" id="tg-wishlisst" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="tg-themebadge">3</span>
-                                            <i class="icon-heart"></i>
-                                            <span>Wishlist</span>
-                                        </a>
-                                        <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-wishlisst">
-                                            <div class="tg-description"><p>No products were added to the wishlist!</p></div>
-                                        </div>
-                                    </div>
                                     <div class="dropdown tg-themedropdown tg-minicartdropdown">
                                         <a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="tg-themebadge">3</span>

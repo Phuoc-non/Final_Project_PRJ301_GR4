@@ -59,7 +59,10 @@ body {
   top: -20px;
 }
 
-
+.register-link {
+  margin-top: 100px !important;
+  display: block;
+}
 
 .container.right-panel-active .register-container {
   transform: translateX(100%);
@@ -403,75 +406,4 @@ a:hover {
   outline: none;
   box-shadow: 0 0 8px rgba(75, 182, 183, 0.3);
   border-color: #4bb6b7 !important;
-}
-
-/* --- Social Login Section --- */
-.social-login {
-  width: 100%;
-  text-align: center;
-}
-
-.divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-}
-
-.divider::before,
-.divider::after {
-  content: "";
-  flex: 1;
-  border-bottom: 1px solid #ddd;
-  margin: 0 2px;
-}
-
-.divider span {
-  color: #888;
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.social-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 1px; /* giảm khoảng cách giữa HOẶC và nút */
-}
-
-.social-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 6px 18px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
-  background-color: #fff;
-  transition: all 0.3s ease;
-  min-width: 110px; /* cân hai nút */
-}
-
-.social-btn img {
-  width: 18px;
-  height: 18px;
-}
-
-.social-btn.facebook:hover {
-  background-color: #1877f2;
-  color: #fff;
-  border-color: #1877f2;
-}
-
-.social-btn.google:hover {
-  background-color: #db4437;
-  color: #fff;
-  border-color: #db4437;
-}
-
-.register-link{
-    margin-top: 40px;
 }
