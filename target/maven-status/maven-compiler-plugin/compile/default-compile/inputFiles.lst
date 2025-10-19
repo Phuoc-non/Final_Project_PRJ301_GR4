@@ -1,11 +1,19 @@
-C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\com\mycompany\lib\JakartaRestConfiguration.java
-C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\com\mycompany\lib\resources\JakartaEE11Resource.java
-C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\BookServlet.java
-C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\LoginServlet.java
-C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\LogoutServlet.java
-C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\RegisterServlet.java
-C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\RegistrationDAO.java
-C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\TestLogin.java
-C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\db\DBContext.java
-C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Registration.java
-C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\Util\MD5Util.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\com\mycompany\lib\JakartaRestConfiguration.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\com\mycompany\lib\resources\JakartaEE11Resource.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\BookServlet.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\Cart.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\CategoryServlet.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\LoginServlet.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\LogoutServlet.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\ProductDetailSerVlet.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\RegisterServlet.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\CategoryDao.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\ProductDetailDao.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\RegistrationDAO.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\test.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\TestLogin.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\db\DBContext.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Category.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\ProductDetail.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Registration.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Util\MD5Util.java
