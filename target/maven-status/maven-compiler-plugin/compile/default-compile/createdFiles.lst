@@ -1,9 +1,13 @@
 Controller\LoginServlet.class
 dao\TestLogin.class
 com\mycompany\lib\resources\JakartaEE11Resource.class
+Controller\RegisterServlet.class
+Controller\ProfileServlet.class
 Util\MD5Util.class
 com\mycompany\lib\JakartaRestConfiguration.class
+Controller\ChangePasswordServlet.class
 model\Registration.class
 Controller\LogoutServlet.class
+Controller\BookServlet.class
 db\DBContext.class
 dao\RegistrationDAO.class

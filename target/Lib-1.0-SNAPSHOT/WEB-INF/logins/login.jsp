@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Double Slider Login / Registration Form</title>
         <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
-        <link rel="stylesheet" href="http://localhost:8080/Lib/assets/css/login.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/login.css" />
     </head>
     <body>
         <div class="container" id="container">
@@ -65,7 +65,7 @@
                     <!-- Address -->
                     <div class="user-box">
                         <div class="input-with-icon">
-                            <input type="text" name="address" required />
+                            <input type="text" id="address" name="address" required />
                             <label>Address</label>
                             <!-- 🏠 Icon ngôi nhà -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" fill="none"
@@ -143,7 +143,7 @@
                             <input type="password" name="password" id="password" required />
                             <label>Password</label>
                             <!-- Nút con mắt -->
-                            <span class="toggle-password" onclick="togglePassword('login-password', this)">
+                            <span class="toggle-password" onclick="togglePassword('password', this)">
                                 <!-- SVG hình con mắt mở -->
                                 <svg id="eye-open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -195,9 +195,9 @@
                 </div>
             </div>
         </div>
-        <script src="http://localhost:8080/Lib/assets/js/login/index.js"></script>
-        <script src="http://localhost:8080/Lib/assets/js/login/login_validation.js"></script>
-        <script src="http://localhost:8080/Lib/assets/js/login/register-validation.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/login/index.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/login/login_validation.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/login/register-validation.js"></script>
     </body>
 
     <%

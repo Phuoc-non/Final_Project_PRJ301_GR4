@@ -1,8 +1,10 @@
 C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\com\mycompany\lib\JakartaRestConfiguration.java
 C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\com\mycompany\lib\resources\JakartaEE11Resource.java
 C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\BookServlet.java
+C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\ChangePasswordServlet.java
 C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\LoginServlet.java
 C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\LogoutServlet.java
+C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\ProfileServlet.java
 C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\RegisterServlet.java
 C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\RegistrationDAO.java
 C:\Users\DELL\Documents\NetBeansProjects_25\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\TestLogin.java
