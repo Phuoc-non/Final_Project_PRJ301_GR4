@@ -10,10 +10,12 @@ D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\RegisterSe
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\CategoryDao.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\ProductDetailDao.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\RegistrationDAO.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\ReviewDao.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\test.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\TestLogin.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\db\DBContext.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Category.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\ProductDetail.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Registration.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\UserReview.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Util\MD5Util.java

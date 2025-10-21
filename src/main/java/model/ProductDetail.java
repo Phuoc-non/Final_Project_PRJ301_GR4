@@ -19,10 +19,11 @@ public class ProductDetail {
     private String publication_date;
     private String img;
     private String description;
+    private String caterogy;
     public ProductDetail() {
     }
 
-    public ProductDetail(int id, String price, String author, String BookName, String format, int pages, String dimensions, String publication_date, String img, String description) {
+    public ProductDetail(int id, String price, String author, String BookName, String format, int pages, String dimensions, String publication_date, String img, String description, String caterogy) {
         this.id = id;
         this.price = price;
         this.author = author;
@@ -33,8 +34,9 @@ public class ProductDetail {
         this.publication_date = publication_date;
         this.img=img;
         this.description=description;
+        this.caterogy=caterogy;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -114,6 +116,15 @@ public class ProductDetail {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getCaterogy() {
+        return caterogy;
+    }
+
+    public void setCaterogy(String caterogy) {
+        this.caterogy = caterogy;
+    }
+    
 
     @Override
     public String toString() {

@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAO;
+package dao;
 
+import java.util.List;
 import model.ProductDetail;
+import model.UserReview;
 
 /**
  *
@@ -13,8 +15,10 @@ import model.ProductDetail;
 public class test {
     public static void main(String[] args) {
         // TODO code application logic here
-         ProductDetailDao a= new ProductDetailDao();
-         ProductDetail b= a.getById(1);
-         System.out.println(b.toString());
+         ReviewDao dao= new ReviewDao();
+         List<UserReview> b= dao.getById(1);
+        for (UserReview userReview : b) {
+            System.out.println(userReview.getDate()+userReview.getUserName()+"\n");
+        }
     }
 }

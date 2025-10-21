@@ -20,7 +20,8 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/color.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
-        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
         <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
@@ -74,7 +75,7 @@
                                     </ul>
                                 </div>
                                 <div class="tg-userlogin">
-                                    <figure><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/assets/images/users/img-01.jpg" alt="image description"></a></figure>
+                                    <figure><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/assets/images/author/imag-01.jpg" alt="image description"></a></figure>
                                     <span>Hi, John</span>
                                 </div>
                             </div>

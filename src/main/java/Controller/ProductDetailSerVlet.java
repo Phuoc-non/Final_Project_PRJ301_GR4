@@ -4,7 +4,8 @@
  */
 package Controller;
 
-import DAO.ProductDetailDao;
+import dao.ProductDetailDao;
+import dao.ReviewDao;
 import jakarta.persistence.metamodel.SetAttribute;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +14,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import model.ProductDetail;
+import model.UserReview;
 
 /**
  *
@@ -37,13 +40,18 @@ public class ProductDetailSerVlet extends HttpServlet {
             throws ServletException, IOException {
         String rq = request.getParameter("productId");
         ProductDetailDao productDao= new ProductDetailDao();
+        ReviewDao viewDao= new ReviewDao();
+        
         if(rq!=null){ 
         ProductDetail product=productDao.getById(Integer.parseInt(rq));       
-        request.setAttribute("product", product);
-        request.getRequestDispatcher("/WEB-INF/User/productdetail.jsp").forward(request, response);   
+        request.setAttribute("productdetail", product);
+        
+        List<UserReview> review=viewDao.getById(Integer.parseInt(rq));
+        request.setAttribute("reviewer", review);
+        request.getRequestDispatcher("/WEB-INF/Product/productdetail.jsp").forward(request, response);   
         }
-//        else
-//                    request.getRequestDispatcher("/WEB-INF/User/productdetail.jsp").forward(request, response);   
+        else
+                    request.getRequestDispatcher("/assets/404errol.jsp").forward(request, response);   
 
     }
 
