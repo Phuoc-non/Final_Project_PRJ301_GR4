@@ -23,10 +23,7 @@
                                     <div class="tg-frontcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-01.jpg" alt="image description"></div>
                                     <div class="tg-backcover"><img src="${pageContext.request.contextPath}/assets/images/books/img-01.jpg" alt="image description"></div>
                                 </div>
-                                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                                    <i class="icon-heart"></i>
-                                    <span>add to wishlist</span>
-                                </a>
+                               
                             </figure>
                             <div class="tg-postbookcontent">
                                 <ul class="tg-bookscategories">
@@ -35,7 +32,7 @@
                                 </ul>
                                 <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
                                 <div class="tg-booktitle">
-                                    <h3><a href="javascript:void(0);">Help Me Find My Stomach</a></h3>
+                                    <h3><a href="${pageContext.request.contextPath}/ProductDetail?productId=1">Help Me Find My Stomach</a></h3>
                                 </div>
                                 <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
                                 <span class="tg-stars"><span></span></span>
@@ -59,7 +56,7 @@
                                 </div>
                                 <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                     <i class="icon-heart"></i>
-                                    <span>add to wishlist</span>
+                                    
                                 </a>
                             </figure>
                             <div class="tg-postbookcontent">
@@ -93,7 +90,7 @@
                                 </div>
                                 <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                     <i class="icon-heart"></i>
-                                    <span>add to wishlist</span>
+                                   
                                 </a>
                             </figure>
                             <div class="tg-postbookcontent">
@@ -126,7 +123,7 @@
                                 </div>
                                 <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                     <i class="icon-heart"></i>
-                                    <span>add to wishlist</span>
+                                    
                                 </a>
                             </figure>
                             <div class="tg-postbookcontent">
@@ -160,7 +157,7 @@
                                 </div>
                                 <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                     <i class="icon-heart"></i>
-                                    <span>add to wishlist</span>
+                                    
                                 </a>
                             </figure>
                             <div class="tg-postbookcontent">
@@ -193,7 +190,7 @@
                                 </div>
                                 <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                     <i class="icon-heart"></i>
-                                    <span>add to wishlist</span>
+                                    
                                 </a>
                             </figure>
                             <div class="tg-postbookcontent">
@@ -227,7 +224,7 @@
                                 </div>
                                 <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                     <i class="icon-heart"></i>
-                                    <span>add to wishlist</span>
+                                    
                                 </a>
                             </figure>
                             <div class="tg-postbookcontent">
