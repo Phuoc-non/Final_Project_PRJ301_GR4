@@ -7,6 +7,7 @@ D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\LoginServl
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\LogoutServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\ProductDetailSerVlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\RegisterServlet.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\ReviewServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\CategoryDao.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\ProductDetailDao.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\RegistrationDAO.java

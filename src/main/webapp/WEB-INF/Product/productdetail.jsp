@@ -450,37 +450,61 @@
                             </div> 
                         </div>
                         <div class="tg-comment">
-                                <p class="mb-0">${object.comment}</p>
-                            </div>
+                            <p class="mb-0">${object.comment}</p>
+                        </div>
                     </c:forEach>
 
                 </div>
-                <form method="post">
-            <div class="tg-authorbox">
-                <div class="tg-authorinfo">
-                    <div class="tg-authorname mb-2">
-                        <h4>Đánh giá của bạn</h4>
-                    </div>
+                <!-- cần có Bootstrap Icons -->
+                <!-- cần Bootstrap Icons -->
+               
 
-                    <!-- Chọn sao -->
-                    <ul class="ratings mb-3">
-                        <li class="star" data-value="1"><i class="bi bi-star"></i></li>
-                        <li class="star" data-value="2"><i class="bi bi-star"></i></li>
-                        <li class="star" data-value="3"><i class="bi bi-star"></i></li>
-                        <li class="star" data-value="4"><i class="bi bi-star"></i></li>
-                        <li class="star" data-value="5"><i class="bi bi-star"></i></li>
-                    </ul>
+                <form method="post" action="${pageContext.request.contextPath}/ReviewServlet">
+                    <h4>Đánh giá của bạn</h4>
+
+                    <!-- chọn sao -->
+                    <div id="rating" style="font-size:26px;cursor:pointer;color:#ccc;">
+                        <i class="bi bi-star" data-value="1"></i>
+                        <i class="bi bi-star" data-value="2"></i>
+                        <i class="bi bi-star" data-value="3"></i>
+                        <i class="bi bi-star" data-value="4"></i>
+                        <i class="bi bi-star" data-value="5"></i>
+                    </div>
 
                     <input type="hidden" name="star" id="stars_submit">
 
-                    <div class="tg-comment">
-                        <textarea name="content" cols="50" rows="4" style="resize:none;width:100%;height:100px;"></textarea>
-                    </div>
+                    <textarea name="content" placeholder="Nhập đánh giá..." 
+                              style="width:100%;height:100px;resize:none;margin-top:10px;"></textarea>
+                    <br>
+                    <input type="submit" value="submit" style="margin-top:10px;">
+                </form>
 
-                    <input class="tg-btn tg-active mt-3" type="submit" value="Đánh giá">
-                </div>
-            </div>
-        </form>
+                <style>
+                    #rating i {
+                        transition: color 0.2s;
+                    }
+                    #rating i.active {
+                        color: gold;
+                    }
+                </style>
+
+                <script>
+                    const stars = document.querySelectorAll('#rating i');
+                    const hidden = document.getElementById('stars_submit');
+                    
+                    stars.forEach(function(s, i){
+                        s.onclick = function() {
+                            hidden.value = i + 1;
+                            stars.forEach(function(st, j) {
+                                st.classList.toggle('active', j <= i);
+                                st.className = 'bi ' + (j <= i ? 'bi-star-fill active' : 'bi-star');
+                            });
+                        };
+                    });
+
+                </script>
+
+
             </div>
         </div>
     </div>
