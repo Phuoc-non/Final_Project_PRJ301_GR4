@@ -3,6 +3,7 @@ Controller\LoginServlet.class
 dao\test.class
 dao\TestLogin.class
 com\mycompany\lib\resources\JakartaEE11Resource.class
+<<<<<<< HEAD
 model\ProductDetail.class
 Controller\RegisterServlet.class
 Controller\Cart.class
@@ -13,6 +14,15 @@ model\Category.class
 model\Registration.class
 Controller\LogoutServlet.class
 Controller\ProductDetailSerVlet.class
+=======
+Controller\RegisterServlet.class
+Controller\ProfileServlet.class
+Util\MD5Util.class
+com\mycompany\lib\JakartaRestConfiguration.class
+Controller\ChangePasswordServlet.class
+model\Registration.class
+Controller\LogoutServlet.class
+>>>>>>> VDat
 Controller\BookServlet.class
 db\DBContext.class
 dao\RegistrationDAO.class

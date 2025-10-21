@@ -11,6 +11,7 @@ package Util;
 import java.security.MessageDigest;
 
 public class MD5Util {
+
     public static String md5(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -24,4 +25,5 @@ public class MD5Util {
             throw new RuntimeException(e);
         }
     }
+
 }

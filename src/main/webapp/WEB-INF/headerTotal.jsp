@@ -47,16 +47,16 @@
                                         <span>Hi, <%= username%></span>
                                     </a>
                                     <ul class="dropdown-menu list-unstyled" style="list-style: none; padding-left: 0;">
-                                        <li style="list-style: none;"><a href="profile.jsp">Thông tin tài khoản</a></li>
+                                        <li style="list-style: none;"><a href="profile">Account information</a></li>
                                             <% if (!isAdmin) { %>
-                                        <li style="list-style: none;"><a href="orders.jsp">Thông tin mua hàng</a></li>
+                                        <li style="list-style: none;"><a href="orders.jsp">Purchase information</a></li>
                                             <% } %>
-                                        <li style="list-style: none;"><a href="logout">Đăng xuất</a></li>
+                                        <li style="list-style: none;"><a href="logout">Logout</a></li>
                                     </ul>
                                 </div>
                                 <% } else { %>
                                 <div class="tg-userlogin">
-                                    <a href="login">Đăng nhập</a> | <a href="register">Đăng ký</a>
+                                    <a href="login">Login</a> | <a href="register">Register</a>
                                 </div>
                                 <% } %>
                             </div>
@@ -320,4 +320,14 @@
                     </div>
                 </div>
             </header>
+
  
+
+            <!--************************************
+                            Header End
+            *************************************-->
+     
+        </div>
+  
+   
+  
