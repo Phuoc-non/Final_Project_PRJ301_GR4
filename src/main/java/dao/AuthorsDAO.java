@@ -65,7 +65,7 @@ public void createAuthor(Authors author) {
     }
 
     // Cập nhật thông tin tác giả
-    public void updateAuthor(Authors author) {
+    public void editAuthor(Authors author) {
         String sql = "UPDATE Author SET name = ?, bio = ? WHERE id = ?";
         try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
             ps.setString(1, author.getName());

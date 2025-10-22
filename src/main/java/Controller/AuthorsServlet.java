@@ -17,6 +17,10 @@ import model.Authors;
 
 /**
  *
+ * lỗi 2 cách đầu cuối, emty trung   trung sai dùng .trim()
+ * trùng tác giả là cook
+ * không ddc số, kí tự đặc biệt
+ * 
  * @author ACER
  */
 @WebServlet(name = "Authors", urlPatterns = {"/authors"})
@@ -63,7 +67,7 @@ public class AuthorsServlet extends HttpServlet {
         AuthorsDAO dao = new AuthorsDAO();
         List<Authors> authorList = dao.getAllAuthors();
         request.setAttribute("authorList", authorList);
-        
+
         request.getRequestDispatcher("/WEB-INF/authors.jsp").forward(request, response);
     }
 
@@ -78,7 +82,70 @@ public class AuthorsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String action = request.getParameter("action");
+
+        if (action != null && action.equals("create")) {
+            createAuthor(request, response);
+        }
+        if (action != null && action.equals("delete")) {
+            deleteAuthor(request, response);
+        }
+        if (action != null && action.equals("edit")) {
+            editAuthor(request, response);
+        }
+    }
+
+    private void createAuthor(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        // Lấy dữ liệu từ form
+        String name = request.getParameter("name");
+        String bio = request.getParameter("bio");
+
+        // Tạo đối tượng model
+        Authors author = new Authors();
+        author.setName(name);
+        author.setBio(bio);
+
+        // Gọi DAO để lưu vào DB
+        AuthorsDAO dao = new AuthorsDAO();
+        dao.createAuthor(author);
+
+        // Quay lại trang danh sách
+        response.sendRedirect("authors");
+
+    }
+
+    private void deleteAuthor(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        Authors author = new Authors();
+        author.setId(id);
+
+        AuthorsDAO dao = new AuthorsDAO();
+        dao.deleteAuthor(id);
+
+        response.sendRedirect("authors");
+    }
+
+    private void editAuthor(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String bio = request.getParameter("bio");
+
+        Authors author = new Authors();
+        author.setId(id);
+        author.setName(name);
+        author.setBio(bio);
+
+        AuthorsDAO dao = new AuthorsDAO();
+        dao.editAuthor(author);
+
+        response.sendRedirect("authors");
     }
 
     /**
