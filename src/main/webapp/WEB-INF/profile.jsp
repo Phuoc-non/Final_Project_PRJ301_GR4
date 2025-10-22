@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Registration"%>
+<<<<<<< HEAD
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="../WEB-INF/headerTotal.jsp" %>
 
@@ -190,4 +191,5 @@
     </c:if>
 </script>
 </body>
+
 </html>

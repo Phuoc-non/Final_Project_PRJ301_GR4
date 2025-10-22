@@ -59,7 +59,6 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         HttpSession session = request.getSession();
         Registration user = (Registration) session.getAttribute("user");
 
@@ -69,6 +68,7 @@ public class ProfileServlet extends HttpServlet {
         }
 
         // Truyền thông tin người dùng vào trang JSP
+
         request.setAttribute("currentUser", user);
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }
@@ -78,11 +78,14 @@ public class ProfileServlet extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
+
         HttpSession session = request.getSession();
         Registration user = (Registration) session.getAttribute("user");
 
         if (user == null) {
+
             response.sendRedirect(request.getContextPath() + "/login");
+
             return;
         }
 
@@ -92,11 +95,12 @@ public class ProfileServlet extends HttpServlet {
             String email = request.getParameter("email");
             String address = request.getParameter("address");
 
+
             // Cập nhật vào object user (trong session)
+
             user.setFull_name(fullName);
             user.setEmail(email);
             user.setAddress(address);
-
             RegistrationDAO dao = new RegistrationDAO();
             boolean updated = dao.updateUserInfo(user);
 
@@ -116,6 +120,7 @@ public class ProfileServlet extends HttpServlet {
         }
 
         // Truyền dữ liệu người dùng hiện tại trở lại JSP
+
         request.setAttribute("currentUser", user);
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }

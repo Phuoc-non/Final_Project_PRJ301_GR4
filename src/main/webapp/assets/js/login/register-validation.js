@@ -81,6 +81,31 @@ document.addEventListener('DOMContentLoaded', function () {
         return true;
     }
 
+
+    // Kiểm tra mật khẩu cấp cao
+    function validatePasswordStrength(password) {
+        if (!password) {
+            return 'Password is required';
+        }
+        if (password.length < 6 || password.length > 20) {
+            return 'Password must be between 6 and 20 characters';
+        }
+        if (!/(?=.*[a-z])/.test(password)) {
+            return 'Password requires at least one lowercase letter.';
+        }
+        if (!/(?=.*[A-Z])/.test(password)) {
+            return 'Password requires at least one uppercase letter.';
+        }
+        if (!/(?=.*\d)/.test(password)) {
+            return 'Password must contain at least one number';
+        }
+        if (!/(?=.*[!@#$%^&*(),.?":{}|<>])/.test(password)) {
+            return 'Password must contain at least one special character';
+        }
+        return null; // Password is strong
+    }
+
+    // Add event listeners
     if (passwordInput && repasswordInput) {
         passwordInput.addEventListener('blur', function () {
             const error = validatePasswordStrength(this.value);
