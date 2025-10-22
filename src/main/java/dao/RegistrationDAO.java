@@ -85,7 +85,6 @@ public class RegistrationDAO extends DBContext {
         return false;
     }
 //update profile
-
     public boolean updateUserInfo(Registration user) {
         String sql = "UPDATE Registration SET full_name=?, email=?, address=? WHERE id=?";
         try {
@@ -102,6 +101,7 @@ public class RegistrationDAO extends DBContext {
             System.out.println(e.getMessage());
             return false;
         }
+
     
     }   
         
@@ -118,6 +118,5 @@ public class RegistrationDAO extends DBContext {
         }
         return false;
     }
-
 
 }

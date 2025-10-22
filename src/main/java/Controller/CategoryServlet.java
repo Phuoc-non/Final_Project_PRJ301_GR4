@@ -4,8 +4,10 @@
  */
 package Controller;
 
+
 import DAO.CategoryDao;
 import java.io.IOException;
+
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,9 +24,7 @@ import model.Category;
 @WebServlet(name = "CategoryServlet", urlPatterns = {"/Category"})
 public class CategoryServlet extends HttpServlet {
 
-   
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

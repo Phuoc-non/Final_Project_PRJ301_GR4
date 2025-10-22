@@ -146,7 +146,7 @@
                                     </div>
                                     <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
                                         <ul>
-                                            <li><a href="index.jsp">Home</a></li>
+                                            <li><a href="book">Home</a></li>
                                                 <% if (isAdmin) { %>
                                             <li class="menu-item-has-children menu-item-has-mega-menu">
                                                 <a href="javascript:void(0);">All Categories</a>
@@ -300,11 +300,8 @@
                                                 </div>
                                             </li>
                                             <li class="menu-item-has-children">
-                                                <a href="javascript:void(0);">Authors</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="authors.html">Authors</a></li>
-                                                    <li><a href="authordetail.html">Author Detail</a></li>
-                                                </ul>
+                                                <a href="authors">Authors</a>
+                                               
                                             </li>
                                             <li><a href="products.html">AllBook</a></li>
                                             <li><a href="products.html">Customer</a></li>
@@ -328,6 +325,3 @@
             *************************************-->
      
         </div>
-  
-   
-  
