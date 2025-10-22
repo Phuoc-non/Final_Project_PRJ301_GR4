@@ -1,6 +1,6 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@include file="/WEB-INF/includes/header.jsp" %>
 
 <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="../images/parallax/bgparallax-07.jpg">
@@ -8,10 +8,10 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="tg-innerbannercontent">
-                    <h1 style="margin-bottom: 20px;">Quản lý Danh mục</h1>
+                    <h1 style="margin-bottom: 20px;">Category Management</h1>
                     <ol class="tg-breadcrumb">
-                        <li><a href="javascript:void(0);">Trang chủ</a></li>
-                        <li class="tg-active">Danh mục</li>
+                        <li><a href="javascript:void(0);">Home page</a></li>
+                        <li class="tg-active">Category</li>
                     </ol>
                 </div>
             </div>
@@ -24,7 +24,7 @@
             <div class="row">
                 <div>
                     <div> 
-                        <!-- <h2>Thông tin khách hàng</h2> -->
+                        <!-- <h2>Th�ng tin kh�ch h�ng</h2> -->
                         <div id="tg-content" class="tg-content">
                             <div class="tg-products">
                                 <div class="tg-productgrid">
@@ -58,14 +58,14 @@
 
 
 
-                                    <!-- Modal thông báo lỗi or thành công -->
+                                    <!-- Modal th�ng b�o l?i or th�nh c�ng -->
                                     <c:if test="${not empty message}">
                                         <div class="modal fade" id="resultModal" tabindex="-1" role="dialog">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header ${messageType == 'success' ? 'bg-success' : 'bg-danger'} text-white">
                                                         <h5 class="modal-title">
-                                                            ${messageType == 'success' ? 'Thành công' : 'Lỗi'}
+                                                            ${messageType == 'success' ? 'Success' : 'Error'}
                                                         </h5>
 
                                                     </div>
@@ -82,11 +82,11 @@
                                     </c:if>
 
                                     <script>
-                                        // Tự động mở modal sau khi trang tải lại
+                                        // T? ??ng m? modal sau khi trang t?i l?i
                                         $(document).ready(function () {
                                             $('#resultModal').modal('show');
                                         });
-                                        //tự đóng sau 3 s
+                                        //t? ?�ng sau 3 s
                                         setTimeout(() => {
                                             $('#resultModal').modal('hide');
                                         }, 3000);
@@ -147,12 +147,12 @@
                                             </div>  
                                             <script>
                                                 $('#editModal').on('show.bs.modal', function (event) {
-                                                    var button = $(event.relatedTarget); // Nút Edit vừa click
-                                                    var cateId = button.data('id');      // Lấy id từ data-id
+                                                    var button = $(event.relatedTarget); // N�t Edit v?a click
+                                                    var cateId = button.data('id');      // L?y id t? data-id
 
 
 
-                                                    // Gán id vào input ẩn trong modal (để gửi form)
+                                                    // G�n id v�o input ?n trong modal (?? g?i form)
                                                     $(this).find('#cateIdInput').val(cateId);
 
 
