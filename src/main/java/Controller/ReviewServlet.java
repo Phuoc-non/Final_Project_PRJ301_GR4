@@ -48,7 +48,6 @@ public class ReviewServlet extends HttpServlet {
        int star = 0;
        String comment= request.getParameter("content");
        String starStr = request.getParameter("star");
-
 if (starStr != null && !starStr.isEmpty()) {
     star=Integer.parseInt(starStr);
 }

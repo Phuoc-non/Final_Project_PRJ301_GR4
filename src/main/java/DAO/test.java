@@ -18,7 +18,7 @@ public class test {
          ReviewDao dao= new ReviewDao();
          List<UserReview> b= dao.getById(1);
         for (UserReview userReview : b) {
-            System.out.println(userReview.getDate()+userReview.getUserName()+"\n");
+            System.out.println(userReview.getDate()+"\n");
         }
     }
 }
