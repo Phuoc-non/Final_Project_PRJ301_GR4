@@ -84,5 +84,23 @@ public class RegistrationDAO extends DBContext {
         }
         return false;
     }
+//update profile
+    public boolean updateUserInfo(Registration user) {
+        String sql = "UPDATE Registration SET full_name=?, email=?, address=? WHERE id=?";
+        try {
+            PreparedStatement ps = this.getConnection().prepareStatement(sql);
+
+            ps.setString(1, user.getFull_name());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getAddress());
+            ps.setInt(4, user.getId());
+
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 
 }

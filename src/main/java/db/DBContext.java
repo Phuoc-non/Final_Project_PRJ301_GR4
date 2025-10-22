@@ -22,7 +22,7 @@ public class DBContext {
     private Connection conn;
     private final String DB_URL = "jdbc:sqlserver://127.0.0.1:1433;databaseName=BOOK_STORE;encrypt=false";
     private final String DB_USER = "sa";
-    private final String DB_PWD = "12345";
+    private final String DB_PWD = "123456";
 
     public DBContext() {
         try {
