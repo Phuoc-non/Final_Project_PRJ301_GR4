@@ -22,8 +22,8 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap.min.js"></script>
     </head>
     <body>
         <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
@@ -35,46 +35,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <ul class="tg-addnav">
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <i class="icon-envelope"></i>
-                                            <em>Contact</em>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <i class="icon-question-circle"></i>
-                                            <em>Help</em>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="dropdown tg-themedropdown tg-currencydropdown">
-                                    <a href="javascript:void(0);" id="tg-currenty" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="icon-earth"></i>
-                                        <span>Currency</span>
-                                    </a>
-                                    <ul class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-currenty">
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <i>£</i>
-                                                <span>British Pound</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <i>$</i>
-                                                <span>Us Dollar</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">
-                                                <i>?</i>
-                                                <span>Euro</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+
                                 <div class="tg-userlogin">
                                     <figure><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/assets/images/author/imag-01.jpg" alt="image description"></a></figure>
                                     <span>Hi, John</span>
@@ -193,5 +154,5 @@
                     </div>
                 </div>
             </header>
-
+        </div>
 

@@ -38,6 +38,7 @@ public class ProductDetailSerVlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+//        request.getRequestDispatcher("/WEB-INF/includes/headerTotal.jsp").forward(request, response);   
         String rq = request.getParameter("productId");
         ProductDetailDao productDao= new ProductDetailDao();
         ReviewDao viewDao= new ReviewDao();

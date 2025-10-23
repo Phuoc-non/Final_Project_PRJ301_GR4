@@ -39,11 +39,11 @@
                                                 <tr>
                                                     <th>STT</th>
                                                     <th>Tên sách</th>
-                                                    <th>Hình ?nh</th>
-                                                    <th>??n giá</th>
-                                                    <th>S? l??ng</th>
+                                                    <th>Hình ảnh</th>
+                                                    <th>đơn giá</th>
+                                                    <th>Số lương</th>
                                                     <!-- <th>Thành ti?n</th> -->
-                                                    <th>Hành ??ng</th>
+                                                    <th>Hành động</th>
                                                 </tr>
                                             </thead>
                                             <tbody >
@@ -70,7 +70,7 @@
                                                   <tr>
                                                   <td colspan="7" >
                                                       <button  class="btn btn-primary"  style="background: green; width: 200px; margin-bottom: 5px; margin-top: 5px;" 
-                                                        type="submit">??t hàng</button>
+                                                        type="submit">Đặt hàng</button>
                                                   </td>
                                                   </tr>
                                               
@@ -79,7 +79,7 @@
                                     </form>
                                     </th:block>
                                     <th:block th:if="">
-                                         <h5 style="color: red; margin-top: 5px;">Hi?n t?i gi? sách tr?ng</h5>
+                                         <h5 style="color: red; margin-top: 5px;">Hiện tại giỏ sách trống</h5>
                                      </th:block>
                                 </div>
                             </div>
