@@ -307,7 +307,7 @@
                                                 </ul>
                                             </li>
                                             <li><a href="products.html">AllBook</a></li>
-                                            <li><a href="products.html">Customer</a></li>
+                                            <li><a href="cutomer">Customer</a></li>
                                             <li><a href="contactus.html">Order</a></li>
                                                 <% } else { %>
                                             <li><a href="products.html">AllBook</a></li>

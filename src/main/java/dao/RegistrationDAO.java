@@ -118,6 +118,40 @@ public class RegistrationDAO extends DBContext {
         }
         return false;
     }
+    
+    
+    public boolean deleteRegistrationById(int id) {
+        String sql = "DELETE FROM Registration WHERE id = ?";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
+
+    public Registration getRegistrationById(int id) {
+        String sql = "SELECT * FROM Registration WHERE id = ?";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Registration r = new Registration();
+                r.setId(rs.getInt("id"));
+                r.setFull_name(rs.getString("full_name"));
+                r.setUsername(rs.getString("username"));
+                r.setPassword(rs.getString("password"));
+                r.setEmail(rs.getString("email"));
+                r.setIsAdmin(rs.getBoolean("isAdmin"));
+                r.setAddress(rs.getString("address"));
+                return r;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

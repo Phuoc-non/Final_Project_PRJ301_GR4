@@ -48,19 +48,19 @@
                         <div class="form-group">
                             <label for="full_name"><span style="color: red;">*</span><strong>Full name</strong></label>
                             <input type="text" id="full_name" name="full_name" value="${currentUser.full_name}" class="form-control"
-                                   style="width: 600px; text-transform: none" readonly/>
+                                   style="width: 600px;" readonly/>
                         </div>
 
                         <div class="form-group">
                             <label for="email"><span style="color: red;">*</span><strong>Email</strong></label>
                             <input type="text" id="email" name="email" value="${currentUser.email}" class="form-control"
-                                   style="width: 600px; text-transform: none" readonly/> <%-- đang tự động viết hoa kiếm coi nó nằm where(css)--%>
+                                   style="width: 600px;" readonly/> <%-- đang tự động viết hoa kiếm coi nó nằm where(css)--%>
                         </div>
 
                         <div class="form-group">
                             <label for="address"><span style="color: red;">*</span><strong>Address</strong></label>
                             <input type="text" id="address" name="address" value="${currentUser.address}" class="form-control"
-                                   style="width: 600px; text-transform: none" readonly/>
+                                   style="width: 600px;" readonly/>
                         </div>
                     </div>
 
@@ -70,13 +70,13 @@
                         <div class="form-group">
                             <label for="username"><span style="color: red;">*</span><strong>Username</strong></label>
                             <input type="text" id="username" name="username" value="${currentUser.username}" class="form-control"
-                                   style="width: 400px; text-transform: none" readonly/>
+                                   style="width: 400px;" readonly/>
                         </div>
 
                         <div class="form-group">
                             <label for="password"><span style="color: red;">*</span><strong>Password</strong></label>
                             <input type="password" id="password" name="password" value="${currentUser.password}" class="form-control"
-                                   style="width: 400px; text-transform: none" readonly/>
+                                   style="width: 400px;" readonly/>
                         </div>
 
                         <button type="button" class="btn btn-warning" id="editPassBtn"

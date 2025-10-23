@@ -145,8 +145,8 @@
         </div>
     </div>
 </footer>
-<script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-1.11.2.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script> <%-- hi?n th? thông báo b?t l?i k xóa khách hàng ?ang mua sách--%>
+<script src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap.min.js"></script> 
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
 <script src="${pageContext.request.contextPath}/assets/js/owl.carousel.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/jquery.vide.min.js"></script>
@@ -157,6 +157,7 @@
 <script src="${pageContext.request.contextPath}/assets/js/appear.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/gmap3.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+
   </body>
 
 </html>
