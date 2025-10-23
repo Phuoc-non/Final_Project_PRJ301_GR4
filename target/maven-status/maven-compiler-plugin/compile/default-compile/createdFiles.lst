@@ -1,8 +1,7 @@
 Controller\CategoryServlet.class
 Controller\LoginServlet.class
-dao\test.class
-<<<<<<< HEAD
 model\ProductDetail.class
+Controller\AuthorsServlet.class
 Controller\ReviewServlet.class
 Controller\RegisterServlet.class
 Controller\Cart.class
@@ -10,31 +9,22 @@ dao\ProductDetailDao.class
 Util\MD5Util.class
 com\mycompany\lib\JakartaRestConfiguration.class
 Controller\ChangePasswordServlet.class
+model\Authors.class
+Controller\AllBookServlet.class
 Controller\BookServlet.class
+dao\AuthorsDAO.class
 dao\RegistrationDAO.class
 dao\CategoryDao.class
 dao\TestLogin.class
 com\mycompany\lib\resources\JakartaEE11Resource.class
 Controller\ProfileServlet.class
+model\Promotion.class
+Controller\PromotionServlet.class
 model\UserReview.class
 dao\ReviewDao.class
+dao\PromotionDao.class
 model\Category.class
 model\Registration.class
 Controller\LogoutServlet.class
 Controller\ProductDetailSerVlet.class
-=======
-dao\TestLogin.class
-com\mycompany\lib\resources\JakartaEE11Resource.class
-Controller\AuthorsServlet.class
-Controller\RegisterServlet.class
-Controller\ProfileServlet.class
-Util\MD5Util.class
-com\mycompany\lib\JakartaRestConfiguration.class
-model\Authors.class
-model\Registration.class
-Controller\LogoutServlet.class
-Controller\AllBookServlet.class
-Controller\BookServlet.class
-dao\AuthorsDAO.class
->>>>>>> Trung
 db\DBContext.class

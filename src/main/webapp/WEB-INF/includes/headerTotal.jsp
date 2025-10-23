@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Registration" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%
     Registration user = (Registration) session.getAttribute("user");
     boolean isLoggedIn = user != null;
@@ -28,6 +30,10 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/color.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
         <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap.min.js"></script>
     </head>
     <body class="tg-home tg-homeone">
 
@@ -301,7 +307,7 @@
                                             </li>
                                             <li class="menu-item-has-children">
                                                 <a href="authors">Authors</a>
-                                               
+
                                             </li>
                                             <li><a href="products.html">AllBook</a></li>
                                             <li><a href="products.html">Customer</a></li>
@@ -318,10 +324,10 @@
                 </div>
             </header>
 
- 
+
 
             <!--************************************
                             Header End
             *************************************-->
-     
+
         </div>

@@ -4,7 +4,7 @@
     Author     : Asus
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="../includes/header.jsp" %>
+<%@include file="../includes/headerTotal.jsp" %>
 
 <!--************************************
                 Inner Banner Start
@@ -411,7 +411,7 @@
                             </div>
 
 
-                            <
+                            
                         </aside>
                     </div>
                 </div>
@@ -437,7 +437,7 @@
                                             <c:forEach var="i" begin="1" end="5">
                                                 <c:choose>
                                                     <c:when test="${i <= object.rating}">
-                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star-fill star-gold" style="color:#FFD700;"></i>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <i class="bi bi-star text-secondary"></i>
@@ -472,11 +472,12 @@
                     </div>
 
                     <input type="hidden" name="star" id="stars_submit">
-
+                    <input type="hidden" name="id" value="${param.productId}">
+                    <!-- lấy thẳng id trên thanh url -->
                     <textarea name="content" placeholder="Nhập đánh giá..." 
                               style="width:100%;height:100px;resize:none;margin-top:10px;"></textarea>
                     <br>
-                    <input type="submit" value="submit" style="margin-top:10px;">
+                    <input type="submit" value="submit" style="margin-top:10px; background-color: orange; width: 100px; height: 50px">
                 </form>
 
                 <style>

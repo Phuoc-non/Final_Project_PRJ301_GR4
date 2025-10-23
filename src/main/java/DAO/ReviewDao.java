@@ -43,4 +43,28 @@ public class ReviewDao extends DBContext{
         }
         return reviews;
     }
+    public int insertByID(int id, String username, int rating, String comment){
+        try {
+            String query= "Declare @sku NVARCHAR(20);\n" +
+                    "\n" +
+                    "set @sku=(select p.sku from Product p\n" +
+                    "join productDetail pd\n" +
+                    "on p.sku = pd.product_sku\n" +
+                    "where pd.id=?)\n" +
+                    "\n" +
+                    "INSERT [dbo].[Review] ([product_sku], [username], [rating], [comment]) \n" +
+                    "VALUES (@sku,?,?,?);\n" ;
+            //ko cần N'' vì PreparedStatement sẽ tự xử lý phần dữ liệu có dấu cho mình. mới biết Wowwww.
+            PreparedStatement statement = this.getConnection().prepareStatement(query);
+            statement.setInt(1, id);
+            statement.setString(2, username);
+            statement.setInt(3, rating);
+            statement.setString(4, comment);
+            
+            return statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.getLogger(ReviewDao.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+         return 0;             
+    }
 }

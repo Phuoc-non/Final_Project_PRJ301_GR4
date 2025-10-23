@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="../WEB-INF/includes/header.jsp" %>
+<%@include file="../WEB-INF/includes/headerTotal.jsp" %>
 		<!--************************************
 				Inner Banner Start
 		*************************************-->
@@ -14,10 +14,10 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<div class="tg-innerbannercontent">
-							<h1>404 Error</h1>
+							<h1>404 Error </h1>
 							<ol class="tg-breadcrumb">
 								<li><a href="javascript:void(0);">home</a></li>
-								<li class="tg-active">404 Error</li>
+								<li class="tg-active">404 Error${Errol} </li>
 							</ol>
 						</div>
 					</div>
