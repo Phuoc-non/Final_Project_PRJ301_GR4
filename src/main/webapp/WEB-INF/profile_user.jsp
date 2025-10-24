@@ -1,9 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Registration"%>
-<<<<<<< HEAD
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="../WEB-INF/headerTotal.jsp" %>
-
 <%
     Registration currentUser = (Registration) request.getAttribute("currentUser");
     if (currentUser == null) {
@@ -25,7 +23,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="tg-innerbannercontent">
-                    <h1 style="margin-bottom: 20px; font-weight: bold;">Personal information</h1>
+                    <h1 style="margin-bottom: 20px; font-weight: bold;">Customer information</h1>
                     <ol class="tg-breadcrumb">
                         <li><a href="${pageContext.request.contextPath}/home">home</a></li>
                     </ol>
@@ -47,19 +45,27 @@
                         <h2>Personal information</h2>
 
                         <div class="form-group">
-                            <label for="full_name"><span style="color: red;">*</span><strong>Full name</strong></label>
+                            <label for="full_name"><strong>Full name</strong></label>
                             <input type="text" id="full_name" name="full_name" value="${currentUser.full_name}" class="form-control"
                                    style="width: 600px;" readonly/>
                         </div>
 
                         <div class="form-group">
-                            <label for="email"><span style="color: red;">*</span><strong>Email</strong></label>
+                            <label for="email"><strong>Email</strong></label>
                             <input type="text" id="email" name="email" value="${currentUser.email}" class="form-control"
                                    style="width: 600px;" readonly/> <%-- đang tự động viết hoa kiếm coi nó nằm where(css)--%>
                         </div>
 
+
                         <div class="form-group">
-                            <label for="address"><span style="color: red;">*</span><strong>Address</strong></label>
+                            <label for="phone"><strong>Phone</strong></label>
+                            <input type="text" id="phone" name="phone" 
+                                   value="${lastOrder.phone}" class="form-control" style="width: 600px;" readonly/>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="address"><strong>Address</strong></label>
                             <input type="text" id="address" name="address" value="${currentUser.address}" class="form-control"
                                    style="width: 600px;" readonly/>
                         </div>
@@ -69,26 +75,21 @@
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5 pull-right">
                         <h2>Account</h2>
                         <div class="form-group">
-                            <label for="username"><span style="color: red;">*</span><strong>Username</strong></label>
+                            <label for="username"><strong>Username</strong></label>
                             <input type="text" id="username" name="username" value="${currentUser.username}" class="form-control"
                                    style="width: 400px;" readonly/>
                         </div>
 
                         <div class="form-group">
-                            <label for="password"><span style="color: red;">*</span><strong>Password</strong></label>
+                            <label for="password"><strong>Password</strong></label>
                             <input type="password" id="password" name="password" value="${currentUser.password}" class="form-control"
                                    style="width: 400px;" readonly/>
                         </div>
 
-                        <button type="button" class="btn btn-warning" id="editPassBtn"
-                                style="display:block;" data-toggle="modal" data-target="#modalChangePassword">
-                            Change password
-                        </button>
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-warning" id="editBtn" style="display:block;">Change</button>
-                <button type="submit" class="btn btn-primary" id="saveBtn" style="display:none;">Save</button>
+
             </form>
         </div>
     </div>
@@ -106,15 +107,13 @@
                 <form id="changePasswordForm" action="${pageContext.request.contextPath}/change-password" method="POST">
                     <input type="hidden" name="username" value="${currentUser.username}"/>
                     <div class="form-group">
-                        <label for="oldPassword"><span style="color: red;">*</span>Old password</label>
+                        <label for="oldPassword">Old password</label>
                         <input type="password" class="form-control" name="oldPassword" id="oldPassword" required>
-                        <label for="newPassword"><span style="color: red;">*</span>New password</label>
+                        <label for="newPassword">New password</label>
                         <input type="password" class="form-control" name="newPassword" id="newPassword" required>
-                        <label for="confirmNewPassword"><span style="color: red;">*</span>Confirm new password</label>
+                        <label for="confirmNewPassword">Confirm new password</label>
                         <input type="password" class="form-control" name="confirmNewPassword" id="confirmNewPassword" required>
                     </div>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
         </div>
@@ -191,5 +190,4 @@
     </c:if>
 </script>
 </body>
-
 </html>

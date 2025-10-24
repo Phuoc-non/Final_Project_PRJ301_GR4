@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../WEB-INF/includes/headerTotal.jsp"/>
+
 <!doctype html>
 <html>
     <head>
@@ -70,8 +71,9 @@
                                     <td>${author.name}</td>
                                     <td style="max-width: 160px;">${author.bio}</td>
                                     <td>${author.bookcount}</td>
-                                    <td>${author.created_at}</td>
-                                    <td>${author.updated_at}</td>
+                                    <td><fmt:formatDate value="${author.created_at}" pattern="dd/MM/yyyy" /></td>
+                                    <td><fmt:formatDate value="${author.updated_at}" pattern="dd/MM/yyyy" /></td>
+
                                     <td>
                                         <button type="button" class="btn btn-warning" data-toggle="modal"
                                                 data-target="#myModal_edit${author.id}">Sửa
@@ -87,7 +89,8 @@
                             <div class="modal fade" id="myModal_edit${author.id}" tabindex="-1" role="dialog">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                        <form action="${pageContext.request.contextPath}/edit-author" method="post">
+                                        <form action="${pageContext.request.contextPath}/authors" method="post">
+                                            <input type="hidden" name="action" value="edit">               
                                             <div class="modal-header">
                                                 <h4 class="modal-title">Sửa tác giả</h4>
                                             </div>
@@ -99,7 +102,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Miêu tả</label>
-                                                    <textarea name="description" class="form-control" required>${author.bio}</textarea>
+                                                    <textarea name="bio" class="form-control" required>${author.bio}</textarea>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -115,7 +118,8 @@
                             <div class="modal fade" id="myModal_delete${author.id}" tabindex="-1" role="dialog">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                        <form action="${pageContext.request.contextPath}/delete-author" method="get">
+                                        <form action="${pageContext.request.contextPath}/authors" method="post">
+                                            <input type="hidden" name="action" value="delete">
                                             <input type="hidden" name="id" value="${author.id}">
                                             <div class="modal-header">
                                                 <h4 class="modal-title">Bạn chắc chắn muốn xóa tác giả này?</h4>
@@ -140,7 +144,8 @@
         <div class="modal fade" id="myModal_add" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="${pageContext.request.contextPath}/create-author" method="post">
+                    <form action="${pageContext.request.contextPath}/authors" method="post">
+                        <input type="hidden" name="action" value="create">
                         <div class="modal-header">
                             <h4 class="modal-title">Thêm tác giả mới</h4>
                         </div>
@@ -151,7 +156,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Miêu tả</label>
-                                <input name="description" type="text" class="form-control" required>
+                                <input name="bio" type="text" class="form-control" required>
                             </div>
                         </div>
                         <div class="modal-footer">
