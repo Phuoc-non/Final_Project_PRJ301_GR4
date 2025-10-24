@@ -28,6 +28,8 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/color.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
         <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     </head>
     <body class="tg-home tg-homeone">
 
@@ -51,12 +53,12 @@
                                             <% if (!isAdmin) { %>
                                         <li style="list-style: none;"><a href="orders.jsp">Purchase information</a></li>
                                             <% } %>
-                                        <li style="list-style: none;"><a href="logout">Logout</a></li>
+                                        <li style="list-style: none;"><a href="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
                                     </ul>
                                 </div>
                                 <% } else { %>
                                 <div class="tg-userlogin">
-                                    <a href="login">Login</a> | <a href="register">Register</a>
+                                    <a href="login"><i class="fa-solid fa-right-to-bracket"></i> Login</a>  |  <a href="register"> <i class="fa-solid fa-user-plus"></i> Register</a>
                                 </div>
                                 <% } %>
                             </div>

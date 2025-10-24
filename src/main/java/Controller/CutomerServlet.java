@@ -69,7 +69,7 @@ public class CutomerServlet extends HttpServlet {
         RegistrationDAO regDao = new RegistrationDAO();
 
         // Nếu không có "view" → hiển thị danh sách khách hàng
-        if (view == null || view.trim().isEmpty()) {
+        if (view == null || view.equals("list")) {
             List<Order> list = customerDAO.getAllCustomer();
             request.setAttribute("reports", list);
             request.getRequestDispatcher("/WEB-INF/user_ad.jsp").forward(request, response);
@@ -79,7 +79,7 @@ public class CutomerServlet extends HttpServlet {
         // 🧩 Kiểm tra hợp lệ của ID
         int id = -1;
         if (idParam == null || idParam.isEmpty()) {
-            request.setAttribute("errorMessage", "Thiếu tham số ID.");
+            request.setAttribute("errorMessage", "Missing ID parameter.");
             List<Order> list = customerDAO.getAllCustomer();
             request.setAttribute("reports", list);
             request.getRequestDispatcher("/WEB-INF/user_ad.jsp").forward(request, response);
@@ -89,14 +89,14 @@ public class CutomerServlet extends HttpServlet {
         try {
             id = Integer.parseInt(idParam);
             if (id <= 0) {
-                request.setAttribute("errorMessage", "ID phải là số dương hợp lệ!");
+                request.setAttribute("errorMessage", "ID must be a valid positive number!");
                 List<Order> list = customerDAO.getAllCustomer();
                 request.setAttribute("reports", list);
                 request.getRequestDispatcher("/WEB-INF/user_ad.jsp").forward(request, response);
                 return;
             }
         } catch (NumberFormatException e) {
-            request.setAttribute("errorMessage", "Tham số ID không đúng định dạng số!");
+            request.setAttribute("errorMessage", "The ID parameter is not in a valid number format!");
             List<Order> list = customerDAO.getAllCustomer();
             request.setAttribute("reports", list);
             request.getRequestDispatcher("/WEB-INF/user_ad.jsp").forward(request, response);
@@ -106,7 +106,7 @@ public class CutomerServlet extends HttpServlet {
         // 🧩 Lấy thông tin khách hàng theo ID
         Registration reg = regDao.getRegistrationById(id);
         if (reg == null) {
-            request.setAttribute("errorMessage", "Không tìm thấy khách hàng có ID = " + id);
+            request.setAttribute("errorMessage", "No customer found with ID = " + id);
             List<Order> list = customerDAO.getAllCustomer();
             request.setAttribute("reports", list);
             request.getRequestDispatcher("/WEB-INF/user_ad.jsp").forward(request, response);
@@ -116,6 +116,16 @@ public class CutomerServlet extends HttpServlet {
         // 🧩 Xử lý từng hành động
         switch (view) {
             case "edit-user": {
+                // 🚫 Không cho xem admin
+                if (reg.isIsAdmin()) {
+                    request.setAttribute("errorMessage", "You are not allowed to view admin information!");
+                    List<Order> list = customerDAO.getAllCustomer();
+                    request.setAttribute("reports", list);
+                    request.getRequestDispatcher("/WEB-INF/user_ad.jsp").forward(request, response);
+                    break;
+                }
+
+                // ✅ Nếu không phải admin → cho phép xem
                 Order lastOrder = customerDAO.getLastOrderByRegistrationId(id);
                 request.setAttribute("currentUser", reg);
                 request.setAttribute("lastOrder", lastOrder);
@@ -124,17 +134,23 @@ public class CutomerServlet extends HttpServlet {
             }
 
             case "delete-user": {
-                boolean hasOrder = customerDAO.hasOrderByRegistrationId(id);
-                if (hasOrder) {
-                    request.setAttribute("errorMessage", "Không thể xóa khách hàng đang có đơn hàng!");
+                // 🚫 Prevent deleting admin accounts
+                if (reg.isIsAdmin()) {
+                    request.setAttribute("errorMessage", "Cannot delete administrator account!");
                 } else {
-                    boolean deleted = regDao.deleteRegistrationById(id);
-                    if (deleted) {
-                        request.setAttribute("successMessage", "Xóa khách hàng thành công!");
+                    boolean hasOrder = customerDAO.hasOrderByRegistrationId(id);
+                    if (hasOrder) {
+                        request.setAttribute("errorMessage", "Cannot delete existing customers in the order!");
                     } else {
-                        request.setAttribute("errorMessage", "Xóa khách hàng thất bại!");
+                        boolean deleted = regDao.deleteRegistrationById(id);
+                        if (deleted) {
+                            request.setAttribute("successMessage", "Customer deleted successfully!");
+                        } else {
+                            request.setAttribute("errorMessage", "Failed to delete customer!");
+                        }
                     }
                 }
+
                 List<Order> list = customerDAO.getAllCustomer();
                 request.setAttribute("reports", list);
                 request.getRequestDispatcher("/WEB-INF/user_ad.jsp").forward(request, response);
@@ -142,7 +158,7 @@ public class CutomerServlet extends HttpServlet {
             }
 
             default: {
-                request.setAttribute("errorMessage", "Hành động không hợp lệ!");
+                request.setAttribute("errorMessage", "Invalid action!");
                 List<Order> list = customerDAO.getAllCustomer();
                 request.setAttribute("reports", list);
                 request.getRequestDispatcher("/WEB-INF/user_ad.jsp").forward(request, response);
