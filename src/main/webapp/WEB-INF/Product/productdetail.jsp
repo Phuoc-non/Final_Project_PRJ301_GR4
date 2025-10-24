@@ -14,7 +14,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            
                 <div class="tg-innerbannercontent">
                     <h1>All Products</h1>
                     <ol class="tg-breadcrumb">
@@ -23,7 +23,7 @@
                         <li class="tg-active">Product Title Here</li>
                     </ol>
                 </div>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -41,10 +41,10 @@
         <div class="container">
             <div class="row">
                 <div id="tg-twocolumns" class="tg-twocolumns">
-                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9 pull-right">
+                    
                         <div id="tg-content" class="tg-content">
 
-                            <div class="tg-productdetail">
+                            
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                         <div class="tg-postbook">
@@ -119,7 +119,7 @@
                                                         <div class="tg-leftarea">
                                                             <div class="tg-authorname">
                                                                 <h2>Kathrine Culbertson</h2>
-                                                                <span>Author Since: June 27, 2017</span>
+                                                                <!--<span>Author Since: June 27, 2017</span>-->
                                                             </div>
                                                         </div>
 
@@ -376,9 +376,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            
                         </div>
-                    </div>
+                    
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 pull-left">
                         <aside id="tg-sidebar" class="tg-sidebar">
                             <div class="tg-widget tg-widgetsearch">

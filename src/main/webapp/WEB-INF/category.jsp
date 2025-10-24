@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
-    <%@include file="../WEB-INF/headerTotal.jsp" %>
+    <%@include file="../WEB-INF/includes/headerTotal.jsp" %>
 
 
     <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-07.jpg">
