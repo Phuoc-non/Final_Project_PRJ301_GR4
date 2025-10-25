@@ -10,20 +10,21 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/assets/apple-touch-icon.png">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/normalize.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/icomoon.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jquery-ui.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/owl.carousel.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/transitions.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/color.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/normalize.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/icomoon.css">
 
         <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap.min.js"></script>
     </head>
     <body>
         <div id="tg-wrapper" class="tg-wrapper tg-haslayout">

@@ -11,24 +11,35 @@ import java.util.Date;
  * @author Admin
  */
 public class Promotion {
-
+    private int id;
     private String code;
     private int discount;
     private Date startDay;
     private Date endDay;
     private String description;
     private int status;
+    private int minOrderValue;
 
     public Promotion() {
     }
 
-    public Promotion(String code, int discount, Date startDay, Date endDay, String description, int status) {
+    public Promotion(int id,String code, int discount, Date startDay, Date endDay, String description, int status,int minOrderValue ) {
+        this.id = id;
         this.code = code;
         this.discount = discount;
         this.startDay = startDay;
         this.endDay = endDay;
         this.description = description;
         this.status = status;
+        this.minOrderValue = minOrderValue;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCode() {
@@ -77,6 +88,14 @@ public class Promotion {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getMinOrderValue() {
+        return minOrderValue;
+    }
+
+    public void setMinOrderValue(int minOrderValue) {
+        this.minOrderValue = minOrderValue;
     }
     
     

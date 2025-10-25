@@ -5,6 +5,7 @@
 package DAO;
 
 import db.DBContext;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,21 +48,19 @@ public class CategoryDao extends DBContext {
         return list;
     }
 
-    public int create(int id,String name) {
+    public int create(String name) {
+
+        String query = "  insert into Category (name, created_at, updated_at)\n"
+                + "values (?, CAST(GETDATE() AS date), NULL);\n";
 
         try {
-            String query = "SET IDENTITY_INSERT Category ON;\n"
-                    + "\n"
-                    + "insert into Category (id,name, created_at, updated_at)\n"
-                    + "values (?,?, CAST(GETDATE() AS date), NULL);\n"
-                    + "\n"
-                    + "SET IDENTITY_INSERT Category OFF;";
+            Connection con = this.getConnection();
 
-            PreparedStatement statement = this.getConnection().prepareStatement(query);
-            statement.setInt(1, id);
-            statement.setString(2, name);
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, name);
+           return statement.executeUpdate();
 
-            return statement.executeUpdate();
+            
         } catch (SQLException ex) {
             System.getLogger(CategoryDao.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             return 0;
@@ -100,19 +99,19 @@ public class CategoryDao extends DBContext {
         }
         return 0;
     }
-    
-    public int delete(int id){
-        
+
+    public int delete(int id) {
+
         try {
-            String sql="delete  from Category  where id = ?";
+            String sql = "delete  from Category  where id = ?";
             PreparedStatement statement = this.getConnection().prepareStatement(sql);
             statement.setInt(1, id);
-            
+
             return statement.executeUpdate();
         } catch (SQLException ex) {
             System.getLogger(CategoryDao.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
-        
+
         return 0;
     }
 }

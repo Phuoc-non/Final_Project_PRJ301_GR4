@@ -61,8 +61,8 @@ public class CategoryServlet extends HttpServlet {
             CategoryDao dao = new CategoryDao();
            
             if (dao.checkNameCategory(name)) {
-                int id = dao.getAll().size()+1;
-                int checkCreate = dao.create(id,name);
+               
+                int checkCreate = dao.create(name);
                 if (checkCreate == 0) { // lỗi
                     request.setAttribute("messageType", "error");
                     request.setAttribute("message", "Add category failed! Please try again.");

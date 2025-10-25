@@ -23,165 +23,266 @@
     </div>
 </div>
 
-<div class="container-fluid mt-4">
-    <!-- Tiêu đề trang -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
 
-        <button class="btn btn-primary m-5" data-toggle="modal" data-target="#addPromoModal">
-            Thêm khuyến mãi
-        </button>
-    </div>
+<!-- Tiêu đề trang -->
+<div class="d-flex justify-content-between align-items-center mb-5">
 
-    <!-- Thanh công cụ -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <form class="form-inline">
-                <input type="text" class="form-control mr-2 mb-2 mb-sm-0" placeholder="Tìm kiếm khuyến mãi...">
-                <select class="form-control mr-2 mb-2 mb-sm-0">
-                    <option>Tất cả</option>
-                    <option>Đang diễn ra</option>    
-                    <option>Đã kết thúc</option>
-                </select>
-                <button type="submit" class="btn btn-outline-secondary">
-                    <i class="fa fa-search">Tìm</i> 
-                </button>
-            </form>
-        </div>
-    </div>
+    <button class="btn btn-primary " data-toggle="modal" data-target="#addPromoModal">
+        Thêm khuyến mãi
+    </button>
+    <!-- Modal thêm khuyến mãi -->
+    <div class="modal fade" id="addPromoModal" tabindex="-1" role="dialog" aria-labelledby="addPromoModalLabel" aria-hidden="true">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <form method="POST" action="${pageContext.request.contextPath}/Promotion">
+                    <div class="modal-header  bg-warning text-dark p-3">
+                        <h5 class="modal-title" >Thêm khuyến mãi mới</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body bg-info text-white p-3">
 
-    <!-- Bảng danh sách khuyến mãi -->
-    <div class="card shadow-sm">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-striped table-hover mb-0">
-                    <thead class="thead-light">
-                        <tr>
 
-                            <th>Mã KM</th>
-                            <th>Giảm (%)</th>
-                            <th>description</th>
-                            <th>Ngày bắt đầu</th>
-                            <th>Ngày kết thúc</th>
+                        <div class="form-group col-md-6">
+                            <label><span style="color: red;">*</span>Mã khuyến mãi</label>
+                            <input type="text"  name="code" required>
+                        </div>
 
-                            <th>Trạng thái</th>
-                            <th >Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="pro" items="${list}">
-                            <tr>      
-                                <td>${pro.code}</td>
-                                <td>${pro.discount}</td>
-                                <td>${pro.description}</td>
-                                <td><fmt:formatDate value="${pro.startDay}" pattern="dd-MM-yyyy"/></td>
-                                <td><fmt:formatDate value="${pro.endDay}" pattern="dd-MM-yyyy"/></td>
-                                <c:choose>
-                                    <c:when test="${pro.status == 1}">
-                                        <td class="bg-success text-white">Đang diễn ra</td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td class="bg-danger text-white">Đã diễn ra</td>
-                                    </c:otherwise>
-                                </c:choose>
-                                <td class="text-center">
+                        <div class="form-group col-md-4">
+                            <label><span style="color: red;">*</span>Ngày bắt đầu</label>
+                            <input type="date"  name="sday"> 
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label><span style="color: red;">*</span>Ngày kết thúc</label>
+                            <input type="date"  name="eday">
+                        </div>
 
-                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal" >Edit</button>
+                        <div class="form-group col-md-4">
+                            <label><span style="color: red;">*</span>Giá trị giảm %</label>
+                            <input type="number"  placeholder="Nhập % " name="discount" min="1" max="100" required> 
+                        </div>
 
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" >Delete</button>
-                                </td>
+                        <div class="form-group col-md-4">
+                            <label><span style="color: red;">*</span>giá trị đơn hàng giảm giá</label>
+                            <input type="number" min="1" required placeholder="Nhập số tiền Đơn hàng cần để giảm..." name="minValue">
+                        </div>
 
-                            </tr>
-                        </c:forEach>
-                        <!-- Dòng khác -->
-                    </tbody>
-                </table>
+                        <div class="form-group col-md-4">
+                            <label>Mô tả</label>
+                            <textarea class="form-control" id="message-text" name="description"></textarea>
+                        </div>
+
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
+                        <button type="submit" class="btn btn-primary" name="action" value="create" >Confirm</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- Phân trang -->
-    <nav aria-label="Page navigation">
-        <ul class="pager">
-            <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li><a >1</a></li>
-            <li><a >2</a></li>
-            <li><a >3</a></li>
-            <li><a >4</a></li>
-            <li><a >5</a></li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 </div>
 
-<!-- Modal thêm khuyến mãi -->
-<div class="modal fade" id="addPromoModal" tabindex="-1" role="dialog" aria-labelledby="addPromoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addPromoModalLabel">Thêm khuyến mãi mới</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span>&times;</span>
-                    </button>
+
+<!-- Bảng danh sách khuyến mãi -->
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table  table-hover mb-0">
+                <thead class=" bg-info thead-light">
+                    <tr>
+
+                        <th>Mã KM</th>
+                        <th>Giảm (%)</th>
+                        <th>description</th>
+                        <th>giá trị đơn hàng giảm giá</th>
+                        <th>Ngày bắt đầu</th>
+                        <th>Ngày kết thúc</th>
+
+                        <th>Trạng thái</th>
+                        <th >Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="pro" items="${list}">
+                        <tr>      
+                            <td>${pro.code}</td>
+                            <td>${pro.discount}</td>
+
+                            <td>${pro.minOrderValue}</td>
+                            <td><fmt:formatDate value="${pro.startDay}" pattern="dd-MM-yyyy"/></td>
+                            <td><fmt:formatDate value="${pro.endDay}" pattern="dd-MM-yyyy"/></td>
+                            <c:choose>
+                                <c:when test="${pro.status == 1}">
+                                    <td class="bg-success text-white">Đang diễn ra</td>
+                                </c:when>
+                                <c:when test="${pro.status == 2}">
+                                    <td class="" style=" background-color:#73aef6; color: white;" >Chưa diễn ra</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td class="" style=" background-color:#fa86a1; color: white;"> Đã diễn ra</td>
+                                </c:otherwise>
+                            </c:choose>
+                            <td>${pro.description}</td>
+                            <td class="text-center">
+
+                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal" data-code="${pro.code}" data-sday="${pro.startDay}" 
+                                        data-eday="${pro.endDay}" data-discount="${pro.discount}" data-description="${pro.description}" data-minvalue="${pro.minOrderValue}"
+                                        data-id="${pro.id}"     >Edit</button>
+
+                                <button type="button"   class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="${pro.id}">Delete</button>
+                            </td>
+
+                        </tr>
+                    </c:forEach>
+                </tbody>
+
+                <!-- Modal edit -->
+                <div  class="modal fade "  id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-content role="document" >
+                        <div class="modal-content">
+                            <div  class="  modal-header" style="background-color: #f6462b;" >
+                                <h5 class="modal-title" style="color: white"id="exampleModalLabel">Are you sure you want to edit this promotion?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body  bg-info text-white p-3">
+                                <form method="POST" action="${pageContext.request.contextPath}/Promotion">
+                                    <input type="hidden" id="idInput" name="id"/>
+                                    <div class="form-group col-md-6">
+                                        <label> Mã khuyến mãi</label>
+                                        <input  type="text"   name="code" id="codeInput" required/>  
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Ngày bắt đầu</label>
+                                        <input  readonly type="date"  id="sdayInput" > 
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Ngày kết thúc</label>
+                                        <input  readonly type="date"  id="edayInput">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Giá trị giảm %</label>
+                                        <input type="number" min="1" max="100" required id="discountInput" name="discount">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>giá trị đơn hàng giảm giá</label>
+                                        <input type="number" min="1" required id="minvalueInput" name="minValue">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Mô tả</label>
+                                        <textarea class="form-control" id="descriptionInput" name="description"></textarea>
+                                    </div>
+
+
+                                    <button type="button" class="btn btn-secondary " data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary " name="action" value="edit" >Save </button>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                <script>
+                    $('#editModal').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget); // Nút Edit v?a click
+                    var code = button.data('code'); // L?y id t? data-id
+                    var sday = button.data('sday');
+                    var eday = button.data('eday');
+                    var description = button.data('description');
+                    var minvalue = button.data('minvalue');
+                    var discount = button.data('discount');
+                    var id = button.data('id');
+                    // Gán id vào input ?n trong modal (?? g?i form)
+                    $(this).find('#codeInput').val(code);
+                    $(this).find('#sdayInput').val(sday);
+                    $(this).find('#edayInput').val(eday);
+                    $(this).find('#descriptionInput').val(description);
+                    $(this).find('#minvalueInput').val(minvalue);
+                    $(this).find('#discountInput').val(discount);
+                    $(this).find('#idInput').val(id);
+                    });
+                </script>
+
+
+                <!-- Modal delete -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#f03333;">
+                                <h5 class="modal-title" style="color: white;" > Are you sure you want to delete this promotion? </h5>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" >
+                                <form   method="POST" action="${pageContext.request.contextPath}/Promotion">
+                                    <input type="hidden" name="id" id="idInput"/>
+
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary" name="action" value="delete">Confirm</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label>Tên chương trình</label>
-                            <input type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Mã khuyến mãi</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label>Loại khuyến mãi</label>
-                            <select class="form-control">
-                                <option>Theo %</option>
-                                <option>Theo số tiền</option>
-                                <option>Mua X tặng Y</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Ngày bắt đầu</label>
-                            <input type="date" class="form-control">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Ngày kết thúc</label>
-                            <input type="date" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Giá trị giảm</label>
-                        <input type="number" class="form-control" placeholder="Nhập % hoặc số tiền giảm">
-                    </div>
-                    <div class="form-group">
-                        <label>Sản phẩm áp dụng</label>
-                        <input type="text" class="form-control" placeholder="Nhập tên hoặc mã sản phẩm...">
-                    </div>
-                    <div class="form-group">
-                        <label>Mô tả</label>
-                        <textarea class="form-control" rows="3"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn btn-primary">Lưu</button>
-                </div>
-            </form>
+                <script>
+                    $('#deleteModal').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget);
+                    var id = button.data('id');
+                    $(this).find('#idInput').val(id);
+                    });
+                </script>
+
+
+
+            </table>
         </div>
     </div>
 </div>
+
+
+<!-- Modal thông báo l?i or thành công -->
+<c:if test="${not empty message}">
+    <div class="modal fade" id="resultModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header ${messageType == 'success' ? 'bg-success' : 'bg-danger'} text-white">
+                    <h5 class="modal-title">
+                        ${messageType == 'success' ? 'Success' : 'Error'}
+                    </h5>
+
+                </div>
+                <div class="modal-body">
+                    <p>${message}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</c:if>
+
+<script>
+    // T? ??ng m? modal sau khi trang t?i l?i
+    $(document).ready(function () {
+    $('#resultModal').modal('show');
+    });
+    //t? ?óng sau 3 s
+    setTimeout(() => {
+    $('#resultModal').modal('hide');
+    }, 3000);
+
+
+</script>
+
 
 
 
