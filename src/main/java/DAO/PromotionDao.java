@@ -41,7 +41,7 @@ public class PromotionDao extends DBContext {
 
             while (rs.next()) {
 
-                list.add(new Promotion(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getInt(7), rs.getInt(8)));
+                list.add(new Promotion(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getInt(9)));
 
             }
 
@@ -52,11 +52,11 @@ public class PromotionDao extends DBContext {
         return list;
     }
 
-    public int create(String code, int discount, Date startDay, Date endDay, String description, int status, int minOrderValue) {
+    public int create(String code, int discount, Date startDay, Date endDay, String description, int status, int minOrderValue,int quantity) {
 
         try {
             String query = " insert into Promotion (code,discount_percent, start_date, end_date,description,status,min_order_value)\n"
-                    + "  values (?,?,?,?,?,?,?);";
+                    + "  values (?,?,?,?,?,?,?,?);";
 
             Connection con = this.getConnection();
 
@@ -69,6 +69,7 @@ public class PromotionDao extends DBContext {
             statement.setString(5, description);
             statement.setInt(6, status);
             statement.setInt(7, minOrderValue);
+            statement.setInt(8, quantity);
             return statement.executeUpdate();
 
         } catch (SQLException ex) {
@@ -77,18 +78,19 @@ public class PromotionDao extends DBContext {
         return 0;
     }
 
-    public int edit(int id, String code, int discount, String description, int minOrderValue) {
+    public int edit(int id, String code, int discount, String description, int minOrderValue,int quantity) {
 
         try {
             String sql = "UPDATE  Promotion \n"
-                    + "set  code =?,discount_percent = ?,description =?,min_order_value=? \n"
+                    + "set  code =?,discount_percent = ?,description =?,min_order_value=?,quantity = ? \n"
                     + "where id = ?";
             PreparedStatement statement = this.getConnection().prepareStatement(sql);
             statement.setString(1, code);
             statement.setInt(2, id);
             statement.setString(3, description);
             statement.setInt(4, minOrderValue);
-            statement.setInt(5, id);
+            statement.setInt(6, id);
+            statement.setInt(5, quantity);
 
             return statement.executeUpdate();
         } catch (SQLException ex) {

@@ -58,6 +58,11 @@
                             <input type="date"  name="eday">
                         </div>
 
+                         <div class="form-group col-md-4">
+                            <label><span style="color: red;">*</span>Quantity</label>
+                            <input type="number"  placeholder="Nhập số lượng " name="quantity" min="1"  required> 
+                        </div>
+                        
                         <div class="form-group col-md-4">
                             <label><span style="color: red;">*</span>Giá trị giảm %</label>
                             <input type="number"  placeholder="Nhập % " name="discount" min="1" max="100" required> 
@@ -95,12 +100,12 @@
 
                         <th>Mã KM</th>
                         <th>Giảm (%)</th>
-                        <th>description</th>
                         <th>giá trị đơn hàng giảm giá</th>
                         <th>Ngày bắt đầu</th>
                         <th>Ngày kết thúc</th>
-
+                        <th>Quantity</th>
                         <th>Trạng thái</th>
+                        <th>description</th>
                         <th >Hành động</th>
                     </tr>
                 </thead>
@@ -113,6 +118,8 @@
                             <td>${pro.minOrderValue}</td>
                             <td><fmt:formatDate value="${pro.startDay}" pattern="dd-MM-yyyy"/></td>
                             <td><fmt:formatDate value="${pro.endDay}" pattern="dd-MM-yyyy"/></td>
+                           
+                              <td>${pro.quantity}</td>
                             <c:choose>
                                 <c:when test="${pro.status == 1}">
                                     <td class="bg-success text-white">Đang diễn ra</td>
@@ -129,7 +136,7 @@
 
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal" data-code="${pro.code}" data-sday="${pro.startDay}" 
                                         data-eday="${pro.endDay}" data-discount="${pro.discount}" data-description="${pro.description}" data-minvalue="${pro.minOrderValue}"
-                                        data-id="${pro.id}"     >Edit</button>
+                                        data-id="${pro.id}"  data-quantity="${pro.quantity}"   >Edit</button>
 
                                 <button type="button"   class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="${pro.id}">Delete</button>
                             </td>
@@ -164,6 +171,11 @@
                                         <input  readonly type="date"  id="edayInput">
                                     </div>
 
+                                     <div class="form-group col-md-6">
+                                        <label>Quantity</label>
+                                        <input type="number" min="1"  required id="quantityInput" name="quantity">
+                                    </div>
+                                    
                                     <div class="form-group col-md-6">
                                         <label>Giá trị giảm %</label>
                                         <input type="number" min="1" max="100" required id="discountInput" name="discount">
@@ -189,22 +201,24 @@
                 </div>  
                 <script>
                     $('#editModal').on('show.bs.modal', function (event) {
-                    var button = $(event.relatedTarget); // Nút Edit v?a click
-                    var code = button.data('code'); // L?y id t? data-id
-                    var sday = button.data('sday');
-                    var eday = button.data('eday');
-                    var description = button.data('description');
-                    var minvalue = button.data('minvalue');
-                    var discount = button.data('discount');
-                    var id = button.data('id');
-                    // Gán id vào input ?n trong modal (?? g?i form)
-                    $(this).find('#codeInput').val(code);
-                    $(this).find('#sdayInput').val(sday);
-                    $(this).find('#edayInput').val(eday);
-                    $(this).find('#descriptionInput').val(description);
-                    $(this).find('#minvalueInput').val(minvalue);
-                    $(this).find('#discountInput').val(discount);
-                    $(this).find('#idInput').val(id);
+                        var button = $(event.relatedTarget); // Nút Edit v?a click
+                        var code = button.data('code'); // L?y id t? data-id
+                        var sday = button.data('sday');
+                        var eday = button.data('eday');
+                        var description = button.data('description');
+                        var minvalue = button.data('minvalue');
+                        var discount = button.data('discount');
+                        var id = button.data('id');
+                        var quantity = button.data('quantity');
+                        // Gán id vào input ?n trong modal (?? g?i form)
+                        $(this).find('#codeInput').val(code);
+                        $(this).find('#sdayInput').val(sday);
+                        $(this).find('#edayInput').val(eday);
+                        $(this).find('#descriptionInput').val(description);
+                        $(this).find('#minvalueInput').val(minvalue);
+                        $(this).find('#discountInput').val(discount);
+                        $(this).find('#idInput').val(id);
+                        $(this).find('#quantityInput').val(quantity);
                     });
                 </script>
 
@@ -233,9 +247,9 @@
                 </div>
                 <script>
                     $('#deleteModal').on('show.bs.modal', function (event) {
-                    var button = $(event.relatedTarget);
-                    var id = button.data('id');
-                    $(this).find('#idInput').val(id);
+                        var button = $(event.relatedTarget);
+                        var id = button.data('id');
+                        $(this).find('#idInput').val(id);
                     });
                 </script>
 
@@ -273,11 +287,11 @@
 <script>
     // T? ??ng m? modal sau khi trang t?i l?i
     $(document).ready(function () {
-    $('#resultModal').modal('show');
+        $('#resultModal').modal('show');
     });
     //t? ?óng sau 3 s
     setTimeout(() => {
-    $('#resultModal').modal('hide');
+        $('#resultModal').modal('hide');
     }, 3000);
 
 

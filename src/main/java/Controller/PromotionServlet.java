@@ -69,6 +69,7 @@ public class PromotionServlet extends HttpServlet {
                 int discount = Integer.parseInt(request.getParameter("discount"));
                 int minvalue = Integer.parseInt(request.getParameter("minValue"));
                 String description = request.getParameter("description");
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
                 int status = 0;
                 Date today = new Date();
                 if (!today.before(sday) && !today.after(eday)) {
@@ -76,7 +77,7 @@ public class PromotionServlet extends HttpServlet {
                 } else if (today.before(sday)) {
                     status = 2; // chưa tới ngày bắt đầu
                 } 
-                int checkCreate = dao.create(code, discount, sday, eday, description, status, minvalue);
+                int checkCreate = dao.create(code, discount, sday, eday, description, status, minvalue,quantity);
                 if (checkCreate == 0) { // lỗi
                     request.setAttribute("messageType", "error");
                     request.setAttribute("message", "Add promotion failed! Please try again.");
@@ -98,8 +99,8 @@ public class PromotionServlet extends HttpServlet {
             int discount = Integer.parseInt(request.getParameter("discount"));
 
             PromotionDao dao = new PromotionDao();
-
-            int checkEdit = dao.edit(id, code, discount, description, minvalue);
+             int quantity = Integer.parseInt(request.getParameter("quantity"));
+            int checkEdit = dao.edit(id, code, discount, description, minvalue,quantity);
             if (checkEdit == 0) { // lỗi
                 request.setAttribute("messageType", "error");
                 request.setAttribute("message", "Edit promotion failed! Please try again.");
