@@ -24,7 +24,7 @@ public class PromotionDao extends DBContext {
         ArrayList<Promotion> list = new ArrayList<>();
         try {
             Connection con = this.getConnection();
-            String sql = "select * from Promotion";
+          String sql = "SELECT * FROM Promotion";
             String setSatus = "UPDATE Promotion\n"
                     + "SET status = CASE\n"
                     + "                WHEN CAST(GETDATE() AS DATE) BETWEEN CAST(start_date AS DATE) AND CAST(end_date AS DATE) THEN 1\n"
@@ -46,7 +46,7 @@ public class PromotionDao extends DBContext {
             }
 
         } catch (SQLException ex) {
-            System.getLogger(CategoryDao.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(PromotionDao.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
 
         }
         return list;
@@ -55,7 +55,7 @@ public class PromotionDao extends DBContext {
     public int create(String code, int discount, Date startDay, Date endDay, String description, int status, int minOrderValue,int quantity) {
 
         try {
-            String query = " insert into Promotion (code,discount_percent, start_date, end_date,description,status,min_order_value)\n"
+            String query = " insert into Promotion (code,discount_percent, start_date, end_date,description,status,min_order_value,quantity)\n"
                     + "  values (?,?,?,?,?,?,?,?);";
 
             Connection con = this.getConnection();
@@ -94,7 +94,7 @@ public class PromotionDao extends DBContext {
 
             return statement.executeUpdate();
         } catch (SQLException ex) {
-            System.getLogger(CategoryDao.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(PromotionDao.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
         return 0;
     }
@@ -108,7 +108,7 @@ public class PromotionDao extends DBContext {
 
             return statement.executeUpdate();
         } catch (SQLException ex) {
-            System.getLogger(CategoryDao.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(PromotionDao.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
 
         return 0;

@@ -3,6 +3,7 @@
     Created on : Oct 19, 2025, 12:53:25?PM
     Author     : Admin
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/includes/header.jsp" %>
