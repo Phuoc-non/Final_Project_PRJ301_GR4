@@ -4,39 +4,42 @@
  */
 package model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Asus
  */
 public class ProductDetail {
+
     private int id;
-    private String price;
-    private String author;
-    private String BookName;
+   
+    private String bookName;
     private String format;
     private int pages;
     private String dimensions;
-    private String publication_date;
-    private String img;
-    private String description;
-    private String caterogy;
+    private Date publicationDate;
+    private String language;
+    private Authors author;
+    private Product product;
+    private Category category;
+    
     public ProductDetail() {
     }
 
-    public ProductDetail(int id, String price, String author, String BookName, String format, int pages, String dimensions, String publication_date, String img, String description, String caterogy) {
-        this.id = id;
-        this.price = price;
-        this.author = author;
-        this.BookName = BookName;
+    public ProductDetail(int id, String bookName, String format, int pages, String dimensions, Date publicationDate,String language, Authors author, Product product, Category category) {
+        this.id = id;    
+        this.bookName = bookName;
         this.format = format;
         this.pages = pages;
         this.dimensions = dimensions;
-        this.publication_date = publication_date;
-        this.img=img;
-        this.description=description;
-        this.caterogy=caterogy;
+        this.publicationDate = publicationDate;
+        this.language=language;
+        this.author = author;
+        this.product = product;
+        this.category = category;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -45,28 +48,14 @@ public class ProductDetail {
         this.id = id;
     }
 
-    public String getPrice() {
-        return price;
-    }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
     public String getBookName() {
-        return BookName;
+        return bookName;
     }
 
-    public void setBookName(String BookName) {
-        this.BookName = BookName;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
     public String getFormat() {
@@ -93,47 +82,44 @@ public class ProductDetail {
         this.dimensions = dimensions;
     }
 
-    public String getPublication_date() {
-        return publication_date;
+    public Date getPublicationDate() {
+        return publicationDate;
     }
 
-    public void setPublication_date(String publication_date) {
-        this.publication_date = publication_date;
+    public void setPublicationDate(Date publicationDate) {
+        this.publicationDate = publicationDate;
     }
 
-    public String getImg() {
-        return img;
+    public Authors getAuthor() {
+        return author;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setAuthor(Authors author) {
+        this.author = author;
     }
 
-    public String getDescription() {
-        return description;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public String getCaterogy() {
-        return caterogy;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCaterogy(String caterogy) {
-        this.caterogy = caterogy;
+    public void setCategory(Category category) {
+        this.category = category;
     }
-    
 
-    @Override
-    public String toString() {
-        return "ProductDetail{" + "id=" + id + ", price=" + price + ", author=" + author + ", BookName=" + BookName + ", format=" + format + ", pages=" + pages + ", dimensions=" + dimensions + ", publication_date=" + publication_date + ", img=" + img + ", description=" + description + '}';
+    public String getLanguage() {
+        return language;
     }
-    
-   
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
 }
-
-    
-
-    

@@ -384,7 +384,7 @@
                 Footer Start
 *************************************-->
 
-<%@include file="../WEB-INF/footer.jsp" %>
+<%@include file="../WEB-INF/includes/footer.jsp" %>
 
 <!--************************************
                 Footer End

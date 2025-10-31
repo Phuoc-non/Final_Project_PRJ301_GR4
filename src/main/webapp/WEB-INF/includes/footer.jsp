@@ -170,10 +170,8 @@
 <script src="${pageContext.request.contextPath}/assets/js/parallax.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/countTo.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/appear.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/gmap3.js"></script>
+ <script src="${pageContext.request.contextPath}/assets/js/gmap3.js"></script> 
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
-
-
 </body>
 
 </html>
