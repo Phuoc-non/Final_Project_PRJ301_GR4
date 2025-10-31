@@ -4,13 +4,16 @@
  */
 package Controller;
 
-import entity.GoogleAccount;
+import dao.RegistrationDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Registration;
 
 /**
  *
@@ -30,17 +33,6 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String code = request.getParameter("code");
-        String error = request.getParameter("error");
-        //neu nguoi dung huy uy quyen
-        if(error != null) {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
-        GoogleLogin gg = new GoogleLogin();
-        String accessToken = gg.getToken(code);
-        GoogleAccount acc = gg.getUserInfo(accessToken);
-        //check tk da dky chua
     }
 
     /**
@@ -68,29 +60,28 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        String u = request.getParameter("username");
-//        String p = request.getParameter("password");
-//
-//        UserDAO dao = new UserDAO();
-//        String passMD5 = MD5Util.md5(p);
-//        Users user = dao.login(u, passMD5);
-//
-//        if (user != null) {
-//            HttpSession session = request.getSession();
-//            session.setAttribute("user", user);
-//
-//            Cookie cookieUser = new Cookie("username", u);
-//            Cookie cookiePass = new Cookie("password", p);
-//            cookieUser.setMaxAge(24 * 60 * 60);
-//            cookiePass.setMaxAge(24 * 60 * 60);
-//            response.addCookie(cookieUser);
-//            response.addCookie(cookiePass);
-//
-//            response.sendRedirect(getServletContext().getContextPath() + "/...");
-//        } else {
-//            request.setAttribute("error", "Username or password invalid!");
-//            request.getRequestDispatcher("/WEB-INF/logins/login.jsp").forward(request, response);//
-//        }
+        String u = request.getParameter("username");
+        String p = request.getParameter("password");
+
+        RegistrationDAO dao = new RegistrationDAO();
+        Registration user = dao.login(u, p);
+
+        if (user != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+
+            Cookie cookieUser = new Cookie("username", u);
+            Cookie cookiePass = new Cookie("password", p);
+            cookieUser.setMaxAge(24 * 60 * 60);
+            cookiePass.setMaxAge(24 * 60 * 60);
+            response.addCookie(cookieUser);
+            response.addCookie(cookiePass);
+
+            response.sendRedirect(getServletContext().getContextPath() + "/book");
+        } else {
+            request.setAttribute("error", "Username or password invalid!");
+            request.getRequestDispatcher("/WEB-INF/logins/login.jsp").forward(request, response);//
+        }
     }
 
     /**
