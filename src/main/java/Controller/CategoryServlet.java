@@ -5,7 +5,7 @@
 package Controller;
 
 
-import DAO.CategoryDao;
+import dao.CategoryDao;
 import java.io.IOException;
 
 

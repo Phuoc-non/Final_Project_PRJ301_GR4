@@ -1,22 +1,13 @@
 Controller\CategoryServlet.class
 Controller\LoginServlet.class
-<<<<<<< HEAD
 model\ProductDetail.class
 Controller\AuthorsServlet.class
 Controller\ReviewServlet.class
 Controller\RegisterServlet.class
 Controller\Cart.class
 dao\ProductDetailDao.class
-=======
-dao\TestLogin.class
-com\mycompany\lib\resources\JakartaEE11Resource.class
-Controller\CutomerServlet.class
-Controller\RegisterServlet.class
-Controller\ProfileServlet.class
 dao\CustomerDAO.class
->>>>>>> VDat
 Util\MD5Util.class
-model\Order.class
 com\mycompany\lib\JakartaRestConfiguration.class
 Controller\ChangePasswordServlet.class
 model\Authors.class
@@ -27,8 +18,10 @@ dao\RegistrationDAO.class
 dao\CategoryDao.class
 dao\TestLogin.class
 com\mycompany\lib\resources\JakartaEE11Resource.class
+Controller\CutomerServlet.class
 Controller\ProfileServlet.class
 model\Promotion.class
+model\Order.class
 Controller\PromotionServlet.class
 model\UserReview.class
 dao\ReviewDao.class

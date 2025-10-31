@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import DAO.PromotionDao;
+import dao.PromotionDao;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;

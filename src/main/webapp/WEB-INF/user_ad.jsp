@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@include file="headerTotal.jsp" %>
+<%@include file="includes/headerTotal.jsp" %>
 
 <!-- 🧩 Hiển thị thông báo lỗi từ Servlet -->
 <c:if test="${not empty errorMessage}">
@@ -132,6 +132,8 @@
                 </div>
             </div>
         </c:forEach>
+
+        <nav aria-label="Page navigation"> <ul class="pager"> <li> <a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a> </li> <li><a href="<c:url value='/manage-user?page=1'/>">1</a></li> <li><a href="<c:url value='/manage-user?page=2'/>">2</a></li> <li><a href="<c:url value='/manage-user?page=3'/>">3</a></li> <li><a href="<c:url value='/manage-user?page=4'/>">4</a></li> <li><a href="<c:url value='/manage-user?page=5'/>">5</a></li> <li> <a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a> </li> </ul> </nav>
     </div>
 </main>
 
