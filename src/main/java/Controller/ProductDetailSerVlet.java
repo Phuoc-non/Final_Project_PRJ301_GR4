@@ -46,7 +46,6 @@ public class ProductDetailSerVlet extends HttpServlet {
         if(rq!=null){ 
         ProductDetail product=productDao.getById(Integer.parseInt(rq));       
         request.setAttribute("productdetail", product);
-        
         List<UserReview> review=viewDao.getById(Integer.parseInt(rq));
         request.setAttribute("reviewer", review);
         request.getRequestDispatcher("/WEB-INF/Product/productdetail.jsp").forward(request, response);   

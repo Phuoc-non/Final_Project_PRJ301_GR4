@@ -17,7 +17,7 @@
 							<h1>404 Error </h1>
 							<ol class="tg-breadcrumb">
 								<li><a href="javascript:void(0);">home</a></li>
-								<li class="tg-active">404 Error${Errol} </li>
+								<li class="tg-active">${Error} </li>
 							</ol>
 						</div>
 					</div>

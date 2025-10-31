@@ -3,6 +3,8 @@
     Created on : Oct 15, 2025, 2:33:11 PM
     Author     : Asus
 --%>
+<%@page import="model.UserReview"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../includes/headerTotal.jsp" %>
 
@@ -49,11 +51,11 @@
                                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                         <div class="tg-postbook">
 
-                                            <figure class="tg-featureimg"><img src="${productdetail.img}" alt="image description"></figure>
+                                            <figure class="tg-featureimg"><img src="${productdetail.getProduct().img}" alt="image description"></figure>
 
                                             <div class="tg-postbookcontent">
                                                 <span class="tg-bookprice">
-                                                    <ins>${productdetail.price}</ins>
+                                                    <ins>${productdetail.getProduct().price}</ins>
                                                     <del>$27.20</del>
                                                 </span>
                                                 <span class="tg-bookwriter">You save $4.02</span>
@@ -63,45 +65,192 @@
 
                                                 </ul>
                                                 <div class="tg-quantityholder">
+
+                                                    <p>Số lượng</p>
                                                     <em class="minus">-</em>
-                                                    <input type="text" class="result" value="0" id="quantity1" name="quantity">
-                                                    <em class="plus">+</em>
+                                                    <input type="text" class="result" value="1" id="quantity1" name="quantity" data-max="${productdetail.getProduct().quantity}">
+                                                    <em class="plus">+</em> 
+                                                    <p id="quantitymax">${productdetail.getProduct().quantity} sản phẩm có sẵn</p>   
                                                 </div>
-                                                <a class="tg-btn tg-active tg-btn-lg" href="javascript:void(0);">Add To Basket</a>
+
+                                                <a class="tg-btn tg-active tg-btn-lg add"  id="addToBasket">Add To Basket</a>
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        const min = 1;
+                                                        function addCartItem(sku, quantity) {
+                                                            fetch('http://localhost:8080/Lib/Cart', {
+                                                                method: 'POST',
+                                                                headers: {
+                                                                    'Content-Type': 'application/x-www-form-urlencoded'
+                                                                },
+                                                                body: new URLSearchParams({
+                                                                    sku: sku,
+                                                                    quantity: quantity,
+                                                                    status: 'add'
+                                                                })
+                                                            })
+
+                                                                    .then(res => res.text())
+                                                                    .then(data => {
+                                                                        alert(data);
+                                                                    });
+                                                        }
+
+                                                        $('.add').on('click', function () {
+                                                            const quantity = $('#quantity1').val();
+                                                            const sku = '${productdetail.getProduct().sku}';
+                                                            addCartItem(sku, quantity);
+                                                        }
+                                                        );
+
+                                                        $('.minus').on('click', function () {
+
+                                                            const input = $(this).siblings('.result');
+                                                            let val = parseInt(input.val(), 10) || 0;
+
+                                                            if (val > min) {
+                                                                val--;
+                                                                input.val(val);
+                                                            }
+                                                        });
+                                                        // Nút cộng
+                                                        $('.plus').on('click', function () {
+                                                            const input = $(this).siblings('.result');
+                                                            const max = parseInt(input.data('max'));
+                                                            let val = parseInt(input.val(), 10) || 0;
+
+                                                            if (val < max) {
+                                                                val++;
+                                                                input.val(val);
+                                                            }
+                                                        });
+                                                        // Ngăn nhập ký tự không phải số + giới hạn max khi gõ
+                                                        $('.result').on('keypress', function (e) {
+                                                            const val = parseInt($(this).val(), 10) || 0;
+                                                            const max = parseInt($(this).data('max'));
+                                                            // Nếu đã đạt max hoặc gõ ký tự không phải số → chặn
+                                                            if (val >= max || e.which < 48 || e.which > 57)//e.which la nằm ngoài trong bảng ASCII
+                                                                e.preventDefault(); //chặn các hành động nằm ngoài đó
+                                                        });
+                                                        // Khi dán (paste) hoặc nhập bằng chuột → lọc lại và giới hạn max
+                                                        $('.result').on('input', function () {
+                                                            const max = parseInt($(this).data('max'));
+                                                            let val = parseInt($(this).val().replace(/[^0-9]/g, ''), 10) || 0;
+                                                            if (val > max)
+                                                                val = max;
+                                                            if (val < min)
+                                                                val = min;
+                                                            $(this).val(val);
+                                                        });
+                                                    });
+
+                                                </script>
+
+
 
 
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                                        <div class="tg-productcontent">
-                                            <ul class="tg-bookscategories">
-                                                <li><a href="javascript:void(0);">${productdetail.caterogy}</a></li>
-                                            </ul>
-                                            <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
-                                            <div class="tg-booktitle">
-                                                <h3>${productdetail.getBookName()}</h3>
-                                            </div>
-                                            <span class="tg-bookwriter">By: <a href="javascript:void(0);">${productdetail.author}</a></span>
-                                            <span class="tg-stars"><span></span></span>
-                                            <span class="tg-addreviews"><a href="javascript:void(0);">Add Your Review</a></span>
 
-                                            <div class="tg-description">
-                                                <p>${productdetail.description}</p>
-                                                <!--<p>Arure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat nulla aetur excepteur sint occaecat cupidatat non proident, sunt in culpa quistan officia serunt mollit anim id est laborum sed ut perspiciatis unde omnis iste natus... <a href="javascript:void(0);">More</a></p>-->
-                                            </div>
-                                            <div class="tg-sectionhead">
-                                                <h2>Product Details</h2>
-                                            </div>
-                                            <ul class="tg-productinfo">
-                                                <li><span>Format:</span><span>${productdetail.format}</span></li>
-                                                <li><span>Pages:</span><span>${productdetail.pages}</span></li>
-                                                <li><span>Dimensions:</span><span>${productdetail.dimensions}</span></li>
-                                                <li><span>Publication Date:</span><span>${productdetail.publication_date}</span></li>
-                                                <li><span>Language:</span><span>English</span></li>
-                                            </ul>
-
+                                        <ul class="tg-bookscategories">
+                                            <li><a href="javascript:void(0);">${productdetail.getCategory().name}</a></li>
+                                        </ul>
+                                        <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
+                                        <div class="tg-booktitle">
+                                            <h3>${productdetail.bookName}</h3>
                                         </div>
+                                        <span class="tg-bookwriter">By: <a href="javascript:void(0);">${productdetail.getAuthor().name}</a></span>
+                                        <!--                                            <span class="tg-stars"><span></span></span>-->
+                                        <%--    <c:set  var="avrRating" value="0"></c:set>
+                                        <c:set  var="count" value="0"></c:set>
+                                        <c:forEach var="rating" items="${reviewer}">
+                                            <c:set var="sum" value="${sum + rating}" />
+                                            <c:set var="count" value="${count + 1}" />
+                                        </c:forEach>
+
+                                        <c:choose>
+                                            <c:when test="${count > 0}">
+                                                <c:set var="avgRating" value="${sum / count}" />
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:set var="avgRating" value="0" />
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <!-- Hiển thị sao -->
+                                        <c:set var="fullStars" value="${fn:floor(avgRating)}" />
+                                        <c:set var="halfStar" value="${avgRating - fullStars >= 0.5}" />
+
+                                        <div>
+                                            <c:forEach begin="1" end="5" var="i">
+                                                <c:choose>
+                                                    <c:when test="${i <= fullStars}">
+                                                        <i class="fas fa-star text-warning"></i>
+                                                    </c:when>
+                                                    <c:when test="${halfStar and i == fullStars + 1}">
+                                                        <i class="fas fa-star-half-alt text-warning"></i>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <i class="far fa-star text-warning"></i>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                            <span class="ml-2">(${avgRating}/5)</span>
+                                        </div>
+                                        --%>
+                                        <%
+                                            List<UserReview> ratings = (List<UserReview>) request.getAttribute("reviewer");
+                                            double avgRating = 0;
+                                            if (ratings != null && !ratings.isEmpty()) {
+                                                int sum = 0;
+                                                for (UserReview r : ratings) {
+                                                    sum += r.getRating();
+                                                }
+                                                avgRating = (double) sum / ratings.size();
+                                            }
+                                        %>
+
+                                        <div>
+                                            <%
+                                                int fullStars = (int) Math.floor(avgRating);//làm tròn xuống
+                                                boolean halfStar = (avgRating - fullStars) >= 0.5;
+                                                for (int i = 1; i <= 5; i++) {
+                                                    if (i <= fullStars) {//in ra số sao đầy
+                                            %>
+                                            <i class="fas fa-star text-warning" style="color:#FFD700"></i>
+                                            <%
+                                            } else if (halfStar && i == fullStars + 1) {// in ra số sao nửa
+                                            %>
+                                            <i class="fas fa-star-half-alt text-warning" style="color:#FFD700"></i>
+                                            <%
+                                            } else {// in ra số sao rỗng
+                                            %>
+                                            <i class="far fa-star text-warning"></i>
+                                            <%
+                                                    }
+                                                }
+                                            %>
+                                            <span class="ml-2">(<%= String.format("%.1f", avgRating)%>/5)</span>
+                                        </div>
+                                        <span class="tg-addreviews"><a href="javascript:void(0);">Add Your Review</a></span>
+
+                                        <div class="tg-description">
+                                            <p></p>
+                                            <!--<p>Arure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat nulla aetur excepteur sint occaecat cupidatat non proident, sunt in culpa quistan officia serunt mollit anim id est laborum sed ut perspiciatis unde omnis iste natus... <a href="javascript:void(0);">More</a></p>-->
+                                        </div>
+                                        <div class="tg-sectionhead">
+                                            <h2>Product Details</h2>
+                                        </div>
+                                        <ul class="tg-productinfo">
+                                            <li><span>Format:</span><span>${productdetail.format}</span></li>
+                                            <li><span>Pages:</span><span>${productdetail.pages}</span></li>
+                                            <li><span>Dimensions:</span><span>${productdetail.dimensions}</span></li>
+                                            <li><span>Publication Date:</span><span></span>${productdetail.publicationDate}</li>
+                                            <li><span>Language:</span><span>${productdetail.language}</span></li>
+                                        </ul>
+
+
                                     </div>
 
                                     <div class="tg-aboutauthor">
@@ -110,22 +259,19 @@
                                                 <h2>About Author</h2>
                                             </div>
                                             <div class="tg-authorbox">
-                                                <figure class="tg-authorimg">
-                                                    <img src="${pageContext.request.contextPath}/assets/images/author/imag-24.jpg" alt="image description">
 
-                                                </figure>
                                                 <div class="tg-authorinfo">
                                                     <div class="tg-authorhead">
                                                         <div class="tg-leftarea">
                                                             <div class="tg-authorname">
-                                                                <h2>Kathrine Culbertson</h2>
-                                                                <span>Author Since: June 27, 2017</span>
+                                                                <h2></h2>
+
                                                             </div>
                                                         </div>
 
                                                     </div>
                                                     <div class="tg-description">
-                                                        <p>Laborum sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis etation.</p>
+                                                        <p>${productdetail.getAuthor().bio}</p>
                                                     </div>
                                                     <a class="tg-btn tg-active" href="javascript:void(0);">View All Books</a>
                                                 </div>
@@ -411,7 +557,7 @@
                             </div>
 
 
-                            
+
                         </aside>
                     </div>
                 </div>
@@ -457,7 +603,7 @@
                 </div>
                 <!-- cần có Bootstrap Icons -->
                 <!-- cần Bootstrap Icons -->
-               
+
 
                 <form method="post" action="${pageContext.request.contextPath}/ReviewServlet">
                     <h4>Đánh giá của bạn</h4>
@@ -492,16 +638,16 @@
                 <script>
                     const stars = document.querySelectorAll('#rating i');
                     const hidden = document.getElementById('stars_submit');
-                    
-                    stars.forEach(function(s, i){
-                        s.onclick = function() {
+                    stars.forEach(function (s, i) {
+                        s.onclick = function () {
                             hidden.value = i + 1;
-                            stars.forEach(function(st, j) {
+                            stars.forEach(function (st, j) {
                                 st.classList.toggle('active', j <= i);
                                 st.className = 'bi ' + (j <= i ? 'bi-star-fill active' : 'bi-star');
                             });
                         };
-                    });
+                    })
+                            ;
 
                 </script>
 

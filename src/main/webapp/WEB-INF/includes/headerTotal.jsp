@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Registration" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
     Registration user = (Registration) session.getAttribute("user");
@@ -30,15 +31,11 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/color.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
         <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-<<<<<<< HEAD:src/main/webapp/WEB-INF/includes/headerTotal.jsp
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap.min.js"></script>
-=======
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
->>>>>>> VDat:src/main/webapp/WEB-INF/headerTotal.jsp
     </head>
     <body class="tg-home tg-homeone">
 
@@ -80,54 +77,57 @@
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <strong class="tg-logo"><a href="index.jsp"><img src="${pageContext.request.contextPath}/assets/images/logo.png" alt="company name here"></a></strong>
                                 <div class="tg-wishlistandcart">
-                                    <div class="dropdown tg-themedropdown tg-minicartdropdown">
-                                        <a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="tg-themebadge">3</span>
+                                    <!-- muốn dùng thì xóa cái div dưới<div class="dropdown tg-themedropdown tg-minicartdropdown">-->
+                                    <div>
+                                        <%-- <a href="${pageContext.request.contextPath}/Cart" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
+                                        <a href="${pageContext.request.contextPath}/Cart" id="tg-minicart" class="tg-btnthemedropdown" aria-haspopup="true" aria-expanded="false">
+
+                                            <span class="tg-themebadge">7</span>
                                             <i class="icon-cart"></i>
                                             <span>$123.00</span>
                                         </a>
-                                        <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">
-                                            <div class="tg-minicartbody">
-                                                <div class="tg-minicarproduct">
-                                                    <figure>
-                                                        <img src="${pageContext.request.contextPath}/assets/images/products/img-01.jpg" alt="image description">
-                                                    </figure>
-                                                    <div class="tg-minicarproductdata">
-                                                        <h5><a href="javascript:void(0);">Our State Fair Is A Great Function</a></h5>
-                                                        <h6><a href="javascript:void(0);">$ 12.15</a></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="tg-minicarproduct">
-                                                    <figure>
-                                                        <img src="${pageContext.request.contextPath}/assets/images/products/img-02.jpg" alt="image description">
-                                                    </figure>
-                                                    <div class="tg-minicarproductdata">
-                                                        <h5><a href="javascript:void(0);">Bring Me To Light</a></h5>
-                                                        <h6><a href="javascript:void(0);">$ 12.15</a></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="tg-minicarproduct">
-                                                    <figure>
-                                                        <img src="${pageContext.request.contextPath}/assets/images/products/img-03.jpg" alt="image description">
-                                                    </figure>
-                                                    <div class="tg-minicarproductdata">
-                                                        <h5><a href="javascript:void(0);">Have Faith In Your Soul</a></h5>
-                                                        <h6><a href="javascript:void(0);">$ 12.15</a></h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tg-minicartfoot">
-                                                <a class="tg-btnemptycart" href="javascript:void(0);">
-                                                    <i class="fa fa-trash-o"></i>
-                                                    <span>Clear Your Cart</span>
-                                                </a>
-                                                <span class="tg-subtotal">Subtotal: <strong>35.78</strong></span>
-                                                <div class="tg-btns">
-                                                    <a class="tg-btn tg-active" href="javascript:void(0);">View Cart</a>
-                                                    <a class="tg-btn" href="javascript:void(0);">Checkout</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <!--                                        <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">
+                                                                                    <div class="tg-minicartbody">
+                                                                                        <div class="tg-minicarproduct">
+                                                                                            <figure>
+                                                                                                <img src="${pageContext.request.contextPath}/assets/images/products/img-01.jpg" alt="image description">
+                                                                                            </figure>
+                                                                                            <div class="tg-minicarproductdata">
+                                                                                                <h5><a href="javascript:void(0);">Our State Fair Is A Great Function</a></h5>
+                                                                                                <h6><a href="javascript:void(0);">$ 12.15</a></h6>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="tg-minicarproduct">
+                                                                                            <figure>
+                                                                                                <img src="${pageContext.request.contextPath}/assets/images/products/img-02.jpg" alt="image description">
+                                                                                            </figure>
+                                                                                            <div class="tg-minicarproductdata">
+                                                                                                <h5><a href="javascript:void(0);">Bring Me To Light</a></h5>
+                                                                                                <h6><a href="javascript:void(0);">$ 12.15</a></h6>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="tg-minicarproduct">
+                                                                                            <figure>
+                                                                                                <img src="${pageContext.request.contextPath}/assets/images/products/img-03.jpg" alt="image description">
+                                                                                            </figure>
+                                                                                            <div class="tg-minicarproductdata">
+                                                                                                <h5><a href="javascript:void(0);">Have Faith In Your Soul</a></h5>
+                                                                                                <h6><a href="javascript:void(0);">$ 12.15</a></h6>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="tg-minicartfoot">
+                                                                                        <a class="tg-btnemptycart" href="javascript:void(0);">
+                                                                                            <i class="fa fa-trash-o"></i>
+                                                                                            <span>Clear Your Cart</span>
+                                                                                        </a>
+                                                                                        <span class="tg-subtotal">Subtotal: <strong>35.78</strong></span>
+                                                                                        <div class="tg-btns">
+                                                                                            <a class="tg-btn tg-active" href="javascript:void(0);">View Cart</a>
+                                                                                            <a class="tg-btn" href="javascript:void(0);">Checkout</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>-->
                                     </div>
                                 </div>
                                 <div class="tg-searchbox">
