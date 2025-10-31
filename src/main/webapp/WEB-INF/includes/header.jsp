@@ -21,10 +21,20 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/font-awesome.min.css">
 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/icomoon.css">
-
+       
         <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script>
+      <script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap.min.js"></script>
+   
+        <style>
+  #tg-main canvas {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+  }
+</style>
+
     </head>
     <body>
         <div id="tg-wrapper" class="tg-wrapper tg-haslayout">

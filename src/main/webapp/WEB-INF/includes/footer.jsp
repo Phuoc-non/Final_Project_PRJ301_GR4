@@ -166,7 +166,7 @@
                 Wrapper End
 *************************************-->
  
-
+     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
 <script src="${pageContext.request.contextPath}/assets/js/owl.carousel.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/jquery.vide.min.js"></script>
@@ -177,8 +177,12 @@
 <script src="${pageContext.request.contextPath}/assets/js/appear.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/gmap3.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+  
 
+	
+	
 
+        
 </body>
 
 </html>
