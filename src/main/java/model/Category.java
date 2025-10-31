@@ -18,10 +18,15 @@ public class Category {
     private int quantity;
     private Date dayCreate;
     private Date dayUpdate;
-
+    
     public Category() {
     }
 
+    public Category(String name) {
+        this.name = name;
+    }
+
+    
     public Category(int id, String name, int quantity, Date dayCreate, Date dayUpdate) {
         this.id = id;
         this.name = name;
