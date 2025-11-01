@@ -5,6 +5,7 @@
 package Controller;
 
 import Util.MD5Util;
+
 import dao.RegistrationDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -65,8 +66,9 @@ public class LoginServlet extends HttpServlet {
         String p = request.getParameter("password");
 
         RegistrationDAO dao = new RegistrationDAO();
-        String passMD5 = MD5Util.md5(p);
-        Registration user = dao.login(u, passMD5);
+
+        Registration user = dao.login(u, p);
+
 
         if (user != null) {
             HttpSession session = request.getSession();

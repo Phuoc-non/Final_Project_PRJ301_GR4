@@ -78,7 +78,7 @@
                                                     $(document).ready(function () {
                                                         const min = 1;
                                                         function addCartItem(sku, quantity) {
-                                                            fetch('http://localhost:8080/Lib/Cart', {
+                                                            fetch('http://localhost:8080/Lib/cart', {
                                                                 method: 'POST',
                                                                 headers: {
                                                                     'Content-Type': 'application/x-www-form-urlencoded'

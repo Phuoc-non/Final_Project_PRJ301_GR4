@@ -40,6 +40,7 @@ public class TestLogin {
 //        int n=cd.createCartItem(2, "BOOK02", 4);
 //        int up=cd.updateCartItem(2, "BOOK02", 20);
 //        List<CartItem> l= cd.cartAll(1);
+
            int n=cd.deleteCartItem(1, "BOOK01");
            ProductDetailDao pd= new ProductDetailDao();
            ProductDetail p=pd.getById(1);
@@ -50,6 +51,7 @@ public class TestLogin {
         }
         else {
         System.out.println("AN CUC");
+//             System.out.println(cart1.getCartId());
         }
                 }
 }

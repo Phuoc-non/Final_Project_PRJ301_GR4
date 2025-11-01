@@ -78,7 +78,7 @@
                                                 const min = 1;
 
                                                 function deleteItem(sku) {
-                                                    fetch('http://localhost:8080/Lib/Cart', {
+                                                    fetch('http://localhost:8080/Lib/cart', {
                                                         method: 'POST',
                                                         headers: {
                                                             'Content-Type': 'application/x-www-form-urlencoded'
@@ -90,7 +90,7 @@
                                                     });
                                                 }
                                                 function updateCart(sku, quantity) {
-                                                    fetch('http://localhost:8080/Lib/Cart', {
+                                                    fetch('http://localhost:8080/Lib/cart', {
                                                         method: 'POST',
                                                         headers: {
                                                             'Content-Type': 'application/x-www-form-urlencoded'
@@ -101,9 +101,6 @@
                                                             status: 'update'
                                                         })
                                                     });
-//                                                    .then(res => res.text())
-//                                                            .then(data => console.log('Server:', data))
-//                                                            .catch(err => console.error(err));
                                                 }
                                                 function updateRowTotal(input) {
                                                     const price = parseFloat($(input).data('price'));
@@ -168,7 +165,7 @@
                                                 // Khi dán (paste) hoặc nhập bằng chuột → lọc lại và giới hạn max
                                                 $('.quan').on('input', function () {
                                                     const sku = $(this).data('sku');
-                                                    
+
                                                     const max = parseInt($(this).data('max'));
                                                     let val = parseInt($(this).val().replace(/[^0-9]/g, ''), 10) || 0;
                                                     if (val > max)
