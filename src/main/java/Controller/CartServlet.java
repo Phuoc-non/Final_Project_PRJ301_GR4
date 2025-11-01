@@ -42,11 +42,13 @@ public class CartServlet extends HttpServlet {
 
         if (user != null) {
             Cart cart = cartDao.getCart(user.getUsername());//truy cap username de lay usercartID
-
+            if (cart == null) {
+                cartDao.creatCart(user.getUsername());
+                cart = cartDao.getCart(user.getUsername());
+            }
             List<CartItem> cartItem = cartDao.cartAll(cart.getId());//co ai thi tim list cartItem
             request.setAttribute("listCartItem", cartItem);//set vao vang vao cart.jsp
             request.getRequestDispatcher("/WEB-INF/Product/cart.jsp").forward(request, response);
-
         } else {
             request.setAttribute("Error", "Please login to use the shopping cart");
             request.getRequestDispatcher("/assets/404errol.jsp").forward(request, response);

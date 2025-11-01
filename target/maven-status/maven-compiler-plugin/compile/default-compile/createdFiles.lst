@@ -28,7 +28,6 @@ Controller\Order.class
 Controller\ProfileServlet.class
 model\Promotion.class
 model\Order.class
-Controller\AllBook.class
 dao\HomeDAO.class
 Controller\PromotionServlet.class
 model\Author.class

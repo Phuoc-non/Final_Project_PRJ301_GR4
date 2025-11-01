@@ -8,11 +8,14 @@ package dao;
  *
  * @author DELL
  */
+import java.util.ArrayList;
 import java.util.List;
+import model.Book;
 import model.Cart;
 import model.CartItem;
 import model.ProductDetail;
 import model.Registration;
+import org.eclipse.tags.shaded.org.apache.bcel.generic.AALOAD;
 
 public class TestLogin {
 
@@ -41,13 +44,17 @@ public class TestLogin {
 //        int up=cd.updateCartItem(2, "BOOK02", 20);
 //        List<CartItem> l= cd.cartAll(1);
 
-           int n=cd.deleteCartItem(1, "BOOK01");
-           ProductDetailDao pd= new ProductDetailDao();
-           ProductDetail p=pd.getById(1);
-        if (p!=null){
-
-         System.out.println("insert successfull");
-            System.out.println(p.toString());
+//           int n=cd.deleteCartItem(1, "BOOK01");
+//           ProductDetailDao pd= new ProductDetailDao();
+//           ProductDetail p=pd.getById(1);
+            ProductDAO p=new ProductDAO();
+            List<Book> list = p.getAllBook();
+        if (list!=null){
+           
+            for (Book book : list) {
+                System.out.println(book.toString());
+            }
+           
         }
         else {
         System.out.println("AN CUC");

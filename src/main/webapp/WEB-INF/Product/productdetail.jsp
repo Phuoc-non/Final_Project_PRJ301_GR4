@@ -94,7 +94,7 @@
                                                                     .then(data => {
                                                                         alert(data);
                                                                     });
-                                                        }
+                                                        };
 
                                                         $('.add').on('click', function () {
                                                             const quantity = $('#quantity1').val();

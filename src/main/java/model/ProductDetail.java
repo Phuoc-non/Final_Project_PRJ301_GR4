@@ -40,6 +40,10 @@ public class ProductDetail {
         this.category = category;
     }
 
+    public ProductDetail(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
@@ -127,4 +131,5 @@ public class ProductDetail {
         return "ProductDetail{" + "id=" + id + ", bookName=" + bookName + ", format=" + format + ", pages=" + pages + ", dimensions=" + dimensions + ", publicationDate=" + publicationDate + ", language=" + language + ", author=" + author + ", product=" + product + ", category=" + category + '}';
     }
 
+    
 }
