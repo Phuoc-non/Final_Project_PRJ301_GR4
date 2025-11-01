@@ -41,9 +41,12 @@ public class TestLogin {
 //        int up=cd.updateCartItem(2, "BOOK02", 20);
 //        List<CartItem> l= cd.cartAll(1);
            int n=cd.deleteCartItem(1, "BOOK01");
-        if (n!=0){
+           ProductDetailDao pd= new ProductDetailDao();
+           ProductDetail p=pd.getById(1);
+        if (p!=null){
 
          System.out.println("insert successfull");
+            System.out.println(p.toString());
         }
         else {
         System.out.println("AN CUC");
