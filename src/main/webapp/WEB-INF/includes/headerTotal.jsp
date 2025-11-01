@@ -317,9 +317,12 @@
                                             <li><a href="products.html">AllBook</a></li>
                                             <li><a href="cutomer">Customer</a></li>
                                             <li><a href="contactus.html">Order</a></li>
-                                                <% } else { %>
+
+                                            <% } else { %>
                                             <li><a href="products.html">AllBook</a></li>
-                                                <% }%>
+                                            <li><a href="support">Support</a></li>
+
+                                            <% }%>
                                         </ul>
                                     </div>
                                 </nav>

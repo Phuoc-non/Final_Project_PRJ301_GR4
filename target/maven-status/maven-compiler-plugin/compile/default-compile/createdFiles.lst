@@ -1,21 +1,17 @@
 Controller\CategoryServlet.class
+Controller\CustomerSupportServlet.class
 Controller\LoginServlet.class
-<<<<<<< HEAD
-=======
 model\CartItem.class
->>>>>>> origin
 model\ProductDetail.class
 Controller\AuthorsServlet.class
 Controller\ReviewServlet.class
 Controller\CartServlet.class
 Controller\RegisterServlet.class
 model\Cart.class
+dao\CustomerSupportDAO.class
 dao\ProductDetailDao.class
 dao\CustomerDAO.class
-<<<<<<< HEAD
-=======
 dao\CartDAO.class
->>>>>>> origin
 Util\MD5Util.class
 com\mycompany\lib\JakartaRestConfiguration.class
 Controller\ChangePasswordServlet.class
@@ -35,8 +31,10 @@ model\Order.class
 Controller\PromotionServlet.class
 model\UserReview.class
 dao\ReviewDao.class
+dao\PromotionDao.class
 model\Category.class
 model\Registration.class
 Controller\LogoutServlet.class
 Controller\ProductDetailSerVlet.class
 db\DBContext.class
+model\CustomerSupport.class
