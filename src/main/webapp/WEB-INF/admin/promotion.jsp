@@ -47,7 +47,8 @@
 
                         <div class="form-group col-md-6">
                             <label><span style="color: red;">*</span>Mã khuyến mãi</label>
-                            <input type="text"  name="code" required>
+                            <input type="text" name="code" pattern="[A-Z0-9]{10}" required
+                                   title="Enter exactly 6 characters: uppercase letters and digits only">
                         </div>
 
                         <div class="form-group col-md-4">
@@ -59,19 +60,19 @@
                             <input type="date"  name="eday">
                         </div>
 
-                         <div class="form-group col-md-4">
+                        <div class="form-group col-md-4">
                             <label><span style="color: red;">*</span>Quantity</label>
-                            <input type="number"  placeholder="Nhập số lượng " name="quantity" min="1"  required> 
+                            <input type="number"  placeholder="Nhập số lượng " name="quantity" min="1" title="only enter greater than or equal to 1" required> 
                         </div>
-                        
+
                         <div class="form-group col-md-4">
                             <label><span style="color: red;">*</span>Giá trị giảm %</label>
-                            <input type="number"  placeholder="Nhập % " name="discount" min="1" max="100" required> 
+                            <input type="number"  placeholder="Nhập % " name="discount" min="1" max="100" title="enter only from 1 to 100" required> 
                         </div>
 
                         <div class="form-group col-md-4">
                             <label><span style="color: red;">*</span>giá trị đơn hàng giảm giá</label>
-                            <input type="number" min="1" required placeholder="Nhập số tiền Đơn hàng cần để giảm..." name="minValue">
+                            <input type="number" min="1" required placeholder="Nhập số tiền Đơn hàng cần để giảm..." title="only enter greater than or equal to 1" name="minValue">
                         </div>
 
                         <div class="form-group col-md-4">
@@ -119,8 +120,8 @@
                             <td>${pro.minOrderValue}</td>
                             <td><fmt:formatDate value="${pro.startDay}" pattern="dd-MM-yyyy"/></td>
                             <td><fmt:formatDate value="${pro.endDay}" pattern="dd-MM-yyyy"/></td>
-                           
-                              <td>${pro.quantity}</td>
+
+                            <td>${pro.quantity}</td>
                             <c:choose>
                                 <c:when test="${pro.status == 1}">
                                     <td class="bg-success text-white">Đang diễn ra</td>
@@ -172,11 +173,11 @@
                                         <input  readonly type="date"  id="edayInput">
                                     </div>
 
-                                     <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6">
                                         <label>Quantity</label>
                                         <input type="number" min="1"  required id="quantityInput" name="quantity">
                                     </div>
-                                    
+
                                     <div class="form-group col-md-6">
                                         <label>Giá trị giảm %</label>
                                         <input type="number" min="1" max="100" required id="discountInput" name="discount">

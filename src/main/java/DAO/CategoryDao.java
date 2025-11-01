@@ -70,19 +70,19 @@ public class CategoryDao extends DBContext {
     public boolean checkNameCategory(String name) {
 
         try {
-            String sql = " select name from Category";
+            String sql = " select name from Category ";
             PreparedStatement statement = this.getConnection().prepareStatement(sql);
 
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                if (name.equals(rs.getString("name"))) {
-                    return false;
+                if (name.equalsIgnoreCase(rs.getString("name"))) {
+                    return true;
                 }
             }
         } catch (SQLException ex) {
             System.getLogger(CategoryDao.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
-        return true;
+        return false;
     }
 
     public int edit(int id, String newName) {

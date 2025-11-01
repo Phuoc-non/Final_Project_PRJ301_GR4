@@ -99,6 +99,25 @@ public class PromotionDao extends DBContext {
         return 0;
     }
 
+     public boolean checkCodeDuplicate(String name) {
+
+        try {
+            String sql = " select code from Promotion ";
+            PreparedStatement statement = this.getConnection().prepareStatement(sql);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                if (name.equalsIgnoreCase(rs.getString("code"))) {
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            System.getLogger(CategoryDao.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return false;
+    }
+    
+    
     public int delete(int id) {
 
         try {

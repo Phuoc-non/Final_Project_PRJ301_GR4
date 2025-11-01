@@ -76,17 +76,26 @@ public class PromotionServlet extends HttpServlet {
                     status = 1; // đang trong khoảng
                 } else if (today.before(sday)) {
                     status = 2; // chưa tới ngày bắt đầu
-                } 
-                int checkCreate = dao.create(code, discount, sday, eday, description, status, minvalue,quantity);
-                if (checkCreate == 0) { // lỗi
-                    request.setAttribute("messageType", "error");
-                    request.setAttribute("message", "Add promotion failed! Please try again.");
-                } else { // thành công
-                    request.setAttribute("messageType", "success");
-                    request.setAttribute("message", "Promotion added successfully!");
                 }
-                request.setAttribute("list", dao.getAll());
-                request.getRequestDispatcher("/WEB-INF/admin/promotion.jsp").forward(request, response);
+                if (dao.checkCodeDuplicate(code)) {
+                    request.setAttribute("messageType", "error");
+                    request.setAttribute("message", "Promotion code  is already in use! Please try again.");
+                    request.setAttribute("list", dao.getAll());
+                    request.getRequestDispatcher("/WEB-INF/admin/promotion.jsp").forward(request, response);
+
+                } else {
+
+                    int checkCreate = dao.create(code, discount, sday, eday, description, status, minvalue, quantity);
+                    if (checkCreate == 0) { // lỗi
+                        request.setAttribute("messageType", "error");
+                        request.setAttribute("message", "Add promotion failed! Please try again.");
+                    } else { // thành công
+                        request.setAttribute("messageType", "success");
+                        request.setAttribute("message", "Promotion added successfully!");
+                    }
+                    request.setAttribute("list", dao.getAll());
+                    request.getRequestDispatcher("/WEB-INF/admin/promotion.jsp").forward(request, response);
+                }
             } catch (ParseException ex) {
                 System.getLogger(PromotionServlet.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
@@ -99,24 +108,34 @@ public class PromotionServlet extends HttpServlet {
             int discount = Integer.parseInt(request.getParameter("discount"));
 
             PromotionDao dao = new PromotionDao();
-             int quantity = Integer.parseInt(request.getParameter("quantity"));
-            int checkEdit = dao.edit(id, code, discount, description, minvalue,quantity);
-            if (checkEdit == 0) { // lỗi
-                request.setAttribute("messageType", "error");
-                request.setAttribute("message", "Edit promotion failed! Please try again.");
-            } else { // thành công
-                request.setAttribute("messageType", "success");
-                request.setAttribute("message", "Promotion editted successfully!");
-            }
-            request.setAttribute("list", dao.getAll());
-            request.getRequestDispatcher("/WEB-INF/admin/promotion.jsp").forward(request, response);
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-        }else if (action.equals("delete")) {
+            if (dao.checkCodeDuplicate(code)) {
+                request.setAttribute("messageType", "error");
+                request.setAttribute("message", "Promotion code  is already in use! Please try again.");
+                request.setAttribute("list", dao.getAll());
+                request.getRequestDispatcher("/WEB-INF/admin/promotion.jsp").forward(request, response);
+
+            } else {
+
+                int checkEdit = dao.edit(id, code, discount, description, minvalue, quantity);
+
+                if (checkEdit == 0) { // lỗi
+                    request.setAttribute("messageType", "error");
+                    request.setAttribute("message", "Edit promotion failed! Please try again.");
+                } else { // thành công
+                    request.setAttribute("messageType", "success");
+                    request.setAttribute("message", "Promotion editted successfully!");
+                }
+                request.setAttribute("list", dao.getAll());
+                request.getRequestDispatcher("/WEB-INF/admin/promotion.jsp").forward(request, response);
+            }
+        } else if (action.equals("delete")) {
             int id = Integer.parseInt(request.getParameter("id"));
-             PromotionDao dao = new PromotionDao();
+            PromotionDao dao = new PromotionDao();
             int checkDelete = dao.delete(id);
-            
-             if (checkDelete == 0) { // lỗi
+
+            if (checkDelete == 0) { // lỗi
                 request.setAttribute("messageType", "error");
                 request.setAttribute("message", "Delete promotion failed! Please try again.");
             } else { // thành công
