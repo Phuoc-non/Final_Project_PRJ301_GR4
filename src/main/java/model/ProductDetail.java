@@ -122,4 +122,9 @@ public class ProductDetail {
         this.language = language;
     }
 
+    @Override
+    public String toString() {
+        return "ProductDetail{" + "id=" + id + ", bookName=" + bookName + ", format=" + format + ", pages=" + pages + ", dimensions=" + dimensions + ", publicationDate=" + publicationDate + ", language=" + language + ", author=" + author + ", product=" + product + ", category=" + category + '}';
+    }
+
 }

@@ -22,7 +22,7 @@ import model.Registration;
  *
  * @author Asus
  */
-@WebServlet(name = "Cart", urlPatterns = {"/Cart"})
+@WebServlet(name = "Cart", urlPatterns = {"/cart"})
 public class CartServlet extends HttpServlet {
 
     /**
@@ -39,17 +39,17 @@ public class CartServlet extends HttpServlet {
         CartDAO cartDao = new CartDAO();//tao cartDao de chuan bi lay usercartID vi registration la id khac nen ko the lay theo duoc
         HttpSession session = request.getSession();
         Registration user = (Registration) session.getAttribute("user");//lay username
-        
-        if(user!=null){
-        Cart cart = cartDao.getCart(user.getUsername());//truy cap username de lay usercartID
-        List<CartItem> cartItem = cartDao.cartAll(cart.getId());//co ai thi tim list cartItem
-        request.setAttribute("listCartItem", cartItem);//set vao vang vao cart.jsp
 
-        request.getRequestDispatcher("/WEB-INF/Product/cart.jsp").forward(request, response);
-        }
-        else{
-            request.setAttribute("Error","Please login to use the shopping cart");
-           request.getRequestDispatcher("/assets/404errol.jsp").forward(request, response); 
+        if (user != null) {
+            Cart cart = cartDao.getCart(user.getUsername());//truy cap username de lay usercartID
+
+            List<CartItem> cartItem = cartDao.cartAll(cart.getId());//co ai thi tim list cartItem
+            request.setAttribute("listCartItem", cartItem);//set vao vang vao cart.jsp
+            request.getRequestDispatcher("/WEB-INF/Product/cart.jsp").forward(request, response);
+
+        } else {
+            request.setAttribute("Error", "Please login to use the shopping cart");
+            request.getRequestDispatcher("/assets/404errol.jsp").forward(request, response);
         }
         //Tai sao ko cho cart thanh session ?
         //Cho session o dau? o doPost?
@@ -82,20 +82,21 @@ public class CartServlet extends HttpServlet {
 //        else{
 //            response.getWriter().write("ko nhan");
 //        }
-        CartDAO cartDAO = new CartDAO();
-        Cart cart = cartDAO.getCart(user.getUsername());
 
 //Kiem tra xem co dang nhap hay chua
         if (user != null) {
+            CartDAO cartDAO = new CartDAO();
+            Cart cart = cartDAO.getCart(user.getUsername());
             //kiem tra xem user da co cart hay chua, neu chua thi tao cart cho user
             if (cart == null) {
                 cartDAO.creatCart(user.getUsername());
-                response.getWriter().write("add cartuser");
+                cart = cartDAO.getCart(user.getUsername());
             }
             //kiem tra neu da co cart thi them sp vao cart
             if (cart != null) {
 //                 response.getWriter().write(quantity+"and"+cart.getId()+"and"+sku);
                 CartItem cartItem = cartDAO.getCartItem(cart.getId(), sku);
+
                 //kiem tra xem san pham da ton tai trong gio hang chua
                 //neu da co thi cong don(update) vao quantity
                 if (status.equals("update")) {
@@ -123,19 +124,23 @@ public class CartServlet extends HttpServlet {
                     if (cartItem != null) {
                         int addQuantity = cartItem.getQuantity() + Integer.parseInt(quantity);
                         int rs = cartDAO.updateCartItem(cart.getId(), sku, addQuantity);
-                        int rs2=cartDAO.updateCart(cart.getUsername());
-                        if (rs == 0||rs2 == 0) {
+                        int rs2 = cartDAO.updateCart(cart.getUsername());
+                        if (rs == 0 || rs2 == 0) {
                             System.out.println("Can't add =((");
                         } else {
                             System.out.println("Add succesfull 😘");
                             response.getWriter().write("Add succesfull 😘");
                         }
                     } //neu chua ton tai trong cart thi tao moi va insert vao
-                    else {
+                    else if (cartItem == null) {
                         int rs = cartDAO.createCartItem(cart.getId(), sku, Integer.parseInt(quantity));
                         if (rs == 0) {
-                            System.out.println("Can't add =((");
+                            response.getWriter().write("Can't add2 =((" + rs);
+                            System.out.println("Can't add 2 =((");
                         } else {
+
+                            response.getWriter().write("Add succesfull 😊😊😊");
+
                             System.out.println("Create and Add succesfull 😊");
                         }
                     }
@@ -144,7 +149,8 @@ public class CartServlet extends HttpServlet {
                 response.getWriter().write("Loi cart ko ton tai, hien chua bt cach thong bao 😓");
             }
         } else {
-            request.getRequestDispatcher("/assets/404errol.jsp").forward(request, response);
+            response.getWriter().write("Loi cart ko ton tai, hien chua bt cach thong bao 😓");
+
         }
     }
 
