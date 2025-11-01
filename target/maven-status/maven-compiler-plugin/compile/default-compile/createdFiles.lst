@@ -1,15 +1,25 @@
 Controller\CategoryServlet.class
 Controller\LoginServlet.class
+<<<<<<< HEAD
+=======
+model\CartItem.class
+>>>>>>> origin
 model\ProductDetail.class
 Controller\AuthorsServlet.class
 Controller\ReviewServlet.class
+Controller\CartServlet.class
 Controller\RegisterServlet.class
-Controller\Cart.class
+model\Cart.class
 dao\ProductDetailDao.class
 dao\CustomerDAO.class
+<<<<<<< HEAD
+=======
+dao\CartDAO.class
+>>>>>>> origin
 Util\MD5Util.class
 com\mycompany\lib\JakartaRestConfiguration.class
 Controller\ChangePasswordServlet.class
+model\Product.class
 model\Authors.class
 Controller\AllBookServlet.class
 Controller\BookServlet.class

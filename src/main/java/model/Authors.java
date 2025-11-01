@@ -13,10 +13,16 @@ public class Authors {
     private String bio;
     private Date created_at;
     private Date updated_at;
-    private int bookcount;
+    private int bookcount; 
 
+    
     public Authors() {}
 
+       public Authors(String name, String bio) {
+        this.name = name;
+        this.bio = bio;
+        
+    }
     public Authors(int id, String name, String bio, Date created_at, Date updated_at, int bookcount) {
         this.id = id;
         this.name = name;
@@ -73,8 +79,8 @@ public class Authors {
     public void setBookcount(int bookcount) {
         this.bookcount = bookcount;
     }
+
     
 
 }
-
 
