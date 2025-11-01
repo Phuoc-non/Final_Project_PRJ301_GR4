@@ -16,6 +16,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
+
                 <div id="tg-bestsellingbooksslider" class="tg-bestsellingbooksslider tg-bestsellingbooks owl-carousel">
                     <c:forEach var="b" items="${bookList}">
                         <div class="item">

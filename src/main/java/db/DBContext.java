@@ -10,16 +10,26 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+/**
+ *
+ * @author Admin
+ */
+
 public class DBContext {
     private Connection conn;
     private final String DB_URL = "jdbc:sqlserver://127.0.0.1:1433;databaseName=BOOK_STORE;encrypt=false";
     private final String DB_USER = "sa";
-    private final String DB_PWD = "123456";
+
+    private final String DB_PWD = "ryzen2710";
+
 
     public DBContext() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            this.conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
+
+            this.conn = (Connection) DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
+
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -28,4 +38,6 @@ public class DBContext {
     public Connection getConnection() {
         return conn;
     }
+
 }
+

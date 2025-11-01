@@ -11,6 +11,7 @@ package dao;
 import db.DBContext;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,6 +30,7 @@ public class RegistrationDAO extends DBContext {
             String sql = "select * from Registration where username = ? and password = ?";
             PreparedStatement stm = this.getConnection().prepareStatement(sql);
             stm.setString(1, username);
+
             stm.setString(2, this.hashMd5(password));
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
@@ -155,6 +157,7 @@ public class RegistrationDAO extends DBContext {
         }
         return null;
     }
+
     
      private String hashMd5(String raw) {
         try {
