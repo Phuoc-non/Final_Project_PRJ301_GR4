@@ -78,7 +78,7 @@
                                                 const min = 1;
 
                                                 function deleteItem(sku) {
-                                                    fetch('http://localhost:8080/Lib/Cart', {
+                                                    fetch('http://localhost:8080/Lib/cart', {
                                                         method: 'POST',
                                                         headers: {
                                                             'Content-Type': 'application/x-www-form-urlencoded'
@@ -90,7 +90,7 @@
                                                     });
                                                 }
                                                 function updateCart(sku, quantity) {
-                                                    fetch('http://localhost:8080/Lib/Cart', {
+                                                    fetch('http://localhost:8080/Lib/cart', {
                                                         method: 'POST',
                                                         headers: {
                                                             'Content-Type': 'application/x-www-form-urlencoded'

@@ -20,7 +20,6 @@ Controller\BookServlet.class
 dao\AuthorsDAO.class
 dao\RegistrationDAO.class
 dao\CategoryDao.class
-dao\TestLogin.class
 com\mycompany\lib\resources\JakartaEE11Resource.class
 Controller\CutomerServlet.class
 Controller\ProfileServlet.class

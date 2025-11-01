@@ -51,7 +51,7 @@ public class TestLogin {
         }
         else {
         System.out.println("AN CUC");
-             System.out.println(cart1.getCartId());
+//             System.out.println(cart1.getCartId());
         }
                 }
 }

@@ -22,7 +22,7 @@ import model.Registration;
  *
  * @author Asus
  */
-@WebServlet(name = "Cart", urlPatterns = {"/Cart"})
+@WebServlet(name = "Cart", urlPatterns = {"/cart"})
 public class CartServlet extends HttpServlet {
 
     /**
