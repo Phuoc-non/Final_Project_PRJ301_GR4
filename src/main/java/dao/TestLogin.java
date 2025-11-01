@@ -40,13 +40,15 @@ public class TestLogin {
 //        int n=cd.createCartItem(2, "BOOK02", 4);
 //        int up=cd.updateCartItem(2, "BOOK02", 20);
 //        List<CartItem> l= cd.cartAll(1);
-           int n=cd.deleteCartItem(1, "BOOK01");
-        if (n!=0){
-
-         System.out.println("insert successfull");
+          Cart cart = cd.getCart("tueminh");
+          int ci=cd.createCartItem(cart.getId(), "BOOK01", 2);
+         CartItem cart1=cd.getCartItem(cart.getId(), "BOOK03");
+         if(cart1!=null){
+             System.out.println("insert successfull");
         }
         else {
         System.out.println("AN CUC");
+             System.out.println(cart1.getCartId());
         }
                 }
 }
