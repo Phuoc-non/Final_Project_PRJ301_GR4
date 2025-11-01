@@ -2,10 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../WEB-INF/includes/headerTotal.jsp"/>
 
-<<<<<<< HEAD
-<jsp:include page="../WEB-INF/includes/headerTotal.jsp"/>
-=======
->>>>>>> 68c8ae74f6d7fd41376027537c59410b7c620987
 <!doctype html>
 <html>
     <head>

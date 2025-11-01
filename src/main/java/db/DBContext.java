@@ -20,12 +20,9 @@ public class DBContext {
     private Connection conn;
     private final String DB_URL = "jdbc:sqlserver://127.0.0.1:1433;databaseName=BOOK_STORE;encrypt=false";
     private final String DB_USER = "sa";
-<<<<<<< HEAD
-    private final String DB_PWD = "12345";
-=======
 
-    private final String DB_PWD = "ryzen2710";
->>>>>>> 68c8ae74f6d7fd41376027537c59410b7c620987
+    private final String DB_PWD = "12345";
+
 
 
     public DBContext() {
