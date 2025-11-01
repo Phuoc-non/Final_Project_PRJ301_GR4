@@ -49,96 +49,115 @@
         <main id="tg-main" class="tg-main tg-haslayout">
             <div class="tg-sectionspace tg-haslayout" style="padding-top: 50px;">
                 <div class="container">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_add"
-                            style="margin-bottom: 10px;">Thêm tác giả mới
-                    </button>
 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Tên tác giả</th>
-                                <th>Miêu tả</th>
-                                <th>Số lượng sách</th>
-                                <th>Ngày tạo</th>
-                                <th>Ngày cập nhật</th>
-                                <th>Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="author" items="${authorList}" varStatus="loop">
-                                <tr class="active-row">
-                                    <td>${loop.index + 1}</td>
-                                    <td>${author.name}</td>
-                                    <td style="max-width: 160px;">${author.bio}</td>
-                                    <td>${author.bookcount}</td>
-                                    <td><fmt:formatDate value="${author.created_at}" pattern="dd/MM/yyyy" /></td>
-                                    <td><fmt:formatDate value="${author.updated_at}" pattern="dd/MM/yyyy" /></td>
 
-                                    <td>
-                                        <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                data-target="#myModal_edit${author.id}">Sửa
-                                        </button>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#myModal_delete${author.id}">Xóa
-                                        </button>
-                                    </td>
+
+                    <c:if test="${not empty errorMessage}">
+                        <div class="alert alert-danger" role="alert">
+                            <div class="alert alert-success" role="alert">
+                                ${errorMessage}
+                            </div>
+                        </c:if>
+
+                        <c:if test="${not empty successMessage}">
+                            <div class="alert alert-error" role="alert">
+                                ${successMessage}
+                            </div>
+                        </c:if>
+
+
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_add"
+
+                                style="margin-bottom: 10px;">Thêm tác giả mới
+                        </button>
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên tác giả</th>
+                                    <th>Miêu tả</th>
+                                    <th>Số lượng sách</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Ngày cập nhật</th>
+                                    <th>Hành động</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="author" items="${authorList}" varStatus="loop">
+                                    <tr class="active-row">
+                                        <td>${loop.index + 1}</td>
+                                        <td>${author.name}</td>
+                                        <td style="max-width: 160px;">${author.bio}</td>
+                                        <td>${author.bookcount}</td>
+                                        <td><fmt:formatDate value="${author.created_at}" pattern="dd/MM/yyyy" /></td>
+                                        <td><fmt:formatDate value="${author.updated_at}" pattern="dd/MM/yyyy" /></td>
+
+                                        <td>
+                                            <button type="button" class="btn btn-warning" data-toggle="modal"
+                                                    data-target="#myModal_edit${author.id}">Sửa
+                                            </button>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                    data-target="#myModal_delete${author.id}">Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
 
 
-                                <!-- Modal edit -->
-                            <div class="modal fade" id="myModal_edit${author.id}" tabindex="-1" role="dialog">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <form action="${pageContext.request.contextPath}/authors" method="post">
-                                            <input type="hidden" name="action" value="edit">               
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Sửa tác giả</h4>
-                                            </div>
-                                            <div class="modal-body">
+                                    <!-- Modal edit -->
+                                <div class="modal fade" id="myModal_edit${author.id}" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form action="${pageContext.request.contextPath}/authors" method="post">
+                                                <input type="hidden" name="action" value="edit">               
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Sửa tác giả</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="id" value="${author.id}">
+                                                    <div class="form-group">
+                                                        <label>Tên tác giả</label>
+                                                        <input type="text" name="name" value="${author.name}" class="form-control" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Miêu tả</label>
+                                                        <textarea name="bio" class="form-control" required>${author.bio}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                                                    <button type="submit" class="btn btn-primary">Lưu</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal delete -->
+                                <div class="modal fade" id="myModal_delete${author.id}" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form action="${pageContext.request.contextPath}/authors" method="post">
+                                                <input type="hidden" name="action" value="delete">
                                                 <input type="hidden" name="id" value="${author.id}">
-                                                <div class="form-group">
-                                                    <label>Tên tác giả</label>
-                                                    <input type="text" name="name" value="${author.name}" class="form-control" required>
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Bạn chắc chắn muốn xóa tác giả này?</h4>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>Miêu tả</label>
-                                                    <textarea name="bio" class="form-control" required>${author.bio}</textarea>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                                                    <button type="submit" class="btn btn-danger">Xác nhận</button>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                                                <button type="submit" class="btn btn-primary">Lưu</button>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </c:forEach>
+                            </tbody>
+                        </table>
 
-                            <!-- Modal delete -->
-                            <div class="modal fade" id="myModal_delete${author.id}" tabindex="-1" role="dialog">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <form action="${pageContext.request.contextPath}/authors" method="post">
-                                            <input type="hidden" name="action" value="delete">
-                                            <input type="hidden" name="id" value="${author.id}">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Bạn chắc chắn muốn xóa tác giả này?</h4>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                                                <button type="submit" class="btn btn-danger">Xác nhận</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-
+                    </div>
                 </div>
-            </div>
         </main>
 
         <!-- Modal add -->

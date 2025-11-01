@@ -49,8 +49,9 @@
                                     <ul class="dropdown-menu list-unstyled" style="list-style: none; padding-left: 0;">
                                         <li style="list-style: none;"><a href="profile">Account information</a></li>
                                             <% if (!isAdmin) { %>
-                                        <li style="list-style: none;"><a href="orders.jsp">Purchase information</a></li>
-                                            <% } %>
+                                        <li style="list-style: none;"><a href="${pageContext.request.contextPath}/orders" >Purchase information</a></li>
+
+                                        <% } %>
                                         <li style="list-style: none;"><a href="logout">Logout</a></li>
                                     </ul>
                                 </div>
@@ -301,11 +302,11 @@
                                             </li>
                                             <li class="menu-item-has-children">
                                                 <a href="authors">Authors</a>
-                                               
+
                                             </li>
                                             <li><a href="products.html">AllBook</a></li>
                                             <li><a href="products.html">Customer</a></li>
-                                            <li><a href="contactus.html">Order</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/orders">Order</a></li>
                                                 <% } else { %>
                                             <li><a href="products.html">AllBook</a></li>
                                                 <% }%>
@@ -320,8 +321,7 @@
             <!--************************************
                             Header End
             *************************************-->
-     
+
         </div>
-  
-   
-  
+
+

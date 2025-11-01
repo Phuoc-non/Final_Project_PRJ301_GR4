@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Authors;
+import model.Orders;
 
 public class AuthorsDAO extends DBContext {
 
@@ -34,12 +35,12 @@ public class AuthorsDAO extends DBContext {
 
             while (rs.next()) {
                 Authors author = new Authors(
-                rs.getInt("id"),
-                rs.getString("name"),
-                rs.getString("bio"),             
-                rs.getDate("created_at"),
-                rs.getDate("updated_at"),
-                rs.getInt("bookcount"));              
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("bio"),
+                        rs.getDate("created_at"),
+                        rs.getDate("updated_at"),
+                        rs.getInt("bookcount"));
                 list.add(author);
             }
 
@@ -50,18 +51,35 @@ public class AuthorsDAO extends DBContext {
         return list;
     }
 
-
 // Thêm mới tác giả
-public void createAuthor(Authors author) {
+    public boolean createAuthor(Authors author) {
         String sql = "INSERT INTO Author (name, bio) VALUES (?, ?)";
         try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
-            ps.setString(1, author.getName());
-            ps.setString(2, author.getBio());
+            ps.setString(1, author.getName().trim());
+            ps.setString(2, author.getBio().trim());
             ps.executeUpdate();
             System.out.println("Thêm tác giả thành công!");
         } catch (SQLException e) {
             Logger.getLogger(AuthorsDAO.class.getName()).log(Level.SEVERE, null, e);
         }
+        return false;
+    }
+//check trùng
+
+    public boolean checkDuplicateAuthorname(String name) {
+        String checkDuplicateAuthorname = "SELECT COUNT(*) FROM Author WHERE name = ?";
+        try {
+            PreparedStatement ps = this.getConnection().prepareStatement(checkDuplicateAuthorname);
+            ps.setString(1, name.trim());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 
     // Cập nhật thông tin tác giả
@@ -88,5 +106,9 @@ public void createAuthor(Authors author) {
         } catch (SQLException e) {
             Logger.getLogger(AuthorsDAO.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+
+    List<Orders> getOrders() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

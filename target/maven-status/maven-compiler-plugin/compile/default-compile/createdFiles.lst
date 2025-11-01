@@ -1,4 +1,3 @@
-Controller\CategoryServlet.class
 Controller\LoginServlet.class
 dao\test.class
 dao\TestLogin.class
@@ -6,13 +5,18 @@ com\mycompany\lib\resources\JakartaEE11Resource.class
 Controller\AuthorsServlet.class
 Controller\RegisterServlet.class
 Controller\ProfileServlet.class
+model\OrderDetails.class
 Util\MD5Util.class
+model\Orders.class
+dao\OrdersDAO.class
 com\mycompany\lib\JakartaRestConfiguration.class
+Controller\OrderDetailsServlet.class
 model\Authors.class
 model\Registration.class
 Controller\LogoutServlet.class
-Controller\AllBookServlet.class
 Controller\BookServlet.class
+Controller\OrdersServlet.class
 dao\AuthorsDAO.class
 db\DBContext.class
 dao\RegistrationDAO.class
+dao\OrderDetailsDAO.class
