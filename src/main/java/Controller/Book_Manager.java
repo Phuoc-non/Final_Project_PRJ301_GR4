@@ -92,9 +92,6 @@ public class Book_Manager extends HttpServlet {
         int totalProducts = dao.getTotalRows();
         int totalPages = (int) Math.ceil(totalProducts / 10.0);
 
-        System.out.println("🧩 totalProducts = " + totalProducts);
-        System.out.println("🧩 totalPages = " + totalPages);
-        System.out.println("🧩 currentPage = " + page);
 
         // 🧩 3. Gán dữ liệu cho JSP (luôn có, cho tất cả view)
         request.setAttribute("list", productList);
