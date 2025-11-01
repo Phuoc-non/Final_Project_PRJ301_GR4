@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import dao.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,13 +12,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Book;
+import model.Category;
 
 /**
  *
- * @author Asus
+ * @author ADMIN
  */
-@WebServlet(name = "Cart", urlPatterns = {"/Cart"})
-public class Cart extends HttpServlet {
+@WebServlet(name = "AllBook", urlPatterns = {"/ab"})
+public class AllBook extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,15 +40,16 @@ public class Cart extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Cart</title>");
+            out.println("<title>Servlet AllBook</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Cart at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AllBook at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -56,7 +61,39 @@ public class Cart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/Product/cart.jsp").forward(request, response);  
+        ProductDAO dao = new ProductDAO();
+
+        // Nhận tham số
+        String keyword = request.getParameter("keyword");
+        String type = request.getParameter("type");
+        String sortBy = request.getParameter("sortBy");
+
+        List<Book> list;
+
+        // Ưu tiên tìm kiếm trước
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            if ("author".equals(type)) {
+                list = dao.searchBookByAuthor(keyword.trim());
+            } else {
+                list = dao.searchBookByTitle(keyword.trim());
+            }
+        } else if ("title".equals(sortBy)) { // đổi từ "name" -> "title" cho khớp với value trong JSP
+            list = dao.getBooksSortedByName();
+        } else if ("price".equals(sortBy)) {
+            list = dao.getBooksSortedByPrice();
+        } else {
+            list = dao.getAllBook();
+        }
+
+        List<Category> categories = dao.getAllCategories();
+
+        request.setAttribute("list", list);
+        request.setAttribute("categories", categories);
+        request.setAttribute("keyword", keyword);
+        request.setAttribute("type", type);
+        request.setAttribute("sortBy", sortBy);
+
+        request.getRequestDispatcher("/WEB-INF/User/AllBook.jsp").forward(request, response);
     }
 
     /**

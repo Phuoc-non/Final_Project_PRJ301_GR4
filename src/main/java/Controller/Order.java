@@ -4,9 +4,6 @@
  */
 package Controller;
 
-import dao.ProductDetailDao;
-import dao.ReviewDao;
-import jakarta.persistence.metamodel.SetAttribute;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,19 +11,41 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.ProductDetail;
-import model.UserReview;
 
 /**
  *
- * @author Asus
+ * @author ADMIN
  */
-@WebServlet(name = "ProductDetail", urlPatterns = {"/ProductDetail"})
-public class ProductDetailSerVlet extends HttpServlet {
+@WebServlet(name = "Order", urlPatterns = {"/order"})
+public class Order extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Order</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Order at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
 
-
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -38,21 +57,7 @@ public class ProductDetailSerVlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        request.getRequestDispatcher("/WEB-INF/includes/headerTotal.jsp").forward(request, response);   
-        String rq = request.getParameter("productId");
-        ProductDetailDao productDao= new ProductDetailDao();
-        ReviewDao viewDao= new ReviewDao();
-        
-        if(rq!=null){ 
-        ProductDetail product=productDao.getById(Integer.parseInt(rq));       
-        request.setAttribute("productdetail", product);
-        List<UserReview> review=viewDao.getById(Integer.parseInt(rq));
-        request.setAttribute("reviewer", review);
-        request.getRequestDispatcher("/WEB-INF/Product/productdetail.jsp").forward(request, response);   
-        }
-        else
-                    request.getRequestDispatcher("/assets/404errol.jsp").forward(request, response);   
-
+        request.getRequestDispatcher("/WEB-INF/User/purchase.jsp").forward(request, response);
     }
 
     /**
@@ -66,7 +71,7 @@ public class ProductDetailSerVlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        processRequest(request, response);
     }
 
     /**

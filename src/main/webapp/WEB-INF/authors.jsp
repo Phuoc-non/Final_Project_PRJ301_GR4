@@ -1,8 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <jsp:include page="../WEB-INF/includes/headerTotal.jsp"/>
+
+<<<<<<< HEAD
+<jsp:include page="../WEB-INF/includes/headerTotal.jsp"/>
+=======
+>>>>>>> 68c8ae74f6d7fd41376027537c59410b7c620987
 <!doctype html>
 <html>
     <head>

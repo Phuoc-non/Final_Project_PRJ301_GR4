@@ -4,6 +4,8 @@
  */
 package Controller;
 
+
+import dao.HomeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +13,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Book;
+
 
 /**
  *
@@ -32,6 +37,9 @@ public class BookServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HomeDAO dao = new HomeDAO();
+        List<Book> list = dao.getTop6Books();
+        request.setAttribute("bookList", list);
         request.getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
     }
 
