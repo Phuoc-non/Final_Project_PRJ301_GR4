@@ -174,7 +174,7 @@
                                                             <form  id="deleteButtons" method="POST" action="${pageContext.request.contextPath}/Category">
                                                                 <input type="hidden" name="id" id="cateId">
 
-                                                    
+
                                                             </form>
                                                         </div>
                                                     </div>
@@ -216,27 +216,69 @@
                 </div>
             </div>
         </div>
+        <style>
+            .pagination {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                list-style: none;
+                padding-left: 0;
+                margin-top: 30px;
+            }
+            .pagination .page-link {
+                color: #4CAF50;
+                border: 1px solid #d9d9d9;
+                border-radius: 50%;
+                padding: 8px 15px;
+                text-decoration: none;
+                background-color: #fff;
+                transition: all 0.2s ease-in-out;
+                font-weight: 500;
+            }
+            .pagination .page-link:hover {
+                background-color: #e9f5ec;
+                border-color: #4CAF50;
+                color: #4CAF50;
+            }
+            .pagination .active .page-link {
+                background-color: #4CAF50;
+                color: #fff;
+                border-color: #4CAF50;
+            }
+            .pagination .disabled .page-link {
+                color: #ccc;
+                pointer-events: none;
+                border-color: #eee;
+            }
+        </style>
+        <!-- ? Pagination -->
         <nav aria-label="Page navigation">
-            <ul class="pager">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a >1</a></li>
-                <li><a >2</a></li>
-                <li><a >3</a></li>
-                <li><a >4</a></li>
-                <li><a >5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</main>
+            <ul class="pagination">
+                <!-- Nút Previous -->
+                <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                    <a class="page-link"
+                       href="<c:url value='/category'><c:param name='page' value='${currentPage - 1}'/></c:url>"
+                           aria-label="Previous">&laquo;</a>
+                    </li>
+
+                    <!-- Các s? trang -->
+                <c:forEach begin="1" end="${totalPages}" var="i">
+                    <li class="page-item ${currentPage == i ? 'active' : ''}">
+                        <a class="page-link"
+                           href="<c:url value='/category'><c:param name='page' value='${i}'/></c:url>">${i}</a>
+                        </li>
+                </c:forEach>
+
+                <!-- Nút Next -->
+                <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                    <a class="page-link"
+                       href="<c:url value='/category'><c:param name='page' value='${currentPage + 1}'/></c:url>"
+                           aria-label="Next">&raquo;</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </main>
 
 
 

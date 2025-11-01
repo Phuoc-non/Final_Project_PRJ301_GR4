@@ -70,8 +70,30 @@ public class CutomerServlet extends HttpServlet {
 
         // Nếu không có "view" → hiển thị danh sách khách hàng
         if (view == null || view.equals("list")) {
-            List<Order> list = customerDAO.getAllCustomer();
+            // 🧩 Lấy tham số trang từ URL (?page=2)
+            int page = 1;
+            String pageStr = request.getParameter("page");
+            if (pageStr != null && !pageStr.isEmpty()) {
+                try {
+                    page = Integer.parseInt(pageStr);
+                    if (page < 1) {
+                        page = 1;
+                    }
+                } catch (NumberFormatException ex) {
+                    System.err.println("Invalid page parameter");
+                }
+            }
+
+            // 🧩 Gọi DAO có phân trang
+           List<Order> list = customerDAO.getCustomerList(page);
+            int rowCount = customerDAO.getTotalRows(); // số dòng tổng
+            int totalPages = (int) Math.ceil((double) rowCount / 10);
+
+            // 🧩 Truyền dữ liệu sang JSP
             request.setAttribute("reports", list);
+            request.setAttribute("totalPages", totalPages);
+            request.setAttribute("currentPage", page);
+
             request.getRequestDispatcher("/WEB-INF/user_ad.jsp").forward(request, response);
             return;
         }

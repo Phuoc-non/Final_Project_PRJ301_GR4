@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="../WEB-INF/headerTotal.jsp"/>
+<jsp:include page="../WEB-INF/includes/headerTotal.jsp"/>
 <!doctype html>
 <html>
     <head>
@@ -12,19 +12,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/assets/apple-touch-icon.png">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/normalize.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/icomoon.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jquery-ui.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/transitions.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/color.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
     </head>
 
     <body>
-
 
         <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner"
              data-z-index="-100"
@@ -49,12 +41,18 @@
         <main id="tg-main" class="tg-main tg-haslayout">
             <div class="tg-sectionspace tg-haslayout" style="padding-top: 50px;">
                 <div class="container">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_add"
-                            style="margin-bottom: 10px;">Thêm tác giả mới
-                    </button>
 
-                    <table class="table table-bordered">
-                        <thead>
+                    <!-- 🧩 Nút thêm + tiêu đề -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2 class="m-0">Danh sách tác giả</h2>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_add">
+                            + Thêm tác giả mới
+                        </button>
+                    </div>
+
+                    <!-- 🧩 Bảng danh sách -->
+                    <table class="table table-bordered text-center align-middle">
+                        <thead class="table-light">
                             <tr>
                                 <th>STT</th>
                                 <th>Tên tác giả</th>
@@ -67,31 +65,25 @@
                         </thead>
                         <tbody>
                             <c:forEach var="author" items="${authorList}" varStatus="loop">
-                                <tr class="active-row">
+                                <tr>
                                     <td>${loop.index + 1}</td>
                                     <td>${author.name}</td>
-                                    <td style="max-width: 160px;">${author.bio}</td>
+                                    <td style="max-width:160px;">${author.bio}</td>
                                     <td>${author.bookcount}</td>
                                     <td><fmt:formatDate value="${author.created_at}" pattern="dd/MM/yyyy" /></td>
                                     <td><fmt:formatDate value="${author.updated_at}" pattern="dd/MM/yyyy" /></td>
-
                                     <td>
-                                        <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                data-target="#myModal_edit${author.id}">Sửa
-                                        </button>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#myModal_delete${author.id}">Xóa
-                                        </button>
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal_edit${author.id}">Sửa</button>
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal_delete${author.id}">Xóa</button>
                                     </td>
                                 </tr>
-
 
                                 <!-- Modal edit -->
                             <div class="modal fade" id="myModal_edit${author.id}" tabindex="-1" role="dialog">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <form action="${pageContext.request.contextPath}/authors" method="post">
-                                            <input type="hidden" name="action" value="edit">               
+                                            <input type="hidden" name="action" value="edit">
                                             <div class="modal-header">
                                                 <h4 class="modal-title">Sửa tác giả</h4>
                                             </div>
@@ -136,7 +128,68 @@
                         </c:forEach>
                         </tbody>
                     </table>
+                    <!-- 🌿 CSS phân trang -->
+        <style>
+            .pagination {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                list-style: none;
+                padding-left: 0;
+                margin-top: 30px;
+            }
+            .pagination .page-link {
+                color: #4CAF50;
+                border: 1px solid #d9d9d9;
+                border-radius: 50%;
+                padding: 8px 15px;
+                text-decoration: none;
+                background-color: #fff;
+                transition: all 0.2s ease-in-out;
+                font-weight: 500;
+            }
+            .pagination .page-link:hover {
+                background-color: #e9f5ec;
+                border-color: #4CAF50;
+                color: #4CAF50;
+            }
+            .pagination .active .page-link {
+                background-color: #4CAF50;
+                color: #fff;
+                border-color: #4CAF50;
+            }
+            .pagination .disabled .page-link {
+                color: #ccc;
+                pointer-events: none;
+                border-color: #eee;
+            }
+        </style>
+        <!-- 🌿 Pagination -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <!-- Nút Previous -->
+                <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                    <a class="page-link"
+                       href="<c:url value='/authors'><c:param name='page' value='${currentPage - 1}'/></c:url>"
+                           aria-label="Previous">&laquo;</a>
+                    </li>
 
+                    <!-- Các số trang -->
+                <c:forEach begin="1" end="${totalPages}" var="i">
+                    <li class="page-item ${currentPage == i ? 'active' : ''}">
+                        <a class="page-link"
+                           href="<c:url value='/authors'><c:param name='page' value='${i}'/></c:url>">${i}</a>
+                        </li>
+                </c:forEach>
+
+                <!-- Nút Next -->
+                <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                    <a class="page-link"
+                       href="<c:url value='/authors'><c:param name='page' value='${currentPage + 1}'/></c:url>"
+                           aria-label="Next">&raquo;</a>
+                    </li>
+                </ul>
+            </nav>
                 </div>
             </div>
         </main>
@@ -173,8 +226,6 @@
 
         <script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/owl.carousel.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/jquery-ui.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 
     </body>
