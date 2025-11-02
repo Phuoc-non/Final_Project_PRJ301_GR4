@@ -1,45 +1,3 @@
-<<<<<<< HEAD
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\com\mycompany\lib\JakartaRestConfiguration.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\com\mycompany\lib\resources\JakartaEE11Resource.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\AllBookServlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\AuthorsServlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\BookServlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\CartServlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\CategoryServlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\ChangePasswordServlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\CustomerSupportServlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\CutomerServlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\LoginServlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\LogoutServlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\ProductDetailSerVlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\ProfileServlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\PromotionServlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\RegisterServlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Controller\ReviewServlet.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\DAO\AuthorsDAO.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\DAO\CartDAO.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\DAO\CategoryDao.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\DAO\CustomerDAO.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\DAO\CustomerSupportDAO.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\DAO\ProductDetailDao.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\DAO\PromotionDao.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\DAO\RegistrationDAO.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\DAO\ReviewDao.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\DAO\TestLogin.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\db\DBContext.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\model\Authors.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\model\Cart.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\model\CartItem.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\model\Category.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\model\CustomerSupport.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\model\Order.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\model\Product.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\model\ProductDetail.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\model\Promotion.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\model\Registration.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\model\UserReview.java
-C:\Users\ASUS\Downloads\Final_Project_PRJ301_GR4\src\main\java\Util\MD5Util.java
-=======
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\com\mycompany\lib\JakartaRestConfiguration.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\com\mycompany\lib\resources\JakartaEE11Resource.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\AllBookServlet.java
@@ -49,6 +7,7 @@ D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\BookServle
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\CartServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\CategoryServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\ChangePasswordServlet.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\CustomerSupportServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\CutomerServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\LoginServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\LogoutServlet.java
@@ -62,6 +21,7 @@ D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\AuthorsDAO.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\CartDAO.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\CategoryDao.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\CustomerDAO.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\CustomerSupportDAO.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\HomeDAO.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\ProductDAO.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\ProductDetailDao.java
@@ -76,6 +36,7 @@ D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Book.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Cart.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\CartItem.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Category.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\CustomerSupport.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Order.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Product.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\ProductDetail.java
@@ -83,4 +44,3 @@ D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Promotion.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Registration.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\UserReview.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Util\MD5Util.java
->>>>>>> 68c8ae74f6d7fd41376027537c59410b7c620987
