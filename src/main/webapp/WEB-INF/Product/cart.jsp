@@ -55,8 +55,9 @@
 
                                                         <td>${count}</td>
                                                     <td>${item.getProduct().bookName}</td>
+                                                    
                                                     <td><img src="${item.getProduct().img}" alt="image description" style="height: 100px;"></td>
-                                                    <td style="font-size : 15px"></td>
+                                                    <td style="font-size : 15px">${item.getProduct().price} $</td>
                                                     <td class="tg-quantityholder">
                                                         <em class="minus">-</em>
                                                         <input type="text" value="${item.quantity}" class="quan" data-max="${item.getProduct().quantity}" data-sku="${item.sku}" data-price="${item.getProduct().price}" style="width: 80px; margin-top: 5px;">

@@ -17,6 +17,7 @@ D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\ProfileSer
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\PromotionServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\RegisterServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\ReviewServlet.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\StatisticsServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\AuthorsDAO.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\CartDAO.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\CategoryDao.java
@@ -28,6 +29,7 @@ D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\ProductDetailDao.
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\PromotionDao.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\RegistrationDAO.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\ReviewDao.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\StatisticsDAO.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\TestLogin.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\db\DBContext.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Author.java
@@ -36,6 +38,7 @@ D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Book.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Cart.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\CartItem.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Category.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\ChartData.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\CustomerSupport.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Order.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Product.java
