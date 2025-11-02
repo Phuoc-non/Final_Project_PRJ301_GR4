@@ -28,6 +28,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    
 </head>
 <body class="tg-home tg-homeone">
 
@@ -49,8 +52,8 @@
                                 <ul class="dropdown-menu list-unstyled" style="list-style: none; padding-left: 0;">
                                     <li style="list-style: none; margin-bottom:10px;"><a href="profile"><i class="fa-solid fa-user"></i> Account information</a></li>
                                         <% if (!isAdmin) { %>
-                                    <li style="list-style: none; margin-bottom:10px;"><a href="orders.jsp"><i class="fa-solid fa-cart-shopping"></i> Purchase information</a></li>
-                                            <% } %>
+                                    <li style="list-style: none; margin-bottom:10px;"><a href="${pageContext.request.contextPath}/orders"><i class="fa-solid fa-cart-shopping"></i> Purchase information</a></li>
+                                        <% } %>
                                     <li style="list-style: none; margin-bottom:10px;"><a href="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
                                 </ul>
                             </div>
@@ -308,7 +311,7 @@
                                         </li>
                                         <li><a href="bm">Book</a></li>
                                         <li><a href="cutomer">Customer</a></li>
-                                        <li><a href="contactus.html">Order</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/orders">Order</a></li>
                                             <% } else { %>
                                         <li><a href="ab">AllBook</a></li>
                                             <% }%>
@@ -318,8 +321,10 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </header>
+
 
 
 

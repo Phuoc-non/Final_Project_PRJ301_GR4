@@ -25,8 +25,6 @@ import model.UserReview;
 @WebServlet(name = "ProductDetail", urlPatterns = {"/ProductDetail"})
 public class ProductDetailSerVlet extends HttpServlet {
 
-
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -40,18 +38,18 @@ public class ProductDetailSerVlet extends HttpServlet {
             throws ServletException, IOException {
 //        request.getRequestDispatcher("/WEB-INF/includes/headerTotal.jsp").forward(request, response);   
         String rq = request.getParameter("productId");
-        ProductDetailDao productDao= new ProductDetailDao();
-        ReviewDao viewDao= new ReviewDao();
-        
-        if(rq!=null){ 
-        ProductDetail product=productDao.getById(Integer.parseInt(rq));       
-        request.setAttribute("productdetail", product);
-        List<UserReview> review=viewDao.getById(Integer.parseInt(rq));
-        request.setAttribute("reviewer", review);
-        request.getRequestDispatcher("/WEB-INF/Product/productdetail.jsp").forward(request, response);   
+        ProductDetailDao productDao = new ProductDetailDao();
+        ReviewDao viewDao = new ReviewDao();
+
+        if (rq != null) {
+            ProductDetail product = productDao.getById(Integer.parseInt(rq));
+            request.setAttribute("productdetail", product);
+            List<UserReview> review = viewDao.getById(Integer.parseInt(rq));
+            request.setAttribute("reviewer", review);
+            request.getRequestDispatcher("/WEB-INF/Product/productdetail.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("/assets/404errol.jsp").forward(request, response);
         }
-        else
-                    request.getRequestDispatcher("/assets/404errol.jsp").forward(request, response);   
 
     }
 
@@ -66,7 +64,7 @@ public class ProductDetailSerVlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 
     /**

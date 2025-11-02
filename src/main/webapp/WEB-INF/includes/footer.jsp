@@ -158,10 +158,12 @@
 <!--************************************
                 Wrapper End
 *************************************-->
- 
-<script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-1.11.2.min.js"></script>
+<<<<<<< HEAD
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
 <script src="${pageContext.request.contextPath}/assets/js/owl.carousel.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/jquery.vide.min.js"></script>
@@ -170,8 +172,9 @@
 <script src="${pageContext.request.contextPath}/assets/js/parallax.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/countTo.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/appear.js"></script>
- <script src="${pageContext.request.contextPath}/assets/js/gmap3.js"></script> 
+<script src="${pageContext.request.contextPath}/assets/js/gmap3.js"></script> 
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/product_and_cart.js"></script>   
 </body>
 
 </html>

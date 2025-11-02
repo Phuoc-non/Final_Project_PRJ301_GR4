@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import dao.ProductDAO;
+import dao.OrdersDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,13 +15,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Book;
 import model.Category;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Orders;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name = "AllBook", urlPatterns = {"/ab"})
-public class AllBook extends HttpServlet {
+@WebServlet(name = "Orders", urlPatterns = {"/orders"})
+public class OrdersServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +45,10 @@ public class AllBook extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AllBook</title>");
+            out.println("<title>Servlet Orders</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AllBook at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Orders at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,39 +66,11 @@ public class AllBook extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductDAO dao = new ProductDAO();
 
-        // Nhận tham số
-        String keyword = request.getParameter("keyword");
-        String type = request.getParameter("type");
-        String sortBy = request.getParameter("sortBy");
-
-        List<Book> list;
-
-        // Ưu tiên tìm kiếm trước
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            if ("author".equals(type)) {
-                list = dao.searchBookByAuthor(keyword.trim());
-            } else {
-                list = dao.searchBookByTitle(keyword.trim());
-            }
-        } else if ("title".equals(sortBy)) { // đổi từ "name" -> "title" cho khớp với value trong JSP
-            list = dao.getBooksSortedByName();
-        } else if ("price".equals(sortBy)) {
-            list = dao.getBooksSortedByPrice();
-        } else {
-            list = dao.getAllBook();
-        }
-
-        List<Category> categories = dao.getAllCategories();
-
-        request.setAttribute("list", list);
-        request.setAttribute("categories", categories);
-        request.setAttribute("keyword", keyword);
-        request.setAttribute("type", type);
-        request.setAttribute("sortBy", sortBy);
-
-        request.getRequestDispatcher("/WEB-INF/User/AllBook.jsp").forward(request, response);
+        OrdersDAO dao = new OrdersDAO();
+        List<Orders> orderList = dao.getOrders();
+        request.setAttribute("orderList", orderList);
+        request.getRequestDispatcher("/WEB-INF/orders/orders.jsp").forward(request, response);
     }
 
     /**
@@ -107,7 +84,46 @@ public class AllBook extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String action = request.getParameter("action");
+
+        if (action != null && action.equals("delete")) {
+            deleteOrders(request, response);
+        }
+        if (action != null && action.equals("edit")) {
+            editOrders(request, response);
+        }
+    }
+
+    private void deleteOrders(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        Orders order = new Orders();
+        order.setId(id);
+
+        OrdersDAO dao = new OrdersDAO();
+        dao.deleteOrders(id);
+
+        response.sendRedirect("orders");
+    }
+
+    private void editOrders(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            String status = request.getParameter("status");
+
+            OrdersDAO dao = new OrdersDAO();
+            dao.editOrders(id, status);
+
+            response.sendRedirect("orders");
+        } catch (SQLException ex) {
+            Logger.getLogger(OrdersServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**

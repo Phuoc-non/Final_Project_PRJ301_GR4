@@ -1,8 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@include file="includes/headerTotal.jsp" %>
 
-<%@include file="headerTotal.jsp" %>
 
 <!-- 🧩 Hiển thị thông báo lỗi từ Servlet -->
 <c:if test="${not empty errorMessage}">
@@ -132,7 +132,89 @@
                 </div>
             </div>
         </c:forEach>
-    </div>
-</main>
+        <style>
+            /* 🌿 Pagination Style */
+            .pagination {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                list-style: none;
+                padding-left: 0;
+                margin-top: 30px;
+            }
+
+            .pagination .page-item {
+                display: inline-block;
+            }
+
+            .pagination .page-link {
+                color: #4CAF50; /* Xanh lá */
+                border: 1px solid #d9d9d9;
+                border-radius: 50%; /* Làm tròn */
+                padding: 8px 15px;
+                text-decoration: none;
+                background-color: #fff;
+                transition: all 0.2s ease-in-out;
+                font-weight: 500;
+            }
+
+            /* Hover effect */
+            .pagination .page-link:hover {
+                background-color: #e9f5ec; /* Màu nền xanh nhạt */
+                border-color: #4CAF50;
+                color: #4CAF50;
+            }
+
+            /* Active page */
+            .pagination .active .page-link {
+                background-color: #4CAF50;
+                color: #fff;
+                border-color: #4CAF50;
+            }
+
+            /* Disabled button */
+            .pagination .disabled .page-link {
+                color: #ccc;
+                pointer-events: none;
+                border-color: #eee;
+            }
+        </style>
+
+        <!-- 🌿 Pagination -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <!-- Previous button -->
+                <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                    <a class="page-link"
+                       href="<c:url value='/cutomer'><c:param name='page' value='${currentPage - 1}'/></c:url>"
+                           aria-label="Previous">
+                           &laquo;
+                       </a>
+                    </li>
+
+                    <!-- Page numbers -->
+                <c:forEach begin="1" end="${totalPages}" var="i">
+                    <li class="page-item ${currentPage == i ? 'active' : ''}">
+                        <a class="page-link"
+                           href="<c:url value='/cutomer'><c:param name='page' value='${i}'/></c:url>">
+                            ${i}
+                        </a>
+                    </li>
+                </c:forEach>
+
+                <!-- Next button -->
+                <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                    <a class="page-link"
+                       href="<c:url value='/cutomer'><c:param name='page' value='${currentPage + 1}'/></c:url>"
+                           aria-label="Next">
+                           &raquo;
+                       </a>
+                    </li>
+                </ul>
+            </nav>
+
+
+        </div>
+    </main>
 
 <%@include file="footer.jsp" %>

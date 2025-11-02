@@ -2,7 +2,7 @@
 <%@page import="model.Registration"%>
 <<<<<<< HEAD
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@include file="../WEB-INF/headerTotal.jsp" %>
+<%@include file="../WEB-INF/includes/headerTotal.jsp" %>
 
 <%
     Registration currentUser = (Registration) request.getAttribute("currentUser");
@@ -121,7 +121,7 @@
     </div>
 </div>
 
-<%@include file="footer.jsp" %>
+                    <%@include file="../WEB-INF/includes/footer.jsp" %>
 
 <!-- Scripts -->
 <script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script>
