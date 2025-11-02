@@ -52,7 +52,7 @@
                                 <ul class="dropdown-menu list-unstyled" style="list-style: none; padding-left: 0;">
                                     <li style="list-style: none; margin-bottom:10px;"><a href="profile"><i class="fa-solid fa-user"></i> Account information</a></li>
                                         <% if (!isAdmin) { %>
-                                    <li style="list-style: none; margin-bottom:10px;"><a href="orders.jsp"><i class="fa-solid fa-cart-shopping"></i> Purchase information</a></li>
+                                    <li style="list-style: none; margin-bottom:10px;"><a href="${pageContext.request.contextPath}/orders"><i class="fa-solid fa-cart-shopping"></i> Purchase information</a></li>
                                         <% } %>
                                     <li style="list-style: none; margin-bottom:10px;"><a href="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
                                 </ul>
@@ -311,7 +311,7 @@
                                         </li>
                                         <li><a href="ab">AllBook</a></li>
                                         <li><a href="cutomer">Customer</a></li>
-                                        <li><a href="contactus.html">Order</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/orders">Order</a></li>
                                             <% } else { %>
                                         <li><a href="ab">AllBook</a></li>
                                             <% }%>
