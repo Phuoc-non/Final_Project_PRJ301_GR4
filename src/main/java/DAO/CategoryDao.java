@@ -5,6 +5,7 @@
 package dao;
 
 import db.DBContext;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Authors;
 import model.Category;
 
 /**
@@ -52,21 +52,20 @@ public class CategoryDao extends DBContext {
         return list;
     }
 
-    public int create(int id, String name) {
+    public int create(String name) {
+
+        String query = "  insert into Category (name, created_at, updated_at)\n"
+                + "values (?, CAST(GETDATE() AS date), NULL);\n";
+
 
         try {
-            String query = "SET IDENTITY_INSERT Category ON;\n"
-                    + "\n"
-                    + "insert into Category (id,name, created_at, updated_at)\n"
-                    + "values (?,?, CAST(GETDATE() AS date), NULL);\n"
-                    + "\n"
-                    + "SET IDENTITY_INSERT Category OFF;";
+            Connection con = this.getConnection();
 
-            PreparedStatement statement = this.getConnection().prepareStatement(query);
-            statement.setInt(1, id);
-            statement.setString(2, name);
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, name);
+           return statement.executeUpdate();
 
-            return statement.executeUpdate();
+            
         } catch (SQLException ex) {
             System.getLogger(CategoryDao.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             return 0;
@@ -76,19 +75,19 @@ public class CategoryDao extends DBContext {
     public boolean checkNameCategory(String name) {
 
         try {
-            String sql = " select name from Category";
+            String sql = " select name from Category ";
             PreparedStatement statement = this.getConnection().prepareStatement(sql);
 
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                if (name.equals(rs.getString("name"))) {
-                    return false;
+                if (name.equalsIgnoreCase(rs.getString("name"))) {
+                    return true;
                 }
             }
         } catch (SQLException ex) {
             System.getLogger(CategoryDao.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
-        return true;
+        return false;
     }
 
     public int edit(int id, String newName) {

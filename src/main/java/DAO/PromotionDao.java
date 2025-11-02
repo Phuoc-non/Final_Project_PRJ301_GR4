@@ -27,7 +27,7 @@ public class PromotionDao extends DBContext {
         ArrayList<Promotion> list = new ArrayList<>();
         try {
             Connection con = this.getConnection();
-            String sql = "SELECT * FROM Promotion";
+          String sql = "SELECT * FROM Promotion";
             String setSatus = "UPDATE Promotion\n"
                     + "SET status = CASE\n"
                     + "                WHEN CAST(GETDATE() AS DATE) BETWEEN CAST(start_date AS DATE) AND CAST(end_date AS DATE) THEN 1\n"
@@ -54,8 +54,7 @@ public class PromotionDao extends DBContext {
         }
         return list;
     }
-
-    public int create(String code, int discount, Date startDay, Date endDay, String description, int status, int minOrderValue, int quantity) {
+    public int create(String code, int discount, Date startDay, Date endDay, String description, int status, int minOrderValue,int quantity) {
 
         try {
             String query = " insert into Promotion (code,discount_percent, start_date, end_date,description,status,min_order_value,quantity)\n"
@@ -81,7 +80,7 @@ public class PromotionDao extends DBContext {
         return 0;
     }
 
-    public int edit(int id, String code, int discount, String description, int minOrderValue, int quantity) {
+    public int edit(int id, String code, int discount, String description, int minOrderValue,int quantity) {
 
         try {
             String sql = "UPDATE  Promotion \n"
@@ -102,6 +101,25 @@ public class PromotionDao extends DBContext {
         return 0;
     }
 
+     public boolean checkCodeDuplicate(String name) {
+
+        try {
+            String sql = " select code from Promotion ";
+            PreparedStatement statement = this.getConnection().prepareStatement(sql);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                if (name.equalsIgnoreCase(rs.getString("code"))) {
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            System.getLogger(CategoryDao.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return false;
+    }
+    
+    
     public int delete(int id) {
 
         try {
@@ -116,7 +134,6 @@ public class PromotionDao extends DBContext {
 
         return 0;
     }
-
     public List<Promotion> getPromotionList(int page) {
         List<Promotion> list = new ArrayList<>();
         String sql = """
@@ -197,5 +214,4 @@ public class PromotionDao extends DBContext {
         }
         return count;
     }
-
 }

@@ -47,7 +47,12 @@
 
                         <div class="form-group col-md-6">
                             <label><span style="color: red;">*</span>Mã khuyến mãi</label>
+<<<<<<< HEAD
                             <input type="text"  name="code" required>
+=======
+                            <input type="text" name="code" pattern="[A-Z0-9]{10}" required
+                                   title="Enter exactly 6 characters: uppercase letters and digits only">
+>>>>>>> TDat
                         </div>
 
                         <div class="form-group col-md-4">
@@ -61,17 +66,29 @@
 
                         <div class="form-group col-md-4">
                             <label><span style="color: red;">*</span>Quantity</label>
+<<<<<<< HEAD
                             <input type="number"  placeholder="Nhập số lượng " name="quantity" min="1"  required> 
+=======
+                            <input type="number"  placeholder="Nhập số lượng " name="quantity" min="1" title="only enter greater than or equal to 1" required> 
+>>>>>>> TDat
                         </div>
 
                         <div class="form-group col-md-4">
                             <label><span style="color: red;">*</span>Giá trị giảm %</label>
+<<<<<<< HEAD
                             <input type="number"  placeholder="Nhập % " name="discount" min="1" max="100" required> 
+=======
+                            <input type="number"  placeholder="Nhập % " name="discount" min="1" max="100" title="enter only from 1 to 100" required> 
+>>>>>>> TDat
                         </div>
 
                         <div class="form-group col-md-4">
                             <label><span style="color: red;">*</span>giá trị đơn hàng giảm giá</label>
+<<<<<<< HEAD
                             <input type="number" min="1" required placeholder="Nhập số tiền Đơn hàng cần để giảm..." name="minValue">
+=======
+                            <input type="number" min="1" required placeholder="Nhập số tiền Đơn hàng cần để giảm..." title="only enter greater than or equal to 1" name="minValue">
+>>>>>>> TDat
                         </div>
 
                         <div class="form-group col-md-4">
@@ -257,6 +274,7 @@
 
 
             </table>
+<<<<<<< HEAD
             <style>
                 .pagination {
                     display: flex;
@@ -319,11 +337,51 @@
                     </ul>
                 </nav>
             </div>
+=======
+>>>>>>> TDat
         </div>
     </div>
 
 
     <!-- Modal thông báo l?i or thành công -->
+<c:if test="${not empty message}">
+    <div class="modal fade" id="resultModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header ${messageType == 'success' ? 'bg-success' : 'bg-danger'} text-white">
+                    <h5 class="modal-title">
+                        ${messageType == 'success' ? 'Success' : 'Error'}
+                    </h5>
+
+                </div>
+                <div class="modal-body">
+                    <p>${message}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</c:if>
+
+<script>
+    // T? ??ng m? modal sau khi trang t?i l?i
+    $(document).ready(function () {
+        $('#resultModal').modal('show');
+    });
+    //t? ?óng sau 3 s
+    setTimeout(() => {
+        $('#resultModal').modal('hide');
+    }, 3000);
+
+
+</script>
+
+
+
+<!-- Modal thông báo l?i or thành công -->
 <c:if test="${not empty message}">
     <div class="modal fade" id="resultModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

@@ -37,16 +37,18 @@
                                     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
-                                                <div class="modal-header">
+                                                <div class="modal-header  bg-warning text-dark p-3">
                                                     <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to add this category?</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <div class="modal-body">
+                                                <div class="modal-body bg-info text-white p-3">
                                                     <form method="POST" action="${pageContext.request.contextPath}/Category">
                                                         <label><span style="color: red;">*</span> Category Name</label>
-                                                        <input  type="text" name="name"   required/>  <br/> <br/>
+                                                        <input  type="text" name="name" pattern="[A-Za-z\s]+"
+
+                                                                title="Only letters can be entered (no numbers or special characters)"  required/>  <br/> <br/>
 
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
                                                         <button type="submit" class="btn btn-primary" name="action" value="create" >Confirm </button>
@@ -96,7 +98,8 @@
 
 
                                     <div class="row">
-                                        <table class="table table-bordered">
+                                        <table class="table  table-hover mb-0">
+                                            <thead class=" bg-info thead-light">
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Category Name</th>
@@ -105,6 +108,8 @@
                                                 <th>Updated Date</th>
                                                 <th>Actions</th>
                                             </tr>
+                                            </thead>
+                                            <tbody>
                                             <c:forEach var="cate" varStatus="loop" items="${category}"> 
 
 
@@ -115,25 +120,26 @@
                                                     <td><fmt:formatDate value="${cate.dayCreate}" pattern="dd-MM-yyyy"/></td>
                                                     <td><fmt:formatDate value="${cate.dayUpdate}" pattern="dd-MM-yyyy"/></td>
                                                     <td>
-                                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal" data-id="${loop.index+1}">Edit</button>
+                                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal" data-id="${cate.id}">Edit</button>
 
-                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="${loop.index+1}" data-quantity="${cate.quantity}">Delete</button>
+                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="${cate.id}" data-quantity="${cate.quantity}">Delete</button>
                                                     </td>
                                                 </tr>
 
 
                                             </c:forEach>
+                                                </tbody>
                                             <!-- Modal edit -->
                                             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to edit this category?</h5>
+                                                        <div class="modal-header" style="background-color: #f6462b;">
+                                                            <h5 class="modal-title" style="color: white" id="exampleModalLabel">Are you sure you want to edit this category?</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div class="modal-body bg-info text-white p-3">
                                                             <form method="POST" action="${pageContext.request.contextPath}/Category">
                                                                 <label><span style="color: red;">*</span> Category Name</label>
                                                                 <input  type="text" name="name"   required/>  <br/> <br/>
@@ -163,8 +169,8 @@
                                             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="deleteTitle"></h5>
+                                                        <div class="modal-header" style="background-color:#f03333;">
+                                                            <h5 class="modal-title"style="color: white;" id="deleteTitle"></h5>
 
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
