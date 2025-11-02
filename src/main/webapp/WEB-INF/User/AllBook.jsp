@@ -75,7 +75,7 @@
                                                 </ul>
                                                 <div class="tg-booktitle">
                                                     <h4 style="height: 40px; font-weight: bold;">
-                                                        <a href="http://localhost:8080/Lib/ProductDetail?productId=<%= b.getProductDetail().getId()%>" style="text-align: center; color: #333; text-decoration: none;">
+                                                        <a href="http://localhost:8080/Lib/ProductDetail?productId=<%=b.getProductDetail().getId()%>" style="text-align: center; color: #333; text-decoration: none;">
                                                             <%= b.getName_product()%>        
                                                         </a>
                                                     </h4>
@@ -94,7 +94,7 @@
                                                 <span class="tg-bookprice d-block"><ins><%= String.format("%,.0f", b.getPrice_product())%> $</ins></span>
                                                 <a class="tg-btn tg-btnstyletwo mt-2" >
                                                     <i class="fa fa-shopping-basket"></i>
-                                                    <em class="quan1" data-sku=" <%= b.getSku_product() %>">Thêm Vào Giỏ</em>
+                                                    <em class="quan1" data-sku="<%=b.getSku_product()%>" style="cursor: pointer">Thêm Vào Giỏ</em>
                                                 </a>
                                             </div>
                                         </div>
@@ -107,34 +107,7 @@
                                         <p>Không có sản phẩm nào.</p>
                                     </div>
                                     <% }%>
-                                    <script>
-                                                    $(document).ready(function () {
-                                                        
-                                                        function addCartItem(sku, quantity) {
-                                                            fetch('http://localhost:8080/Lib/cart', {
-                                                                method: 'POST',
-                                                                headers: {
-                                                                    'Content-Type': 'application/x-www-form-urlencoded'
-                                                                },
-                                                                body: new URLSearchParams({
-                                                                    sku: sku,
-                                                                    quantity: quantity,
-                                                                    status: 'add'
-                                                                })
-                                                            })
-                                                                    .then(res => res.text())
-                                                                    .then(data => {
-                                                                        alert(data);
-                                                                    });
-                                                        }                                                     
-                                                        $('.quan1').on('click', function () {                                                           
-                                                            const sku = $(this).data("sku");
-                                                            addCartItem(sku, 1);
-                                                        }
-                                                        ); 
-                                                    });
-
-                                                </script>
+                                   
                                 </div>
 
 

@@ -39,7 +39,7 @@ public class TestLogin {
        
 //        
 //        Cart c= cd.getCart("duyduc");
-//        CartItem ci=cd.getCartItem(2, "BOOK01");
+        CartItem ci=cd.getCartItem(12, "BOOK01");
 //        int n=cd.createCartItem(2, "BOOK02", 4);
 //        int up=cd.updateCartItem(2, "BOOK02", 20);
 //        List<CartItem> l= cd.cartAll(1);
@@ -47,13 +47,11 @@ public class TestLogin {
 //           int n=cd.deleteCartItem(1, "BOOK01");
 //           ProductDetailDao pd= new ProductDetailDao();
 //           ProductDetail p=pd.getById(1);
-            ProductDAO p=new ProductDAO();
-            List<Book> list = p.getAllBook();
-        if (list!=null){
+//            ProductDAO p=new ProductDAO();
+//            List<Book> list = p.getAllBook();
+        if (ci!=null){
            
-            for (Book book : list) {
-                System.out.println(book.toString());
-            }
+          System.out.println("Dat AN CUC");
            
         }
         else {
