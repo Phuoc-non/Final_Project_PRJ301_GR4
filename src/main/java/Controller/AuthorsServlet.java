@@ -17,10 +17,9 @@ import model.Authors;
 
 /**
  *
- * lỗi 2 cách đầu cuối, emty trung   trung sai dùng .trim()
- * trùng tác giả là cook
+ * lỗi 2 cách đầu cuối, emty trung trung sai dùng .trim() trùng tác giả là cook
  * không ddc số, kí tự đặc biệt
- * 
+ *
  * @author ACER
  */
 @WebServlet(name = "Authors", urlPatterns = {"/authors"})
@@ -64,10 +63,36 @@ public class AuthorsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AuthorsDAO dao = new AuthorsDAO();
-        List<Authors> authorList = dao.getAllAuthors();
-        request.setAttribute("authorList", authorList);
 
+        AuthorsDAO dao = new AuthorsDAO();
+
+        // 🧩 1. Lấy số trang từ URL (?page=2), mặc định là trang 1
+        int page = 1;
+        String pageStr = request.getParameter("page");
+        if (pageStr != null && !pageStr.isEmpty()) {
+            try {
+                page = Integer.parseInt(pageStr);
+                if (page < 1) {
+                    page = 1; // Không cho nhỏ hơn 1
+                }
+            } catch (NumberFormatException ex) {
+                System.err.println("Invalid page parameter");
+            }
+        }
+
+        // 🧩 2. Gọi DAO lấy danh sách tác giả theo trang
+        List<Authors> authorList = dao.getAuthorList(page);
+
+        // 🧩 3. Lấy tổng số dòng để tính tổng số trang
+        int totalAuthors = dao.getTotalRows();
+        int totalPages = (int) Math.ceil(totalAuthors / 10.0); // mỗi trang 10 tác giả
+
+        // 🧩 4. Truyền dữ liệu sang JSP
+        request.setAttribute("authorList", authorList);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
+
+        // 🧩 5. Chuyển đến trang JSP
         request.getRequestDispatcher("/WEB-INF/authors.jsp").forward(request, response);
     }
 

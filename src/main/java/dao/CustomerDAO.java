@@ -5,9 +5,11 @@
 package dao;
 
 import db.DBContext;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -104,6 +106,65 @@ public class CustomerDAO extends DBContext {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<Order> getCustomerList(int page) {
+        List<Order> list = new ArrayList<>();
+        try {
+            String sql = """
+            SELECT o.id AS order_id, o.dateBuy, o.total, o.name, o.phone, o.address,
+                   r.id AS reg_id, r.full_name, r.username, r.email, r.address AS reg_address
+            FROM Orders o
+            JOIN Registration r ON o.username = r.username
+            ORDER BY o.id
+            OFFSET ? ROWS FETCH NEXT ? ROWS ONLY
+        """;
+
+            PreparedStatement ps = this.getConnection().prepareStatement(sql);
+            ps.setInt(1, (page - 1) * 10);
+            ps.setInt(2, 10);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int orderId = rs.getInt("order_id");
+                Date dateBuy = new Date(rs.getTimestamp("dateBuy").getTime());
+                int total = (int) rs.getDouble("total");
+                String name = rs.getString("name");
+                String phone = rs.getString("phone");
+                String address = rs.getString("address");
+
+                // ✅ Lấy thông tin Registration
+                Registration reg = new Registration();
+                reg.setId(rs.getInt("reg_id"));
+                reg.setFull_name(rs.getString("full_name"));
+                reg.setUsername(rs.getString("username"));
+                reg.setEmail(rs.getString("email"));
+                reg.setAddress(rs.getString("reg_address"));
+
+                // ✅ Tạo đối tượng Order chứa cả Registration
+                Order order = new Order(orderId, dateBuy, total, name, phone, address, reg);
+                list.add(order);
+            }
+
+        } catch (SQLException e) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return list;
+    }
+
+    public int getTotalRows() {
+        int count = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM Orders";
+            PreparedStatement ps = this.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return count;
     }
 
 }

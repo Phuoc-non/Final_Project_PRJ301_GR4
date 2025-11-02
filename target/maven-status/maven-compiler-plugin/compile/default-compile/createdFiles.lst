@@ -1,15 +1,31 @@
 Controller\CategoryServlet.class
+Controller\CustomerSupportServlet.class
 Controller\LoginServlet.class
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 model\CartItem.class
+>>>>>>> 68c8ae74f6d7fd41376027537c59410b7c620987
+=======
+model\CartItem.class
+>>>>>>> Phong
 model\ProductDetail.class
 Controller\AuthorsServlet.class
 Controller\ReviewServlet.class
 Controller\CartServlet.class
 Controller\RegisterServlet.class
 model\Cart.class
+dao\CustomerSupportDAO.class
 dao\ProductDetailDao.class
 dao\CustomerDAO.class
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 dao\CartDAO.class
+>>>>>>> 68c8ae74f6d7fd41376027537c59410b7c620987
+=======
+dao\CartDAO.class
+>>>>>>> Phong
 Util\MD5Util.class
 com\mycompany\lib\JakartaRestConfiguration.class
 Controller\ChangePasswordServlet.class
@@ -23,12 +39,24 @@ dao\CategoryDao.class
 dao\TestLogin.class
 com\mycompany\lib\resources\JakartaEE11Resource.class
 Controller\CutomerServlet.class
+<<<<<<< HEAD
+<<<<<<< HEAD
+Controller\ProfileServlet.class
+model\Promotion.class
+model\Order.class
+=======
+=======
+>>>>>>> Phong
 Controller\Book_Manager.class
 Controller\Order.class
 Controller\ProfileServlet.class
 model\Promotion.class
 model\Order.class
 dao\HomeDAO.class
+<<<<<<< HEAD
+>>>>>>> 68c8ae74f6d7fd41376027537c59410b7c620987
+=======
+>>>>>>> Phong
 Controller\PromotionServlet.class
 model\Author.class
 model\UserReview.class
@@ -40,4 +68,8 @@ model\Registration.class
 Controller\LogoutServlet.class
 Controller\ProductDetailSerVlet.class
 db\DBContext.class
+<<<<<<< HEAD
+model\CustomerSupport.class
+=======
 dao\ProductDAO.class
+>>>>>>> 68c8ae74f6d7fd41376027537c59410b7c620987
