@@ -180,8 +180,10 @@
                                         </script>
                                         <c:if test="${not empty listCartItem}">
                                             <tr><td colspan="7">
-                                                    <button  class="btn btn-primary"  style="background: green; width: 200px; margin-bottom: 5px; margin-top: 5px;  " 
-                                                             type="submit">Đặt hàng</button>
+                                                    <form action="http://localhost:8080/Lib/order" method="doget">
+                                                        <input type="submit" name="submit" value="đặt hàng"class="btn btn-primary">  
+                                                        <input type="hidden" name="listItem" value="${listCartItem}">
+                                                    </form>
                                                 </td></tr>
                                             </c:if>           
 

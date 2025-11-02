@@ -42,7 +42,10 @@ public class CartServlet extends HttpServlet {
 
         if (user != null) {
             Cart cart = cartDao.getCart(user.getUsername());//truy cap username de lay usercartID
-
+            if (cart == null) {
+                cartDao.creatCart(user.getUsername());
+                cart = cartDao.getCart(user.getUsername());
+            }
             List<CartItem> cartItem = cartDao.cartAll(cart.getId());//co ai thi tim list cartItem
             request.setAttribute("listCartItem", cartItem);//set vao vang vao cart.jsp
             request.getRequestDispatcher("/WEB-INF/Product/cart.jsp").forward(request, response);
@@ -99,7 +102,7 @@ public class CartServlet extends HttpServlet {
 
                 //kiem tra xem san pham da ton tai trong gio hang chua
                 //neu da co thi cong don(update) vao quantity
-                if (status.equals("update")) {
+                if ("update".equals(status)) {
                     //test xem có chạy ko
 //                    System.out.println("✅ doPut() has been called!"); // in ra console server
 //                    response.setContentType("text/plain;charset=UTF-8");
@@ -110,7 +113,7 @@ public class CartServlet extends HttpServlet {
 //                    System.out.println("sku = " + request.getParameter("sku"));                    
                     cartDAO.updateCartItem(cart.getId(), sku, Integer.parseInt(quantity));
                     cartDAO.updateCart(cart.getUsername());
-                } else if (status.equals("delete")) {
+                } else if ("delete".equals(status)) {
 
 //                    response.setContentType("text/plain;charset=UTF-8");
 //                    response.getWriter().write("Server received PUT request");
@@ -120,7 +123,7 @@ public class CartServlet extends HttpServlet {
                     } else {
                         System.out.println("delete fails" + cart.getId() + sku); // in ra console server
                     }
-                } else if (status.equals("add")) {
+                } else if ("add".equals(status)) {
                     if (cartItem != null) {
                         int addQuantity = cartItem.getQuantity() + Integer.parseInt(quantity);
                         int rs = cartDAO.updateCartItem(cart.getId(), sku, addQuantity);

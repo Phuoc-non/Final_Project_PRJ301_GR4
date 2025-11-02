@@ -144,7 +144,7 @@ public class CartDAO extends DBContext {
 
     public List<CartItem> cartAll(int cartId) {
         List<CartItem> listCartItem = new ArrayList<>();
-        Product product=null;
+        Product product = null;
         try {
             String query = "select c.cart_id,c.product_sku, p.name,p.img, p.price,c.quantity as cartQuan,p.quantity as PQuan\n"
                     + "from Product p join CartItem c\n"
@@ -156,14 +156,14 @@ public class CartDAO extends DBContext {
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-                String bookName=rs.getString("name");
-                String img=rs.getString("img");
+                String bookName = rs.getString("name");
+                String img = rs.getString("img");
                 String sku = rs.getString("product_sku");
                 int cartQuantity = rs.getInt("CartQuan");
                 int ProductQuantity = rs.getInt("PQuan");
-                int price=rs.getInt("price");
-                
-                product=new Product(bookName, ProductQuantity, price, img);
+                int price = rs.getInt("price");
+
+                product = new Product(bookName, ProductQuantity, price, img);
                 listCartItem.add(new CartItem(cartId, sku, cartQuantity, product));
             }
             return listCartItem;
@@ -173,22 +173,24 @@ public class CartDAO extends DBContext {
 
         return null;
     }
-    public int deleteCartItem(int cartId, String sku){
+
+    public int deleteCartItem(int cartId, String sku) {
         try {
-            String query="delete CartItem where cart_id=? and product_sku=?";
+            String query = "delete CartItem where cart_id=? and product_sku=?";
             PreparedStatement statement = this.getConnection().prepareStatement(query);
             statement.setInt(1, cartId);
             statement.setString(2, sku);
-            
+
             return statement.executeUpdate();
         } catch (SQLException ex) {
             System.getLogger(CartDAO.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
         return 0;
     }
-    public int updateCart(String name){
+
+    public int updateCart(String name) {
         try {
-            String query="update cart set updated_date=(select GETDATE()) where username=?";
+            String query = "update cart set updated_date=(select GETDATE()) where username=?";
             PreparedStatement statement = this.getConnection().prepareStatement(query);
             statement.setString(1, name);
             return statement.executeUpdate();
@@ -197,4 +199,7 @@ public class CartDAO extends DBContext {
         }
         return 0;
     }
+
+    
+
 }

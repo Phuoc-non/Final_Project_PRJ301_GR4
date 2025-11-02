@@ -1,6 +1,7 @@
 Controller\CategoryServlet.class
 Controller\LoginServlet.class
 model\CartItem.class
+dao\OrderDAO.class
 model\ProductDetail.class
 Controller\AuthorsServlet.class
 Controller\ReviewServlet.class
@@ -11,6 +12,7 @@ dao\ProductDetailDao.class
 dao\CustomerDAO.class
 dao\CartDAO.class
 Util\MD5Util.class
+Controller\OrderServlet.class
 com\mycompany\lib\JakartaRestConfiguration.class
 Controller\ChangePasswordServlet.class
 model\Product.class
@@ -24,7 +26,6 @@ dao\TestLogin.class
 com\mycompany\lib\resources\JakartaEE11Resource.class
 Controller\CutomerServlet.class
 Controller\Book_Manager.class
-Controller\Order.class
 Controller\ProfileServlet.class
 model\Promotion.class
 model\Order.class

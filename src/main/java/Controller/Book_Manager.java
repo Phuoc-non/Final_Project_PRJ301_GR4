@@ -69,55 +69,37 @@ public class Book_Manager extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String view = request.getParameter("view");
-        String sortBy = request.getParameter("sortBy");
-        String pageStr = request.getParameter("page");
-
+        String sortBy = request.getParameter("sortBy"); // 🔹 nhận tham số sắp xếp
         ProductDAO dao = new ProductDAO();
+        List<Product> list;
 
-        // 🧩 1. Lấy số trang hiện tại
-        int page = 1;
-        if (pageStr != null && !pageStr.isEmpty()) {
-            try {
-                page = Integer.parseInt(pageStr);
-                if (page < 1) {
-                    page = 1;
-                }
-            } catch (NumberFormatException ex) {
-                System.err.println("Invalid page parameter");
-            }
+        // 🔸 kiểm tra có yêu cầu sắp xếp không
+        if (sortBy != null && !sortBy.isEmpty()) {
+            list = dao.getListSorted(sortBy); // dùng ORDER BY trong DAO
+        } else {
+            list = dao.getList(); // mặc định
         }
 
-        // 🧩 2. Lấy dữ liệu danh sách mặc định
-        List<Product> productList = dao.getListSortedPaged(page);
-        int totalProducts = dao.getTotalRows();
-        int totalPages = (int) Math.ceil(totalProducts / 10.0);
+        request.setAttribute("list", list);
+        request.setAttribute("sortBy", sortBy); // để JSP hiển thị chọn đúng
 
-
-        // 🧩 3. Gán dữ liệu cho JSP (luôn có, cho tất cả view)
-        request.setAttribute("list", productList);
-        request.setAttribute("currentPage", page);
-        request.setAttribute("totalPages", totalPages);
-
-        // 🧩 4. Chuẩn bị đường dẫn JSP
-        String path = "/WEB-INF/CRUD_Book/list.jsp";
-
+        // điều hướng view
         if ("create".equals(view)) {
             List<Author> authors = dao.getAllAuthors();
             List<Category> categories = dao.getAllCategories();
             request.setAttribute("authors", authors);
             request.setAttribute("categories", categories);
-            path = "/WEB-INF/CRUD_Book/create.jsp";
-
+            request.getRequestDispatcher("WEB-INF/CRUD_Book/create.jsp").forward(request, response);
         } else if ("detail".equals(view)) {
             String sku = request.getParameter("sku");
             Product p = dao.getBySku(sku);
             if (p != null) {
                 request.setAttribute("product", p);
-                path = "/WEB-INF/CRUD_Book/detail.jsp";
+                request.getRequestDispatcher("WEB-INF/CRUD_Book/detail.jsp").forward(request, response);
             } else {
                 request.setAttribute("error", "⚠️ Book not found!");
+                request.getRequestDispatcher("WEB-INF/CRUD_Book/list.jsp").forward(request, response);
             }
-
         } else if ("update".equals(view)) {
             String sku = request.getParameter("sku");
             Product p = dao.getBySku(sku);
@@ -126,11 +108,11 @@ public class Book_Manager extends HttpServlet {
             request.setAttribute("product", p);
             request.setAttribute("authors", authors);
             request.setAttribute("categories", categories);
-            path = "/WEB-INF/CRUD_Book/update.jsp";
+            request.getRequestDispatcher("WEB-INF/CRUD_Book/update.jsp").forward(request, response);
+        } else {
+            // mặc định về list
+            request.getRequestDispatcher("WEB-INF/CRUD_Book/list.jsp").forward(request, response);
         }
-
-        // ✅ 5. Forward 1 lần duy nhất
-        request.getRequestDispatcher(path).forward(request, response);
     }
 
     /**

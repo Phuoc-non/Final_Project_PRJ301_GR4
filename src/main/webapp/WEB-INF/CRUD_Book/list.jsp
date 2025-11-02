@@ -86,9 +86,6 @@
                                                     <td><fmt:formatDate value="<%= pr.getCreated_product()%>" pattern="dd-MM-yyyy"/></td>
                                                     <td>
                                                         <a href="<%= request.getContextPath()%>/bm?view=detail&sku=<%= pr.getSku_product()%>" class="btn btn-primary">Detail</a>
-
-
-
                                                         <form action="bm" method="post" style="display:inline;">
                                                             <input type="hidden" name="action" value="delete">
                                                             <input type="hidden" name="sku" value="<%=pr.getSku_product()%>">
