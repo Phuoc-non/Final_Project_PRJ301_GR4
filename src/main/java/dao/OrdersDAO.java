@@ -24,21 +24,22 @@ public class OrdersDAO extends DBContext {
         List<Orders> list = new ArrayList<>();
         String sql = """
                 SELECT 
+                
                     o.id,                           
-                    o.name,                      
-                    o.phone,                     
-                    o.address,                      
-                    o.total,                        
-                    o.created_at,                   
-                    o.updated_at,               
-                    o.status                      
+                    o.name,                         
+                    o.phone,                        
+                    o.address,                     
+                    o.total,                       
+                    o.datebuy,                   
+                    o.updated_at,                   
+                    o.status                        
                 FROM Orders o
                 JOIN OrderDetails od ON o.id = od.order_id
                 JOIN Product p ON od.sku = p.sku
                 GROUP BY 
                     o.id, o.name, o.phone, o.address, o.total, 
-                    o.created_at, o.updated_at, o.status
-                ORDER BY o.created_at DESC;
+                    o.datebuy, o.updated_at, o.status
+                ORDER BY o.datebuy DESC;
                 """;
 
         try (PreparedStatement ps = this.getConnection().prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
@@ -50,7 +51,7 @@ public class OrdersDAO extends DBContext {
                         rs.getString("phone"),
                         rs.getString("address"),
                         rs.getDouble("total"),
-                        rs.getDate("created_at"),
+                        rs.getDate("datebuy"),
                         rs.getDate("updated_at"),
                         rs.getString("status")
                 );
