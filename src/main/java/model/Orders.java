@@ -15,25 +15,24 @@ public class Orders {
     private int id;
     private String name;
     private String phone;
-    private Date datebuy;
     private String address;
     private double total;
-    private Date created_at;
+    private Date datebuy;
     private Date updated_at;
     private String status;
 
-    public Orders(int id, String name, String phone, String address, double total, Date created_at, Date updated_at, String status) {
+    public Orders() {
+    }
+
+    public Orders(int id, String name, String phone, String address, double total, Date datebuy, Date updated_at, String status) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.total = total;
-        this.created_at = created_at;
+        this.datebuy = datebuy;
         this.updated_at = updated_at;
         this.status = status;
-    }
-
-    public Orders() {
     }
 
     public int getId() {
@@ -76,12 +75,12 @@ public class Orders {
         this.total = total;
     }
 
-    public Date getCreated_at() {
-        return created_at;
+    public Date getDatebuy() {
+        return datebuy;
     }
 
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setDatebuy(Date datebuy) {
+        this.datebuy = datebuy;
     }
 
     public Date getUpdated_at() {
@@ -100,9 +99,6 @@ public class Orders {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "Orders{" + "id=" + id + ", name=" + name + ", phone=" + phone + ", address=" + address + ", total=" + total + ", created_at=" + created_at + ", updated_at=" + updated_at + ", status=" + status + '}';
-    }
-
+    
+   
 }

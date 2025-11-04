@@ -5,13 +5,16 @@
 package dao;
 
 import db.DBContext;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.CartItem;
 import model.Orders;
 
 /**
@@ -29,7 +32,7 @@ public class OrdersDAO extends DBContext {
                     o.phone,                     
                     o.address,                      
                     o.total,                        
-                    o.created_at,                   
+                    o.datebuy,                   
                     o.updated_at,               
                     o.status                      
                 FROM Orders o
@@ -37,8 +40,8 @@ public class OrdersDAO extends DBContext {
                 JOIN Product p ON od.sku = p.sku
                 GROUP BY 
                     o.id, o.name, o.phone, o.address, o.total, 
-                    o.created_at, o.updated_at, o.status
-                ORDER BY o.created_at DESC;
+                    o.datebuy, o.updated_at, o.status
+                ORDER BY o.datebuy DESC;
                 """;
 
         try (PreparedStatement ps = this.getConnection().prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
@@ -50,7 +53,7 @@ public class OrdersDAO extends DBContext {
                         rs.getString("phone"),
                         rs.getString("address"),
                         rs.getDouble("total"),
-                        rs.getDate("created_at"),
+                        rs.getDate("datebuy"),
                         rs.getDate("updated_at"),
                         rs.getString("status")
                 );
@@ -88,4 +91,57 @@ public class OrdersDAO extends DBContext {
             throw ex;
         }
     }
+
+    public int confirmOrders(Orders order, List<CartItem> cartItems, String username) {
+        String sqlInsertOrder = """
+        INSERT INTO Orders (dateBuy, name, phone, address, username, total, status, updated_at)
+        VALUES (GETDATE(), ?, ?, ?, ?, ?, N'Chờ xác nhận', GETDATE())
+    """;
+
+        String sqlInsertDetail = """
+        INSERT INTO OrderDetails (sku, order_id, price, quantity, total)
+        VALUES (?, ?, ?, ?, ?)
+    """;
+
+        try (Connection con = this.getConnection()) {
+            con.setAutoCommit(false); // Bắt đầu transaction
+
+            // 1️⃣ Thêm đơn hàng chính
+            PreparedStatement ps = con.prepareStatement(sqlInsertOrder, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, order.getName());
+            ps.setString(2, order.getPhone());
+            ps.setString(3, order.getAddress());
+            ps.setString(4, username);
+            ps.setDouble(5, order.getTotal());
+            ps.executeUpdate();
+
+            // 2️⃣ Lấy ID của đơn hàng vừa thêm
+            ResultSet rs = ps.getGeneratedKeys();
+            int orderId = 0;
+            if (rs.next()) {
+                orderId = rs.getInt(1);
+            }
+
+            // 3️⃣ Thêm chi tiết đơn hàng
+            PreparedStatement psDetail = con.prepareStatement(sqlInsertDetail);
+            for (CartItem item : cartItems) {
+                psDetail.setString(1, item.getSku());
+                psDetail.setInt(2, orderId);
+                double price = item.getProduct().getPrice();
+                int quantity = item.getQuantity();
+                psDetail.setDouble(3, price);
+                psDetail.setInt(4, quantity);
+                psDetail.setDouble(5, price * quantity);
+                psDetail.addBatch();
+            }
+            psDetail.executeBatch();
+
+            con.commit();
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 }

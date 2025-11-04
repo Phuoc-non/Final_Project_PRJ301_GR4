@@ -32,7 +32,8 @@
 <div class="tg-sectionspace tg-haslayout" style="padding-top: 50px;">
     <div class="container">
         <div class="row">
-            <form action="confirm" method="post">
+            <form action="${pageContext.request.contextPath}/orders" method="post">
+                <input type="hidden" name="action" value="confirm">
                 <div id="tg-twocolumns" class="tg-twocolumns">
 
                     <!-- Right Column: Order Info -->
@@ -48,20 +49,13 @@
                                     <th>Tạm tính</th>
                                 </tr>
 
-                                <c:forEach var="item" items="${listCartItem}" varStatus="status">
-                                    <tr class="active-row">
-                                           <td>${count}</td>
-                                                    <td>${item.getProduct().bookName}</td>
-                                                    <td><img src="${item.getProduct().img}" alt="image description" style="height: 100px;"></td>
-                                                    <td style="font-size : 15px"></td>
-                                                    <td class="tg-quantityholder">
-                                                        <em class="minus">-</em>
-                                                        <input type="text" value="${item.quantity}" class="quan" data-max="${item.getProduct().quantity}" data-sku="${item.sku}" data-price="${item.getProduct().price}" style="width: 80px; margin-top: 5px;">
-
-                                                        <em class="plus">+</em>
-
-                                                    </td>
-                                                    <td class="total">${item.quantity * item.getProduct().price} $</td>
+                                <c:forEach var="item" items="${cartList}" varStatus="status">
+                                    <tr>
+                                        <td>${status.index + 1}</td>
+                                        <td>${item.product.bookName}</td>
+                                        <td>${item.quantity}</td>
+                                        <td>${item.product.price} $</td>
+                                        <td>${item.product.price * item.quantity} $</td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -69,10 +63,12 @@
 
                         <tr>
                             <td colspan="7">
-                                <h5 style="color: black; text-align: left;">
+                                <h5 style="color: black; text-align: left; font-family: 'Arial', sans-serif; font-size: 18px; font-weight: bold;">
                                     Tổng tiền :
-                                    <span style="color: green;">${cartInfo.amount} $</span>
+                                    <span style="color: green;">${total} $</span>
+                                    <input type="hidden" name="total" value="${total}">
                                 </h5>
+
                             </td>
                         </tr>
                     </div>
@@ -87,7 +83,6 @@
                             <label><span style="color: red;">*</span><strong>Họ và tên</strong></label>
                             <input name="fullname" type="text" class="form-control" style="width: 500px;" required>
                         </div>
-
                         <div class="form-group">
                             <label><span style="color: red;">*</span><strong>Số điện thoại</strong></label>
                             <input name="phone" type="text" class="form-control" style="width: 500px;" required>
@@ -97,10 +92,9 @@
                             <label><span style="color: red;">*</span><strong>Địa chỉ giao hàng</strong></label>
                             <input name="address" type="text" class="form-control" style="width: 500px;" required>
                         </div>
-
                         <button type="submit" class="btn btn-primary" style="background: green; width: 200px;" id="confirm_btn">
                             Xác nhận đơn đặt hàng
-                        </button>
+                        </button>                  
                     </div>
                 </div>
             </form>

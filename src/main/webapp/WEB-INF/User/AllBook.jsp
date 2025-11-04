@@ -34,7 +34,7 @@
 
                                 <!-- FORM SẮP XẾP -->
                                 <div class="tg-refinesearch mb-3">
-                                    <form class="tg-formtheme tg-formsortshoitems" action="ab">
+                                    <form method="get" class="tg-formtheme tg-formsortshoitems" action="${pageContext.request.contextPath}/ab">
                                         <fieldset>
                                             <div class="form-group">
                                                 <label>Sắp xếp theo:</label>
