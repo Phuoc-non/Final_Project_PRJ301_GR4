@@ -3,7 +3,7 @@
 <%@include file="../includes/headerTotal.jsp" %>
 
 <!--************************************
-		Inner Banner Start
+                Inner Banner Start
 *************************************-->
 <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner"
      data-z-index="-100"
@@ -18,7 +18,7 @@
                     <ol class="tg-breadcrumb">
                         <li><a href="index.jsp">Trang chủ</a></li>
                         <li class="tg-active">Giỏ hàng</li>
-                        <%-- <li class="tg-active">Chi tiết đơn hàng</li> --%>
+                            <%-- <li class="tg-active">Chi tiết đơn hàng</li> --%>
                     </ol>
                 </div>
             </div>
@@ -27,14 +27,14 @@
 </div>
 
 <!--************************************
-		Order Information Start
+                Order Information Start
 *************************************-->
 <div class="tg-sectionspace tg-haslayout" style="padding-top: 50px;">
     <div class="container">
         <div class="row">
             <form action="confirm" method="post">
                 <div id="tg-twocolumns" class="tg-twocolumns">
-                    
+
                     <!-- Right Column: Order Info -->
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 pull-right">
                         <div id="tg-content" class="tg-content">
@@ -48,13 +48,20 @@
                                     <th>Tạm tính</th>
                                 </tr>
 
-                                <c:forEach var="detail" items="${cartInfo.cartDetails}" varStatus="status">
+                                <c:forEach var="item" items="${listCartItem}" varStatus="status">
                                     <tr class="active-row">
-                                        <td>${status.index + 1}</td>
-                                        <td>${detail.book.title}</td>
-                                        <td>${detail.quantity}</td>
-                                        <td style="font-size:15px;">${detail.book.price} VNĐ</td>
-                                        <td>${detail.amount} $</td>
+                                           <td>${count}</td>
+                                                    <td>${item.getProduct().bookName}</td>
+                                                    <td><img src="${item.getProduct().img}" alt="image description" style="height: 100px;"></td>
+                                                    <td style="font-size : 15px"></td>
+                                                    <td class="tg-quantityholder">
+                                                        <em class="minus">-</em>
+                                                        <input type="text" value="${item.quantity}" class="quan" data-max="${item.getProduct().quantity}" data-sku="${item.sku}" data-price="${item.getProduct().price}" style="width: 80px; margin-top: 5px;">
+
+                                                        <em class="plus">+</em>
+
+                                                    </td>
+                                                    <td class="total">${item.quantity * item.getProduct().price} $</td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -101,4 +108,4 @@
     </div>
 </div>
 
-                                    <%@include file="../includes/footer.jsp" %>
+<%@include file="../includes/footer.jsp" %>

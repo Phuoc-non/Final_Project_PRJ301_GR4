@@ -52,6 +52,7 @@
             } else {
                 request.setAttribute("Error", "Please login to use the shopping cart");
                 request.getRequestDispatcher("/assets/404errol.jsp").forward(request, response);
+
             }
             //Tai sao ko cho cart thanh session ?
             //Cho session o dau? o doPost?
@@ -60,6 +61,7 @@
             // cx ko dc vi khi xem chi tiet sach va co add to cart cho do, nhung lai ko mo gio hang thi lam gi co session 🤔.
             //nen la ko cho vao sesion
         }
+
 
         /**
          * Handles the HTTP <code>POST</code> method.

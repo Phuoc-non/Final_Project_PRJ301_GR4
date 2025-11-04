@@ -399,7 +399,7 @@ public class ProductDAO extends DBContext {
         String query = """
         SELECT 
             p.sku, p.name AS product_name, p.img,
-            p.price * 26000 AS price_vnd,
+            p.price AS price_vnd,
             p.quantity - COALESCE(SUM(od.quantity), 0) AS remaining_quantity,
             c.name AS category_name, a.name AS author_name,
             COALESCE(SUM(od.quantity), 0) AS sold
