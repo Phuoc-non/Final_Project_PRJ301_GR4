@@ -1,5 +1,11 @@
 Controller\CustomerSupportServlet.class
 Controller\LoginServlet.class
+<<<<<<< HEAD
+model\CartItem.class
+dao\OrderDAO.class
+model\ProductDetail.class
+=======
+>>>>>>> master
 Controller\AuthorsServlet.class
 Controller\RegisterServlet.class
 dao\ProductDetailDao.class
@@ -11,10 +17,17 @@ Util\MD5Util.class
 <<<<<<< HEAD
 Controller\StatisticsServlet.class
 Util\MD5Util.class
+<<<<<<< HEAD
+Controller\OrderServlet.class
+com\mycompany\lib\JakartaRestConfiguration.class
+=======
 model\Orders.class
+<<<<<<< HEAD
 =======
 Util\MD5Util.class
 >>>>>>> Phuoc
+=======
+>>>>>>> Tinh
 >>>>>>> master
 Controller\ChangePasswordServlet.class
 Controller\OrderDetailsServlet.class

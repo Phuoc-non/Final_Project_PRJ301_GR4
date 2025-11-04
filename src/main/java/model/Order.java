@@ -47,7 +47,5 @@ public class Order {
 
     public Registration getRegistration() { return registration; }
     public void setRegistration(Registration registration) { this.registration = registration; }
-
-   
-    
+ 
 }
