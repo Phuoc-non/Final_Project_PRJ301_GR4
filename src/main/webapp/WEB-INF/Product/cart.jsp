@@ -75,6 +75,7 @@ Author     : Asus
                                                     </td>
 
                                                 </tr>  
+                                            </c:forEach>
                                             
                                         <c:if test="${not empty listCartItem}">
                                             <tr><td colspan="7">
