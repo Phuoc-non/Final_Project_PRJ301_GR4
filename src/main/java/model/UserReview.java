@@ -11,18 +11,30 @@ import java.sql.Date;
  * @author Asus
  */
 public class UserReview {
+
     private int rating;
     private String userName;
     private String comment;
     private Date date;
+    private String sku;
+
     public UserReview() {
     }
 
-    public UserReview(int rating, String userName, String comment, Date date) {
+    public UserReview(int rating, String userName, String comment, Date date, String sku) {
         this.rating = rating;
         this.userName = userName;
         this.comment = comment;
-        this.date=date;
+        this.date = date;
+        this.sku = sku;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
     public int getRating() {
@@ -56,7 +68,5 @@ public class UserReview {
     public void setDate(Date date) {
         this.date = date;
     }
-    
-    
-    
+
 }

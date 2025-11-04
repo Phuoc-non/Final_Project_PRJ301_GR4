@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+    
 
     
 </head>
@@ -77,7 +77,7 @@
                                     <%-- <a href="${pageContext.request.contextPath}/Cart" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
                                     <a href="${pageContext.request.contextPath}/cart" id="tg-minicart" class="tg-btnthemedropdown" aria-haspopup="true" aria-expanded="false">
 
-                                        <span class="tg-themebadge">7</span>
+<!--                                        <span class="tg-themebadge">7</span>-->
                                         <i class="icon-cart"></i>
                                         <span>$123.00</span>
                                     </a>

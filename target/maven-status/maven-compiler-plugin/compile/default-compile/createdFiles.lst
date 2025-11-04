@@ -13,7 +13,6 @@ dao\TestLogin.class
 com\mycompany\lib\resources\JakartaEE11Resource.class
 Controller\CutomerServlet.class
 Controller\Book_Manager.class
-Controller\ProfileServlet.class
 dao\HomeDAO.class
 Controller\PromotionServlet.class
 model\Author.class
