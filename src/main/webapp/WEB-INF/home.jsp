@@ -135,7 +135,7 @@
                             <div class="tg-testimonialauthor">
                                 <h3>Sophia Taylor</h3>
                                 <span>Marketing Specialist</span>
-                                <span class="tg-stars"><span></span></span>
+                                <span class="tg-stars" style="display: block; margin: 15px auto 0; float: none; clear: both;"><span></span></span>
 
                             </div>
                         </div>
@@ -145,7 +145,7 @@
                             <div class="tg-testimonialauthor">
                                 <h3>Robert Miller</h3>
                                 <span>Photographer</span>
-                                <span class="tg-stars"><span></span></span>
+                                <span class="tg-stars" style="display: block; margin: 15px auto 0; float: none; clear: both;"><span></span></span>
                             </div>
                         </div>
                         <div class="item tg-testimonial">
@@ -154,7 +154,7 @@
                             <div class="tg-testimonialauthor">
                                 <h3>James Wilson</h3>
                                 <span>Lawyer</span>
-                                <span class="tg-stars"><span></span></span>
+                                <span class="tg-stars" style="display: block; margin: 15px auto 0; float: none; clear: both;"><span></span></span>
                             </div>
                         </div>
                     </div>

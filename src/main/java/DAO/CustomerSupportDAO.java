@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.CustomerSupport;
-import model.Order;
 import model.Registration;
 
 /**
@@ -39,7 +38,7 @@ public class CustomerSupportDAO extends DBContext {
             ps.setString(5, support.getDescription());
             ps.setString(6, support.getEmail());
             ps.setString(7, "Pending"); // Mặc định là Pending
-            
+
             int rows = ps.executeUpdate();
             return rows > 0;
         } catch (SQLException e) {
@@ -82,7 +81,7 @@ public class CustomerSupportDAO extends DBContext {
             PreparedStatement ps = getConnection().prepareStatement(sql);
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 CustomerSupport cs = new CustomerSupport();
                 cs.setId(rs.getInt("id"));
@@ -94,17 +93,7 @@ public class CustomerSupportDAO extends DBContext {
                 cs.setEmail(rs.getString("email"));
                 cs.setStatus(rs.getString("status"));
                 cs.setRequestDate(rs.getTimestamp("request_date"));
-                
-                // Set Order info
-                Order order = new Order();
-                order.setId(rs.getInt("order_id"));
-                order.setDateBuy(rs.getTimestamp("dateBuy"));
-                order.setTotal(rs.getInt("total"));
-                order.setName(rs.getString("name"));
-                order.setPhone(rs.getString("phone"));
-                order.setAddress(rs.getString("address"));
-                cs.setOrder(order);
-                
+
                 // Set Registration info
                 Registration reg = new Registration();
                 reg.setId(rs.getInt("reg_id"));
@@ -112,7 +101,7 @@ public class CustomerSupportDAO extends DBContext {
                 reg.setUsername(rs.getString("username"));
                 reg.setEmail(rs.getString("reg_email"));
                 cs.setRegistration(reg);
-                
+
                 list.add(cs);
             }
         } catch (SQLException e) {
@@ -135,7 +124,7 @@ public class CustomerSupportDAO extends DBContext {
         try {
             PreparedStatement ps = getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 CustomerSupport cs = new CustomerSupport();
                 cs.setId(rs.getInt("id"));
@@ -147,17 +136,9 @@ public class CustomerSupportDAO extends DBContext {
                 cs.setEmail(rs.getString("email"));
                 cs.setStatus(rs.getString("status"));
                 cs.setRequestDate(rs.getTimestamp("request_date"));
-                
-                // Set Order info
-                Order order = new Order();
-                order.setId(rs.getInt("order_id"));
-                order.setDateBuy(rs.getTimestamp("dateBuy"));
-                order.setTotal(rs.getInt("total"));
-                order.setName(rs.getString("name"));
-                order.setPhone(rs.getString("phone"));
-                order.setAddress(rs.getString("address"));
-                cs.setOrder(order);
-                
+
+               
+
                 // Set Registration info
                 Registration reg = new Registration();
                 reg.setId(rs.getInt("reg_id"));
@@ -165,7 +146,7 @@ public class CustomerSupportDAO extends DBContext {
                 reg.setUsername(rs.getString("username"));
                 reg.setEmail(rs.getString("reg_email"));
                 cs.setRegistration(reg);
-                
+
                 list.add(cs);
             }
         } catch (SQLException e) {
@@ -183,7 +164,7 @@ public class CustomerSupportDAO extends DBContext {
             PreparedStatement ps = getConnection().prepareStatement(sql);
             ps.setString(1, status);
             ps.setInt(2, id);
-            
+
             int rows = ps.executeUpdate();
             return rows > 0;
         } catch (SQLException e) {
@@ -200,7 +181,7 @@ public class CustomerSupportDAO extends DBContext {
         try {
             PreparedStatement ps = getConnection().prepareStatement(sql);
             ps.setInt(1, id);
-            
+
             int rows = ps.executeUpdate();
             return rows > 0;
         } catch (SQLException e) {
@@ -242,7 +223,7 @@ public class CustomerSupportDAO extends DBContext {
             PreparedStatement ps = getConnection().prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 CustomerSupport cs = new CustomerSupport();
                 cs.setId(rs.getInt("id"));
@@ -254,17 +235,9 @@ public class CustomerSupportDAO extends DBContext {
                 cs.setEmail(rs.getString("email"));
                 cs.setStatus(rs.getString("status"));
                 cs.setRequestDate(rs.getTimestamp("request_date"));
-                
-                // Set Order info
-                Order order = new Order();
-                order.setId(rs.getInt("order_id"));
-                order.setDateBuy(rs.getTimestamp("dateBuy"));
-                order.setTotal(rs.getInt("total"));
-                order.setName(rs.getString("name"));
-                order.setPhone(rs.getString("phone"));
-                order.setAddress(rs.getString("address"));
-                cs.setOrder(order);
-                
+
+               
+
                 // Set Registration info
                 Registration reg = new Registration();
                 reg.setId(rs.getInt("reg_id"));
@@ -272,7 +245,7 @@ public class CustomerSupportDAO extends DBContext {
                 reg.setUsername(rs.getString("username"));
                 reg.setEmail(rs.getString("reg_email"));
                 cs.setRegistration(reg);
-                
+
                 return cs;
             }
         } catch (SQLException e) {

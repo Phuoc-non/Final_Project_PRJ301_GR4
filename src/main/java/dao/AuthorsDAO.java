@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Authors;
-import model.Order;
+//import model.Orders;
 import model.Registration;
 
 public class AuthorsDAO extends DBContext {
@@ -143,7 +143,7 @@ public class AuthorsDAO extends DBContext {
                 count = rs.getInt(1);
             }
         } catch (SQLException e) {
-            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(AuthorsDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return count;
     }

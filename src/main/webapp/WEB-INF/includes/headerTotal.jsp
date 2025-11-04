@@ -311,6 +311,9 @@
                                         <li><a href="contactus.html">Order</a></li>
                                             <% } else { %>
                                         <li><a href="ab">AllBook</a></li>
+                                        <li><a href="support">Support</a></li>
+
+                                  
                                             <% }%>
                                     </ul>
                                 </div>
