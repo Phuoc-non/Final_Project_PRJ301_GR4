@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Book;
+import model.ProductDetail;
 
 /**
  *
@@ -18,44 +19,84 @@ import model.Book;
  */
 public class HomeDAO extends DBContext {
 
-
     public List<Book> getTop6Books() {
         List<Book> list = new ArrayList<>();
         String query = """
-            SELECT TOP 6 
-                p.sku,
-                p.name AS product_name,
-                p.img,
-                p.price AS price_vnd, 
-                p.quantity - COALESCE(SUM(od.quantity), 0) AS remaining_quantity,
-                p.description,
-                c.name AS category_name,
-                a.name AS author_name,
-                COALESCE(SUM(od.quantity), 0) AS sold
-            FROM Product p
-            LEFT JOIN Product_Author pa ON p.sku = pa.product_sku
-            LEFT JOIN Author a ON pa.author_id = a.id
-            LEFT JOIN Category c ON p.category_id = c.id
-            LEFT JOIN OrderDetails od ON p.sku = od.sku
-            GROUP BY p.sku, p.name, p.img, c.name, a.name, p.price, p.quantity, p.description
-            ORDER BY p.sku ASC;
+           with orderList as (
+            select sum(od.quantity) as quantity,od.sku from OrderDetails od join Orders o
+            on od.order_id=o.id
+            group by od.sku
+            )
+            select top 6
+            pd.id,pd.book_name,
+            p.img,p.description,p.quantity,p.price,p.sku,
+            STRING_AGG( a.name,', ') as authur_name,
+            ol.quantity as selling_quan,
+            c.name as category
+            from product p join productDetail pd
+            on p.sku=pd.product_sku
+            join Product_Author pa
+            on pa.product_sku=p.sku
+            join Author a
+            on a.id=pa.author_id
+            join orderList ol
+            on ol.sku=p.sku
+            join Category c
+            on c.id=p.category_id
+            group by
+            pd.id,pd.book_name,
+            p.img,p.description,p.quantity,p.price,p.sku,ol.quantity,c.name
+            order by selling_quan desc
         """;
 
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+        try (PreparedStatement ps = this.getConnection().prepareStatement(query); ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                Book b = new Book();
-                b.setSku_product(rs.getString("sku"));
-                b.setName_product(rs.getString("product_name"));
-                b.setImg(rs.getString("img"));
-                b.setDescription(rs.getString("description"));
-                b.setPrice_product(rs.getDouble("price_vnd"));
-                b.setQuantity_product(rs.getInt("remaining_quantity"));
-                b.setCategory_name(rs.getString("category_name"));
-                b.setAuthor_name(rs.getString("author_name"));
-                b.setQuantity_orderDetail(rs.getInt("sold"));
-                list.add(b);
+                ProductDetail p= new ProductDetail(rs.getInt("id"));
+                list.add(new Book(rs.getString("sku"), rs.getString("img"), rs.getString("book_name"), 
+                        rs.getDouble("price"), rs.getInt("quantity"), rs.getString("category"), rs.getString("authur_name"), rs.getInt("selling_quan"), p));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    public Book getTop1Books() {
+        Book list = null;
+        String query = """
+           with orderList as (
+            select sum(od.quantity) as quantity,od.sku from OrderDetails od join Orders o
+            on od.order_id=o.id
+            group by od.sku
+            )
+            select top 6
+            pd.id,pd.book_name,
+            p.img,p.description,p.quantity,p.price,p.sku,
+            STRING_AGG( a.name,', ') as authur_name,
+            ol.quantity as selling_quan,
+            c.name as category
+            from product p join productDetail pd
+            on p.sku=pd.product_sku
+            join Product_Author pa
+            on pa.product_sku=p.sku
+            join Author a
+            on a.id=pa.author_id
+            join orderList ol
+            on ol.sku=p.sku
+            join Category c
+            on c.id=p.category_id
+            group by
+            pd.id,pd.book_name,
+            p.img,p.description,p.quantity,p.price,p.sku,ol.quantity,c.name
+            order by selling_quan desc
+        """;
+
+        try (PreparedStatement ps = this.getConnection().prepareStatement(query); ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                ProductDetail p= new ProductDetail(rs.getInt("id"));
+                list=new Book(rs.getString("sku"), rs.getString("img"), rs.getString("book_name"),rs.getDouble("price"), rs.getInt("quantity"), rs.getString("category"), rs.getString("authur_name"), rs.getInt("selling_quan"), p);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,5 +104,3 @@ public class HomeDAO extends DBContext {
         return list;
     }
 }
-
-

@@ -4,18 +4,46 @@ Controller\AuthorsServlet.class
 Controller\RegisterServlet.class
 dao\ProductDetailDao.class
 dao\CustomerDAO.class
+<<<<<<< HEAD
 Controller\StatisticsServlet.class
 Util\MD5Util.class
+=======
+<<<<<<< HEAD
+Controller\StatisticsServlet.class
+Util\MD5Util.class
+model\Orders.class
+=======
+Util\MD5Util.class
+>>>>>>> Phuoc
+>>>>>>> master
 Controller\ChangePasswordServlet.class
+Controller\OrderDetailsServlet.class
 model\Product.class
+<<<<<<< HEAD
 dao\RegistrationDAO.class
 dao\CategoryDao.class
+=======
+<<<<<<< HEAD
+Controller\OrdersServlet.class
+=======
+>>>>>>> Phuoc
+dao\RegistrationDAO.class
+dao\CategoryDao.class
+dao\OrderDetailsDAO.class
+>>>>>>> master
 model\ChartData.class
 dao\TestLogin.class
 com\mycompany\lib\resources\JakartaEE11Resource.class
 Controller\CutomerServlet.class
 Controller\Book_Manager.class
+<<<<<<< HEAD
 Controller\ProfileServlet.class
+=======
+<<<<<<< HEAD
+Controller\ProfileServlet.class
+=======
+>>>>>>> Phuoc
+>>>>>>> master
 dao\HomeDAO.class
 Controller\PromotionServlet.class
 model\Author.class
@@ -33,13 +61,31 @@ Controller\CartServlet.class
 model\Cart.class
 dao\CustomerSupportDAO.class
 dao\CartDAO.class
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+dao\OrdersDAO.class
+com\mycompany\lib\JakartaRestConfiguration.class
+model\Authors.class
+Controller\BookServlet.class
+dao\AuthorsDAO.class
+dao\StatisticsDAO.class
+Controller\Order.class
+model\OrderDetails.class
+=======
+>>>>>>> master
 com\mycompany\lib\JakartaRestConfiguration.class
 model\Authors.class
 Controller\AllBookServlet.class
 Controller\BookServlet.class
 dao\AuthorsDAO.class
+<<<<<<< HEAD
 dao\StatisticsDAO.class
 Controller\Order.class
+=======
+Controller\Order.class
+>>>>>>> Phuoc
+>>>>>>> master
 model\Promotion.class
 model\Order.class
 model\UserReview.class

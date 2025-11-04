@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Authors;
-import model.Order;
-import model.Registration;
+
+import model.Orders;
 
 public class AuthorsDAO extends DBContext {
 
@@ -54,16 +54,35 @@ public class AuthorsDAO extends DBContext {
     }
 
 // Thêm mới tác giả
-    public void createAuthor(Authors author) {
+
+    public boolean createAuthor(Authors author) {
         String sql = "INSERT INTO Author (name, bio) VALUES (?, ?)";
         try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
-            ps.setString(1, author.getName());
-            ps.setString(2, author.getBio());
+            ps.setString(1, author.getName().trim());
+            ps.setString(2, author.getBio().trim());
             ps.executeUpdate();
             System.out.println("Thêm tác giả thành công!");
         } catch (SQLException e) {
             Logger.getLogger(AuthorsDAO.class.getName()).log(Level.SEVERE, null, e);
         }
+        return false;
+    }
+//check trùng
+
+    public boolean checkDuplicateAuthorname(String name) {
+        String checkDuplicateAuthorname = "SELECT COUNT(*) FROM Author WHERE name = ?";
+        try {
+            PreparedStatement ps = this.getConnection().prepareStatement(checkDuplicateAuthorname);
+            ps.setString(1, name.trim());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 
     // Cập nhật thông tin tác giả
@@ -146,5 +165,6 @@ public class AuthorsDAO extends DBContext {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return count;
+
     }
 }

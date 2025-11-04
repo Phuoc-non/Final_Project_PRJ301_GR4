@@ -17,8 +17,7 @@ import model.Authors;
 
 /**
  *
- * lỗi 2 cách đầu cuối, emty trung trung sai dùng .trim() trùng tác giả là cook
- * không ddc số, kí tự đặc biệt
+ *
  *
  * @author ACER
  */
@@ -123,22 +122,45 @@ public class AuthorsServlet extends HttpServlet {
     private void createAuthor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Lấy dữ liệu từ form
-        String name = request.getParameter("name");
-        String bio = request.getParameter("bio");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
-        // Tạo đối tượng model
+        String name = request.getParameter("name").trim();
+        String bio = request.getParameter("bio").trim();
+
+        AuthorsDAO dao = new AuthorsDAO();
+
+        // Kiểm tra tên rỗng
+        if (name.isEmpty()) {
+            request.setAttribute("errorMessage", "Tên tác giả không được để trống!");
+            request.setAttribute("authorList", dao.getAllAuthors());
+            request.getRequestDispatcher("/WEB-INF/authors.jsp").forward(request, response);
+            return;
+        }
+
+        // Kiểm tra trùng tên
+        if (dao.checkDuplicateAuthorname(name)) {
+            request.setAttribute("errorMessage", "Tên tác giả đã tồn tại!");
+            request.setAttribute("authorList", dao.getAllAuthors());
+            request.getRequestDispatcher("/WEB-INF/authors.jsp").forward(request, response);
+            return;
+        }
+
+        // Tạo mới
         Authors author = new Authors();
         author.setName(name);
         author.setBio(bio);
 
-        // Gọi DAO để lưu vào DB
-        AuthorsDAO dao = new AuthorsDAO();
-        dao.createAuthor(author);
-
-        // Quay lại trang danh sách
-        response.sendRedirect("authors");
-
+        boolean success = dao.createAuthor(author);
+        if (success) {
+            // Lưu thông báo vào session để hiển thị sau redirect
+            request.getSession().setAttribute("successMessage", "Thêm tác giả thành công!");
+            response.sendRedirect("authors"); // redirect để load lại danh sách
+        } else {
+            request.setAttribute("errorMessage", "Thêm tác giả thành công!");
+            request.setAttribute("authorList", dao.getAllAuthors());
+            request.getRequestDispatcher("/WEB-INF/authors.jsp").forward(request, response);
+        }
     }
 
     private void deleteAuthor(HttpServletRequest request, HttpServletResponse response)
@@ -161,6 +183,9 @@ public class AuthorsServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String bio = request.getParameter("bio");
+
+        name = name.trim();
+        bio = bio.trim();
 
         Authors author = new Authors();
         author.setId(id);

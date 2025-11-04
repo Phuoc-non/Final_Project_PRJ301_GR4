@@ -139,7 +139,7 @@ $(document).ready(function () {
         const sku = $(this).data('sku');
 
         deleteItem(sku);
-        $(this).text('delete success');
+        
     });
 
     // Nút trừ

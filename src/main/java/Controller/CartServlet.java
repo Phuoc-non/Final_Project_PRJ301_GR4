@@ -118,7 +118,7 @@
                             int rs2 = cartDAO.updateCart(cart.getUsername());
                             if (rs == 0 || rs2 == 0) {
                                 System.out.println("Can't add =((");
-                                response.getWriter().write("errol");
+                                response.getWriter().write("error");
                             } else {
                                 System.out.println("Add book succesfull ");
                                 response.getWriter().write("Add book succesfull ");
@@ -127,7 +127,7 @@
                         else if (cartItem == null) {
                             int rs = cartDAO.createCartItem(cart.getId(), sku, Integer.parseInt(quantity));
                             if (rs == 0) {
-                                response.getWriter().write("errol");
+                                response.getWriter().write("error");
                                 System.out.println("errol");
                             } else {
                                 response.getWriter().write("Add book succesfull");
