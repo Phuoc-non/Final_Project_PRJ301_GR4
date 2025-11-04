@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import model.Book;
 import model.Category;
@@ -67,8 +68,10 @@ public class AllBookServlet extends HttpServlet {
         String keyword = request.getParameter("keyword");
         String type = request.getParameter("type");
         String sortBy = request.getParameter("sortBy");
+        String cate = request.getParameter("cate");
         List<Book> list;
-
+        
+        List<Book> list2 = dao.getAllBook();//dùng để hiển thị số lượng caategory
         // Ưu tiên tìm kiếm trước
         if (keyword != null && !keyword.trim().isEmpty()) {
             if ("author".equals(type)) {
@@ -80,13 +83,18 @@ public class AllBookServlet extends HttpServlet {
             list = dao.getBooksSortedByName();
         } else if ("price".equals(sortBy)) {
             list = dao.getBooksSortedByPrice();
-        } else {
+        } else if (cate.isEmpty() || cate == null) {
+           
             list = dao.getAllBook();
+        } else {
+           
+            list = dao.getBookCate(cate);
         }
 
         List<Category> categories = dao.getAllCategories();
 
         request.setAttribute("list", list);
+        request.setAttribute("list2", list2);
         request.setAttribute("categories", categories);
         request.setAttribute("keyword", keyword);
         request.setAttribute("type", type);

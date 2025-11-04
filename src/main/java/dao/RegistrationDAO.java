@@ -25,6 +25,10 @@ import model.Registration;
  */
 public class RegistrationDAO extends DBContext {
 
+    public RegistrationDAO() {
+    }
+
+    
     public Registration login(String username, String password) {
         try {
             String sql = "select * from Registration where username = ? and password = ?";

@@ -313,7 +313,7 @@
                                         <li><a href="cutomer">Customer</a></li>
                                         <li><a href="contactus.html">Order</a></li>
                                             <% } else { %>
-                                        <li><a href="ab">AllBook</a></li>
+                                        <li><a href="ab?cate"  >AllBook</a></li>
                                             <% }%>
                                     </ul>
                                 </div>

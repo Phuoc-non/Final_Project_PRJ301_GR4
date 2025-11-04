@@ -350,6 +350,50 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
+     public List<Book> getBookCate(String nameCate) {
+        try {
+            List<Book> list = new ArrayList<>();
+            String query = """
+                                       SELECT
+                                                   p.sku,
+                                                   p.name AS product_name,
+                                                   p.img,
+                                                   p.price AS price_vnd,
+                                                 p.quantity -COALESCE(SUM(od.quantity), 0) AS remaining_quantity,
+                                                   p.description,
+                                                  pd.id,
+                                                   c.name AS category_name,
+                                                   a.name AS author_name,
+                                                  COALESCE(SUM(od.quantity), 0) AS sold
+                                               FROM Product p
+                                               LEFT JOIN Product_Author pa ON p.sku = pa.product_sku
+                                               LEFT JOIN Author a ON pa.author_id = a.id
+                                               LEFT JOIN Category c ON p.category_id = c.id
+                                               LEFT JOIN OrderDetails od ON p.sku = od.sku
+                                               left join productDetail pd on pd.product_sku=p.sku
+                                               where c.name = ?
+                                               GROUP BY p.sku, p.name, p.img, c.name, a.name, p.price, p.quantity,p.description,pd.id
+                                               ORDER BY p.sku ASC;
+                                   """;
+            PreparedStatement st = this.getConnection().prepareStatement(query);
+            st.setString(1, nameCate);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                
+                ProductDetail p = new ProductDetail(rs.getInt("id"));
+                list.add(new Book(rs.getString("sku"),rs.getString("img"),rs.getString("product_name"),
+                        rs.getDouble("price_vnd"), rs.getInt("remaining_quantity"), rs.getString("category_name"),
+                        rs.getString("author_name"), rs.getInt("sold"), p));
+                
+            }
+            
+            return list;
+        } catch (SQLException ex) {
+            System.getLogger(ProductDAO.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return null;
+    }
+    
     public List<Book> searchBookByTitle(String title) {
         List<Book> list = new ArrayList<>();
         String query = """

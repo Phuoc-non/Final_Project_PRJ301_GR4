@@ -62,10 +62,10 @@
                                             <figure class="tg-featureimg">
                                                 <div class="tg-bookimg">
                                                     <div class="tg-frontcover">
-                                                        <img src="<%= b.getImg() %>" alt="<%= b.getImg() %>" style="width:180px; height:240px; object-fit:cover;">
+                                                        <img src="<%= b.getImg()%>" alt="<%= b.getImg()%>" style="width:180px; height:240px; object-fit:cover;">
                                                     </div>
                                                     <div class="tg-backcover">
-                                                        <img src="<%= b.getImg() %>" alt="<%= b.getImg() %>" style="width:180px; height:240px; object-fit:cover;">
+                                                        <img src="<%= b.getImg()%>" alt="<%= b.getImg()%>" style="width:180px; height:240px; object-fit:cover;">
                                                     </div>
                                                 </div>
                                             </figure>
@@ -107,7 +107,7 @@
                                         <p>Không có sản phẩm nào.</p>
                                     </div>
                                     <% }%>
-                                   
+
                                 </div>
 
 
@@ -138,27 +138,34 @@
                         </aside> 
                         <div class="tg-widget tg-catagories"> <br>
                             <div class="tg-widgettitle">
-                                <h3>Thể loại</h3>
-                            </div>
-                            <div class="tg-widgetcontent">
-                                <ul style="padding-left:0; margin:0;">
+                                <a  class="" href="ab?cate"> <h3>Thể loại</h3></a>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <ul style="padding-left:0; margin:0;">
                                     <c:forEach var="c" items="${categories}">
                                         <!-- khởi tạo count = 0 -->
                                         <c:set var="count" value="${0}" />
 
                                         <!-- duyệt danh sách sách và tăng count khi trùng thể loại -->
-                                        <c:forEach var="b" items="${list}">
+                                        <c:forEach var="b" items="${list2}">
                                             <c:if test="${not empty b.category_name and b.category_name == c.name}">
                                                 <c:set var="count" value="${count + 1}" />
                                             </c:if>
                                         </c:forEach>
 
                                         <!-- hiển thị tên category và số lượng (canh phải) -->
-                                        <li style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; list-style:none; border-bottom: 1px solid #f0f0f0;">
-                                            <a href="#" style="text-decoration:none; color:inherit;">
+                                        <c:url var="cateUrl" value="/ab">
+                                            <c:param name="cate" value="${c.name}" />
+                                        </c:url>
+
+                                        <!-- hiển thị tên category và số lượng -->
+                                        <li style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; list-style:none; border-bottom:1px solid #f0f0f0;">
+                                            <a href="${cateUrl}" style="text-decoration:none; color:inherit;">
                                                 ${c.name}
                                             </a>
-                                            <span style="font-size:0.9rem; color:#666;">${count}</span>
+                                            <span style="font-size:0.9rem; color:#666;">
+                                                ${count}
+                                            </span>
                                         </li>
                                     </c:forEach>
                                 </ul>
