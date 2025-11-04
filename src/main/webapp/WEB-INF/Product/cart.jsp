@@ -1,7 +1,7 @@
-    <%-- 
-    Document   : productdetail
-    Created on : Oct 15, 2025, 2:33:11 PM
-    Author     : Asus
+<%-- 
+Document   : productdetail
+Created on : Oct 15, 2025, 2:33:11 PM
+Author     : Asus
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../includes/headerTotal.jsp" %>
@@ -37,13 +37,13 @@
                                         <thead>
 
                                             <tr>
-                                                <th>STT</th>
-                                                <th>Tên sách</th>
-                                                <th>Hình ảnh</th>
-                                                <th>đơn giá</th>
-                                                <th>Số lương</th>
-                                                <th>Thành tien</th> 
-                                                <th>Hành động</th>
+                                                <th>No.</th>
+                                                <th>Book name</th>
+                                                <th>Image</th>
+                                                <th>Selling price</th>
+                                                <th>Quantity</th>
+                                                <th>Total</th> 
+                                                <th>Action</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -55,8 +55,9 @@
 
                                                         <td>${count}</td>
                                                     <td>${item.getProduct().bookName}</td>
+
                                                     <td><img src="${item.getProduct().img}" alt="image description" style="height: 100px;"></td>
-                                                    <td style="font-size : 15px"></td>
+                                                    <td style="font-size : 15px">${item.getProduct().price} $</td>
                                                     <td class="tg-quantityholder">
                                                         <em class="minus">-</em>
                                                         <input type="text" value="${item.quantity}" class="quan" data-max="${item.getProduct().quantity}" data-sku="${item.sku}" data-price="${item.getProduct().price}" style="width: 80px; margin-top: 5px;">
@@ -67,19 +68,21 @@
                                                     <td class="total">${item.quantity * item.getProduct().price} $</td>
                                                     <td>
                                                         <a href="">
-                                                            <button type="button" class="btn btn-danger delete" data-sku="${item.sku}" style="width: 80px;">Xóa</button>
-                                                        </a>
+                                                            <button type="button" class="btn btn-danger delete" data-sku="${item.sku}" style="width: 80px;">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </button>
+                                                        </a> 
                                                     </td>
 
                                                 </tr>  
                                             </c:forEach>
-                                            
-                                        <c:if test="${not empty listCartItem}">
-                                            <tr><td colspan="7">
-                                                    <button  class="btn btn-primary"  style="background: green; width: 200px; margin-bottom: 5px; margin-top: 5px;  " 
-                                                             type="submit">Đặt hàng</button>
-                                                </td></tr>
-                                            </c:if>           
+
+                                            <c:if test="${not empty listCartItem}">
+                                                <tr><td colspan="7">
+                                                        <button  class="btn btn-primary"  style="background: green; width: 200px; margin-bottom: 5px; margin-top: 5px;  " 
+                                                                 type="submit">Đặt hàng</button>
+                                                    </td></tr>
+                                                </c:if>           
 
 
                                         </tbody>

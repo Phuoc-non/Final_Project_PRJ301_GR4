@@ -15,8 +15,7 @@ public class Book {
     private String name_product;
     private double price_product; 
     private int quantity_product; // số lượng này là số lượng tồn(product) phải trừ số lượng đã bán(orderDetails) qua sku
-    private String description;
-    
+    private String description;   
     //Lấy từ bảng category thuộc tính: name
     private String category_name;
     
@@ -28,7 +27,7 @@ public class Book {
     private ProductDetail productDetail;
     public Book() {
     }
-
+    
     public Book(String sku_product, String img, String name_product, double price_product, int quantity_product, 
             String category_name, String author_name, int quantity_orderDetail,ProductDetail productDetail) {
         this.sku_product = sku_product;
@@ -41,7 +40,7 @@ public class Book {
         this.quantity_orderDetail = quantity_orderDetail;
         this.productDetail=productDetail;
     }
-
+    
     public ProductDetail getProductDetail() {
         return productDetail;
     }

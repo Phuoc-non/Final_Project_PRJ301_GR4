@@ -15,6 +15,7 @@ import model.Cart;
 import model.CartItem;
 import model.ProductDetail;
 import model.Registration;
+import model.UserReview;
 import org.eclipse.tags.shaded.org.apache.bcel.generic.AALOAD;
 
 public class TestLogin {
@@ -35,28 +36,39 @@ public class TestLogin {
 //        } else {
 //            System.out.println("Login fail!");
 //        }
-       CartDAO cd= new CartDAO();
-       
+        CartDAO cd = new CartDAO();
+        HomeDAO h = new HomeDAO();
+        HomeDAO dao = new HomeDAO();
+        List<Book> list = dao.getTop6Books();
+
 //        
 //        Cart c= cd.getCart("duyduc");
-        CartItem ci=cd.getCartItem(12, "BOOK01");
+//        CartItem ci=cd.getCartItem(12, "BOOK01");
 //        int n=cd.createCartItem(2, "BOOK02", 4);
 //        int up=cd.updateCartItem(2, "BOOK02", 20);
 //        List<CartItem> l= cd.cartAll(1);
-
 //           int n=cd.deleteCartItem(1, "BOOK01");
 //           ProductDetailDao pd= new ProductDetailDao();
 //           ProductDetail p=pd.getById(1);
 //            ProductDAO p=new ProductDAO();
-//            List<Book> list = p.getAllBook();
-        if (ci!=null){
-           
-          System.out.println("Dat AN CUC");
-           
-        }
-        else {
-        System.out.println("AN CUC");
+        List<Book> ci = h.getTop6Books();
+        List<UserReview> rating = null;
+        ReviewDao rd=new ReviewDao();
+            rating= rd.getAll(); 
+        if (ci != null) {
+            for (Book book : list) {
+            
+                System.out.println("----------");
+            for (UserReview userReview : rating) {
+                if(book.getSku_product().equals(userReview.getSku()))
+                System.out.println(userReview.getRating()+userReview.getSku());
+            }
+        }           
+            System.out.println("Dat AN CUC");
+
+        } else {
+            System.out.println("AN CUC");
 //             System.out.println(cart1.getCartId());
         }
-                }
+    }
 }
