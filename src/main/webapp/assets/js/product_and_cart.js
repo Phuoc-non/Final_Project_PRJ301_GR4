@@ -33,7 +33,7 @@ $(document).ready(function () {
                         Swal.fire({
                             position: 'top',
                             icon: 'error',
-                            title: data,
+                            title: "Please login to add products to cart",
                             showConfirmButton: false,
                             timer: 1500
                         });
@@ -230,7 +230,7 @@ $(document).ready(function () {
                         Swal.fire({
                             position: 'top',
                             icon: 'error',
-                            title: data,
+                            title: "Please login to add products to cart",
                             showConfirmButton: false,
                             timer: 1500
                         });

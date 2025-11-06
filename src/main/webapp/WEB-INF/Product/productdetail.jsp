@@ -20,8 +20,8 @@
                 <div class="tg-innerbannercontent">
                     <h1>All Products</h1>
                     <ol class="tg-breadcrumb">
-                        <li><a href="javascript:void(0);">home</a></li>
-                        <li><a href="${pageContext.request.contextPath}/assets/product.jsp">Products</a></li>
+                        <li><a href="book">home</a></li>
+                        <li><a href="ab?cate">Products</a></li>
                         <li class="tg-active">Product Title Here</li>
                     </ol>
                 </div>  
@@ -67,11 +67,11 @@
                                                 </ul>
                                                 <div class="tg-quantityholder">
 
-                                                    <p>Số lượng</p>
+                                                    <p>Quantity</p>
                                                     <em class="minus">-</em>
                                                     <input type="text" class="result" value="1" id="quantity1" name="quantity" data-max="${productdetail.getProduct().quantity}">
                                                     <em class="plus">+</em> 
-                                                    <p id="quantitymax">${productdetail.getProduct().quantity} sản phẩm có sẵn</p>   
+                                                    <p id="quantitymax">${productdetail.getProduct().quantity} products available</p>   
                                                 </div>
 
                                                 <a class="tg-btn tg-active tg-btn-lg add" style="cursor: pointer"  id="addToBasket" data-sku="${productdetail.getProduct().sku}">Add To Basket</a>
@@ -82,13 +82,13 @@
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
 
                                         <ul class="tg-bookscategories">
-                                            <li><a href="javascript:void(0);">${productdetail.getCategory().name}</a></li>
+                                            <li>${productdetail.getCategory().name}</li>
                                         </ul>
                                         <!--                                        <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>-->
                                         <div class="tg-booktitle">
                                             <h2>${productdetail.bookName}</h2>
                                         </div>
-                                        <span class="tg-bookwriter">By: <a href="javascript:void(0);">${productdetail.getAuthor().name}</a></span>
+                                        <span class="tg-bookwriter">By: ${productdetail.getAuthor().name}</span>
                                         <!--                                            <span class="tg-stars"><span></span></span>-->
                                         <%--    <c:set  var="avrRating" value="0"></c:set>
                                         <c:set  var="count" value="0"></c:set>
@@ -160,7 +160,6 @@
                                             %>
                                             <span class="ml-2">(<%= String.format("%.1f", avgRating)%>/5)</span>
                                         </div>
-                                        <span class="tg-addreviews"><a href="javascript:void(0);">Add Your Review</a></span>
 
                                         <div class="tg-description">
                                             <p></p>
@@ -210,7 +209,7 @@
         <div class="tg-aboutauthor">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 120px; margin-top: 30px">
                 <div class="tg-sectionhead" style="margin-left: 20px">
-                    <h2>Đánh giá</h2>
+                    <h2>Reviews</h2>
                 </div>
 
                 <div class="tg-authorbox">
@@ -250,7 +249,7 @@
 
 
                 <form method="post" action="${pageContext.request.contextPath}/ReviewServlet">
-                    <h4>Đánh giá của bạn</h4>
+                    <h4>Your review</h4>
 
                     <!-- chọn sao -->
                     <div id="rating" style="font-size:26px;cursor:pointer;color:#ccc;">
@@ -264,7 +263,7 @@
                     <input type="hidden" name="star" id="stars_submit">
                     <input type="hidden" name="id" value="${param.productId}">
                     <!-- lấy thẳng id trên thanh url -->
-                    <textarea name="content" placeholder="Nhập đánh giá..." 
+                    <textarea name="content" placeholder="Enter review..." 
                               style="width:100%;height:100px;resize:none;margin-top:10px;"></textarea>
                     <br>
                     <input type="submit" value="Submit" class="btn btn-warning" style="margin-top: 30px; padding: 10px">

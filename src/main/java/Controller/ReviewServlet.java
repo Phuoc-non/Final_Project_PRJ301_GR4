@@ -65,11 +65,11 @@ public class ReviewServlet extends HttpServlet {
                     response.sendRedirect(getServletContext().getContextPath()+"/ProductDetail?productId="+id);
                 }
                 } else {                  
-                    request.setAttribute("Error", "StarErrol");
+                    request.setAttribute("Error", "Please login to use the shopping cart");
                     request.getRequestDispatcher("/assets/404errol.jsp").forward(request, response);
                 }
             } else {
-                request.setAttribute("Error", "UserErrol");
+                request.setAttribute("Error", "Please login to rate this product");
                 request.getRequestDispatcher("/assets/404errol.jsp").forward(request, response);
             }
         } else {

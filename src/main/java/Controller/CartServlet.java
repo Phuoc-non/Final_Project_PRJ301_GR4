@@ -141,7 +141,7 @@
                     response.getWriter().write("Loi cart ko ton tai, hien chua bt cach thong bao 😓");
                 }
             } else {
-                response.getWriter().write("Loi cart ko ton tai, hien chua bt cach thong bao 😓");
+               response.getWriter().write("error");
 
             }
         }

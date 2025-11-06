@@ -6,9 +6,7 @@ package Controller;
 
 import dao.ProductDetailDao;
 import dao.ReviewDao;
-import jakarta.persistence.metamodel.SetAttribute;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

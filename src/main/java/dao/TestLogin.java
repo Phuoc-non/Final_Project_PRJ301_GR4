@@ -61,8 +61,9 @@ public class TestLogin {
                 System.out.println("----------");
             for (UserReview userReview : rating) {
                 if(book.getSku_product().equals(userReview.getSku()))
-                System.out.println(userReview.getRating()+userReview.getSku());
+                System.out.println(userReview.getRating()+userReview.getSku()+userReview.getComment()+userReview.getUserName());
             }
+            break;
         }           
             System.out.println("Dat AN CUC");
 

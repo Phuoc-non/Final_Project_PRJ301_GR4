@@ -80,7 +80,7 @@ Author     : Asus
                                         <c:if test="${not empty listCartItem}">
                                             <tr><td colspan="7">
                                                     <form action="http://localhost:8080/Lib/order" method="doget">
-                                                        <input type="submit" name="submit" value="đặt hàng"class="btn btn-primary">  
+                                                        <input type="submit" name="submit" value="order"class="btn btn-primary">  
                                                         <input type="hidden" name="listItem" value="${listCartItem}">
                                                     </form>
                                                 </td></tr>

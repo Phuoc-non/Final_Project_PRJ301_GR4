@@ -40,21 +40,21 @@ public class BookServlet extends HttpServlet {
         List<Book> list = dao.getTop6Books();
         ReviewDao rd = new ReviewDao();
         List<UserReview> rating = rd.getAll();
-        for (Book book : list) {
-             double avgRating = 0;
-              int sum = 0;
-              int count=0;
-                System.out.println("----------");
-            for (UserReview userReview : rating) {
-                if(book.getSku_product().equals(userReview.getSku())){
-                    sum += userReview.getRating();
-                    System.out.println(userReview.getRating()+userReview.getSku());
-                    count+=1;
-                }
-                avgRating = (double) sum / count;
-                System.out.println(avgRating);
-            }
-        }
+//        for (Book book : list) {
+//             double avgRating = 0;
+//              int sum = 0;
+//              int count=0;
+//                System.out.println("----------");
+//            for (UserReview userReview : rating) {
+//                if(book.getSku_product().equals(userReview.getSku())){
+//                    sum += userReview.getRating();
+//                    System.out.println(userReview.getRating()+userReview.getSku());
+//                    count+=1;
+//                }
+//                avgRating = (double) sum / count;
+//                System.out.println(avgRating);
+//            }
+//        }
         request.setAttribute("rw", rating);
         request.setAttribute("bookList", list);
         Book top1 = dao.getTop1Books();

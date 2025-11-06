@@ -1685,7 +1685,8 @@ li.menu-item-has-mega-menu { position: static; }
 	float: left;
 	position: relative;
 }
-.tg-frontcover:before{
+.tg-frontcover:before{    
+        
 	top: 0;
 	left: 0;
 	z-index: 3;
@@ -1710,6 +1711,8 @@ li.menu-item-has-mega-menu { position: static; }
 		rgba(0,0,0,0) 13%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#00000000',GradientType=1 );
 }
+
+
 .tg-backcover {
 	top: 2%;
 	left: 0;

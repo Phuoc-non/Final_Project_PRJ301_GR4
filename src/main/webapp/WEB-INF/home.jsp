@@ -15,7 +15,7 @@
                 <div class="tg-sectionhead" >
                     <div style="width: 1145px">                   
                         <h2><span>People’s Choice</span>Bestselling Books</h2>
-                        <a class="tg-btn" href="javascript:void(0); ">View All</a>
+                        <a class="tg-btn" href="ab?cate  ">View All</a>
                     </div> 
                 </div>
             </div>
@@ -36,19 +36,22 @@
                         <div class="tg-postbook d-flex flex-column justify-content-between h-100 p-3 border rounded bg-white shadow-sm" style="min-height: 520px;">
 
                             <!-- Hình ảnh -->
-                            <figure class="tg-featureimg text-center mb-3">
-                                <div class="tg-bookimg position-relative">
-                                    <div class="tg-frontcover">
-                                        <img src="<%=b.getImg()%>" alt="<%=b.getAuthor_name()%>" class="img-fluid" style="width:180px; height:240px; object-fit:cover;">
-                                    </div>
-                                </div>
-                            </figure>
+                            <a href="http://localhost:8080/Lib/ProductDetail?productId=<%=b.getProductDetail().getId()%>" class="text-dark">
+                                <figure class="tg-featureimg text-center mb-3">
+                                    <div class="tg-bookimg position-relative">
+                                        <div class="tg-frontcover">       
 
+                                            <img src="<%=b.getImg()%>" alt="<%=b.getName_product()%>" class="img-fluid" style="width:180px; height:240px; object-fit:cover;"> 
+
+                                        </div>
+                                    </div>
+                                </figure>
+                            </a>
                             <!-- Nội dung -->
                             <div class="tg-postbookcontent d-flex flex-column flex-grow-1 justify-content-between">
                                 <div>
                                     <ul class="tg-bookscategories list-unstyled mb-1">
-                                        <li><a href="#"><%=b.getCategory_name()%></a></li>
+                                        <li><%=b.getCategory_name()%></li>
                                     </ul>
 
                                     <!-- Tên sản phẩm -->
@@ -67,17 +70,17 @@
                                     <%
 
                                         double avgRating = 0;
-                                        
+
                                         if (ratings != null && !ratings.isEmpty()) {
                                             int sum = 0;
-                                            int count=0;
+                                            int count = 0;
                                             for (UserReview r : ratings) {
                                                 if (r.getSku().equals(b.getSku_product())) {
                                                     sum += r.getRating();
-                                                    count+=1;
+                                                    count += 1;
                                                 }
-                                            }                                         
-                                                avgRating = (double) sum / count;                                          
+                                            }
+                                            avgRating = (double) sum / count;
                                         }
                                     %>
 
@@ -112,7 +115,7 @@
                                           white-space: nowrap;
                                           text-overflow: ellipsis;
                                           display: block;">
-                                        By: <a href="#"><%=b.getAuthor_name()%></a>
+                                        By: <%=b.getAuthor_name()%>
                                     </span>
                                 </div>
 
@@ -134,10 +137,10 @@
                                         <%=b.getDescription()%>
                                     </p>
 
-                                    <a class="tg-btn tg-btnstyletwo btn btn-outline-primary btn-block" href="javascript:void(0);">
+                                    <div class="tg-btn tg-btnstyletwo btn btn-outline-primary btn-block">
                                         <i class="fa fa-shopping-basket"></i>
-                                        <em class="quan1" data-sku="<%=b.getSku_product()%>" style="cursor: pointer">Thêm Vào Giỏ</em>
-                                    </a>
+                                        <em class="quan1" data-sku="<%=b.getSku_product()%>" style="cursor: pointer">Add to card</em>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -171,25 +174,70 @@
         <div class="row">
             <div class="tg-featureditm">
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-sm hidden-xs">
+                    <a href="http://localhost:8080/Lib/ProductDetail?productId=${Top1.getProductDetail().id}">
                     <figure><img src="${Top1.img}" alt="image description" style="width: 240px"></figure>
+                    </a>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                     <div class="tg-featureditmcontent">
                         <div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
                         <div class="tg-booktitle">
-                            <h3><a href="javascript:void(0);">Things To Know About Green Flat Design</a></h3>
+                            <h3><a href="http://localhost:8080/Lib/ProductDetail?productId=${Top1.getProductDetail().id}">${Top1.name_product}</a></h3>
                         </div>
-                        <span class="tg-bookwriter">By: <a href="javascript:void(0);">Farrah Whisenhunt</a></span>
-                        <span class="tg-stars"><span></span></span>
+                        <span class="tg-bookwriter">By: ${Top1.author_name}</span>
+                            <%
+                                if (list != null && !list.isEmpty()) {
+                                    for (Book b : list) {
+                                        double avgRating = 0;
+
+                                        if (ratings != null && !ratings.isEmpty()) {
+                                            int sum = 0;
+                                            int count = 0;
+                                            for (UserReview r : ratings) {
+                                                if (r.getSku().equals(b.getSku_product())) {
+                                                    sum += r.getRating();
+                                                    count += 1;
+                                                }
+                                            }
+                                            avgRating = (double) sum / count;
+                                        }
+
+                            %>
+                        <div>
+                            <%                                int fullStars = (int) Math.floor(avgRating);
+                                boolean halfStar = (avgRating - fullStars) >= 0.5;
+                                for (int i = 1; i <= 5; i++) {
+                                    if (i <= fullStars) {//in ra số sao đầy
+                            %>
+                            <i class="fas fa-star text-warning" style="color:#FFD700"></i>
+                            <%
+                            } else if (halfStar && i == fullStars + 1) {// in ra số sao nửa
+                            %>
+                            <i class="fas fa-star-half-alt text-warning" style="color:#FFD700"></i>
+                            <%
+                            } else {// in ra số sao rỗng
+                            %>
+                            <i class="far fa-star text-warning"></i>
+
+                            <span class="ml-2">(<%= String.format("%.1f", avgRating)%>/5)</span>
+                        </div>
+                        <%
+                                        }
+                                    }
+                                    break;
+                                }
+
+                            }
+                        %>
                         <div class="tg-priceandbtn">
                             <span class="tg-bookprice">
-                                <ins>$23.18</ins>
-                                <del>$30.20</del>
+                                <ins>${Top1.price_product}$</ins>
+
                             </span>
-                            <a class="tg-btn tg-btnstyletwo tg-active" href="javascript:void(0);">
+                            <div class="tg-btn tg-btnstyletwo tg-active">
                                 <i class="fa fa-shopping-basket"></i>
-                                <em>Add To Basket</em>
-                            </a>
+                                <em class="quan1" data-sku="${Top1.sku_product}" style="cursor: pointer">Add to card</em>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -204,34 +252,38 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-push-2">
                     <div id="tg-testimonialsslider" class="tg-testimonialsslider tg-testimonials owl-carousel">
-                        <div class="item tg-testimonial">
-                            <figure><img src="${pageContext.request.contextPath}/assets/images/author/imag-02.jpg" alt="image description"></figure>
-                            <blockquote><q>The book is very easy to understand, engaging from start to finish, and leaves many valuable lessons after reading.</q></blockquote>
-                            <div class="tg-testimonialauthor">
-                                <h3>Sophia Taylor</h3>
-                                <span>Marketing Specialist</span>
-                                <span class="tg-stars"><span></span></span>
+                        <%
+                            if (list != null && !list.isEmpty()) {
+                                for (Book b : list) {
+                                    for (UserReview r : ratings) {
+                                        if (r.getSku().equals(b.getSku_product())) {
 
-                            </div>
-                        </div>
-                        <div class="item tg-testimonial">
-                            <figure><img src="${pageContext.request.contextPath}/assets/images/author/chan-dung-nam2.jpg" alt="image description"></figure>
-                            <blockquote><q>Simple and relatable language, with vivid examples. I feel more mature after reading it.</q></blockquote>
+                        %>
+                        <div class="item tg-testimonial">                                                   
+                            <figure><img src="${pageContext.request.contextPath}/assets/images/users/icon.jpg" alt="image description"></figure>
+                            <blockquote><q><%= r.getComment()%></q></blockquote>
                             <div class="tg-testimonialauthor">
-                                <h3>Robert Miller</h3>
-                                <span>Photographer</span>
-                                <span class="tg-stars"><span></span></span>
+                                <h3><%=r.getUserName()%></h3>
+                                <div style="text-align: center">
+
+
+                                    <% for (int i = 1; i <= r.getRating(); i++) {
+                                    %>                                              
+                                    <i class="fas fa-star text-warning" style="color:#FFD700"  ></i >
+
+                                    <%}%>
+
+                                </div>
                             </div>
                         </div>
-                        <div class="item tg-testimonial">
-                            <figure><img src="${pageContext.request.contextPath}/assets/images/author/chan-dung-nam3.jpg" alt="image description"></figure>
-                            <blockquote><q>A must-have book for your shelf – both useful and inspiring. I finished it in just two days.</q></blockquote>
-                            <div class="tg-testimonialauthor">
-                                <h3>James Wilson</h3>
-                                <span>Lawyer</span>
-                                <span class="tg-stars"><span></span></span>
-                            </div>
-                        </div>
+                        <%
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                        %>
+
                     </div>
                 </div>
             </div>
@@ -239,7 +291,7 @@
     </div>
 </section>
 
-</main>
+
 
 <!--************************************
                 Main End
