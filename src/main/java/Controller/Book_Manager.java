@@ -69,19 +69,9 @@ public class Book_Manager extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String view = request.getParameter("view");
-        String sortBy = request.getParameter("sortBy"); // 🔹 nhận tham số sắp xếp
+
         ProductDAO dao = new ProductDAO();
         List<Product> list;
-
-        // 🔸 kiểm tra có yêu cầu sắp xếp không
-        if (sortBy != null && !sortBy.isEmpty()) {
-            list = dao.getListSorted(sortBy); // dùng ORDER BY trong DAO
-        } else {
-            list = dao.getList(); // mặc định
-        }
-
-        request.setAttribute("list", list);
-        request.setAttribute("sortBy", sortBy); // để JSP hiển thị chọn đúng
 
         // điều hướng view
         if ("create".equals(view)) {
@@ -109,10 +99,42 @@ public class Book_Manager extends HttpServlet {
             request.setAttribute("authors", authors);
             request.setAttribute("categories", categories);
             request.getRequestDispatcher("WEB-INF/CRUD_Book/update.jsp").forward(request, response);
-        } else {
-            // mặc định về list
+        } else if (view == null || view.isEmpty() || view.equals("list")) {
+            int pageSize = 10;
+            int currentPage = 1;
+            String pageParam = request.getParameter("page");
+            if (pageParam != null && !pageParam.isEmpty()) {
+                try {
+                    currentPage = Integer.parseInt(pageParam);
+                } catch (NumberFormatException e) {
+                    currentPage = 1;
+                }
+            }
+
+            String sortBy = request.getParameter("sortBy");
+            List<Product> allBooks;
+            if (sortBy != null && !sortBy.isEmpty()) {
+                allBooks = dao.getListSorted(sortBy);
+            } else {
+                allBooks = dao.getList();
+            }
+
+            int totalBooks = allBooks.size();
+            int totalPages = (int) Math.ceil((double) totalBooks / pageSize);
+
+            int start = (currentPage - 1) * pageSize;
+            int end = Math.min(start + pageSize, totalBooks);
+            List<Product> booksPerPage = allBooks.subList(start, end);
+
+            // ✅ Gửi dữ liệu sang JSP
+            request.setAttribute("list", booksPerPage);
+            request.setAttribute("currentPage", currentPage);
+            request.setAttribute("totalPages", totalPages);
+            request.setAttribute("sortBy", sortBy);
+
             request.getRequestDispatcher("WEB-INF/CRUD_Book/list.jsp").forward(request, response);
         }
+
     }
 
     /**

@@ -47,8 +47,8 @@
                                     <td>${loop.index + 1}</td>
                                     <td>${detail.productName}</td>
                                     <td>${detail.quantity}</td>
-                                    <td>${detail.price} VNĐ</td>
-                                    <td>${detail.subTotal} VNĐ</td>
+                                    <td>${detail.price} $</td>
+                                    <td>${detail.subTotal} $</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -82,7 +82,7 @@
                         </tr>
                         <tr>
                             <th>Tổng tiền</th>
-                            <td>${order.total} VNĐ</td>
+                            <td>${order.total} $</td>
                         </tr>
                         <tr>
                             <th>Trạng thái</th>

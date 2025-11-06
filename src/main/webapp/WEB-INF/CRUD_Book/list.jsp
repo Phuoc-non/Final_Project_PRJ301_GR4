@@ -55,8 +55,11 @@
                                     <div class="row">
                                         <table class="table table-bordered table-striped">
                                             <thead class="table-success">
-                                                <% List<Product> list = (List<Product>) request.getAttribute("list");
-                                                    int count = 1;
+                                                <%
+                                                    List<Product> list = (List<Product>) request.getAttribute("list");
+                                                    int currentPage = (int) request.getAttribute("currentPage");
+                                                    int pageSize = 10; // phải trùng với servlet
+                                                    int count = (currentPage - 1) * pageSize + 1;
                                                 %>
                                                 <tr>
                                                     <th>No.</th>
