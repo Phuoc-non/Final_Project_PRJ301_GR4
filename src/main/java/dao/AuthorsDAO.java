@@ -57,8 +57,8 @@ public class AuthorsDAO extends DBContext {
         try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
             ps.setString(1, author.getName().trim());
             ps.setString(2, author.getBio().trim());
-            ps.executeUpdate();
-            System.out.println("Thêm tác giả thành công!");
+            int rows = ps.executeUpdate();
+            return rows > 0; // Trả về true nếu thêm thành công
         } catch (SQLException e) {
             Logger.getLogger(AuthorsDAO.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -66,15 +66,15 @@ public class AuthorsDAO extends DBContext {
     }
 //check trùng
 
-    public boolean checkDuplicateAuthorname(String name) {
-        String checkDuplicateAuthorname = "SELECT COUNT(*) FROM Author WHERE name = ?";
+    public boolean checkDuplicateAuthorname(String name, int excludeId) {
+        String sql = "SELECT COUNT(*) FROM Author WHERE name = ? AND id != ?";
         try {
-            PreparedStatement ps = this.getConnection().prepareStatement(checkDuplicateAuthorname);
+            PreparedStatement ps = this.getConnection().prepareStatement(sql);
             ps.setString(1, name.trim());
+            ps.setInt(2, excludeId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return rs.getInt(1) > 0;
-
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -83,29 +83,31 @@ public class AuthorsDAO extends DBContext {
     }
 
     // Cập nhật thông tin tác giả
-    public void editAuthor(Authors author) {
+    public boolean editAuthor(Authors author) {
         String sql = "UPDATE Author SET name = ?, bio = ? WHERE id = ?";
         try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
             ps.setString(1, author.getName());
             ps.setString(2, author.getBio());
             ps.setInt(3, author.getId());
-            ps.executeUpdate();
-            System.out.println("Cập nhật tác giả thành công!");
+            int rows = ps.executeUpdate();
+            return rows > 0;
         } catch (SQLException e) {
             Logger.getLogger(AuthorsDAO.class.getName()).log(Level.SEVERE, null, e);
         }
+        return false;
     }
 
     // Xóa tác giả theo ID
-    public void deleteAuthor(int id) {
+    public boolean deleteAuthor(int id) {
         String sql = "DELETE FROM Author WHERE id = ?";
         try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
             ps.setInt(1, id);
-            ps.executeUpdate();
-            System.out.println("Xóa tác giả thành công!");
+            int rows = ps.executeUpdate();
+            return rows > 0;
         } catch (SQLException e) {
             Logger.getLogger(AuthorsDAO.class.getName()).log(Level.SEVERE, null, e);
         }
+        return false;
     }
 
     List<Orders> getOrders() {
