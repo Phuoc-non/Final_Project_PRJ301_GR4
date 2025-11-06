@@ -82,12 +82,19 @@
                                 <td><fmt:formatDate value="${author.created_at}" pattern="dd/MM/yyyy" /></td>
                                 <td><fmt:formatDate value="${author.updated_at}" pattern="dd/MM/yyyy" /></td>
 
-                                <td>
-                                    <button type="button" class="btn btn-warning" data-toggle="modal"
-                                            data-target="#myModal_edit${author.id}">Sửa
+                                <td class="text-center">
+                                    <!-- NÚT SỬA: BÚT + VỞ -->
+                                    <button type="button" class="btn btn-warning btn-sm" 
+                                            data-toggle="modal" data-target="#myModal_edit${author.id}"
+                                            title="Sửa tác giả">
+                                        <i class="fa fa-pencil-square-o"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#myModal_delete${author.id}">Xóa
+
+                                    <!-- NÚT XÓA: THÙNG RÁC -->
+                                    <button type="button" class="btn btn-danger btn-sm" 
+                                            data-toggle="modal" data-target="#myModal_delete${author.id}"
+                                            title="Xóa tác giả">
+                                        <i class="fa fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
