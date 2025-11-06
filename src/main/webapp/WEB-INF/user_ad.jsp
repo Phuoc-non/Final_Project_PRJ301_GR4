@@ -94,11 +94,11 @@
                                                     <td><fmt:formatDate value="${p.datebuy}" pattern="dd/MM/yyyy"/></td>
                                                     <td>
                                                         <a href="<c:url value='/cutomer?view=edit-user&id=${p.registration.id}'/>"
-                                                           class="btn btn-warning">Detail</a>
-                                                        <button type="button" class="btn btn-danger"
+                                                           style="width: 60px;" class="btn btn-warning"> <i class="fa-solid fa-eye"></i></a>
+                                                           <button type="button" class="btn btn-danger" style="width: 60px;"
                                                                 data-toggle="modal"
                                                                 data-target="#myModal_delete${p.registration.id}">
-                                                            Delete
+                                                            <i class="fa fa-trash"></i>
                                                         </button>
                                                     </td>
                                                 </tr>
