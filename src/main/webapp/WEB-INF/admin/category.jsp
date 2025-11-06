@@ -44,7 +44,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body bg-info text-white p-3">
-                                                    <form method="POST" action="${pageContext.request.contextPath}/Category">
+                                                    <form method="POST" action="${pageContext.request.contextPath}/category">
                                                         <label><span style="color: red;">*</span> Category Name</label>
                                                         <input  type="text" name="name" pattern="[A-Za-z\s]+"
 
@@ -140,7 +140,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body bg-info text-white p-3">
-                                                            <form method="POST" action="${pageContext.request.contextPath}/Category">
+                                                            <form method="POST" action="${pageContext.request.contextPath}/category">
                                                                 <label><span style="color: red;">*</span> Category Name</label>
                                                                 <input  type="text" name="name"   required/>  <br/> <br/>
                                                                 <input    type="hidden" name="id" id="cateIdInput"/>
@@ -177,7 +177,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body" >
-                                                            <form  id="deleteButtons" method="POST" action="${pageContext.request.contextPath}/Category">
+                                                            <form  id="deleteButtons" method="POST" action="${pageContext.request.contextPath}/category">
                                                                 <input type="hidden" name="id" id="cateId">
 
 

@@ -44,7 +44,7 @@ public class PromotionDao extends DBContext {
 
             while (rs.next()) {
 
-                list.add(new Promotion(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getInt(9)));
+                list.add(new Promotion(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getInt(7), rs.getInt(8)));
 
             }
 
@@ -54,11 +54,11 @@ public class PromotionDao extends DBContext {
         }
         return list;
     }
-    public int create(String code, int discount, Date startDay, Date endDay, String description, int status, int minOrderValue,int quantity) {
+    public int create(String code, int discount, Date startDay, Date endDay, String description, int status, int minOrderValue) {
 
         try {
-            String query = " insert into Promotion (code,discount_percent, start_date, end_date,description,status,min_order_value,quantity)\n"
-                    + "  values (?,?,?,?,?,?,?,?);";
+            String query = " insert into Promotion (code,discount_percent, start_date, end_date,description,status,min_order_value)\n"
+                    + "  values (?,?,?,?,?,?,?);";
 
             Connection con = this.getConnection();
 
@@ -71,7 +71,7 @@ public class PromotionDao extends DBContext {
             statement.setString(5, description);
             statement.setInt(6, status);
             statement.setInt(7, minOrderValue);
-            statement.setInt(8, quantity);
+         
             return statement.executeUpdate();
 
         } catch (SQLException ex) {
@@ -84,7 +84,7 @@ public class PromotionDao extends DBContext {
 
         try {
             String sql = "UPDATE  Promotion \n"
-                    + "set  code =?,discount_percent = ?,description =?,min_order_value=?,quantity = ? \n"
+                    + "set  code =?,discount_percent = ?,description =?,min_order_value=? \n"
                     + "where id = ?";
             PreparedStatement statement = this.getConnection().prepareStatement(sql);
             statement.setString(1, code);
@@ -92,7 +92,7 @@ public class PromotionDao extends DBContext {
             statement.setString(3, description);
             statement.setInt(4, minOrderValue);
             statement.setInt(6, id);
-            statement.setInt(5, quantity);
+            
 
             return statement.executeUpdate();
         } catch (SQLException ex) {
@@ -145,8 +145,7 @@ public class PromotionDao extends DBContext {
             end_date,
             description,
             status,
-            min_order_value,
-            quantity
+            min_order_value
         FROM Promotion
         ORDER BY id
         OFFSET ? ROWS FETCH NEXT ? ROWS ONLY
@@ -186,10 +185,10 @@ public class PromotionDao extends DBContext {
                     double minOrderValueDouble = rs.getDouble("min_order_value");
                     int minOrderValue = (int) Math.round(minOrderValueDouble);
 
-                    int quantity = rs.getInt("quantity");
+                  
 
                     // Tạo đối tượng Promotion theo constructor của bạn
-                    Promotion promo = new Promotion(id, code, discount, startDay, endDay, description, status, minOrderValue, quantity);
+                    Promotion promo = new Promotion(id, code, discount, startDay, endDay, description, status, minOrderValue);
                     list.add(promo);
                 }
             }

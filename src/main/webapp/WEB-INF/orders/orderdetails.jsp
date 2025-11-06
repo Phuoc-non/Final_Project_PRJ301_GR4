@@ -41,18 +41,28 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <c:set var="oldTotal" value="0" />
                             <c:forEach var="detail" items="${orderDetails}" varStatus="loop">
                                 <tr>
                                     
                                     <td>${loop.index + 1}</td>
                                     <td>${detail.productName}</td>
                                     <td>${detail.quantity}</td>
-                                    <td>${detail.price} VNĐ</td>
-                                    <td>${detail.subTotal} VNĐ</td>
+                                    <td>${detail.price} $</td>
+                                    <td>${detail.subTotal} $</td>
                                 </tr>
+                                  <c:set var="oldTotal" value="${oldTotal + detail.subTotal}" />
                             </c:forEach>
                             </tbody>
                         </table>
+                        
+                         <h5 style="color: black; text-align: left; font-family: 'Arial', sans-serif; font-size: 18px; font-weight: bold; margin-top: 15px;">  
+                                Tổng giá gốc :
+                            <!-- Giá gốc -->
+                            <span id="old-total" style="text-decoration: none; color: green;">
+                               ${oldTotal} $
+                            </span>
+                         </h5>
                     </div>
                 </div>
 
@@ -81,8 +91,8 @@
                             <td>${order.datebuy}</td>
                         </tr>
                         <tr>
-                            <th>Tổng tiền</th>
-                            <td>${order.total} VNĐ</td>
+                            <th>Giá sau giảm</th>
+                            <td>${order.total} $</td>
                         </tr>
                         <tr>
                             <th>Trạng thái</th>

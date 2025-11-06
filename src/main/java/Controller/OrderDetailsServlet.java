@@ -23,7 +23,7 @@ public class OrderDetailsServlet extends HttpServlet {
 
         // Nếu chưa đăng nhập → quay lại login
         if (user == null) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("login");
             return;
         }
 

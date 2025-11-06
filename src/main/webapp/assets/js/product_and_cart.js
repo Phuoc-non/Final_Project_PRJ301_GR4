@@ -215,9 +215,10 @@ $(document).ready(function () {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: new URLSearchParams({
+                status: 'add',
                 sku: sku,
-                quantity: quantity,
-                status: 'add'
+                quantity: quantity
+                
             })
         })
 //                .then(res => res.text())

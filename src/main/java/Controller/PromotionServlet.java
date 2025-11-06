@@ -22,7 +22,7 @@ import model.Promotion;
  *
  * @author Admin
  */
-@WebServlet(name = "PromotionServlet", urlPatterns = {"/Promotion"})
+@WebServlet(name = "PromotionServlet", urlPatterns = {"/promotion"})
 public class PromotionServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -91,7 +91,7 @@ public class PromotionServlet extends HttpServlet {
                 int discount = Integer.parseInt(request.getParameter("discount"));
                 int minvalue = Integer.parseInt(request.getParameter("minValue"));
                 String description = request.getParameter("description");
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                
                 int status = 0;
                 Date today = new Date();
                 if (!today.before(sday) && !today.after(eday)) {
@@ -107,7 +107,7 @@ public class PromotionServlet extends HttpServlet {
 
                 } else {
 
-                    int checkCreate = dao.create(code, discount, sday, eday, description, status, minvalue, quantity);
+                    int checkCreate = dao.create(code, discount, sday, eday, description, status, minvalue);
                     if (checkCreate == 0) { // lỗi
                         request.setAttribute("messageType", "error");
                         request.setAttribute("message", "Add promotion failed! Please try again.");

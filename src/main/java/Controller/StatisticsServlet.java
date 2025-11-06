@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import DAO.StatisticsDAO;
+import dao.StatisticsDAO;
 import com.google.gson.Gson;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -18,7 +18,7 @@ import model.ChartData;
  *
  * @author Admin
  */
-@WebServlet(name = "StatisticsServlet", urlPatterns = {"/Statistics"})
+@WebServlet(name = "StatisticsServlet", urlPatterns = {"/statistics"})
 public class StatisticsServlet extends HttpServlet {
 
    

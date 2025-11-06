@@ -1,108 +1,46 @@
-Controller\CustomerSupportServlet.class
+Controller\CategoryServlet.class
 Controller\LoginServlet.class
-<<<<<<< HEAD
 model\CartItem.class
-dao\OrderDAO.class
 model\ProductDetail.class
-=======
->>>>>>> master
-Controller\AuthorsServlet.class
+Controller\ReviewServlet.class
+Controller\CartServlet.class
 Controller\RegisterServlet.class
+model\Cart.class
 dao\ProductDetailDao.class
-dao\CustomerDAO.class
-<<<<<<< HEAD
 Controller\StatisticsServlet.class
+dao\CartDAO.class
 Util\MD5Util.class
-=======
-<<<<<<< HEAD
-Controller\StatisticsServlet.class
-Util\MD5Util.class
-<<<<<<< HEAD
-Controller\OrderServlet.class
-com\mycompany\lib\JakartaRestConfiguration.class
-=======
 model\Orders.class
-<<<<<<< HEAD
-=======
-Util\MD5Util.class
->>>>>>> Phuoc
-=======
->>>>>>> Tinh
->>>>>>> master
+dao\OrdersDAO.class
+com\mycompany\lib\JakartaRestConfiguration.class
 Controller\ChangePasswordServlet.class
 Controller\OrderDetailsServlet.class
 model\Product.class
-<<<<<<< HEAD
-dao\RegistrationDAO.class
-dao\CategoryDao.class
-=======
-<<<<<<< HEAD
+model\Authors.class
+Controller\AllBookServlet.class
+Controller\BookServlet.class
 Controller\OrdersServlet.class
-=======
->>>>>>> Phuoc
 dao\RegistrationDAO.class
 dao\CategoryDao.class
 dao\OrderDetailsDAO.class
->>>>>>> master
 model\ChartData.class
 dao\TestLogin.class
 com\mycompany\lib\resources\JakartaEE11Resource.class
-Controller\CutomerServlet.class
+dao\StatisticsDAO.class
 Controller\Book_Manager.class
-<<<<<<< HEAD
-Controller\ProfileServlet.class
-=======
-<<<<<<< HEAD
-Controller\ProfileServlet.class
-=======
->>>>>>> Phuoc
->>>>>>> master
+model\OrderDetails.class
+model\Promotion.class
 dao\HomeDAO.class
 Controller\PromotionServlet.class
 model\Author.class
+model\UserReview.class
+dao\ReviewDao.class
+dao\PromotionDao.class
 model\Category.class
 model\Book.class
 model\Registration.class
 Controller\LogoutServlet.class
 Controller\ProductDetailSerVlet.class
-dao\ProductDAO.class
-Controller\CategoryServlet.class
-model\CartItem.class
-model\ProductDetail.class
-Controller\ReviewServlet.class
-Controller\CartServlet.class
-model\Cart.class
-dao\CustomerSupportDAO.class
-dao\CartDAO.class
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-dao\OrdersDAO.class
-com\mycompany\lib\JakartaRestConfiguration.class
-model\Authors.class
-Controller\BookServlet.class
-dao\AuthorsDAO.class
-dao\StatisticsDAO.class
-Controller\Order.class
-model\OrderDetails.class
-=======
->>>>>>> master
-com\mycompany\lib\JakartaRestConfiguration.class
-model\Authors.class
-Controller\AllBookServlet.class
-Controller\BookServlet.class
-dao\AuthorsDAO.class
-<<<<<<< HEAD
-dao\StatisticsDAO.class
-Controller\Order.class
-=======
-Controller\Order.class
->>>>>>> Phuoc
->>>>>>> master
-model\Promotion.class
-model\Order.class
-model\UserReview.class
-dao\ReviewDao.class
-dao\PromotionDao.class
 db\DBContext.class
+dao\ProductDAO.class
 model\CustomerSupport.class

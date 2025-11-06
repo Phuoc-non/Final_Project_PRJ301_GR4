@@ -24,7 +24,7 @@
                         <li><a href="${pageContext.request.contextPath}/assets/product.jsp">Products</a></li>
                         <li class="tg-active">Product Title Here</li>
                     </ol>
-                </div>  
+                </div>
             </div>
         </div>
     </div>
@@ -43,13 +43,12 @@
         <div class="container">
             <div class="row">
                 <div id="tg-twocolumns" class="tg-twocolumns">
-                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-12 pull-left">
+                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9 pull-right">
                         <div id="tg-content" class="tg-content">
 
                             <div class="tg-productdetail">
                                 <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                         <div class="tg-postbook">
 
                                             <figure class="tg-featureimg"><img src="${productdetail.getProduct().img}" alt="image description"></figure>
@@ -73,20 +72,20 @@
                                                     <em class="plus">+</em> 
                                                     <p id="quantitymax">${productdetail.getProduct().quantity} sản phẩm có sẵn</p>   
                                                 </div>
-
-                                                <a class="tg-btn tg-active tg-btn-lg add" style="cursor: pointer"  id="addToBasket" data-sku="${productdetail.getProduct().sku}">Add To Basket</a>
-
+                                                
+                                                    <a class="tg-btn tg-active tg-btn-lg add" style="cursor: pointer"  id="addToBasket" data-sku="${productdetail.getProduct().sku}">Add To Basket</a>
+                                                
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 
                                         <ul class="tg-bookscategories">
                                             <li><a href="javascript:void(0);">${productdetail.getCategory().name}</a></li>
                                         </ul>
-                                        <!--                                        <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>-->
+                                        <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
                                         <div class="tg-booktitle">
-                                            <h2>${productdetail.bookName}</h2>
+                                            <h3>${productdetail.bookName}</h3>
                                         </div>
                                         <span class="tg-bookwriter">By: <a href="javascript:void(0);">${productdetail.getAuthor().name}</a></span>
                                         <!--                                            <span class="tg-stars"><span></span></span>-->
@@ -169,47 +168,87 @@
                                         <div class="tg-sectionhead">
                                             <h2>Product Details</h2>
                                         </div>
-                                        <ul class="list-unstyled tg-productinfo">
-                                            <li class="d-flex justify-content-between align-items-start py-2 border-bottom bg-light">
-                                                <span class="font-weight-bold text-dark">Format:</span>
-                                                <span class="text-secondary">${productdetail.format}</span>
-                                            </li>
-                                            <li class="d-flex justify-content-between align-items-start py-2 border-bottom">
-                                                <span class="font-weight-bold text-dark">Pages:</span>
-                                                <span class="text-secondary">${productdetail.pages}</span>
-                                            </li>
-                                            <li class="d-flex justify-content-between align-items-start py-2 border-bottom bg-light">
-                                                <span class="font-weight-bold text-dark">Dimensions:</span>
-                                                <span class="text-secondary">${productdetail.dimensions}</span>
-                                            </li>
-                                            <li class="d-flex justify-content-between align-items-start py-2 border-bottom">
-                                                <span class="font-weight-bold text-dark">Publication Date:</span>
-                                                <span class="text-secondary">${productdetail.publicationDate}</span>
-                                            </li>
-                                            <li class="d-flex justify-content-between align-items-start py-2 border-bottom bg-light">
-                                                <span class="font-weight-bold text-dark">Language:</span>
-                                                <span class="text-secondary">${productdetail.language}</span>
-                                            </li>
-                                            <li class="d-flex justify-content-between align-items-start py-2">
-                                                <span class="font-weight-bold text-dark">Description:</span>
-                                                <span class="text-secondary">${productdetail.getProduct().description}</span>
-                                            </li>
+                                        <ul class="tg-productinfo">
+                                            <li><span>Format:</span><span>${productdetail.format}</span></li>
+                                            <li><span>Pages:</span><span>${productdetail.pages}</span></li>
+                                            <li><span>Dimensions:</span><span>${productdetail.dimensions}</span></li>
+                                            <li><span>Publication Date:</span><span></span>${productdetail.publicationDate}</li>
+                                            <li><span>Language:</span><span>${productdetail.language}</span></li>
                                         </ul>
 
 
-
                                     </div>
+
+                                    <div class="tg-aboutauthor">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="tg-sectionhead">
+                                                <h2>About Author</h2>
+                                            </div>
+                                            <div class="tg-authorbox">
+
+                                                <div class="tg-authorinfo">
+                                                    <div class="tg-authorhead">
+                                                        <div class="tg-leftarea">
+                                                            <div class="tg-authorname">
+                                                                <h2></h2>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="tg-description">
+                                                        <p>${productdetail.getAuthor().bio}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 pull-left">
+                        <aside id="tg-sidebar" class="tg-sidebar">
+                            <div class="tg-widget tg-widgetsearch">
+                                <form class="tg-formtheme tg-formsearch">
+                                    <div class="form-group">
+                                        <button type="submit"><i class="icon-magnifier"></i></button>
+                                        <input type="search" name="search" class="form-group" placeholder="Search by title, author, key...">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tg-widget tg-catagories">
+                                <div class="tg-widgettitle">
+                                    <h3>Categories</h3>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <ul>
+                                        <li><a href="javascript:void(0);"><span>Art &amp; Photography</span><em>28245</em></a></li>
+                                        <li><a href="javascript:void(0);"><span>Biography</span><em>4856</em></a></li>
+                                        <li><a href="javascript:void(0);"><span>Children’s Book</span><em>8654</em></a></li>
+                                        <li><a href="javascript:void(0);"><span>Craft &amp; Hobbies</span><em>6247</em></a></li>
+                                        <li><a href="javascript:void(0);"><span>Crime &amp; Thriller</span><em>888654</em></a></li>
+                                        <li><a href="javascript:void(0);"><span>Fantasy &amp; Horror</span><em>873144</em></a></li>
+                                        <li><a href="javascript:void(0);"><span>Fiction</span><em>18465</em></a></li>
+                                        <li><a href="javascript:void(0);"><span>Fod &amp; Drink</span><em>3148</em></a></li>
+                                        <li><a href="javascript:void(0);"><span>Graphic, Anime &amp; Manga</span><em>77531</em></a></li>
+                                        <li><a href="javascript:void(0);"><span>Science Fiction</span><em>9247</em></a></li>
+                                        <li><a href="javascript:void(0);"><span>View All</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
 
+
+
+                        </aside>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="tg-aboutauthor">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 120px; margin-top: 30px">
-                <div class="tg-sectionhead" style="margin-left: 20px">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="tg-sectionhead">
                     <h2>Đánh giá</h2>
                 </div>
 
@@ -267,7 +306,7 @@
                     <textarea name="content" placeholder="Nhập đánh giá..." 
                               style="width:100%;height:100px;resize:none;margin-top:10px;"></textarea>
                     <br>
-                    <input type="submit" value="Submit" class="btn btn-warning" style="margin-top: 30px; padding: 10px">
+                    <input type="submit" value="submit" style="margin-top:10px; background-color: orange; width: 100px; height: 50px">
                 </form>
 
                 <style>

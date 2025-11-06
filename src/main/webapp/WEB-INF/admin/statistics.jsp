@@ -4,7 +4,7 @@
     Author     : Admin
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/includes/header.jsp" %>
+<%@include file="/WEB-INF/includes/headerTotal.jsp" %>
 
 <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="../images/parallax/bgparallax-07.jpg">
     <div class="container">
@@ -30,7 +30,7 @@
 <div class="container mt-4">
     <h2>Báo cáo thống kê</h2>
 
-    <form method="get" action="${pageContext.request.contextPath}/Statistics" class="mb-4">
+    <form method="get" action="${pageContext.request.contextPath}/statistics" class="mb-4">
         <label for="period">Kỳ báo cáo:</label>
         <select id="period" name="period" onchange="this.form.submit()">
             <option value="day" <c:if test="${period eq 'day'}">selected</c:if>>Theo ngày</option>

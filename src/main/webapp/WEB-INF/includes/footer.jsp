@@ -158,7 +158,7 @@
 <!--************************************
                 Wrapper End
 *************************************-->
-<<<<<<< HEAD
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script>
