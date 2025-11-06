@@ -175,6 +175,8 @@
 <script src="${pageContext.request.contextPath}/assets/js/gmap3.js"></script> 
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/product_and_cart.js"></script>   
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="${pageContext.request.contextPath}/assets/js/login/profile_validation.js"></script>
 </body>
 
 </html>

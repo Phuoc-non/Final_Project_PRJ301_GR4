@@ -1,4 +1,4 @@
-// Full validation script for registration form (no phone)
+// ===== FULL VALIDATION SCRIPT FOR REGISTRATION FORM =====
 document.addEventListener('DOMContentLoaded', function () {
     const passwordInput = document.querySelector('input[name="password"]');
     const repasswordInput = document.querySelector('input[name="repassword"]');
@@ -11,8 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // ======= COMMON ERROR FUNCTIONS =======
     function showError(input, message) {
         const existingError = input.parentNode.querySelector('.error-message');
-        if (existingError)
-            existingError.remove();
+        if (existingError) existingError.remove();
 
         const errorElement = document.createElement('div');
         errorElement.className = 'error-message';
@@ -29,9 +28,44 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function clearError(input) {
         const errorElement = input.parentNode.querySelector('.error-message');
-        if (errorElement)
-            errorElement.remove();
+        if (errorElement) errorElement.remove();
         input.style.borderColor = '#ccc';
+    }
+
+    // ======= FULLNAME VALIDATION =======
+    function validateFullName(fullName) {
+    const fullNameRegex = /^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$/;
+        if (!fullName || fullName.trim() === '')
+            return 'Full name is required';
+        if (!fullNameRegex.test(fullName))
+            return 'Full name must be capitalized.';
+        return null;
+    }
+
+    if (fullNameInput) {
+        fullNameInput.addEventListener('blur', function () {
+            const error = validateFullName(this.value);
+            error ? showError(this, error) : clearError(this);
+        });
+        fullNameInput.addEventListener('input', () => clearError(fullNameInput));
+    }
+
+    // ======= USERNAME VALIDATION =======
+    function validateUsername(username) {
+        const usernameRegex = /^(?=.*[A-Za-z])[A-Za-z0-9_]+$/;
+        if (!username || username.trim() === '')
+            return 'Username is required';
+        if (!usernameRegex.test(username))
+            return 'Username must contain at least one letter and can include letters.';
+        return null;
+    }
+
+    if (usernameInput) {
+        usernameInput.addEventListener('blur', function () {
+            const error = validateUsername(this.value);
+            error ? showError(this, error) : clearError(this);
+        });
+        usernameInput.addEventListener('input', () => clearError(usernameInput));
     }
 
     // ======= EMAIL VALIDATION =======
@@ -81,31 +115,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return true;
     }
 
-
-    // Kiểm tra mật khẩu cấp cao
-    function validatePasswordStrength(password) {
-        if (!password) {
-            return 'Password is required';
-        }
-        if (password.length < 6 || password.length > 20) {
-            return 'Password must be between 6 and 20 characters';
-        }
-        if (!/(?=.*[a-z])/.test(password)) {
-            return 'Password requires at least one lowercase letter.';
-        }
-        if (!/(?=.*[A-Z])/.test(password)) {
-            return 'Password requires at least one uppercase letter.';
-        }
-        if (!/(?=.*\d)/.test(password)) {
-            return 'Password must contain at least one number';
-        }
-        if (!/(?=.*[!@#$%^&*(),.?":{}|<>])/.test(password)) {
-            return 'Password must contain at least one special character';
-        }
-        return null; // Password is strong
-    }
-
-    // Add event listeners
     if (passwordInput && repasswordInput) {
         passwordInput.addEventListener('blur', function () {
             const error = validatePasswordStrength(this.value);
@@ -143,16 +152,18 @@ document.addEventListener('DOMContentLoaded', function () {
     if (registerForm) {
         registerForm.addEventListener('submit', function (e) {
             // Full name
-            if (!fullNameInput.value.trim()) {
+            const fullNameError = validateFullName(fullNameInput ? fullNameInput.value : '');
+            if (fullNameError) {
                 e.preventDefault();
-                showError(fullNameInput, 'Full name is required');
+                showError(fullNameInput, fullNameError);
                 return;
             }
 
             // Username
-            if (!usernameInput.value.trim()) {
+            const usernameError = validateUsername(usernameInput ? usernameInput.value : '');
+            if (usernameError) {
                 e.preventDefault();
-                showError(usernameInput, 'Username is required');
+                showError(usernameInput, usernameError);
                 return;
             }
 
