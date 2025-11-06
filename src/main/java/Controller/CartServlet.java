@@ -47,6 +47,7 @@
                     cart = cartDao.getCart(user.getUsername());
                 }
                 List<CartItem> cartItem = cartDao.cartAll(cart.getId());//co ai thi tim list cartItem
+                session.setAttribute("listCartItem", cartItem);
                 request.setAttribute("listCartItem", cartItem);//set vao vang vao cart.jsp
                 request.getRequestDispatcher("/WEB-INF/Product/cart.jsp").forward(request, response);
             } else {
@@ -100,17 +101,17 @@
                 if (cart != null) {
                     //kiem tra xem san pham da ton tai trong gio hang chua
                     //neu da co thi cong don(update) vao quantity
-                    if (status.equals("update")) {                    
+                    if ("update".equals(status)) {                    
                         cartDAO.updateCartItem(cart.getId(), sku, Integer.parseInt(quantity));
                         cartDAO.updateCart(cart.getUsername());
-                    } else if (status.equals("delete")) {
+                    } else if ("delete".equals(status)) {
                         int rs = cartDAO.deleteCartItem(cart.getId(), sku);
                         if (rs == 1) {
                             System.out.println("delete has been called!"); // in ra console server 
                         } else {
                             System.out.println("delete fails" + cart.getId() + sku); // in ra console server
                         }
-                    } else if (status.equals("add")) {
+                    } else if ("add".equals(status)) {
     //                     response.getWriter().write(cart.getId()+sku);
                         System.out.println(cart.getId()+sku);
                         CartItem cartItem= cartDAO.getCartItem(cart.getId(),sku);
@@ -120,7 +121,7 @@
                             int rs2 = cartDAO.updateCart(cart.getUsername());
                             if (rs == 0 || rs2 == 0) {
                                 System.out.println("Can't add =((");
-                                response.getWriter().write("error");
+                                response.getWriter().write("errol");
                             } else {
                                 System.out.println("Add book succesfull ");
                                 response.getWriter().write("Add book succesfull ");
@@ -129,7 +130,7 @@
                         else if (cartItem == null) {
                             int rs = cartDAO.createCartItem(cart.getId(), sku, Integer.parseInt(quantity));
                             if (rs == 0) {
-                                response.getWriter().write("error");
+                                response.getWriter().write("errol");
                                 System.out.println("errol");
                             } else {
                                 response.getWriter().write("Add book succesfull");

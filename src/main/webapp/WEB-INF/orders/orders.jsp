@@ -53,7 +53,7 @@
                                                 <td>${order.phone}</td>
                                                 <td>${order.address}</td>
                                                 <td>${order.total}</td>
-                                                <td><fmt:formatDate value="${order.created_at}" pattern="dd/MM/yyyy" /></td>
+                                                <td><fmt:formatDate value="${order.datebuy}" pattern="dd/MM/yyyy" /></td>
                                                 <td><fmt:formatDate value="${order.updated_at}" pattern="dd/MM/yyyy" /></td>
                                                 <td>${order.status}</td>
                                                 <td>

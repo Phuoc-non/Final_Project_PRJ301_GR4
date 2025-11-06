@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import dao.CartDAO;
 import dao.OrdersDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,14 +13,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Book;
-import model.Category;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Cart;
+import model.CartItem;
 import model.Orders;
+import model.Promotion;
+import model.Registration;
 
 /**
  *
@@ -67,10 +69,59 @@ public class OrdersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        OrdersDAO dao = new OrdersDAO();
-        List<Orders> orderList = dao.getOrders();
-        request.setAttribute("orderList", orderList);
-        request.getRequestDispatcher("/WEB-INF/orders/orders.jsp").forward(request, response);
+        String view = request.getParameter("view");
+        if ("order".equals(view) || view == null || view.isEmpty()) {
+            OrdersDAO dao = new OrdersDAO();
+            List<Orders> orderList = dao.getOrders();
+            request.setAttribute("orderList", orderList);
+            request.getRequestDispatcher("/WEB-INF/orders/orders.jsp").forward(request, response);
+
+        } else if ("confirm".equals(view)) {
+            // ✅ Lấy session trước
+            jakarta.servlet.http.HttpSession session = request.getSession();
+
+            Registration user = (Registration) session.getAttribute("user");
+            if (user == null) {
+                response.sendRedirect("login");
+                return;
+            }
+
+            //  lấy từ session
+            List<CartItem> list = (List<CartItem>) session.getAttribute("listCartItem");
+
+// nếu session không có => lấy lại từ DB
+            if (list == null) {
+                CartDAO cartDao = new CartDAO();
+                Cart cart = cartDao.getCart(user.getUsername());
+                if (cart != null) {
+                    list = cartDao.cartAll(cart.getId());
+                    session.setAttribute("listCartItem", list);
+                }
+            }
+
+// nếu vẫn null hoặc rỗng
+            if (list == null || list.isEmpty()) {
+                request.setAttribute("message", "Giỏ hàng trống, không thể đặt hàng!");
+                request.getRequestDispatcher("/WEB-INF/Product/cart.jsp").forward(request, response);
+                return;
+            }
+
+// ✅ Tính tổng tiền
+            double total = 0;
+            for (CartItem item : list) {
+                total += item.getProduct().getPrice() * item.getQuantity();
+            }
+
+               OrdersDAO dao = new OrdersDAO();
+               List<Promotion> listPromotion = dao.getListPromotion();
+               
+             request.setAttribute("listP", listPromotion);
+            request.setAttribute("cartList", list);
+            request.setAttribute("total", total);
+
+            request.getRequestDispatcher("/WEB-INF/User/purchase.jsp").forward(request, response);
+        }
+
     }
 
     /**
@@ -93,6 +144,44 @@ public class OrdersServlet extends HttpServlet {
         if (action != null && action.equals("edit")) {
             editOrders(request, response);
         }
+
+        if (action != null && action.equals("confirm")) {
+            String name = request.getParameter("fullname");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
+            double total = Double.parseDouble(request.getParameter("total"));
+
+            jakarta.servlet.http.HttpSession session = request.getSession();
+            Registration user = (Registration) session.getAttribute("user");
+            if (user == null) {
+                response.sendRedirect("login");
+                return;
+            }
+
+            List<CartItem> cartItems = (List<CartItem>) session.getAttribute("listCartItem");
+            if (cartItems == null || cartItems.isEmpty()) {
+                response.sendRedirect("cart");
+                return;
+            }
+
+            Orders order = new Orders();
+            order.setName(name);
+            order.setPhone(phone);
+            order.setAddress(address);
+            order.setTotal(total);
+
+            OrdersDAO dao = new OrdersDAO();
+            int rs = dao.confirmOrders(order, cartItems, user.getUsername());
+
+            if (rs == 1) {
+                // Xóa giỏ hàng sau khi đặt hàng thành công
+                session.removeAttribute("listCartItem");
+                response.sendRedirect(request.getContextPath() + "/orders");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/login");
+            }
+        }
+
     }
 
     private void deleteOrders(HttpServletRequest request, HttpServletResponse response)

@@ -19,12 +19,19 @@ public class Promotion {
     private String description;
     private int status;
     private int minOrderValue;
-    private int quantity;
+
 
     public Promotion() {
     }
 
-    public Promotion(int id,String code, int discount, Date startDay, Date endDay, String description, int status,int minOrderValue,int quantity ) {
+    public Promotion(String code, int discount, int minOrderValue) {
+        this.code = code;
+        this.discount = discount;
+        this.minOrderValue = minOrderValue;
+    }
+
+    
+    public Promotion(int id,String code, int discount, Date startDay, Date endDay, String description, int status,int minOrderValue ) {
         this.id = id;
         this.code = code;
         this.discount = discount;
@@ -33,7 +40,7 @@ public class Promotion {
         this.description = description;
         this.status = status;
         this.minOrderValue = minOrderValue;
-        this.quantity = quantity;
+      
     }
 
     public int getId() {
@@ -44,13 +51,6 @@ public class Promotion {
         this.id = id;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     
     public String getCode() {
