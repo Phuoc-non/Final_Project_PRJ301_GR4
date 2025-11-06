@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.CartItem;
 import model.Order;
-import model.Promotion;
 
 /**
  *
@@ -28,25 +27,23 @@ public class OrdersDAO extends DBContext {
         List<Order> list = new ArrayList<>();
         String sql = """
                 SELECT 
-                
                     o.id,                           
-                    o.name,                         
-                    o.phone,                        
-                    o.address,                     
-                    o.total,                       
+                    o.name,                      
+                    o.phone,                     
+                    o.address,                      
+                    o.total,                        
                     o.datebuy,                   
-                    o.updated_at,                   
-                    o.status                        
+                    o.updated_at,               
+                    o.status,
+                    o.cancel_reason,
+                    o.return_status
                 FROM Orders o
-                JOIN OrderDetails od ON o.id = od.order_id
-                JOIN Product p ON od.sku = p.sku
-                GROUP BY 
-                    o.id, o.name, o.phone, o.address, o.total, 
-                    o.datebuy, o.updated_at, o.status
                 ORDER BY o.datebuy DESC;
                 """;
 
         try (PreparedStatement ps = this.getConnection().prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            System.out.println("=== DEBUG: Executing getOrders query ===");
 
             while (rs.next()) {
                 Order order = new Order(
@@ -59,10 +56,17 @@ public class OrdersDAO extends DBContext {
                         rs.getDate("updated_at"),
                         rs.getString("status")
                 );
+                order.setCancelReason(rs.getString("cancel_reason"));
+                order.setReturnStatus(rs.getString("return_status"));
                 list.add(order);
+                System.out.println("DEBUG: Added order ID: " + order.getId());
             }
 
+            System.out.println("DEBUG: Total orders found: " + list.size());
+
         } catch (SQLException e) {
+            System.err.println("ERROR in getOrders: " + e.getMessage());
+            e.printStackTrace();
             Logger.getLogger(OrdersDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return list;
@@ -145,23 +149,130 @@ public class OrdersDAO extends DBContext {
             return 0;
         }
     }
-    public List<Promotion> getListPromotion(){
-        List<Promotion> list = new ArrayList<>();
-        try {
-            
-            
-            String sql = "select code,discount_percent,min_order_value from Promotion where status = 1";
-            PreparedStatement statement = this.getConnection().prepareStatement(sql);
-            
-            ResultSet rs = statement.executeQuery();
-            while(rs.next()){
-                list.add(new Promotion(rs.getString("code"),rs.getInt("discount_percent"),rs.getInt("min_order_value")));
-                
+
+    /**
+     * Cancel order with reason Only allowed when status = 'Chờ xác nhận'
+     */
+    public boolean cancelOrder(int orderId, String cancelReason) throws SQLException {
+        String sql = "UPDATE Orders SET status = N'Đã hủy', cancel_reason = ?, updated_at = GETDATE() WHERE id = ? AND status = N'Chờ xác nhận'";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
+            ps.setString(1, cancelReason);
+            ps.setInt(2, orderId);
+            int rows = ps.executeUpdate();
+            return rows > 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(OrdersDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Request return for completed order Only allowed when status = 'Hoàn tất'
+     */
+    public boolean requestReturn(int orderId) throws SQLException {
+        // First check if the order can be returned
+        String checkSql = "SELECT status FROM Orders WHERE id = ?";
+        try (PreparedStatement checkPs = this.getConnection().prepareStatement(checkSql)) {
+            checkPs.setInt(1, orderId);
+            ResultSet rs = checkPs.executeQuery();
+            if (rs.next()) {
+                String currentStatus = rs.getString("status");
+                if (!"Hoàn tất".equals(currentStatus)) {
+                    Logger.getLogger(OrdersDAO.class.getName()).log(Level.WARNING,
+                            "Order {0} cannot be returned because status is {1}, not ''Hoàn tất''",
+                            new Object[]{orderId, currentStatus});
+                    return false;
+                }
+            } else {
+                Logger.getLogger(OrdersDAO.class.getName()).log(Level.WARNING,
+                        "Order {0} not found", orderId);
+                return false;
+            }
+        }
+
+        String sql = "UPDATE Orders SET return_status = N'Đang chờ phê duyệt', updated_at = GETDATE() WHERE id = ?";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
+            ps.setInt(1, orderId);
+            int rows = ps.executeUpdate();
+            boolean success = rows > 0;
+
+            if (!success) {
+                Logger.getLogger(OrdersDAO.class.getName()).log(Level.WARNING,
+                        "Failed to update return status for order {0}. No rows affected.", orderId);
+            }
+
+            return success;
+        } catch (SQLException ex) {
+            Logger.getLogger(OrdersDAO.class.getName()).log(Level.SEVERE,
+                    "Error updating return status for order " + orderId, ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Admin approve return request
+     */
+    public boolean approveReturn(int orderId) throws SQLException {
+        String sql = "UPDATE Orders SET return_status = N'Được phê duyệt', updated_at = GETDATE() WHERE id = ? AND return_status = N'Đang chờ phê duyệt'";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
+            ps.setInt(1, orderId);
+            int rows = ps.executeUpdate();
+            return rows > 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(OrdersDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Admin reject return request
+     */
+    public boolean rejectReturn(int orderId) throws SQLException {
+        String sql = "UPDATE Orders SET return_status = N'Từ chối', updated_at = GETDATE() WHERE id = ? AND return_status = N'Đang chờ phê duyệt'";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
+            ps.setInt(1, orderId);
+            int rows = ps.executeUpdate();
+            return rows > 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(OrdersDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Check if order can be cancelled
+     */
+    public boolean canCancelOrder(int orderId) {
+        String sql = "SELECT status FROM Orders WHERE id = ?";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
+            ps.setInt(1, orderId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String status = rs.getString("status");
+                return "Chờ xác nhận".equals(status);
             }
         } catch (SQLException ex) {
-            System.getLogger(OrdersDAO.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            Logger.getLogger(OrdersDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return list;
+        return false;
     }
+
+    /**
+     * Check if order can be returned
+     */
+    public boolean canReturnOrder(int orderId) {
+        String sql = "SELECT status FROM Orders WHERE id = ?";
+        try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
+            ps.setInt(1, orderId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String status = rs.getString("status");
+                return "Hoàn tất".equals(status);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrdersDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
 }

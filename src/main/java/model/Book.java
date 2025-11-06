@@ -9,19 +9,20 @@ package model;
  * @author ADMIN
  */
 public class Book {
+
     //Lấy từ bảng product 5 thuộc tính: sku, img,name,price,quantity
     private String sku_product;
     private String img;
     private String name_product;
-    private double price_product; 
+    private double price_product;
     private int quantity_product; // số lượng này là số lượng tồn(product) phải trừ số lượng đã bán(orderDetails) qua sku
     private String description;   
     //Lấy từ bảng category thuộc tính: name
     private String category_name;
-    
+
     //Lấy từ bảng Author thuộc tính: name
     private String author_name;
-    
+
     //Lấy từ bảng orderDetails thuộc tính: quantity
     private int quantity_orderDetail; 
     private ProductDetail productDetail;
@@ -120,6 +121,8 @@ public class Book {
     public void setQuantity_orderDetail(int quantity_orderDetail) {
         this.quantity_orderDetail = quantity_orderDetail;
     }
+
+   
 
     @Override
     public String toString() {

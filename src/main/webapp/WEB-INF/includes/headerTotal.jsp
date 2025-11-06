@@ -84,9 +84,14 @@
                                 </div>
                             </div>
                             <div class="tg-searchbox">
-                                <form class="tg-formtheme tg-formsearch">
-                                    <fieldset>
-                                        <input type="text" name="search" class="typeahead form-control" placeholder="Search by title, author, keyword, ISBN...">
+                                <form class="tg-formtheme tg-formsearch" action="${pageContext.request.contextPath}/ab" method="get">
+                                    <fieldset style="display: flex; align-items: center; gap: 5px;">
+                                        <input type="text" name="keyword" class="typeahead form-control" placeholder="Search by title, author, keyword..." required style="flex: 1;">
+                                        <select name="type" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                                            <option value="">All</option>
+                                            <option value="title">Title</option>
+                                            <option value="author">Author</option>
+                                        </select>
                                         <button type="submit"><i class="icon-magnifier"></i></button>
                                     </fieldset>
                                 </form>

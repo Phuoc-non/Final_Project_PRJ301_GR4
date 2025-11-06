@@ -62,10 +62,36 @@ public class AuthorsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AuthorsDAO dao = new AuthorsDAO();
-        List<Authors> authorList = dao.getAllAuthors();
-        request.setAttribute("authorList", authorList);
 
+        AuthorsDAO dao = new AuthorsDAO();
+
+        // 🧩 1. Lấy số trang từ URL (?page=2), mặc định là trang 1
+        int page = 1;
+        String pageStr = request.getParameter("page");
+        if (pageStr != null && !pageStr.isEmpty()) {
+            try {
+                page = Integer.parseInt(pageStr);
+                if (page < 1) {
+                    page = 1; // Không cho nhỏ hơn 1
+                }
+            } catch (NumberFormatException ex) {
+                System.err.println("Invalid page parameter");
+            }
+        }
+
+        // 🧩 2. Gọi DAO lấy danh sách tác giả theo trang
+        List<Authors> authorList = dao.getAuthorList(page);
+
+        // 🧩 3. Lấy tổng số dòng để tính tổng số trang
+        int totalAuthors = dao.getTotalRows();
+        int totalPages = (int) Math.ceil(totalAuthors / 10.0); // mỗi trang 10 tác giả
+
+        // 🧩 4. Truyền dữ liệu sang JSP
+        request.setAttribute("authorList", authorList);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
+
+        // 🧩 5. Chuyển đến trang JSP
         request.getRequestDispatcher("/WEB-INF/authors.jsp").forward(request, response);
     }
 
@@ -93,109 +119,60 @@ public class AuthorsServlet extends HttpServlet {
         }
     }
 
-    private boolean isValidAuthorName(String name) {
-        if (name == null) {
-            return false;
-        }
-        return name.matches("^[a-zA-Z\\-\\s]+$");
-    }
-
     private void createAuthor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        String name = request.getParameter("name");
-        String bio = request.getParameter("bio");
-
-        // Xử lý null hoặc rỗng
-        if (name == null || name.trim().isEmpty()) {
-            request.getSession().setAttribute("errorMessage", "Tên tác giả không được để trống!");
-            response.sendRedirect("authors");
-            return;
-        }
-
-        name = name.trim();
-        if (!isValidAuthorName(name)) {
-            request.getSession().setAttribute("errorMessage",
-                    "Tên tác giả chỉ được chứa chữ cái!");
-            response.sendRedirect("authors");
-            return;
-        }
-
-        bio = (bio == null) ? "" : bio.trim();
+        String name = request.getParameter("name").trim();
+        String bio = request.getParameter("bio").trim();
 
         AuthorsDAO dao = new AuthorsDAO();
 
-        // Kiểm tra trùng tên
-        if (dao.checkDuplicateAuthorname(name, 0)) {
-            request.getSession().setAttribute("errorMessage", "Tên tác giả đã tồn tại!");
-            response.sendRedirect("authors");
+        // Kiểm tra tên rỗng
+        if (name.isEmpty()) {
+            request.setAttribute("errorMessage", "Tên tác giả không được để trống!");
+            request.setAttribute("authorList", dao.getAllAuthors());
+            request.getRequestDispatcher("/WEB-INF/authors.jsp").forward(request, response);
             return;
         }
 
-        // Tạo tác giả
+        // Kiểm tra trùng tên
+        if (dao.checkDuplicateAuthorname(name, 0)) {
+            request.setAttribute("errorMessage", "Tên tác giả đã tồn tại!");
+            request.setAttribute("authorList", dao.getAllAuthors());
+            request.getRequestDispatcher("/WEB-INF/authors.jsp").forward(request, response);
+            return;
+        }
+
+        // Tạo mới
         Authors author = new Authors();
         author.setName(name);
         author.setBio(bio);
 
-        boolean success = false;
-        try {
-            success = dao.createAuthor(author);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        boolean success = dao.createAuthor(author);
         if (success) {
+            // Lưu thông báo vào session để hiển thị sau redirect
             request.getSession().setAttribute("successMessage", "Thêm tác giả thành công!");
+            response.sendRedirect("authors"); // redirect để load lại danh sách
         } else {
-            request.getSession().setAttribute("errorMessage", "Thêm tác giả thất bại! Vui lòng thử lại.");
+            request.setAttribute("errorMessage", "Thêm tác giả thành công!");
+            request.setAttribute("authorList", dao.getAllAuthors());
+            request.getRequestDispatcher("/WEB-INF/authors.jsp").forward(request, response);
         }
-
-        response.sendRedirect("authors"); // Luôn redirect để reload danh sách + giữ thông báo
     }
 
- private void deleteAuthor(HttpServletRequest request, HttpServletResponse response)
+    private void deleteAuthor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.setCharacterEncoding("UTF-8");
+        int id = Integer.parseInt(request.getParameter("id"));
 
-        String idParam = request.getParameter("id");
-        String bookcountParam = request.getParameter("bookcount"); // Nhận từ form
-
-        if (idParam == null || idParam.trim().isEmpty()) {
-            request.getSession().setAttribute("errorMessage", "ID tác giả không hợp lệ!");
-            response.sendRedirect("authors");
-        }
-
-        int id;
-        int bookcount = 0;
-        try {
-            id = Integer.parseInt(idParam);
-            bookcount = Integer.parseInt(bookcountParam != null ? bookcountParam : "0");
-        } catch (NumberFormatException e) {
-            request.getSession().setAttribute("errorMessage", "Dữ liệu không hợp lệ!");
-            response.sendRedirect("authors");
-            return;
-        }
-
-        // KIỂM TRA QUA BOOKCOUNT – KHÔNG CẦN DAO
-        if (bookcount > 0) {
-            request.getSession().setAttribute("errorMessage",
-                    "Không thể xóa! Tác giả đang có " + bookcount + " cuốn sách.");
-            response.sendRedirect("authors");
-            return;
-        }
+        Authors author = new Authors();
+        author.setId(id);
 
         AuthorsDAO dao = new AuthorsDAO();
-        boolean success = dao.deleteAuthor(id); // vẫn dùng method cũ
-
-        if (success) {
-            request.getSession().setAttribute("successMessage", "Xóa tác giả thành công!");
-        } else {
-            request.getSession().setAttribute("errorMessage", "Xóa thất bại! Có lỗi xảy ra.");
-        }
+        dao.deleteAuthor(id);
 
         response.sendRedirect("authors");
     }
@@ -203,64 +180,20 @@ public class AuthorsServlet extends HttpServlet {
     private void editAuthor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-
-        String idParam = request.getParameter("id");
+        int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String bio = request.getParameter("bio");
 
-        // Kiểm tra dữ liệu đầu vào
-        if (idParam == null || idParam.trim().isEmpty()) {
-            request.getSession().setAttribute("errorMessage", "ID tác giả không hợp lệ!");
-            response.sendRedirect("authors");
-            return;
-        }
-
-        int id = Integer.parseInt(idParam);
-        if (name == null || name.trim().isEmpty()) {
-            request.getSession().setAttribute("errorMessage", "Tên tác giả không được để trống!");
-            response.sendRedirect("authors");
-            return;
-        }
-
         name = name.trim();
-        if (!isValidAuthorName(name)) {
-            request.getSession().setAttribute("errorMessage", "Tên tác giả chỉ được chứa chữ cái!");
-            response.sendRedirect("authors");
-            return;
-        }
+        bio = bio.trim();
 
-        bio = (bio == null) ? "" : bio.trim();
-
-        AuthorsDAO dao = new AuthorsDAO();
-
-        // Kiểm tra trùng tên (nhưng cho phép giữ nguyên tên cũ của chính nó)
-        if (dao.checkDuplicateAuthorname(name, id)) {
-            request.getSession().setAttribute("errorMessage", "Tên tác giả đã tồn tại!");
-            response.sendRedirect("authors");
-            return;
-        }
-
-        // Cập nhật
         Authors author = new Authors();
         author.setId(id);
         author.setName(name);
         author.setBio(bio);
 
-        boolean success = false;
-        try {
-            dao.editAuthor(author);
-            success = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (success) {
-            request.getSession().setAttribute("successMessage", "Cập nhật tác giả thành công!");
-        } else {
-            request.getSession().setAttribute("errorMessage", "Cập nhật thất bại! Vui lòng thử lại.");
-        }
+        AuthorsDAO dao = new AuthorsDAO();
+        dao.editAuthor(author);
 
         response.sendRedirect("authors");
     }

@@ -24,13 +24,12 @@ public class CustomerSupport {
 
     // Thông tin bổ sung từ bảng khác
     private Registration registration;
-    private Order order;
 
     public CustomerSupport() {
     }
 
-    public CustomerSupport(int id, int orderId, String username, String reason, double totalRefund, 
-                          String description, String email, String status, Timestamp requestDate) {
+    public CustomerSupport(int id, int orderId, String username, String reason, double totalRefund,
+            String description, String email, String status, Timestamp requestDate) {
         this.id = id;
         this.orderId = orderId;
         this.username = username;
@@ -123,18 +122,10 @@ public class CustomerSupport {
         this.registration = registration;
     }
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
     @Override
     public String toString() {
-        return "CustomerSupport{" + "id=" + id + ", orderId=" + orderId + ", username=" + username 
-                + ", reason=" + reason + ", totalRefund=" + totalRefund + ", description=" + description 
+        return "CustomerSupport{" + "id=" + id + ", orderId=" + orderId + ", username=" + username
+                + ", reason=" + reason + ", totalRefund=" + totalRefund + ", description=" + description
                 + ", email=" + email + ", status=" + status + ", requestDate=" + requestDate + '}';
     }
 }

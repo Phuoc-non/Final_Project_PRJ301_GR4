@@ -22,11 +22,14 @@ public class Order {
     private Date updated_at;
     private String status;
     private Registration registration;
+    private String cancelReason;
+    private String returnStatus;
+
     public Order() {
     }
 
     public Order(int id, Date datebuy, int totalQuantity,
-                 String name, String phone, String address, Registration registration) {
+            String name, String phone, String address, Registration registration) {
         this.id = id;
         this.datebuy = datebuy;
         this.totalQuantity = totalQuantity;
@@ -35,7 +38,7 @@ public class Order {
         this.address = address;
         this.registration = registration;
     }
-    
+
     public Order(int id, String name, String phone, String address, double total, Date datebuy, Date updated_at, String status) {
         this.id = id;
         this.name = name;
@@ -47,6 +50,22 @@ public class Order {
         this.status = status;
     }
 
+    public String getCancelReason() {
+        return cancelReason;
+    }
+
+    public void setCancelReason(String cancelReason) {
+        this.cancelReason = cancelReason;
+    }
+
+    public String getReturnStatus() {
+        return returnStatus;
+    }
+
+    public void setReturnStatus(String returnStatus) {
+        this.returnStatus = returnStatus;
+    }
+
     public int getTotalQuantity() {
         return totalQuantity;
     }
@@ -54,7 +73,7 @@ public class Order {
     public void setTotalQuantity(int totalQuantity) {
         this.totalQuantity = totalQuantity;
     }
-    
+
     public Registration getRegistration() {
         return registration;
     }
@@ -62,7 +81,7 @@ public class Order {
     public void setRegistration(Registration registration) {
         this.registration = registration;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -128,4 +147,3 @@ public class Order {
     }
 
 }
-

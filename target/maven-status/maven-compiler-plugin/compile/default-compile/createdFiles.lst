@@ -1,3 +1,4 @@
+Controller\CustomerSupportServlet.class
 Controller\LoginServlet.class
 Controller\AuthorsServlet.class
 Controller\RegisterServlet.class
@@ -24,6 +25,7 @@ model\Author.class
 model\Category.class
 model\Book.class
 model\Registration.class
+Controller\LogoutServlet.class
 Controller\ProductDetailSerVlet.class
 dao\ProductDAO.class
 Controller\CategoryServlet.class
@@ -32,6 +34,7 @@ model\ProductDetail.class
 Controller\ReviewServlet.class
 Controller\CartServlet.class
 model\Cart.class
+dao\CustomerSupportDAO.class
 dao\CartDAO.class
 dao\OrdersDAO.class
 com\mycompany\lib\JakartaRestConfiguration.class

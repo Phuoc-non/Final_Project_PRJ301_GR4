@@ -7,6 +7,7 @@ D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\BookServle
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\CartServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\CategoryServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\ChangePasswordServlet.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\CustomerSupportServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\CutomerServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\LoginServlet.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\LogoutServlet.java
@@ -22,6 +23,7 @@ D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\AuthorsDAO.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\CartDAO.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\CategoryDao.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\CustomerDAO.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\CustomerSupportDAO.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\HomeDAO.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\OrderDetailsDAO.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\dao\OrdersDAO.java
@@ -42,10 +44,10 @@ D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Category.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\ChartData.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\CustomerSupport.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Order.java
+D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\OrderDetails.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Product.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\ProductDetail.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Promotion.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Registration.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\UserReview.java
-D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\OrderDetails.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Util\MD5Util.java

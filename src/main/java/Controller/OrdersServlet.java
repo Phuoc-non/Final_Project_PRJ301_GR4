@@ -4,6 +4,7 @@
  */
 package Controller;
 
+
 import dao.CartDAO;
 import dao.OrdersDAO;
 import java.io.IOException;
@@ -19,9 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Cart;
 import model.CartItem;
-import model.Order;
-import model.Promotion;
 import model.Registration;
+import model.Order;
 
 /**
  *
@@ -70,10 +70,24 @@ public class OrdersServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String view = request.getParameter("view");
+        String message = request.getParameter("message");
+        
+        // Set message attribute if exists
+        if (message != null) {
+            request.setAttribute("message", message);
+        }
+        
         if ("order".equals(view) || view == null || view.isEmpty()) {
             OrdersDAO dao = new OrdersDAO();
             List<Order> orderList = dao.getOrders();
             request.setAttribute("orderList", orderList);
+            
+            // Handle returnSuccess message
+            String messageParam = request.getParameter("message");
+            if ("returnSuccess".equals(messageParam)) {
+                request.setAttribute("successMessage", "Yêu cầu hoàn trả đã được gửi thành công! Đơn hàng đang ở trạng thái chờ phê duyệt.");
+            }
+            
             request.getRequestDispatcher("/WEB-INF/orders/orders.jsp").forward(request, response);
 
         } else if ("confirm".equals(view)) {
@@ -111,10 +125,7 @@ public class OrdersServlet extends HttpServlet {
             for (CartItem item : list) {
                 total += item.getProduct().getPrice() * item.getQuantity();
             }
-               OrdersDAO dao = new OrdersDAO();
-               List<Promotion> listPromotion = dao.getListPromotion();
-               
-             request.setAttribute("listP", listPromotion);
+
             request.setAttribute("cartList", list);
             request.setAttribute("total", total);
 
@@ -139,16 +150,21 @@ public class OrdersServlet extends HttpServlet {
 
         if (action != null && action.equals("delete")) {
             deleteOrders(request, response);
-        }
-        if (action != null && action.equals("edit")) {
+        } else if (action != null && action.equals("edit")) {
             editOrders(request, response);
-        }
-
-        if (action != null && action.equals("confirm")) {
+        } else if (action != null && action.equals("cancel")) {
+            cancelOrder(request, response);
+        } else if (action != null && action.equals("return")) {
+            returnOrder(request, response);
+        } else if (action != null && action.equals("approveReturn")) {
+            approveReturn(request, response);
+        } else if (action != null && action.equals("rejectReturn")) {
+            rejectReturn(request, response);
+        } else if (action != null && action.equals("confirm")) {
             String name = request.getParameter("fullname");
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
-            double total = Double.parseDouble(request.getParameter("total"));
+            String totalParam = request.getParameter("total");
 
             jakarta.servlet.http.HttpSession session = request.getSession();
             Registration user = (Registration) session.getAttribute("user");
@@ -161,6 +177,16 @@ public class OrdersServlet extends HttpServlet {
             if (cartItems == null || cartItems.isEmpty()) {
                 response.sendRedirect("cart");
                 return;
+            }
+
+            double total = 0;
+            try {
+                total = Double.parseDouble(totalParam);
+            } catch (NumberFormatException e) {
+                // Calculate total from cart items if not provided
+                for (CartItem item : cartItems) {
+                    total += item.getProduct().getPrice() * item.getQuantity();
+                }
             }
 
             Order order = new Order();
@@ -179,6 +205,9 @@ public class OrdersServlet extends HttpServlet {
             } else {
                 response.sendRedirect(request.getContextPath() + "/login");
             }
+        } else {
+            // Default action - show orders list
+            response.sendRedirect(request.getContextPath() + "/orders");
         }
 
     }
@@ -212,6 +241,109 @@ public class OrdersServlet extends HttpServlet {
             Logger.getLogger(OrdersServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    private void cancelOrder(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            String cancelReason = request.getParameter("cancelReason");
+            
+            OrdersDAO dao = new OrdersDAO();
+            
+            // Check if order can be cancelled
+            if (!dao.canCancelOrder(id)) {
+                request.setAttribute("errorMessage", "Không thể hủy đơn hàng này. Chỉ có thể hủy đơn hàng đang ở trạng thái 'Chờ xác nhận'");
+                request.getRequestDispatcher("/WEB-INF/orders/orders.jsp").forward(request, response);
+                return;
+            }
+            
+            boolean success = dao.cancelOrder(id, cancelReason);
+            if (success) {
+                request.setAttribute("successMessage", "Đã hủy đơn hàng thành công");
+            } else {
+                request.setAttribute("errorMessage", "Hủy đơn hàng thất bại");
+            }
+            
+            response.sendRedirect("orders");
+        } catch (SQLException ex) {
+            Logger.getLogger(OrdersServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", "Lỗi hệ thống: " + ex.getMessage());
+            request.getRequestDispatcher("/WEB-INF/orders/orders.jsp").forward(request, response);
+        }
+    }
+
+    private void returnOrder(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            OrdersDAO dao = new OrdersDAO();
+            
+            // Check if order can be returned
+            if (!dao.canReturnOrder(id)) {
+                request.setAttribute("errorMessage", "Không thể trả hàng. Chỉ có thể trả đơn hàng đã hoàn tất");
+                request.getRequestDispatcher("/WEB-INF/orders/orders.jsp").forward(request, response);
+                return;
+            }
+            
+            boolean success = dao.requestReturn(id);
+            if (success) {
+                request.setAttribute("successMessage", "Yêu cầu hoàn trả đã được gửi. Vui lòng chờ admin phê duyệt");
+            } else {
+                request.setAttribute("errorMessage", "Gửi yêu cầu hoàn trả thất bại");
+            }
+            
+            response.sendRedirect("orders");
+        } catch (SQLException ex) {
+            Logger.getLogger(OrdersServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", "Lỗi hệ thống: " + ex.getMessage());
+            request.getRequestDispatcher("/WEB-INF/orders/orders.jsp").forward(request, response);
+        }
+    }
+
+    private void approveReturn(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            OrdersDAO dao = new OrdersDAO();
+            boolean success = dao.approveReturn(id);
+            
+            if (success) {
+                request.setAttribute("successMessage", "Đã phê duyệt yêu cầu hoàn trả");
+            } else {
+                request.setAttribute("errorMessage", "Phê duyệt thất bại");
+            }
+            
+            response.sendRedirect("orders");
+        } catch (SQLException ex) {
+            Logger.getLogger(OrdersServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", "Lỗi hệ thống: " + ex.getMessage());
+            request.getRequestDispatcher("/WEB-INF/orders/orders.jsp").forward(request, response);
+        }
+    }
+
+    private void rejectReturn(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            OrdersDAO dao = new OrdersDAO();
+            boolean success = dao.rejectReturn(id);
+            
+            if (success) {
+                request.setAttribute("successMessage", "Đã từ chối yêu cầu hoàn trả");
+            } else {
+                request.setAttribute("errorMessage", "Từ chối thất bại");
+            }
+            
+            response.sendRedirect("orders");
+        } catch (SQLException ex) {
+            Logger.getLogger(OrdersServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", "Lỗi hệ thống: " + ex.getMessage());
+            request.getRequestDispatcher("/WEB-INF/orders/orders.jsp").forward(request, response);
+        }
     }
 
     /**

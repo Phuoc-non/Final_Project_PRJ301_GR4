@@ -32,6 +32,18 @@
                         <div id="tg-content" class="tg-content">
                             <div class="tg-products">
 
+                                <!-- THÔNG BÁO KẾT QUẢ TÌM KIẾM -->
+                                <c:if test="${not empty keyword}">
+                                    <div class="alert alert-info" style="margin-bottom: 20px;">
+                                        <i class="fa fa-search"></i> 
+                                        Kết quả tìm kiếm cho: <strong>"${keyword}"</strong> 
+                                        - Tìm thấy <strong>${fn:length(list)}</strong> sản phẩm
+                                        <a href="${pageContext.request.contextPath}/ab" class="btn btn-sm btn-default" style="margin-left: 10px;">
+                                            <i class="fa fa-times"></i> Xóa tìm kiếm
+                                        </a>
+                                    </div>
+                                </c:if>
+
                                 <!-- FORM SẮP XẾP -->
                                 <div class="tg-refinesearch mb-3">
                                     <form method="get" class="tg-formtheme tg-formsortshoitems" action="ab">
@@ -103,15 +115,28 @@
                                         }
                                     } else {
                                     %>
-                                    <div class="col-12 text-center">
-                                        <p>Không có sản phẩm nào.</p>
+                                    <div class="col-12 text-center" style="padding: 60px 20px;">
+                                        <c:choose>
+                                            <c:when test="${not empty keyword}">
+                                                <div class="alert alert-warning">
+                                                    <i class="fa fa-exclamation-triangle fa-3x" style="margin-bottom: 15px;"></i>
+                                                    <h3>Không tìm thấy kết quả</h3>
+                                                    <p>Không tìm thấy sản phẩm nào khớp với từ khóa <strong>"${keyword}"</strong></p>
+                                                    <p>Vui lòng thử lại với từ khóa khác hoặc 
+                                                        <a href="${pageContext.request.contextPath}/ab" class="btn btn-primary">
+                                                            <i class="fa fa-home"></i> Xem tất cả sản phẩm
+                                                        </a>
+                                                    </p>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <p>Không có sản phẩm nào.</p>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                     <% }%>
 
                                 </div>
-
-
-
 
                             </div>
                         </div>
@@ -171,7 +196,6 @@
                                 </ul>
                             </div>
                         </div>
-
 
                     </div>
                 </div>
