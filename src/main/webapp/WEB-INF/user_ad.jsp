@@ -100,7 +100,7 @@
                                                                 data-target="#myModal_delete${p.registration.id}">
                                                             <i class="fa fa-trash"></i>
                                                         </button>
-                                                    </td>
+                                                    </td>   
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

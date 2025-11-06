@@ -48,8 +48,8 @@
                         <div class="form-group col-md-6">
                             <label><span style="color: red;">*</span>Mã khuyến mãi</label>
 
-                            <input type="text" name="code" pattern="[A-Z0-9]{10}" required
-                                   title="Enter exactly 6 characters: uppercase letters and digits only">
+                            <input type="text" name="code" pattern="[A-Z0-9]{6,10}" required
+                                   title="Enter from 6 to 10 characters: uppercase letters and digits only">
 
                         </div>
 
@@ -62,7 +62,7 @@
                             <input type="date"  name="eday">
                         </div>
 
-                       
+
 
                         <div class="form-group col-md-4">
                             <label><span style="color: red;">*</span>Giá trị giảm %</label>
@@ -122,7 +122,7 @@
                             <td><fmt:formatDate value="${pro.startDay}" pattern="dd-MM-yyyy"/></td>
                             <td><fmt:formatDate value="${pro.endDay}" pattern="dd-MM-yyyy"/></td>
 
-                        
+
                             <c:choose>
                                 <c:when test="${pro.status == 1}">
                                     <td class="bg-success text-white">Đang diễn ra</td>
@@ -173,7 +173,7 @@
                                         <label>Ngày kết thúc</label>
                                         <input  readonly type="date"  id="edayInput">
                                     </div>
-                                  
+
 
                                     <div class="form-group col-md-6">
                                         <label>Giá trị giảm %</label>
@@ -208,7 +208,7 @@
                         var minvalue = button.data('minvalue');
                         var discount = button.data('discount');
                         var id = button.data('id');
-                      
+
                         // Gán id vào input ?n trong modal (?? g?i form)
                         $(this).find('#codeInput').val(code);
                         $(this).find('#sdayInput').val(sday);
@@ -217,7 +217,7 @@
                         $(this).find('#minvalueInput').val(minvalue);
                         $(this).find('#discountInput').val(discount);
                         $(this).find('#idInput').val(id);
-                       
+
                     });
                 </script>
 
@@ -255,7 +255,7 @@
 
 
             </table>
-        
+
             <style>
                 .pagination {
                     display: flex;
@@ -318,8 +318,8 @@
                     </ul>
                 </nav>
             </div>
-        
-       
+
+
         </div>
     </div>
 
@@ -344,21 +344,21 @@
             </div>
         </div>
     </div>
+    <script>
+        // T? ??ng m? modal sau khi trang t?i l?i
+        $(document).ready(function () {
+            $('#resultModal').modal('show');
+        });
+        //t? ?óng sau 3 s
+        setTimeout(() => {
+            $('#resultModal').modal('hide');
+        }, 3000);
 
+
+    </script>
 </c:if>
 
-<script>
-    // T? ??ng m? modal sau khi trang t?i l?i
-    $(document).ready(function () {
-        $('#resultModal').modal('show');
-    });
-    //t? ?óng sau 3 s
-    setTimeout(() => {
-        $('#resultModal').modal('hide');
-    }, 3000);
 
-
-</script>
 
 
 

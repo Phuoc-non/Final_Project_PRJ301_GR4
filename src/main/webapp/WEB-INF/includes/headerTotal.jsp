@@ -27,10 +27,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/color.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
 
-    
+    <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-library.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/vendor/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body class="tg-home tg-homeone">
 
@@ -74,10 +76,10 @@
                             <div class="tg-wishlistandcart">
                                 <div>
                                     <a href="${pageContext.request.contextPath}/cart" id="tg-minicart" class="tg-btnthemedropdown" aria-haspopup="true" aria-expanded="false">
-<!--                                        <span class="tg-themebadge">7</span>-->                                     
+                                        <!--                                        <span class="tg-themebadge">7</span>-->                                     
                                         <i class="icon-cart"></i>
                                         <span>Cart</span>
-<!--                                        <span>$123.00</span>-->
+                                        <!--                                        <span>$123.00</span>-->
                                     </a>                                 
                                 </div>
                             </div>
@@ -112,8 +114,8 @@
                                             <% if (isAdmin) { %>
                                         <li >
                                             <a href="category">All Categories</a>
-                                            </li>
-                                                   
+                                        </li>
+
                                         <li >
                                             <a href="authors">Authors</a>
 
@@ -121,7 +123,7 @@
                                         <li><a href="bm">Book</a></li>
                                         <li><a href="cutomer">Customer</a></li>
                                         <li><a href="${pageContext.request.contextPath}/orders">Order</a></li>
-                                       
+
                                         <li><a href="promotion">Promotion</a></li>
                                         <li><a href="statistics">Statistic</a></li>
                                             <% } else { %>

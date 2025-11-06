@@ -68,11 +68,8 @@ Author     : Asus
                                                 </td>
                                                 <td class="total">${item.quantity * item.getProduct().price} $</td>
                                                 <td>
-                                                   <a href="">
-                                                            <button type="button" class="btn btn-danger delete" data-sku="${item.sku}" style="width: 80px;">
-                                                                <i class="fa-solid fa-trash"></i>
-                                                            </button>
-                                                        </a> 
+                                                    <button type="button" class="btn btn-danger delete"
+                                                            data-sku="${item.sku}" style="width:80px;">Xóa</button>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -89,6 +86,7 @@ Author     : Asus
                                     </form>
                                 </div>
                             </c:if>
+
                             <!-- Giỏ hàng trống -->
                             <c:if test="${empty listCartItem}">
                                 <h5 style="color:red; margin-top:10px;">Hiện tại giỏ sách trống</h5>

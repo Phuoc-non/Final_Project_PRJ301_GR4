@@ -28,14 +28,15 @@ public class OrdersDAO extends DBContext {
         List<Order> list = new ArrayList<>();
         String sql = """
                 SELECT 
+                
                     o.id,                           
-                    o.name,                      
-                    o.phone,                     
-                    o.address,                      
-                    o.total,                        
+                    o.name,                         
+                    o.phone,                        
+                    o.address,                     
+                    o.total,                       
                     o.datebuy,                   
-                    o.updated_at,               
-                    o.status                      
+                    o.updated_at,                   
+                    o.status                        
                 FROM Orders o
                 JOIN OrderDetails od ON o.id = od.order_id
                 JOIN Product p ON od.sku = p.sku

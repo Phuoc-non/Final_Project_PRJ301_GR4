@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/includes/headerTotal.jsp" />
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 
 <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner"
@@ -88,7 +90,7 @@
                         </tr>
                         <tr>
                             <th>Ngày đặt</th>
-                            <td>${order.datebuy}</td>
+                                     <td><fmt:formatDate value="${order.datebuy}" pattern="dd/MM/yyyy" /></td>
                         </tr>
                         <tr>
                             <th>Giá sau giảm</th>
