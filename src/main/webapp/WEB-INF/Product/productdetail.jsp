@@ -305,7 +305,7 @@
                     <textarea name="content" placeholder="Enter review..." 
                               style="width:100%;height:100px;resize:none;margin-top:10px;"></textarea>
                     <br>
-                    <input type="submit" value="submit" style="margin-top:10px; background-color: orange; width: 100px; height: 50px">
+                    <input type="submit" value="Submit" class="btn btn-warning" style="margin-top: 30px; padding: 10px">
                 </form>
 
                 <style>
