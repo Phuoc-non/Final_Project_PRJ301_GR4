@@ -1,6 +1,8 @@
 Controller\LoginServlet.class
+Controller\AuthorsServlet.class
 Controller\RegisterServlet.class
 dao\ProductDetailDao.class
+dao\CustomerDAO.class
 Controller\StatisticsServlet.class
 Util\MD5Util.class
 Controller\ChangePasswordServlet.class
@@ -13,6 +15,7 @@ dao\OrderDetailsDAO.class
 model\ChartData.class
 dao\TestLogin.class
 com\mycompany\lib\resources\JakartaEE11Resource.class
+Controller\CutomerServlet.class
 Controller\Book_Manager.class
 Controller\ProfileServlet.class
 dao\HomeDAO.class
@@ -21,7 +24,6 @@ model\Author.class
 model\Category.class
 model\Book.class
 model\Registration.class
-Controller\LogoutServlet.class
 Controller\ProductDetailSerVlet.class
 dao\ProductDAO.class
 Controller\CategoryServlet.class
@@ -36,9 +38,11 @@ com\mycompany\lib\JakartaRestConfiguration.class
 model\Authors.class
 Controller\AllBookServlet.class
 Controller\BookServlet.class
+dao\AuthorsDAO.class
 dao\StatisticsDAO.class
 model\OrderDetails.class
 model\Promotion.class
+model\Order.class
 model\UserReview.class
 dao\ReviewDao.class
 dao\PromotionDao.class
