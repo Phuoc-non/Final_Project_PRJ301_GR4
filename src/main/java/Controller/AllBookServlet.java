@@ -61,31 +61,45 @@ public class AllBookServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         ProductDAO dao = new ProductDAO();
 
-        // Nhận tham số
+        // Nhận tham số từ client
         String keyword = request.getParameter("keyword");
         String type = request.getParameter("type");
         String sortBy = request.getParameter("sortBy");
-        List<Book> list;
 
-        // Ưu tiên tìm kiếm trước
+        // ✅ Gán mặc định
+        if (type == null || type.isEmpty()) {
+            type = "title";
+        }
+        List<Book> list = null;
+
+        // ✅ Ưu tiên tìm kiếm
         if (keyword != null && !keyword.trim().isEmpty()) {
-            if ("author".equals(type)) {
-                list = dao.searchBookByAuthor(keyword.trim());
+            keyword = keyword.trim();
+            if ("author".equalsIgnoreCase(type)) {
+                list = dao.searchBookByAuthor(keyword);
             } else {
-                list = dao.searchBookByTitle(keyword.trim());
+                list = dao.searchBookByTitle(keyword);
+                type = "title"; // tránh lỗi UI
             }
-        } else if ("title".equals(sortBy)) { // đổi từ "name" -> "title" cho khớp với value trong JSP
-            list = dao.getBooksSortedByName();
-        } else if ("price".equals(sortBy)) {
-            list = dao.getBooksSortedByPrice();
         } else {
-            list = dao.getAllBook();
+            // ✅ Không search → sort
+            if ("title".equalsIgnoreCase(sortBy)) {
+                list = dao.getBooksSortedByName();
+            } else if ("price".equalsIgnoreCase(sortBy)) {
+                list = dao.getBooksSortedByPrice();
+            } else {
+                // ✅ Không search & không sort → lấy tất cả
+                list = dao.getAllBook();
+            }
         }
 
+        // ✅ Lấy danh mục
         List<Category> categories = dao.getAllCategories();
 
+        // ✅ Đẩy dữ liệu sang JSP
         request.setAttribute("list", list);
         request.setAttribute("categories", categories);
         request.setAttribute("keyword", keyword);
