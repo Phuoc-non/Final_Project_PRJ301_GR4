@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Registration"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@include file="../WEB-INF/headerTotal.jsp" %>
+<%@include file="../WEB-INF/includes/headerTotal.jsp" %>
 <%
     Registration currentUser = (Registration) request.getAttribute("currentUser");
     if (currentUser == null) {
@@ -120,7 +120,7 @@
     </div>
 </div>
 
-<%@include file="footer.jsp" %>
+                    <%@include file="../WEB-INF/includes/footer.jsp" %>
 
 <script>
     const editBtn = document.querySelector('#edit-btn');

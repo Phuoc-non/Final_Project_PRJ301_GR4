@@ -89,8 +89,9 @@
                                                     <td>${p.phone}</td>
                                                     <td>${p.registration.email}</td>
                                                     <td>${p.registration.address}</td>
-                                                    <td>${p.total}</td>
-                                                    <td><fmt:formatDate value="${p.dateBuy}" pattern="dd/MM/yyyy"/></td>
+                                                    <td>${p.totalQuantity}</td>
+                                                    
+                                                    <td><fmt:formatDate value="${p.datebuy}" pattern="dd/MM/yyyy"/></td>
                                                     <td>
                                                         <a href="<c:url value='/cutomer?view=edit-user&id=${p.registration.id}'/>"
                                                            class="btn btn-warning">Detail</a>
@@ -215,4 +216,4 @@
         </div>
     </main>
 
-<%@include file="footer.jsp" %>
+                       <%@include file="../WEB-INF/includes/footer.jsp" %>

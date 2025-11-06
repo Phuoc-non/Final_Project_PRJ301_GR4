@@ -19,7 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Cart;
 import model.CartItem;
-import model.Orders;
+import model.Order;
 import model.Promotion;
 import model.Registration;
 
@@ -72,7 +72,7 @@ public class OrdersServlet extends HttpServlet {
         String view = request.getParameter("view");
         if ("order".equals(view) || view == null || view.isEmpty()) {
             OrdersDAO dao = new OrdersDAO();
-            List<Orders> orderList = dao.getOrders();
+            List<Order> orderList = dao.getOrders();
             request.setAttribute("orderList", orderList);
             request.getRequestDispatcher("/WEB-INF/orders/orders.jsp").forward(request, response);
 
@@ -111,7 +111,6 @@ public class OrdersServlet extends HttpServlet {
             for (CartItem item : list) {
                 total += item.getProduct().getPrice() * item.getQuantity();
             }
-
                OrdersDAO dao = new OrdersDAO();
                List<Promotion> listPromotion = dao.getListPromotion();
                
@@ -164,7 +163,7 @@ public class OrdersServlet extends HttpServlet {
                 return;
             }
 
-            Orders order = new Orders();
+            Order order = new Order();
             order.setName(name);
             order.setPhone(phone);
             order.setAddress(address);
@@ -189,7 +188,7 @@ public class OrdersServlet extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("id"));
 
-        Orders order = new Orders();
+        Order order = new Order();
         order.setId(id);
 
         OrdersDAO dao = new OrdersDAO();

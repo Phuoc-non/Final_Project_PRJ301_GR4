@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.CartItem;
-import model.Orders;
+import model.Order;
 import model.Promotion;
 
 /**
@@ -24,8 +24,8 @@ import model.Promotion;
  */
 public class OrdersDAO extends DBContext {
 
-    public List<Orders> getOrders() {
-        List<Orders> list = new ArrayList<>();
+    public List<Order> getOrders() {
+        List<Order> list = new ArrayList<>();
         String sql = """
                 SELECT 
                     o.id,                           
@@ -48,7 +48,7 @@ public class OrdersDAO extends DBContext {
         try (PreparedStatement ps = this.getConnection().prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                Orders order = new Orders(
+                Order order = new Order(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("phone"),
@@ -93,7 +93,7 @@ public class OrdersDAO extends DBContext {
         }
     }
 
-    public int confirmOrders(Orders order, List<CartItem> cartItems, String username) {
+    public int confirmOrders(Order order, List<CartItem> cartItems, String username) {
         String sqlInsertOrder = """
         INSERT INTO Orders (dateBuy, name, phone, address, username, total, status, updated_at)
         VALUES (GETDATE(), ?, ?, ?, ?, ?, N'Chờ xác nhận', GETDATE())
@@ -144,8 +144,6 @@ public class OrdersDAO extends DBContext {
             return 0;
         }
     }
-
-    
     public List<Promotion> getListPromotion(){
         List<Promotion> list = new ArrayList<>();
         try {

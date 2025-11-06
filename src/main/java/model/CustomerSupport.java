@@ -24,7 +24,7 @@ public class CustomerSupport {
 
     // Thông tin bổ sung từ bảng khác
     private Registration registration;
-    private Orders order;
+    private Order order;
 
     public CustomerSupport() {
     }
@@ -123,11 +123,11 @@ public class CustomerSupport {
         this.registration = registration;
     }
 
-    public Orders getOrder() {
+    public Order getOrder() {
         return order;
     }
 
-    public void setOrder(Orders order) {
+    public void setOrder(Order order) {
         this.order = order;
     }
 
