@@ -69,16 +69,28 @@ public class Book_Manager extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String view = request.getParameter("view");
-
+        String sortBy = request.getParameter("sortBy");
         ProductDAO dao = new ProductDAO();
         List<Product> list;
 
+        // 🔸 kiểm tra có yêu cầu sắp xếp không
+        if (sortBy != null && !sortBy.isEmpty()) {
+            list = dao.getListSorted(sortBy); // dùng ORDER BY trong DAO
+        } else {
+            list = dao.getList(); // mặc định
+        }
+
+        request.setAttribute("list", list);
+        request.setAttribute("sortBy", sortBy); // để JSP hiển thị chọn đúng
+        
         // điều hướng view
         if ("create".equals(view)) {
             List<Author> authors = dao.getAllAuthors();
             List<Category> categories = dao.getAllCategories();
             request.setAttribute("authors", authors);
             request.setAttribute("categories", categories);
+            String nextCode = dao.generateNextBookCode();
+            request.setAttribute("nextCode", nextCode);
             request.getRequestDispatcher("WEB-INF/CRUD_Book/create.jsp").forward(request, response);
         } else if ("detail".equals(view)) {
             String sku = request.getParameter("sku");
@@ -111,7 +123,6 @@ public class Book_Manager extends HttpServlet {
                 }
             }
 
-            String sortBy = request.getParameter("sortBy");
             List<Product> allBooks;
             if (sortBy != null && !sortBy.isEmpty()) {
                 allBooks = dao.getListSorted(sortBy);
@@ -163,13 +174,14 @@ public class Book_Manager extends HttpServlet {
                 String category_name = request.getParameter("catalog");
                 int pages = Integer.parseInt(request.getParameter("pages"));
                 double price = Double.parseDouble(request.getParameter("price"));
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-                // ⚙️ Fix format ngày: form nhập dd/MM/yyyy → đổi sang đúng pattern
+                //️ Fix format ngày: form nhập dd/MM/yyyy → đổi sang đúng pattern
                 java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
                 java.util.Date utilDate = sdf.parse(dateStr);
                 java.sql.Date created_date = new java.sql.Date(utilDate.getTime());
 
-                // 🟩 Upload ảnh (từ máy người dùng)
+                // Upload ảnh (từ máy người dùng)
                 Part filePart = request.getPart("img");
                 String fileName = filePart.getSubmittedFileName();
                 String imgPath;
@@ -195,21 +207,11 @@ public class Book_Manager extends HttpServlet {
                     imgPath = "https://example.com/default.jpg";
                 }
 
-                // ⚙️ Kiểm tra SKU trùng
-                if (dao.isSkuExist(sku)) {
-                    // 🟢 Gửi lại danh sách để form không trống
-                    List<Author> authors = dao.getAllAuthors();
-                    List<Category> categories = dao.getAllCategories();
-
-                    request.setAttribute("authors", authors);
-                    request.setAttribute("categories", categories);
-
-                    request.setAttribute("error", "❌ SKU already exists!");
-                    request.getRequestDispatcher("WEB-INF/CRUD_Book/create.jsp").forward(request, response);
-                    return;
+                if (sku == null || sku.isEmpty()) {
+                    sku = dao.generateNextBookCode(); // fallback nếu bị null
                 }
 
-                int result = dao.createList(sku, // BOOK23
+                int result = dao.createList(sku,
                         name,
                         author,
                         imgPath,
@@ -217,13 +219,18 @@ public class Book_Manager extends HttpServlet {
                         created_date,
                         pages,
                         category_name,
-                        price);
+                        price,
+                        quantity);
 
                 if (result == 1) {
                     // ✅ Thành công → quay về list
                     response.sendRedirect(request.getContextPath() + "/bm?view=list");
                 } else {
                     // ❌ Thất bại → quay lại form
+                    List<Author> authors = dao.getAllAuthors();
+                    List<Category> categories = dao.getAllCategories();
+                    request.setAttribute("authors", authors);
+                    request.setAttribute("categories", categories);
                     request.setAttribute("error", "❌ Failed to add book. Please check your data.");
                     request.getRequestDispatcher("WEB-INF/CRUD_Book/create.jsp").forward(request, response);
                 }
@@ -237,7 +244,7 @@ public class Book_Manager extends HttpServlet {
             try {
                 String sku = request.getParameter("sku");
 
-                // ⚙️ Xóa trong DB
+                // ️ Xóa trong DB
                 int result = dao.deleteList(sku);
 
                 if (result == 1) {
@@ -264,9 +271,10 @@ public class Book_Manager extends HttpServlet {
                 String author = request.getParameter("author");
                 String description = request.getParameter("description");
                 String dateStr = request.getParameter("created_date");
-                String category_name = request.getParameter("catalog");
+                String category_name = request.getParameter("catalog").trim();
                 int pages = Integer.parseInt(request.getParameter("pages"));
                 double price = Double.parseDouble(request.getParameter("price"));
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
                 String oldImg = request.getParameter("oldImg"); // 🟢 ảnh cũ
 
                 java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
@@ -291,7 +299,7 @@ public class Book_Manager extends HttpServlet {
                 }
 
                 int result = dao.updateBook(sku, name, author, imgPath, description,
-                        created_date, pages, category_name, price);
+                        created_date, pages, category_name, price, quantity);
 
                 if (result == 1) {
                     response.sendRedirect(request.getContextPath() + "/bm?view=list");

@@ -49,12 +49,12 @@
                                     <form method="get" class="tg-formtheme tg-formsortshoitems" action="ab">
                                         <fieldset>
                                             <div class="form-group">
-                                                <label>Sắp xếp theo:</label>
+                                                <label>Sort by:</label>
                                                 <span class="tg-select" style="padding-left: 40px;">
                                                     <select name="sortBy" id="sortBy" onchange="this.form.submit()">
-                                                        <option value="">---Chọn sắp xếp---</option>
-                                                        <option value="title" ${sortBy == 'title' ? 'selected' : ''}>Tên sách</option>
-                                                        <option value="price" ${sortBy == 'price' ? 'selected' : ''}>Đơn giá</option>
+                                                        <option value="">---Select sort---</option>
+                                                        <option value="title" ${sortBy == 'title' ? 'selected' : ''}>Book Name</option>
+                                                        <option value="price" ${sortBy == 'price' ? 'selected' : ''}>Price</option>
                                                     </select>
                                                 </span>
                                             </div>
@@ -83,7 +83,7 @@
                                             </figure>
                                             <div class="tg-postbookcontent mt-2">
                                                 <ul class="tg-bookscategories" style="padding: 0; list-style: none;">
-                                                    <li><a href="#"><%= b.getCategory_name() != null ? b.getCategory_name() : "Chưa có thể loại"%></a></li>
+                                                    <li><a href="#"><%= b.getCategory_name() != null ? b.getCategory_name() : "No category yet"%></a></li>
                                                 </ul>
                                                 <div class="tg-booktitle">
                                                     <h4 style="height: 40px; font-weight: bold;">
@@ -94,19 +94,19 @@
 
                                                 </div>
                                                 <span class="tg-bookwriter d-block" style="text-align: left; margin-left: 0px;">
-                                                    Tác giả: <%= b.getAuthor_name() != null ? b.getAuthor_name() : "Không rõ"%>
+                                                    Author: <%= b.getAuthor_name() != null ? b.getAuthor_name() : "Unspecified"%>
                                                 </span>
                                                 <span class="tg-bookwriter d-block" style="text-align: left; margin-left: 0px;">
-                                                    Đã bán: <%= b.getQuantity_orderDetail()%>
+                                                    Sold: <%= b.getQuantity_orderDetail()%>
                                                 </span>
                                                 <span class="tg-bookwriter d-block" style="text-align: left; margin-left: 0px;">
-                                                    Còn: <%= b.getQuantity_product()%>
+                                                    Remaining: <%= b.getQuantity_product()%>
                                                 </span>
 
                                                 <span class="tg-bookprice d-block"><ins><%= String.format("%,.0f", b.getPrice_product())%> $</ins></span>
                                                 <a class="tg-btn tg-btnstyletwo mt-2" >
                                                     <i class="fa fa-shopping-basket"></i>
-                                                    <em class="quan1" data-sku="<%=b.getSku_product()%>" style="cursor: pointer">Thêm Vào Giỏ</em>
+                                                    <em class="quan1" data-sku="<%=b.getSku_product()%>" style="cursor: pointer">Add to cart</em>
                                                 </a>
                                             </div>
                                         </div>
@@ -238,8 +238,8 @@
                                                placeholder="Tìm kiếm với ... ">
                                     </div>
                                     <select name="type" class="form-group" style="width: 130px; margin-top: 3px;" id="searchBy">
-                                        <option value="title" ${type == 'title' ? 'selected' : ''}>Tiêu đề</option>
-                                        <option value="author" ${type == 'author' ? 'selected' : ''}>Tác giả</option>
+                                        <option value="title" ${type == 'title' ? 'selected' : ''}>Title</option>
+                                        <option value="author" ${type == 'author' ? 'selected' : ''}>Author/option>
                                     </select>
                                 </form>
 

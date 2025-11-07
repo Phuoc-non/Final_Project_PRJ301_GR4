@@ -79,6 +79,11 @@
                     <label class="form-label fw-semibold"><span style="color:red">*</span>Price</label>
                     <input type="text" class="form-control" readonly value="${product.price_product}">
                 </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold"><span style="color: red">*</span>Quantity</label>
+                    <input type="number" class="form-control" name="quantity" readonly value="${product.quantity}">
+                </div>
             </div> 
         </div>
 
@@ -92,12 +97,12 @@
                 <c:choose>
                     <c:when test="${not empty product.img}">
                         <c:choose>
-                         
+
                             <c:when test="${fn:startsWith(product.img, 'http')}">
                                 <img src="${product.img}" alt="Book Image"
                                      style="max-width:100%; max-height:100%; object-fit:contain;">
                             </c:when>
-                        
+
                             <c:otherwise>
                                 <img src="${pageContext.request.contextPath}/images/${product.img}" alt="Book Image"
                                      style="max-width:100%; max-height:100%; object-fit:contain;">

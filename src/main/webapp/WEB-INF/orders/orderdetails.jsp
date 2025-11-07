@@ -12,10 +12,10 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="tg-innerbannercontent">
-                    <h1 style="margin-bottom: 20px;">Thông tin đơn hàng</h1>
+                    <h1 style="margin-bottom: 20px;">Order information</h1>
                     <ol class="tg-breadcrumb">
-                        <li><a href="home.jsp">Trang chủ</a></li>
-                        <li class="tg-active">Đơn hàng</li>
+                        <li><a href="home.jsp">Home Page</a></li>
+                        <li class="tg-active">Order</li>
                     </ol>
                 </div>
             </div>
@@ -31,15 +31,15 @@
                 <!-- Bảng Sách Đã Đặt -->
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-7 pull-right">
                     <div id="tg-content" class="tg-content">
-                        <h2>Sách đã đặt</h2>
+                        <h2>Book already booked</h2>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>STT</th>
-                                    <th>Tên sách</th>
-                                    <th>Số lượng</th>
-                                    <th>Đơn giá</th>
-                                    <th>Tạm tính</th>
+                                    <th>NO.</th>
+                                    <th>Book Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Provisional</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,22 +70,22 @@
 
                 <!-- Thông tin Đơn hàng -->
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 pull-left">
-                    <h2>Đơn hàng</h2>
+                    <h2>Orders</h2>
                     <table class="styled-table">
                         <tr>
-                            <th>Mã đơn</th>
+                            <th>ID</th>
                             <td>${order.id}</td>
                         </tr>
                         <tr>
-                            <th>Họ và tên</th>
+                            <th>Full name</th>
                             <td>${order.name}</td>
                         </tr>
                         <tr>
-                            <th>Số điện thoại</th>
+                            <th>Phone</th>
                             <td>${order.phone}</td>
                         </tr>
                         <tr>
-                            <th>Địa chỉ</th>
+                            <th>Address</th>
                             <td>${order.address}</td>
                         </tr>
                         <tr>
@@ -97,7 +97,7 @@
                             <td>${order.total} $</td>
                         </tr>
                         <tr>
-                            <th>Trạng thái</th>
+                            <th>Status</th>
                             <td>${order.status}</td>
                         </tr>
                     </table>
@@ -114,12 +114,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" style="text-transform:none;">
-                    Bạn chắc chắn muốn xóa đơn hàng này?
+                    Are you sure you want to delete this order?
                 </h4>
             </div>
             <div class="modal-body">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                <a href="deleteOrder?id=${order.id}" class="btn btn-primary">Xác nhận</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a href="deleteOrder?id=${order.id}" class="btn btn-primary">Confirm</a>
             </div>
         </div>
     </div>

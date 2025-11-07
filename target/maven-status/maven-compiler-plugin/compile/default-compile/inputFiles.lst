@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\com\mycompany\lib\JakartaRestConfiguration.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\com\mycompany\lib\resources\JakartaEE11Resource.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Controller\AllBookServlet.java
@@ -51,3 +52,60 @@ D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Promotion.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\Registration.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\model\UserReview.java
 D:\java code\K4\Lib\Final_Project_PRJ301_GR4\src\main\java\Util\MD5Util.java
+=======
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\com\mycompany\lib\JakartaRestConfiguration.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\com\mycompany\lib\resources\JakartaEE11Resource.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\AllBookServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\AuthorsServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\Book_Manager.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\BookServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\CartServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\CartUpdateServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\CategoryServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\ChangePasswordServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\CustomerSupportServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\CutomerServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\LoginServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\LogoutServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\OrderDetailsServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\OrdersServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\ProductDetailSerVlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\ProfileServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\PromotionServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\RegisterServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\ReviewServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Controller\StatisticsServlet.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\AuthorsDAO.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\CartDAO.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\CategoryDao.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\CustomerDAO.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\CustomerSupportDAO.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\HomeDAO.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\OrderDetailsDAO.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\OrdersDAO.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\ProductDAO.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\ProductDetailDao.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\PromotionDao.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\RegistrationDAO.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\ReviewDao.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\StatisticsDAO.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\dao\TestLogin.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\db\DBContext.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\Author.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\Authors.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\Book.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\Cart.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\CartItem.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\Category.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\ChartData.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\CustomerSupport.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\Order.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\OrderDetails.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\Orders.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\Product.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\ProductDetail.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\Promotion.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\Registration.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\model\UserReview.java
+D:\Project_PRJ\Final_Project_PRJ301_GR4\src\main\java\Util\MD5Util.java
+>>>>>>> Tinh

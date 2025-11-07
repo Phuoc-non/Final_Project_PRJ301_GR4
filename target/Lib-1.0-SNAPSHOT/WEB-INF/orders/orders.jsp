@@ -4,24 +4,19 @@
 <jsp:include page="/WEB-INF/includes/headerTotal.jsp" />
 
 
-    <body>
-        <header id="tg-header" class="tg-header tg-haslayout">
-
-        </header>
-
-        <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" 
-             data-z-index="-100" data-appear-top-offset="600" 
-             data-parallax="scroll" data-image-src="../images/parallax/bgparallax-07.jpg">
-            <div class="container">
-                <div class="tg-innerbannercontent">
-                    <h1>Quản lý đơn hàng</h1>
-                    <ol class="tg-breadcrumb">
-                        <li><a href="#">Trang chủ</a></li>
-                        <li class="tg-active">Đơn hàng</li>
-                    </ol>
-                </div>
+    <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" 
+         data-z-index="-100" data-appear-top-offset="600" 
+         data-parallax="scroll" data-image-src="../images/parallax/bgparallax-07.jpg">
+        <div class="container">
+            <div class="tg-innerbannercontent">
+                <h1>Order management</h1>
+                <ol class="tg-breadcrumb">
+                    <li><a href="#">Home Page</a></li>
+                    <li class="tg-active">Order</li>
+                </ol>
             </div>
         </div>
+    </div>
 
         <main id="tg-main" class="tg-main tg-haslayout">
             <div class="tg-sectionspace tg-haslayout" style="padding-top: 50px;">
@@ -129,36 +124,8 @@
                                                 </td>
                                             </tr>
 
-                                            <!-- Modal Delete -->                           
-                                        <div class="modal fade" id="delete${order.id}" tabindex="-1" role="dialog">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <form action="${pageContext.request.contextPath}/orders" method="post">
-                                                        <input type="hidden" name="action" value="delete">
-                                                        <input type="hidden" name="id" value="${order.id}">
-                                                        <c:choose>
-                                                            <c:when test="${order.status eq 'Đang giao'}">
-                                                                <div class="modal-header">
-                                                                    <h4>Không thể xóa đơn hàng đang giao!</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-                                                                </div>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <div class="modal-header">
-                                                                    <h4>Bạn chắc chắn muốn xóa đơn hàng này?</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                                                                    <button type="submit" class="btn btn-primary">Xác nhận</button>
-                                                                </div>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
+
+
 
 
                                         <!-- Modal Edit -->
@@ -280,20 +247,21 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Pagination -->
-                    <nav aria-label="Page navigation">
-                        <ul class="pager">
-                            <li><a href="?page=1">1</a></li>
-                            <li><a href="?page=2">2</a></li>
-                            <li><a href="?page=3">3</a></li>
-                            <li><a href="?page=4">4</a></li>
-                            <li><a href="?page=5">5</a></li>
-                        </ul>
-                    </nav>
                 </div>
+
+                <!-- Pagination -->
+                <nav aria-label="Page navigation">
+                    <ul class="pager">
+                        <li><a href="?page=1">1</a></li>
+                        <li><a href="?page=2">2</a></li>
+                        <li><a href="?page=3">3</a></li>
+                        <li><a href="?page=4">4</a></li>
+                        <li><a href="?page=5">5</a></li>
+                    </ul>
+                </nav>
             </div>
-        </main>
+        </div>
+    </main>
 
         <script>
             // Toggle "other reason" textarea when user selects "Khác"
@@ -337,4 +305,4 @@
             }
         </script>
 
-        <%@include file="../includes/footer.jsp" %>
+    <%@include file="../includes/footer.jsp" %>

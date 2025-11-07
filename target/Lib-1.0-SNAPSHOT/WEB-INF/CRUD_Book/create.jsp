@@ -23,13 +23,6 @@
     </div>
 
 
-    <c:if test="${not empty error}">
-        <script>
-            alert("${error}");
-        </script>
-    </c:if>
-
-
     <!-- FORM -->
     <form action="http://localhost:8080/Lib/bm" method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="create"/>
@@ -81,14 +74,21 @@
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label fw-semibold"><span style="color: red">*</span>Book Code</label>
-                        <input type="text" class="form-control" name="sku" required placeholder="Enter Book Code">
+                        <input type="text" class="form-control" name="sku" 
+                               value="${nextCode}" readonly required>
                     </div>
+
                 </div> 
 
                 <div class="row">  <br>
                     <div class="col-md-6 mb-3"> 
                         <label class="form-label fw-semibold"><span style="color: red">*</span>Price</label>
                         <input type="number" class="form-control" name="price" step="0.1" required placeholder="Enter Price">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold"><span style="color: red">*</span>Quantity</label>
+                        <input type="number" class="form-control" name="quantity" required placeholder="Enter Quantity">
                     </div>
                 </div>
             </div> <!-- end col-md-8 -->
@@ -100,7 +100,7 @@
                 </button>
                 <input type="file" id="imageFile" class="d-none" name="img" accept="image/*" onchange="previewImage(event)" required >
 
-                <!-- 🟦 Khung hiển thị ảnh -->
+                <!-- Khung hiển thị ảnh -->
                 <br>
                 <div class="border d-flex align-items-center justify-content-center rounded-3"
                      style="width: 200px; height: 300px; margin: 0 auto; background-color: #f8f9fa;">
@@ -121,92 +121,81 @@
 
 
     <script>
-        // Hiển thị ảnh preview ngay sau khi chọn file
-        function previewImage(event) {
-            const img = document.getElementById('preview');
-            const file = event.target.files[0];
-            if (file) {
-                img.src = URL.createObjectURL(file);
-                img.style.display = 'block';
-            } else {
-                img.src = "#";
-                img.style.display = 'none';
+        document.addEventListener("DOMContentLoaded", () => {
+
+            // Hàm hiển thị lỗi màu đỏ dưới input
+            function showError(input, message) {
+                // Xóa lỗi cũ
+                const oldError = input.parentElement.querySelector(".text-danger");
+                if (oldError)
+                    oldError.remove();
+
+                // Tạo phần tử hiển thị lỗi
+                const error = document.createElement("small");
+                error.className = "text-danger";
+                error.textContent = message;
+                input.insertAdjacentElement("afterend", error);
             }
-        }
-    </script>
 
-    <script>
-        // Chọn input ngày
-        const inputDate = document.querySelector('input[name="created_date"]');
-
-        inputDate.addEventListener('blur', function () {
-            const regex = /^(\d{2})-(\d{2})-(\d{4})$/; // Định dạng dd-MM-yyyy
-
-            if (this.value.trim() !== "" && !regex.test(this.value.trim())) {
-                alert("Please enter date in dd-MM-yyyy format!");
-                this.value = "";      // Xóa dữ liệu sai
-                this.focus();         // Đưa con trỏ lại vào ô input
+            // Hàm xóa lỗi khi nhập lại
+            function clearError(input) {
+                const oldError = input.parentElement.querySelector(".text-danger");
+                if (oldError)
+                    oldError.remove();
             }
-        });
-    </script>
 
-    <script>
-        const skuInput = document.querySelector('input[name="sku"]');
 
-        // Kiểm tra định dạng khi người dùng rời khỏi ô Book Code
-        skuInput.addEventListener('blur', function () {
-            const regex = /^book\d{2}$/i; // không phân biệt hoa thường
-            let value = skuInput.value.trim();
+            // Validate Title
+            const titleInput = document.querySelector('input[name="title"]');
+            titleInput.addEventListener('blur', function () {
+                const regex = /^[A-Za-z]+(\.?[A-Za-z\s]+)*$/;
+                const value = this.value.trim();
 
-            if (value !== "" && !regex.test(value)) {
-                alert("❌ Book Code must be in the format: BOOK + 2 digits (e.g., BOOK01)");
-                skuInput.value = "";
-                skuInput.focus();
-            } else if (value !== "") {
-                // Nếu đúng định dạng thì chuyển sang in hoa luôn
-                skuInput.value = value.toUpperCase();
-            }
-        });
-    </script>
-
-    <script>
-    const titleInput = document.querySelector('input[name="title"]');
-
-    // Khi người dùng nhập hoặc rời khỏi ô Title
-    titleInput.addEventListener('blur', function () {
-        let value = this.value.trim().toLowerCase();
-        if (value !== "") {
-            // Viết hoa chữ cái đầu mỗi từ
-            value = value.replace(/\b\w/g, function (char) {
-                return char.toUpperCase();
+                if (value !== "" && !regex.test(value)) {
+                    showError(this, "Title can only contain letters and dots (e.g., David or David.Cos)");
+                    this.value = "";
+                } else {
+                    clearError(this);
+                }
             });
-            this.value = value; // Gán lại vào input
-        }
-    });
-</script>
 
-    <script>
-        const titleInput = document.querySelector('input[name="title"]');
+            // Validate Release Date (dd-MM-yyyy)
+            const dateInput = document.querySelector('input[name="created_date"]');
+            dateInput.addEventListener('blur', function () {
+                const regex = /^(\d{2})-(\d{2})-(\d{4})$/;
+                const value = this.value.trim();
 
-        // Prevent invalid characters while typing
-        titleInput.addEventListener('input', function () {
-            this.value = this.value.replace(/[^a-zA-Z.\s]/g, '');
-            // Only allow letters, dots, and spaces
-        });
-
-        // Validate when leaving the input field
-        titleInput.addEventListener('blur', function () {
-            const regex = /^[A-Za-z]+(\.?[A-Za-z\s]+)*$/;
-            const value = this.value.trim();
-
-            if (value !== "" && !regex.test(value)) {
-                alert("Title can only contain letters and dots (e.g., David or David.Cos)");
-                this.value = "";
-                this.focus();
-            }
+                if (value !== "" && !regex.test(value)) {
+                    showError(this, "Please enter date in dd-MM-yyyy format (e.g., 01-11-2025)");
+                    this.value = "";
+                } else {
+                    clearError(this);
+                }
+            });
         });
     </script>
 
-    
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById("preview");
+            const placeholder = document.getElementById("placeholder");
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                    placeholder.style.display = "none";
+                };
+                reader.readAsDataURL(file); // đọc file ảnh để hiển thị trước
+            } else {
+                preview.src = "#";
+                preview.style.display = "none";
+                placeholder.style.display = "block";
+            }
+        }
+    </script>
+
 
     <%@include file="../includes/footer.jsp"%>

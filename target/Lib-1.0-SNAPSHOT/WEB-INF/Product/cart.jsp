@@ -45,8 +45,7 @@ Author     : Asus
                                             <th>Selling price</th>
                                             <th>Quantity</th>
                                             <th>Total</th> 
-                                            <th>Action</th>
-                                            
+                                            <th>Action</th>                                         
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -93,7 +92,7 @@ Author     : Asus
 
                             <!-- Giỏ hàng trống -->
                             <c:if test="${empty listCartItem}">
-                                <h5 style="color:red; margin-top:10px;">Hiện tại giỏ sách trống</h5>
+                                <h5 style="color:red; margin-top:10px;">Show at the empty list</h5>
                             </c:if>
                         </div>
                     </div>
@@ -102,5 +101,34 @@ Author     : Asus
         </div>
     </div>
 </main>
+
+
+<script>
+    document.querySelector('input[value="orders"]').addEventListener('click', function (e) {
+        e.preventDefault(); // Ngăn form gửi ngay
+
+        // Thu thập dữ liệu hiện tại
+        const items = [];
+        document.querySelectorAll('.quan').forEach(input => {
+            const sku = input.dataset.sku;
+            const quantity = parseInt(input.value);
+            items.push({sku, quantity});
+        });
+
+        // Gửi cập nhật lên server
+        fetch('cartupdate', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(items)
+        })
+                .then(res => res.text())
+                .then(msg => {
+                    console.log('Cart updated:', msg);
+                    // Sau khi cập nhật session thành công, chuyển sang trang orders
+                    window.location.href = 'orders?view=confirm';
+                })
+                .catch(err => console.error(err));
+    });
+</script>
 
 <%@include file="../includes/footer.jsp" %>

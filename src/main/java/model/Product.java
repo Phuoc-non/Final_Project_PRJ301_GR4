@@ -105,6 +105,8 @@ public class Product {
     public void setPrice(float price) {
         this.price = price;
     }
+    
+    
     public Product(String sku_product, String name_product, double price_product, String description_product, String img, Date created_product, int pages, String category_name, String author_name, int quantity_orderDetail) {
         this.sku_product = sku_product;
         this.name_product = name_product;
@@ -234,7 +236,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "sku_product=" + sku_product + ", name_product=" + name_product + ", price_product=" + price_product + ", description_product=" + description_product + ", img=" + img + ", created_product=" + created_product + ", pages=" + pages + ", category_name=" + category_name + ", author_name=" + author_name + ", quantity_orderDetail=" + quantity_orderDetail + '}';
+        return "Product{"  + "quantity=" + quantity + "sku_product=" + sku_product + ", name_product=" + name_product + ", price_product=" + price_product + ", description_product=" + description_product + ", img=" + img + ", created_product=" + created_product + ", pages=" + pages + ", category_name=" + category_name + ", author_name=" + author_name + ", quantity_orderDetail=" + quantity_orderDetail + '}';
     }
 
 

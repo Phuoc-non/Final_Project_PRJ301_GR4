@@ -92,7 +92,7 @@ public class OrdersServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/orders/orders.jsp").forward(request, response);
 
         } else if ("confirm".equals(view)) {
-            // ✅ Lấy session trước
+            // Lấy session trước
             jakarta.servlet.http.HttpSession session = request.getSession();
 
             Registration user = (Registration) session.getAttribute("user");
@@ -104,7 +104,7 @@ public class OrdersServlet extends HttpServlet {
             //  lấy từ session
             List<CartItem> list = (List<CartItem>) session.getAttribute("listCartItem");
 
-// nếu session không có => lấy lại từ DB
+            // nếu session không có => lấy lại từ DB
             if (list == null) {
                 CartDAO cartDao = new CartDAO();
                 Cart cart = cartDao.getCart(user.getUsername());
@@ -114,14 +114,14 @@ public class OrdersServlet extends HttpServlet {
                 }
             }
 
-// nếu vẫn null hoặc rỗng
+            // nếu vẫn null hoặc rỗng
             if (list == null || list.isEmpty()) {
-                request.setAttribute("message", "Giỏ hàng trống, không thể đặt hàng!");
+                request.setAttribute("message", "Cart is empty, can not order!");
                 request.getRequestDispatcher("/WEB-INF/Product/cart.jsp").forward(request, response);
                 return;
             }
 
-// ✅ Tính tổng tiền
+            // ✅ Tính tổng tiền
             double total = 0;
             for (CartItem item : list) {
                 total += item.getProduct().getPrice() * item.getQuantity();
