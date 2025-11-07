@@ -131,7 +131,7 @@
                                     <td class="" style=" background-color:#73aef6; color: white;" >Chưa diễn ra</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td class="" style=" background-color:#fa86a1; color: white;"> Đã diễn ra</td>
+                                    <td class="" style=" background-color:#fa86a1; color: white;">Hết hiệu lực</td>
                                 </c:otherwise>
                             </c:choose>
                             <td>${pro.description}</td>

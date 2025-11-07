@@ -146,7 +146,7 @@
                                             <p><strong>${author.name}</strong> sẽ bị xóa vĩnh viễn.</p>
                                             <c:if test="${author.bookcount > 0}">
                                                 <p class="text-danger">
-                                                    ⚠️ Tác giả này đang có <strong>${author.bookcount}</strong> cuốn sách!<br>
+                                                    ️ Tác giả này đang có <strong>${author.bookcount}</strong> cuốn sách!<br>
                                                     Không thể xóa nếu còn sách.
                                                 </p>
                                             </c:if>
@@ -165,42 +165,103 @@
                     </c:forEach>
                     </tbody>
                 </table>
+                <style>
+                    .pagination {
+                        display: flex;
+                        justify-content: center;
+                        gap: 8px;
+                        list-style: none;
+                        padding-left: 0;
+                        margin-top: 30px;
+                    }
+                    .pagination .page-link {
+                        color: #4CAF50;
+                        border: 1px solid #d9d9d9;
+                        border-radius: 50%;
+                        padding: 8px 15px;
+                        text-decoration: none;
+                        background-color: #fff;
+                        transition: all 0.2s ease-in-out;
+                        font-weight: 500;
+                    }
+                    .pagination .page-link:hover {
+                        background-color: #e9f5ec;
+                        border-color: #4CAF50;
+                        color: #4CAF50;
+                    }
+                    .pagination .active .page-link {
+                        background-color: #4CAF50;
+                        color: #fff;
+                        border-color: #4CAF50;
+                    }
+                    .pagination .disabled .page-link {
+                        color: #ccc;
+                        pointer-events: none;
+                        border-color: #eee;
+                    }
+                </style>
+                <!-- 🌿 Pagination -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <!-- Nút Previous -->
+                        <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                            <a class="page-link"
+                               href="<c:url value='/authors'><c:param name='page' value='${currentPage - 1}'/></c:url>"
+                                   aria-label="Previous">&laquo;</a>
+                            </li>
 
+                            <!-- Các số trang -->
+                        <c:forEach begin="1" end="${totalPages}" var="i">
+                            <li class="page-item ${currentPage == i ? 'active' : ''}">
+                                <a class="page-link"
+                                   href="<c:url value='/authors'><c:param name='page' value='${i}'/></c:url>">${i}</a>
+                                </li>
+                        </c:forEach>
+
+                        <!-- Nút Next -->
+                        <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                            <a class="page-link"
+                               href="<c:url value='/authors'><c:param name='page' value='${currentPage + 1}'/></c:url>"
+                                   aria-label="Next">&raquo;</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+
+            <!-- Modal add -->
+            <div class="modal fade" id="myModal_add" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form action="${pageContext.request.contextPath}/authors" method="post">
+                        <input type="hidden" name="action" value="create">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Thêm tác giả mới</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Tên tác giả</label>
+                                <input name="name" type="text" class="form-control" 
+                                       pattern="^(?=.{1,50}$)[A-Za-z]+(?:\s[A-Za-z]+)*$" 
+                                       title="Chỉ được nhập chữ cái, chỉ chấp nhận 1 khoảng cách giữa các chữ,
+                                       vd: Tran Thanh Trung"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label>Miêu tả</label>
+                                <input name="bio" type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary">Thêm</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </main>
-
-    <!-- Modal add -->
-    <div class="modal fade" id="myModal_add" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="${pageContext.request.contextPath}/authors" method="post">
-                    <input type="hidden" name="action" value="create">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Thêm tác giả mới</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Tên tác giả</label>
-                            <input name="name" type="text" class="form-control" 
-                                   pattern="[a-zA-Z\-\s]+" 
-                                   title="Chỉ được nhập chữ cái!"
-                                   required>
-                        </div>
-                        <div class="form-group">
-                            <label>Miêu tả</label>
-                            <input name="bio" type="text" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-primary">Thêm</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
+    </main>           
     <jsp:include page="../WEB-INF/includes/footer.jsp"/>
 </body>
 </html>

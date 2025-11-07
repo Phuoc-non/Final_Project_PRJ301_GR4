@@ -46,7 +46,7 @@
                                                 <div class="modal-body bg-info text-white p-3">
                                                     <form method="POST" action="${pageContext.request.contextPath}/category">
                                                         <label><span style="color: red;">*</span> Category Name</label>
-                                                        <input  type="text" name="name" pattern="[A-Za-z\s]+"
+                                                        <input  type="text" name="name" pattern="^(?=.{1,50}$)[A-Za-z]+(?:\s[A-Za-z]+)*$"
 
                                                                 title="Only letters can be entered (no numbers or special characters)"  required/>  <br/> <br/>
 
@@ -100,35 +100,35 @@
                                     <div class="row">
                                         <table class="table  table-hover mb-0">
                                             <thead class=" bg-info thead-light">
-                                            <tr>
-                                                <th>No.</th>
-                                                <th>Category Name</th>
-                                                <th>Number of Books</th>
-                                                <th>Created Date</th>
-                                                <th>Updated Date</th>
-                                                <th>Actions</th>
-                                            </tr>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Category Name</th>
+                                                    <th>Number of Books</th>
+                                                    <th>Created Date</th>
+                                                    <th>Updated Date</th>
+                                                    <th>Actions</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach var="cate" varStatus="loop" items="${category}"> 
+                                                <c:forEach var="cate" varStatus="loop" items="${category}"> 
 
 
-                                                <tr class="active-row">
-                                                    <td>${loop.index+1} </td>
-                                                    <td > ${cate.name}</td>
-                                                    <td > ${cate.quantity}</td>
-                                                    <td><fmt:formatDate value="${cate.dayCreate}" pattern="dd-MM-yyyy"/></td>
-                                                    <td><fmt:formatDate value="${cate.dayUpdate}" pattern="dd-MM-yyyy"/></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal" data-id="${cate.id}">Edit</button>
+                                                    <tr class="active-row">
+                                                        <td>${loop.index+1} </td>
+                                                        <td > ${cate.name}</td>
+                                                        <td > ${cate.quantity}</td>
+                                                        <td><fmt:formatDate value="${cate.dayCreate}" pattern="dd-MM-yyyy"/></td>
+                                                        <td><fmt:formatDate value="${cate.dayUpdate}" pattern="dd-MM-yyyy"/></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal" data-id="${cate.id}">Edit</button>
 
-                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="${cate.id}" data-quantity="${cate.quantity}">Delete</button>
-                                                    </td>
-                                                </tr>
+                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="${cate.id}" data-quantity="${cate.quantity}">Delete</button>
+                                                        </td>
+                                                    </tr>
 
 
-                                            </c:forEach>
-                                                </tbody>
+                                                </c:forEach>
+                                            </tbody>
                                             <!-- Modal edit -->
                                             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -142,10 +142,12 @@
                                                         <div class="modal-body bg-info text-white p-3">
                                                             <form method="POST" action="${pageContext.request.contextPath}/category">
                                                                 <label><span style="color: red;">*</span> Category Name</label>
-                                                                <input  type="text" name="name"   required/>  <br/> <br/>
+                                                                <input  type="text" name="name"required pattern="^(?=.{1,50}$)[A-Za-z]+(?:\s[A-Za-z]+)*$"
+                                                                        title="Only letters can be entered (no numbers or special characters)"
+                                                                        />  <br/> <br/>
                                                                 <input    type="hidden" name="id" id="cateIdInput"/>
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                <button type="submit" class="btn btn-primary" name="action" value="edit" >Confirm </button>
+                                                                <button type="submit" class="btn btn-primary" name="action" value="edit">Confirm </button>
                                                             </form>
                                                         </div>
                                                     </div>

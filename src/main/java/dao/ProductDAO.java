@@ -311,7 +311,6 @@ public class ProductDAO extends DBContext {
     }
 
     // ⚠️ Method cũ - KHÔNG DÙNG NỮA - Dùng getAllBook(int page) thay thế
-    @Deprecated
     public List<Book> getAllBook() {
         List<Book> list = new ArrayList<>();
         String query = """
@@ -339,12 +338,12 @@ public class ProductDAO extends DBContext {
         try (PreparedStatement ps = this.getConnection().prepareStatement(query); ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                
+
                 ProductDetail p = new ProductDetail(rs.getInt("id"));
-                list.add(new Book(rs.getString("sku"),rs.getString("img"),rs.getString("product_name"),
+                list.add(new Book(rs.getString("sku"), rs.getString("img"), rs.getString("product_name"),
                         rs.getDouble("price_vnd"), rs.getInt("remaining_quantity"), rs.getString("category_name"),
                         rs.getString("author_name"), rs.getInt("sold"), p));
-                
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -352,50 +351,62 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
-     public List<Book> getBookCate(String nameCate) {
+    public List<Book> getBookCate(String nameCate, int page) {
+        List<Book> list = new ArrayList<>();
         try {
-            List<Book> list = new ArrayList<>();
+
             String query = """
-                                       SELECT
-                                                   p.sku,
-                                                   p.name AS product_name,
-                                                   p.img,
-                                                   p.price AS price_vnd,
-                                                 p.quantity -COALESCE(SUM(od.quantity), 0) AS remaining_quantity,
-                                                   p.description,
-                                                  pd.id,
-                                                   c.name AS category_name,
-                                                   a.name AS author_name,
-                                                  COALESCE(SUM(od.quantity), 0) AS sold
-                                               FROM Product p
-                                               LEFT JOIN Product_Author pa ON p.sku = pa.product_sku
-                                               LEFT JOIN Author a ON pa.author_id = a.id
-                                               LEFT JOIN Category c ON p.category_id = c.id
-                                               LEFT JOIN OrderDetails od ON p.sku = od.sku
-                                               left join productDetail pd on pd.product_sku=p.sku
-                                               where c.name = ?
-                                               GROUP BY p.sku, p.name, p.img, c.name, a.name, p.price, p.quantity,p.description,pd.id
-                                               ORDER BY p.sku ASC;
-                                   """;
-            PreparedStatement st = this.getConnection().prepareStatement(query);
-            st.setString(1, nameCate);
-            ResultSet rs = st.executeQuery();
+                               SELECT
+                                   p.sku,
+                                   p.name AS product_name,
+                                   p.img,
+                                   p.price AS price_vnd,
+                                   p.quantity - COALESCE(SUM(od.quantity), 0) AS remaining_quantity,
+                                   p.description,
+                                   c.name AS category_name,
+                                   a.name AS author_name,
+                                   COALESCE(SUM(od.quantity), 0) AS sold,
+                                   pd.id AS detail_id
+                               FROM Product p
+                               LEFT JOIN Product_Author pa ON p.sku = pa.product_sku
+                               LEFT JOIN Author a ON pa.author_id = a.id
+                               LEFT JOIN Category c ON p.category_id = c.id
+                               LEFT JOIN OrderDetails od ON p.sku = od.sku
+                               LEFT JOIN productDetail pd ON p.sku = pd.product_sku
+                               where c.name = ?
+                               GROUP BY p.sku, p.name, p.img, c.name, a.name, p.price, p.quantity, p.description, pd.id
+                               ORDER BY p.sku ASC
+                               OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY
+                           """;
+
+            PreparedStatement ps = this.getConnection().prepareStatement(query);
+            ps.setInt(2, (page - 1) * 4); // Bỏ qua (page-1)*12 dòng
+            ps.setString(1, nameCate);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                
-                ProductDetail p = new ProductDetail(rs.getInt("id"));
-                list.add(new Book(rs.getString("sku"),rs.getString("img"),rs.getString("product_name"),
-                        rs.getDouble("price_vnd"), rs.getInt("remaining_quantity"), rs.getString("category_name"),
-                        rs.getString("author_name"), rs.getInt("sold"), p));
-                
+                Book b = new Book();
+                b.setSku_product(rs.getString("sku"));
+                b.setName_product(rs.getString("product_name"));
+                b.setImg(rs.getString("img"));
+                b.setPrice_product(rs.getDouble("price_vnd"));
+                b.setQuantity_product(rs.getInt("remaining_quantity"));
+                b.setCategory_name(rs.getString("category_name"));
+                b.setAuthor_name(rs.getString("author_name"));
+                b.setQuantity_orderDetail(rs.getInt("sold"));
+                b.setDescription(rs.getString("description"));
+
+                model.ProductDetail pd = new model.ProductDetail();
+                pd.setId(rs.getInt("detail_id"));
+                b.setProductDetail(pd);
+
+                list.add(b);
             }
-            
-            return list;
         } catch (SQLException ex) {
             System.getLogger(ProductDAO.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
-        return null;
+        return list;
     }
-    
+
     public List<Book> searchBookByTitle(String title) {
         List<Book> list = new ArrayList<>();
         String query = """
@@ -613,48 +624,46 @@ public class ProductDAO extends DBContext {
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        
+
         // Test 1: Lấy tất cả sách
         System.out.println("=== TEST 1: Get All Books ===");
         List<Book> allBooks = dao.getAllBook();
         System.out.println("Total books: " + allBooks.size());
         for (Book b : allBooks) {
-            System.out.println("SKU: " + b.getSku_product() + 
-                             " | Name: " + b.getName_product() + 
-                             " | Author: " + b.getAuthor_name());
+            System.out.println("SKU: " + b.getSku_product()
+                    + " | Name: " + b.getName_product()
+                    + " | Author: " + b.getAuthor_name());
         }
-        
+
         // Test 2: Tìm theo tác giả
         System.out.println("\n=== TEST 2: Search by Author 'james' ===");
         List<Book> byAuthor = dao.searchBookByAuthor("james");
         System.out.println("Found: " + byAuthor.size() + " books");
         for (Book b : byAuthor) {
-            System.out.println("SKU: " + b.getSku_product() + 
-                             " | Name: " + b.getName_product() + 
-                             " | Author: " + b.getAuthor_name());
+            System.out.println("SKU: " + b.getSku_product()
+                    + " | Name: " + b.getName_product()
+                    + " | Author: " + b.getAuthor_name());
         }
-        
+
         // Test 3: Universal search
         System.out.println("\n=== TEST 3: Universal Search 'james' ===");
         List<Book> universal = dao.searchBooks("james");
         System.out.println("Found: " + universal.size() + " books");
         for (Book b : universal) {
-            System.out.println("SKU: " + b.getSku_product() + 
-                             " | Name: " + b.getName_product() + 
-                             " | Author: " + b.getAuthor_name());
+            System.out.println("SKU: " + b.getSku_product()
+                    + " | Name: " + b.getName_product()
+                    + " | Author: " + b.getAuthor_name());
         }
     }
 
     // ==================== PAGINATION METHODS ====================
-    
     /**
      * Lấy tổng số sách
      */
     public int getTotalBooks() {
         int count = 0;
         String query = "SELECT COUNT(DISTINCT p.sku) FROM Product p";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+        try (PreparedStatement ps = this.getConnection().prepareStatement(query); ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
                 count = rs.getInt(1);
             }
@@ -779,7 +788,7 @@ public class ProductDAO extends DBContext {
                 b.setAuthor_name(rs.getString("author_name"));
                 b.setQuantity_orderDetail(rs.getInt("sold"));
                 b.setDescription(rs.getString("description"));
-                
+
                 model.ProductDetail pd = new model.ProductDetail();
                 pd.setId(rs.getInt("detail_id"));
                 b.setProductDetail(pd);
@@ -821,7 +830,7 @@ public class ProductDAO extends DBContext {
         try (PreparedStatement ps = getConnection().prepareStatement(query)) {
             ps.setString(1, "%" + title + "%");
             ps.setInt(2, (page - 1) * 4);
-            
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Book b = new Book();
@@ -834,11 +843,11 @@ public class ProductDAO extends DBContext {
                 b.setAuthor_name(rs.getString("author_name"));
                 b.setQuantity_orderDetail(rs.getInt("sold"));
                 b.setDescription(rs.getString("description"));
-                
+
                 model.ProductDetail pd = new model.ProductDetail();
                 pd.setId(rs.getInt("detail_id"));
                 b.setProductDetail(pd);
-                
+
                 list.add(b);
             }
         } catch (SQLException e) {
@@ -889,11 +898,11 @@ public class ProductDAO extends DBContext {
                 b.setAuthor_name(rs.getString("author_name"));
                 b.setQuantity_orderDetail(rs.getInt("sold"));
                 b.setDescription(rs.getString("description"));
-                
+
                 model.ProductDetail pd = new model.ProductDetail();
                 pd.setId(rs.getInt("detail_id"));
                 b.setProductDetail(pd);
-                
+
                 list.add(b);
             }
         } catch (SQLException e) {
@@ -946,11 +955,11 @@ public class ProductDAO extends DBContext {
                 b.setAuthor_name(rs.getString("author_name"));
                 b.setQuantity_orderDetail(rs.getInt("sold"));
                 b.setDescription(rs.getString("description"));
-                
+
                 model.ProductDetail pd = new model.ProductDetail();
                 pd.setId(rs.getInt("detail_id"));
                 b.setProductDetail(pd);
-                
+
                 list.add(b);
             }
         } catch (SQLException e) {
@@ -987,7 +996,7 @@ public class ProductDAO extends DBContext {
 
         try (PreparedStatement ps = getConnection().prepareStatement(query)) {
             ps.setInt(1, (page - 1) * 4);
-            
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Book b = new Book();
@@ -1000,11 +1009,11 @@ public class ProductDAO extends DBContext {
                 b.setAuthor_name(rs.getString("author_name"));
                 b.setQuantity_orderDetail(rs.getInt("sold"));
                 b.setDescription(rs.getString("description"));
-                
+
                 model.ProductDetail pd = new model.ProductDetail();
                 pd.setId(rs.getInt("detail_id"));
                 b.setProductDetail(pd);
-                
+
                 list.add(b);
             }
         } catch (SQLException e) {
@@ -1040,7 +1049,7 @@ public class ProductDAO extends DBContext {
 
         try (PreparedStatement ps = getConnection().prepareStatement(query)) {
             ps.setInt(1, (page - 1) * 4);
-            
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Book b = new Book();
@@ -1053,11 +1062,11 @@ public class ProductDAO extends DBContext {
                 b.setAuthor_name(rs.getString("author_name"));
                 b.setQuantity_orderDetail(rs.getInt("sold"));
                 b.setDescription(rs.getString("description"));
-                
+
                 model.ProductDetail pd = new model.ProductDetail();
                 pd.setId(rs.getInt("detail_id"));
                 b.setProductDetail(pd);
-                
+
                 list.add(b);
             }
         } catch (SQLException e) {

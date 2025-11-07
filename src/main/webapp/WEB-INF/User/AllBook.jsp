@@ -134,10 +134,91 @@
                                             </c:otherwise>
                                         </c:choose>
                                     </div>
+                                   
+
+                                    
                                     <% }%>
-
                                 </div>
+                                <!-- 🌿 Pagination -->
+                                    <div class="col-xs-12" style="margin-top: 30px;">
+                                        <c:if test="${not empty totalPages and totalPages > 0}">
+                                            <style>
+                                                .pagination {
+                                                    display: flex;
+                                                    justify-content: center;
+                                                    gap: 8px;
+                                                    list-style: none;
+                                                    padding-left: 0;
+                                                    margin-top: 30px;
+                                                }
+                                                .pagination .page-link {
+                                                    color: #4CAF50;
+                                                    border: 1px solid #d9d9d9;
+                                                    border-radius: 50%;
+                                                    padding: 8px 15px;
+                                                    text-decoration: none;
+                                                    background-color: #fff;
+                                                    transition: all 0.2s ease-in-out;
+                                                    font-weight: 500;
+                                                }
+                                                .pagination .page-link:hover {
+                                                    background-color: #e9f5ec;
+                                                    border-color: #4CAF50;
+                                                    color: #4CAF50;
+                                                }
+                                                .pagination .active .page-link {
+                                                    background-color: #4CAF50;
+                                                    color: #fff;
+                                                    border-color: #4CAF50;
+                                                }
+                                                .pagination .disabled .page-link {
+                                                    color: #ccc;
+                                                    pointer-events: none;
+                                                    border-color: #eee;
+                                                }
+                                            </style>
+                                            <nav aria-label="Page navigation">
+                                                <ul class="pagination">
+                                                    <!-- Nút Previous -->
+                                                    <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                                                        <a class="page-link"
+                                                           href="<c:url value='/ab'>
+                                                               <c:param name='page' value='${currentPage - 1}'/>
+                                                               <c:if test='${not empty keyword}'><c:param name='keyword' value='${keyword}'/></c:if>
+                                                               <c:if test='${not empty type}'><c:param name='type' value='${type}'/></c:if>
+                                                               <c:if test='${not empty sortBy}'><c:param name='sortBy' value='${sortBy}'/></c:if>
+                                                           </c:url>"
+                                                           aria-label="Previous">&laquo;</a>
+                                                    </li>
 
+                                                    <!-- Các số trang -->
+                                                    <c:forEach begin="1" end="${totalPages}" var="i">
+                                                        <li class="page-item ${currentPage == i ? 'active' : ''}">
+                                                            <a class="page-link"
+                                                               href="<c:url value='/ab'>
+                                                                   <c:param name='page' value='${i}'/>
+                                                                   <c:if test='${not empty keyword}'><c:param name='keyword' value='${keyword}'/></c:if>
+                                                                   <c:if test='${not empty type}'><c:param name='type' value='${type}'/></c:if>
+                                                                   <c:if test='${not empty sortBy}'><c:param name='sortBy' value='${sortBy}'/></c:if>
+                                                               </c:url>">${i}</a>
+                                                        </li>
+                                                    </c:forEach>
+
+                                                    <!-- Nút Next -->
+                                                    <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                                                        <a class="page-link"
+                                                           href="<c:url value='/ab'>
+                                                               <c:param name='page' value='${currentPage + 1}'/>
+                                                               <c:if test='${not empty keyword}'><c:param name='keyword' value='${keyword}'/></c:if>
+                                                               <c:if test='${not empty type}'><c:param name='type' value='${type}'/></c:if>
+                                                               <c:if test='${not empty sortBy}'><c:param name='sortBy' value='${sortBy}'/></c:if>
+                                                           </c:url>"
+                                                           aria-label="Next">&raquo;</a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </c:if>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -163,10 +244,10 @@
                         </aside> 
                         <div class="tg-widget tg-catagories"> <br>
                             <div class="tg-widgettitle">
-                                <a  class="" href="ab?cate"> <h3>Thể loại</h3></a>
-                                </div>
-                                <div class="tg-widgetcontent">
-                                    <ul style="padding-left:0; margin:0;">
+                                <a  class="" href="ab"> <h3>Thể loại</h3></a>
+                            </div>
+                            <div class="tg-widgetcontent">
+                                <ul style="padding-left:0; margin:0;">
                                     <c:forEach var="c" items="${categories}">
                                         <!-- khởi tạo count = 0 -->
                                         <c:set var="count" value="${0}" />
@@ -178,19 +259,18 @@
                                             </c:if>
                                         </c:forEach>
 
-                                        <!-- hiển thị tên category và số lượng (canh phải) -->
-                                        <c:url var="cateUrl" value="/ab">
-                                            <c:param name="cate" value="${c.name}" />
-                                        </c:url>
+                                         <c:url var="cateUrl" value="/ab">
+                                                <c:param name="cate" value="${c.name}" />
+                                            </c:url>
 
-                                        <!-- hiển thị tên category và số lượng -->
-                                        <li style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; list-style:none; border-bottom:1px solid #f0f0f0;">
-                                            <a href="${cateUrl}" style="text-decoration:none; color:inherit;">
-                                                ${c.name}
-                                            </a>
-                                            <span style="font-size:0.9rem; color:#666;">
-                                                ${count}
-                                            </span>
+                                            <!-- hiển thị tên category và số lượng -->
+                                            <li style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; list-style:none; border-bottom:1px solid #f0f0f0;">
+                                                <a href="${cateUrl}" style="text-decoration:none; color:inherit;">
+                                                    ${c.name}
+                                                </a>
+                                                <span style="font-size:0.9rem; color:#666;">
+                                                    ${count}
+                                                </span>
                                         </li>
                                     </c:forEach>
                                 </ul>

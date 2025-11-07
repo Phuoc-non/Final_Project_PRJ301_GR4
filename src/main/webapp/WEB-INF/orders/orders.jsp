@@ -78,6 +78,7 @@
                                                             <%-- Nếu là admin --%>
                                                             <c:when test="${sessionScope.user != null && sessionScope.user.isIsAdmin()}">
                                                                 <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit${order.id}" style="min-width: 85px;">Sửa</button>
+                                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete${order.id}">Xóa</button>
                                                                 <%-- Admin: Nút xác nhận hoàn trả (dropdown) --%>
                                                                 <c:if test="${order.returnStatus eq 'Đang chờ phê duyệt'}">
                                                                     <div class="btn-group" style="min-width: 85px;">
