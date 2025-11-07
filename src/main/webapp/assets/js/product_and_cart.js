@@ -43,7 +43,7 @@ $(document).ready(function () {
                             icon: 'success',
                             title: data,
                             showConfirmButton: false,
-                            timer: 1500
+                            timer: 1000
                         });
                     }
                 });
@@ -241,7 +241,7 @@ $(document).ready(function () {
                             icon: 'success',
                             title: data,
                             showConfirmButton: false,
-                            timer: 1500
+                            timer: 1000
                         });
                     }
                 });

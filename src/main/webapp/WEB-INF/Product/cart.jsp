@@ -39,13 +39,14 @@ Author     : Asus
                                 <table class="styled-table">
                                     <thead>
                                         <tr>
-                                            <th>STT</th>
-                                            <th>Tên sách</th>
-                                            <th>Hình ảnh</th>
-                                            <th>Đơn giá</th>
-                                            <th>Số lượng</th>
-                                            <th>Thành tiền</th> 
-                                            <th>Hành động</th>
+                                            <th>No.</th>
+                                            <th>Book name</th>
+                                            <th>Image</th>
+                                            <th>Selling price</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th> 
+                                            <th>Action</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -57,19 +58,22 @@ Author     : Asus
                                                 <td>${item.getProduct().bookName}</td>
                                                 <td><img src="${item.getProduct().img}" alt="image" style="height: 100px;"></td>
                                                 <td style="font-size:15px;">${item.getProduct().price} $</td>
-                                                <td class="tg-quantityholder">
+                                                <td class="tg-quantityholder" style="height: 106px">
                                                     <em class="minus">-</em>
                                                     <input type="text" value="${item.quantity}" class="quan"
                                                            data-max="${item.getProduct().quantity}"
                                                            data-sku="${item.sku}"
                                                            data-price="${item.getProduct().price}"
-                                                           style="width: 80px; margin-top: 5px;">
+                                                           style="width: 80px; margin-top: 5px; ">
                                                     <em class="plus">+</em>
                                                 </td>
                                                 <td class="total">${item.quantity * item.getProduct().price} $</td>
                                                 <td>
-                                                    <button type="button" class="btn btn-danger delete"
-                                                            data-sku="${item.sku}" style="width:80px;">Xóa</button>
+                                                   <a href="">
+                                                            <button type="button" class="btn btn-danger delete" data-sku="${item.sku}" style="width: 80px;">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </button>
+                                                        </a> 
                                                 </td>
                                             </tr>
                                         </c:forEach>
