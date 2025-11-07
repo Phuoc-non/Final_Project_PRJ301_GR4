@@ -51,15 +51,16 @@ public class AllBookServlet extends HttpServlet {
         }
 
         // Nhận tham số
+        String cate = request.getParameter("cate");
         String keyword = request.getParameter("keyword");
         String type = request.getParameter("type");
         String sortBy = request.getParameter("sortBy");
 
         List<Book> list;
         int totalBooks = 0;
-       //dùng để hiển thị số lượng caategory
+        //dùng để hiển thị số lượng caategory
         // Ưu tiên tìm kiếm trước - TÌM CẢ TÊN SÁCH VÀ TÊN TÁC GIẢ
-        
+
         if (keyword != null && !keyword.trim().isEmpty()) {
             // Kiểm tra loại tìm kiếm
             if ("title".equals(type)) {
@@ -81,15 +82,17 @@ public class AllBookServlet extends HttpServlet {
         } else if ("price".equals(sortBy)) {
             list = dao.getBooksSortedByPrice(page);
             totalBooks = dao.getTotalBooks();
-        } else {
+        } else if (cate.equals("all")) {
             list = dao.getAllBook(page);
             totalBooks = dao.getTotalBooks();
-        } 
-        if(pageStr==null||pageStr.isEmpty()){
-            String cate = request.getParameter("cate");
+
+        } else {
             list = dao.getBookCate(cate, page);
+            totalBooks = dao.getTotalBooksByCategoryName(cate);
+           
         }
-         List<Book> list2 = dao.getAllBook();
+
+        List<Book> list2 = dao.getAllBook();
         // 🧩 2. Tính tổng số trang
         int totalPages = (int) Math.ceil(totalBooks / 4.0); // 4 sách mỗi trang (để test)
 
@@ -105,6 +108,7 @@ public class AllBookServlet extends HttpServlet {
         // 🧩 3. Truyền dữ liệu sang JSP
         request.setAttribute("list", list);
         request.setAttribute("list2", list2);
+        request.setAttribute("nameCate", cate);
         request.setAttribute("categories", categories);
         request.setAttribute("keyword", keyword);
         request.setAttribute("type", type);

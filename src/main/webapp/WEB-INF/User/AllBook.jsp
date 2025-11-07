@@ -184,6 +184,7 @@
                                                         <a class="page-link"
                                                            href="<c:url value='/ab'>
                                                                <c:param name='page' value='${currentPage - 1}'/>
+                                                                 <c:param name='cate' value='${nameCate}'/>
                                                                <c:if test='${not empty keyword}'><c:param name='keyword' value='${keyword}'/></c:if>
                                                                <c:if test='${not empty type}'><c:param name='type' value='${type}'/></c:if>
                                                                <c:if test='${not empty sortBy}'><c:param name='sortBy' value='${sortBy}'/></c:if>
@@ -197,6 +198,7 @@
                                                             <a class="page-link"
                                                                href="<c:url value='/ab'>
                                                                    <c:param name='page' value='${i}'/>
+                                                                      <c:param name='cate' value='${nameCate}'/>
                                                                    <c:if test='${not empty keyword}'><c:param name='keyword' value='${keyword}'/></c:if>
                                                                    <c:if test='${not empty type}'><c:param name='type' value='${type}'/></c:if>
                                                                    <c:if test='${not empty sortBy}'><c:param name='sortBy' value='${sortBy}'/></c:if>
@@ -209,6 +211,7 @@
                                                         <a class="page-link"
                                                            href="<c:url value='/ab'>
                                                                <c:param name='page' value='${currentPage + 1}'/>
+                                                                  <c:param name='cate' value='${nameCate}'/>
                                                                <c:if test='${not empty keyword}'><c:param name='keyword' value='${keyword}'/></c:if>
                                                                <c:if test='${not empty type}'><c:param name='type' value='${type}'/></c:if>
                                                                <c:if test='${not empty sortBy}'><c:param name='sortBy' value='${sortBy}'/></c:if>
@@ -244,7 +247,7 @@
                         </aside> 
                         <div class="tg-widget tg-catagories"> <br>
                             <div class="tg-widgettitle">
-                                <a  class="" href="ab"> <h3>Thể loại</h3></a>
+                                <a  class="" href="ab?cate=all&page=1"> <h3>Thể loại</h3></a>
                             </div>
                             <div class="tg-widgetcontent">
                                 <ul style="padding-left:0; margin:0;">
@@ -261,6 +264,7 @@
 
                                          <c:url var="cateUrl" value="/ab">
                                                 <c:param name="cate" value="${c.name}" />
+                                                <c:param name="page" value="${1}" />
                                             </c:url>
 
                                             <!-- hiển thị tên category và số lượng -->

@@ -132,7 +132,7 @@
                                         <li><a href="promotion">Promotion</a></li>
                                         <li><a href="statistics">Statistic</a></li>
                                             <% } else { %>
-                                        <li><a href="ab?page">AllBook</a></li>
+                                        <li><a href="ab?cate=all">AllBook</a></li>
                                             <% }%>
                                     </ul>
                                 </div>

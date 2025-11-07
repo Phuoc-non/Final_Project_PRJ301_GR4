@@ -673,6 +673,39 @@ public class ProductDAO extends DBContext {
         return count;
     }
 
+    public int getTotalBooksByCategoryName(String name) {
+         int count = 0;
+        try {
+           
+            String query = """
+                                   SELECT COUNT(*)
+                                                                   FROM Product p
+                                                                   LEFT JOIN Product_Author pa ON p.sku = pa.product_sku
+                                                                   LEFT JOIN Author a ON pa.author_id = a.id
+                                                                   LEFT JOIN Category c ON p.category_id = c.id
+                                                                   LEFT JOIN OrderDetails od ON p.sku = od.sku
+                                                                   LEFT JOIN productDetail pd ON p.sku = pd.product_sku
+                                                                   where c.name = ?
+                                                                  
+                                    """;
+            
+            
+            
+            PreparedStatement ps = this.getConnection().prepareStatement(query);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+                    if (rs.next()) {
+                        count = rs.getInt(1);
+                    }
+                    
+                    
+        } catch (SQLException ex) {
+            System.getLogger(ProductDAO.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return count;
+    }
+    
+    
     /**
      * Lấy tổng số sách theo tiêu đề
      */
