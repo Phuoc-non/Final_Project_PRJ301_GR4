@@ -91,6 +91,11 @@
                         <label class="form-label fw-semibold"><span style="color:red">*</span>Price</label>
                         <input type="number" step="0.01" class="form-control" name="price" value="<%= p.getPrice_product()%>" required>
                     </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold"><span style="color: red">*</span>Quantity</label>
+                        <input type="number" class="form-control" name="quantity" value="<%= p.getQuantity()%>" required> 
+                    </div>
                 </div> <br>
             </div> <br>
 
@@ -133,7 +138,7 @@
 
 <script>
     function confirmUpdate() {
-        return confirm("Bạn có chắc chắn muốn thay đổi không?");
+        return confirm("Are you sure you want to change?");
     }
 
     // Hiển thị ảnh preview ngay sau khi chọn file
@@ -149,45 +154,57 @@
         }
     }
 
-    // Validate Book Code
-    const skuInput = document.querySelector('input[name="sku"]');
-    skuInput.addEventListener('blur', function () {
-        const regex = /^book\d{2}$/i;
-        let value = skuInput.value.trim();
-        if (value !== "" && !regex.test(value)) {
-            alert("❌ Book Code must be in the format: BOOK + 2 digits (e.g., BOOK01)");
-            skuInput.value = "";
-            skuInput.focus();
-        } else if (value !== "") {
-            skuInput.value = value.toUpperCase();
-        }
-    });
+    document.addEventListener("DOMContentLoaded", () => {
 
-    // Validate Title
-    const titleInput = document.querySelector('input[name="title"]');
-    titleInput.addEventListener('input', function () {
-        this.value = this.value.replace(/[^a-zA-Z.\s]/g, '');
-    });
-    titleInput.addEventListener('blur', function () {
-        const regex = /^[A-Za-z]+(\.?[A-Za-z\s]+)*$/;
-        const value = this.value.trim();
-        if (value !== "" && !regex.test(value)) {
-            alert("Title can only contain letters and dots (e.g., David or David.Cos)");
-            this.value = "";
-            this.focus();
-        }
-    });
+            // Hàm hiển thị lỗi màu đỏ dưới input
+            function showError(input, message) {
+                // Xóa lỗi cũ
+                const oldError = input.parentElement.querySelector(".text-danger");
+                if (oldError)
+                    oldError.remove();
 
-    // Validate Date
-    const inputDate = document.querySelector('input[name="created_date"]');
-    inputDate.addEventListener('blur', function () {
-        const regex = /^(\d{2})-(\d{2})-(\d{4})$/;
-        if (this.value.trim() !== "" && !regex.test(this.value.trim())) {
-            alert("Please enter date in dd-MM-yyyy format!");
-            this.value = "";
-            this.focus();
-        }
-    });
+                // Tạo phần tử hiển thị lỗi
+                const error = document.createElement("small");
+                error.className = "text-danger";
+                error.textContent = message;
+                input.insertAdjacentElement("afterend", error);
+            }
+
+            // Hàm xóa lỗi khi nhập lại
+            function clearError(input) {
+                const oldError = input.parentElement.querySelector(".text-danger");
+                if (oldError)
+                    oldError.remove();
+            }
+
+            // Validate Title
+            const titleInput = document.querySelector('input[name="title"]');
+            titleInput.addEventListener('blur', function () {
+                const regex = /^[A-Za-z]+(\.?[A-Za-z\s]+)*$/;
+                const value = this.value.trim();
+
+                if (value !== "" && !regex.test(value)) {
+                    showError(this, "Title can only contain letters and dots (e.g., David or David.Cos)");
+                    this.value = "";
+                } else {
+                    clearError(this);
+                }
+            });
+
+            // Validate Release Date (dd-MM-yyyy)
+            const dateInput = document.querySelector('input[name="created_date"]');
+            dateInput.addEventListener('blur', function () {
+                const regex = /^(\d{2})-(\d{2})-(\d{4})$/;
+                const value = this.value.trim();
+
+                if (value !== "" && !regex.test(value)) {
+                    showError(this, "Please enter date in dd-MM-yyyy format (e.g., 01-11-2025)");
+                    this.value = "";
+                } else {
+                    clearError(this);
+                }
+            });
+        });
 </script>
 
 <%@include file="../includes/footer.jsp"%>

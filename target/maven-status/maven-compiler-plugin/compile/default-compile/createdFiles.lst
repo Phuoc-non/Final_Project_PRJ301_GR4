@@ -1,3 +1,4 @@
+Controller\CartUpdateServlet.class
 Controller\CustomerSupportServlet.class
 Controller\LoginServlet.class
 Controller\AuthorsServlet.class
@@ -11,6 +12,7 @@ Controller\ChangePasswordServlet.class
 Controller\OrderDetailsServlet.class
 model\Product.class
 Controller\OrdersServlet.class
+Controller\CartUpdateServlet$CartItemUpdate.class
 dao\RegistrationDAO.class
 dao\CategoryDao.class
 dao\OrderDetailsDAO.class
@@ -21,6 +23,7 @@ Controller\CutomerServlet.class
 Controller\Book_Manager.class
 Controller\ProfileServlet.class
 dao\HomeDAO.class
+Controller\CartUpdateServlet$1.class
 Controller\PromotionServlet.class
 model\Author.class
 model\Category.class
