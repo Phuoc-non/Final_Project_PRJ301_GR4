@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import model.Cart;
 import model.CartItem;
 import model.Registration;
+import model.Promotion;
 import model.Order;
 
 /**
@@ -125,7 +126,9 @@ public class OrdersServlet extends HttpServlet {
             for (CartItem item : list) {
                 total += item.getProduct().getPrice() * item.getQuantity();
             }
-
+             OrdersDAO dao = new OrdersDAO();
+               List<Promotion> listPromotion = dao.getListPromotion();              
+             request.setAttribute("listP", listPromotion);
             request.setAttribute("cartList", list);
             request.setAttribute("total", total);
 

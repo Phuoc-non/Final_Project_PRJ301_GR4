@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.CartItem;
 import model.Order;
+import model.Promotion;
 
 /**
  *
@@ -274,5 +275,23 @@ public class OrdersDAO extends DBContext {
         }
         return false;
     }
-
+    public List<Promotion> getListPromotion(){
+        List<Promotion> list = new ArrayList<>();
+        try {
+            
+            
+            String sql = "select code,discount_percent,min_order_value from Promotion where status = 1";
+            PreparedStatement statement = this.getConnection().prepareStatement(sql);
+            
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                list.add(new Promotion(rs.getString("code"),rs.getInt("discount_percent"),rs.getInt("min_order_value")));
+                
+            }
+        } catch (SQLException ex) {
+            System.getLogger(OrdersDAO.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
+        return list;
+    }
 }
