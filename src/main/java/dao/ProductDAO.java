@@ -35,7 +35,7 @@ public class ProductDAO extends DBContext {
             p.name AS product_name ,
             p.img,
             p.description,
-                      
+            p.quantity,          
             c.name AS category_name,
             a.name AS author_name,
             p.price,
@@ -48,7 +48,7 @@ public class ProductDAO extends DBContext {
         LEFT JOIN Category c ON p.category_id = c.id
         LEFT JOIN OrderDetails od ON p.sku = od.sku
         LEFT JOIN productDetail pd ON p.sku = pd.product_sku
-        GROUP BY p.sku, p.name, p.img, c.name, a.name, p.price, p.created_product,p.description,pd.pages
+        GROUP BY p.sku, p.name, p.img, c.name, a.name, p.price, p.created_product,p.description, p.quantity, pd.pages
         ORDER BY p.sku ASC;
         """;
 
@@ -66,6 +66,7 @@ public class ProductDAO extends DBContext {
                 p.setCreated_product(rs.getDate("created_date"));
                 p.setDescription_product(rs.getString("description"));
                 p.setPages(rs.getInt("pages"));
+                p.setQuantity(rs.getInt("quantity"));
                 list.add(p);
             }
         } catch (SQLException e) {
@@ -76,63 +77,73 @@ public class ProductDAO extends DBContext {
 
     public int createList(String sku_product, String name_product, String author_name, String img,
             String description_product, Date created_date, int pages_productDetail,
-            String category_name, double price_product) {
+            String category_name, double price_product, int quantity) {
 
+        // 1️⃣ Thêm tác giả nếu chưa có
         String insertAuthor = """
-    IF NOT EXISTS (SELECT 1 FROM Author WHERE name = ?)
-    BEGIN
-        INSERT INTO Author (name, bio) VALUES (?, 'New author added automatically');
-    END
+        IF NOT EXISTS (SELECT 1 FROM Author WHERE name = ?)
+        BEGIN
+            INSERT INTO Author (name, bio)
+            VALUES (?, 'New author added automatically');
+        END
     """;
 
+        // 2️⃣ Thêm sản phẩm (Product)
         String insertProduct = """
-    INSERT INTO Product (sku, name, description, img, price, created_product, category_id, quantity, status)
-    SELECT TOP 1
-        ? AS sku,
-        ? AS name,
-        ? AS description,
-        ? AS img,
-        ? AS price,
-        ? AS created_product,
-        c.id AS category_id,
-        0 AS quantity,      -- ✅ Luôn gán 0
-        1 AS status         -- ✅ Luôn gán 1
-    FROM Category c
-    WHERE c.name = ?;
+        INSERT INTO Product (sku, name, description, img, price, created_product, category_id, quantity, status)
+        SELECT TOP 1
+            ? AS sku,
+            ? AS name,
+            ? AS description,
+            ? AS img,
+            ? AS price,
+            ? AS created_product,
+            c.id AS category_id,
+            ? AS quantity,
+            1 AS status
+        FROM Category c
+        WHERE LTRIM(RTRIM(LOWER(c.name))) = LTRIM(RTRIM(LOWER(?)));
     """;
 
+        // 3️⃣ Thêm ProductDetail nếu chưa có
         String insertProductDetail = """
-    IF NOT EXISTS (SELECT 1 FROM productDetail WHERE product_sku = ?)
-    BEGIN
-        INSERT INTO productDetail (product_sku, price, author, book_name, format, pages, dimensions, publication_date)
-        VALUES (?, ?, ?, ?, 'Default Format', ?, 'N/A', ?);
-    END
+        IF NOT EXISTS (SELECT 1 FROM productDetail WHERE product_sku = ?)
+        BEGIN
+            INSERT INTO productDetail (product_sku, book_name, format, pages, dimensions, publication_date)
+            VALUES (?, ?, 'Default Format', ?, 'N/A', ?);
+        END
     """;
 
+        // 4️⃣ Thêm Product_Author nếu chưa có (bản giống hệt SQL bạn test thành công)
         String insertProductAuthor = """
-    DECLARE @author_id INT;
-    SELECT @author_id = id FROM Author WHERE name = ?;
-    IF NOT EXISTS (SELECT 1 FROM Product_Author WHERE product_sku = ? AND author_id = @author_id)
-    BEGIN
-        INSERT INTO Product_Author (product_sku, author_id)
-        VALUES (?, @author_id);
-    END
+        DECLARE @author_id INT;
+        SELECT @author_id = id FROM Author WHERE name = ?;
+        IF @author_id IS NOT NULL
+        BEGIN
+            IF NOT EXISTS (SELECT 1 FROM Product_Author WHERE product_sku = ? AND author_id = @author_id)
+            BEGIN
+                INSERT INTO Product_Author (product_sku, author_id)
+                VALUES (?, @author_id);
+            END
+        END
     """;
 
         try (
                 PreparedStatement psAuthor = this.getConnection().prepareStatement(insertAuthor); PreparedStatement psProduct = this.getConnection().prepareStatement(insertProduct); PreparedStatement psDetail = this.getConnection().prepareStatement(insertProductDetail); PreparedStatement psProdAuthor = this.getConnection().prepareStatement(insertProductAuthor)) {
-
+            // ✅ B1: Insert Author
             psAuthor.setString(1, author_name);
             psAuthor.setString(2, author_name);
             psAuthor.executeUpdate();
 
+            // ✅ B2: Insert Product
             psProduct.setString(1, sku_product);
             psProduct.setString(2, name_product);
             psProduct.setString(3, description_product);
             psProduct.setString(4, img);
             psProduct.setDouble(5, price_product);
             psProduct.setDate(6, created_date);
-            psProduct.setString(7, category_name);
+            psProduct.setInt(7, quantity);
+            psProduct.setString(8, category_name);
 
             int inserted = psProduct.executeUpdate();
             if (inserted == 0) {
@@ -140,21 +151,21 @@ public class ProductDAO extends DBContext {
                 return 0;
             }
 
+            // ✅ B3: Insert ProductDetail
             psDetail.setString(1, sku_product);
             psDetail.setString(2, sku_product);
-            psDetail.setDouble(3, price_product);
-            psDetail.setString(4, author_name);
-            psDetail.setString(5, name_product);
-            psDetail.setInt(6, pages_productDetail);
-            psDetail.setDate(7, created_date);
+            psDetail.setString(3, name_product);
+            psDetail.setInt(4, pages_productDetail);
+            psDetail.setDate(5, created_date);
             psDetail.executeUpdate();
 
+            // ✅ B4: Insert Product_Author
             psProdAuthor.setString(1, author_name);
             psProdAuthor.setString(2, sku_product);
             psProdAuthor.setString(3, sku_product);
             psProdAuthor.executeUpdate();
 
-            System.out.println("✅ All data inserted successfully (with quantity=0, status=1)!");
+            System.out.println("✅ All data inserted successfully!");
             return 1;
 
         } catch (SQLException e) {
@@ -167,26 +178,28 @@ public class ProductDAO extends DBContext {
     // Lấy 1 sản phẩm theo SKU
     public Product getBySku(String sku_product) {
         String query = """
-        SELECT 
-            p.sku,
-            p.name AS product_name,
-            p.img,
-            p.description,
-            c.name AS category_name,
-            a.name AS author_name,
-            p.price,
-            COALESCE(SUM(od.quantity), 0) AS sold,
-            p.created_product AS created_date,
-                       pd.pages AS pages
-        FROM Product p
-        LEFT JOIN Product_Author pa ON p.sku = pa.product_sku
-        LEFT JOIN Author a ON pa.author_id = a.id
-        LEFT JOIN Category c ON p.category_id = c.id
-        LEFT JOIN OrderDetails od ON p.sku = od.sku
-                       LEFT JOIN productDetail pd ON p.sku = pd.product_sku
-        WHERE p.sku = ?
-        GROUP BY p.sku, p.name, p.img, c.name, a.name, p.price, p.created_product, p.description,pd.pages
-    """;
+    SELECT 
+        p.sku,
+        p.name AS product_name,
+        p.img,
+        p.description,
+        p.quantity,
+        c.name AS category_name,
+        a.name AS author_name,
+        p.price,
+        COALESCE(SUM(od.quantity), 0) AS sold,
+        p.created_product AS created_date,
+        pd.pages AS pages
+    FROM Product p
+    LEFT JOIN Product_Author pa ON p.sku = pa.product_sku
+    LEFT JOIN Author a ON pa.author_id = a.id
+    LEFT JOIN Category c ON p.category_id = c.id
+    LEFT JOIN OrderDetails od ON p.sku = od.sku
+    LEFT JOIN productDetail pd ON p.sku = pd.product_sku
+    WHERE p.sku = ?
+    GROUP BY p.sku, p.name, p.img, p.description, p.quantity,
+             c.name, a.name, p.price, p.created_product, pd.pages
+""";
 
         try (PreparedStatement ps = this.getConnection().prepareStatement(query)) {
             ps.setString(1, sku_product);
@@ -203,6 +216,7 @@ public class ProductDAO extends DBContext {
                     p.setQuantity_orderDetail(rs.getInt("sold"));
                     p.setCreated_product(rs.getDate("created_date"));
                     p.setPages(rs.getInt("pages"));
+                    p.setQuantity(rs.getInt("quantity"));
                     return p;
                 }
             }
@@ -215,10 +229,10 @@ public class ProductDAO extends DBContext {
 
     public int updateBook(String sku, String name, String author, String imgPath,
             String description, Date createdDate, int pages,
-            String categoryName, double price) {
+            String categoryName, double price, int quantity) {
         String sql = """
         UPDATE Product
-        SET name = ?, description = ?, img = ?, price = ?, created_product = ?,
+        SET name = ?, description = ?, img = ?, price = ?, created_product = ?, quantity=?,
             category_id = (SELECT id FROM Category WHERE name = ?)
         WHERE sku = ?
     """;
@@ -228,8 +242,9 @@ public class ProductDAO extends DBContext {
             ps.setString(3, imgPath);
             ps.setDouble(4, price);
             ps.setDate(5, createdDate);
-            ps.setString(6, categoryName);
-            ps.setString(7, sku);
+            ps.setInt(6, quantity);
+            ps.setString(7, categoryName);
+            ps.setString(8, sku);
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -269,19 +284,29 @@ public class ProductDAO extends DBContext {
         }
     }
 
-    // kiểm tra sku tồn tại chưa
-    public boolean isSkuExist(String sku_product) {
-        String sql = "SELECT COUNT(*) FROM Product WHERE sku = ?";
-        try (PreparedStatement ps = this.getConnection().prepareStatement(sql)) {
-            ps.setString(1, sku_product);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) > 0; // nếu > 0 là đã tồn tại
+    public String generateNextBookCode() {
+        String query = "SELECT sku FROM product ORDER BY sku ASC";
+        List<String> existingCodes = new ArrayList<>();
+
+        try (Connection con = new DBContext().getConnection(); PreparedStatement ps = con.prepareStatement(query); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                existingCodes.add(rs.getString("sku"));
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+
+        // Kiểm tra từ BOOK01 đến BOOK99 xem số nào trống
+        for (int i = 1; i <= 99; i++) {
+            String code = String.format("BOOK%02d", i);
+            if (!existingCodes.contains(code)) {
+                return code; // Trả về code trống đầu tiên
+            }
+        }
+
+        return "BOOK99"; // fallback (giới hạn đến BOOK99)
     }
 
     public List<Author> getAllAuthors() {
@@ -337,12 +362,12 @@ public class ProductDAO extends DBContext {
         try (PreparedStatement ps = this.getConnection().prepareStatement(query); ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                
+
                 ProductDetail p = new ProductDetail(rs.getInt("id"));
-                list.add(new Book(rs.getString("sku"),rs.getString("img"),rs.getString("product_name"),
+                list.add(new Book(rs.getString("sku"), rs.getString("img"), rs.getString("product_name"),
                         rs.getDouble("price_vnd"), rs.getInt("remaining_quantity"), rs.getString("category_name"),
                         rs.getString("author_name"), rs.getInt("sold"), p));
-                
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
