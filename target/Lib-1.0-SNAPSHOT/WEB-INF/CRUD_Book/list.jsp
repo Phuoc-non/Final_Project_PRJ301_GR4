@@ -151,8 +151,7 @@
                         </p>
 
 
-                        <!-- 🌿 Pagination -->
-                        <!-- 🌿 Pagination -->
+   
                         <nav aria-label="Page navigation">
                             <ul class="pagination">
                                 <!-- Nút Previous -->

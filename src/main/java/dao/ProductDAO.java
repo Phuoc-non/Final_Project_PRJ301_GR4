@@ -703,14 +703,14 @@ public class ProductDAO extends DBContext {
         try {
            
             String query = """
-                                   SELECT COUNT(*)
-                                                                   FROM Product p
-                                                                   LEFT JOIN Product_Author pa ON p.sku = pa.product_sku
-                                                                   LEFT JOIN Author a ON pa.author_id = a.id
-                                                                   LEFT JOIN Category c ON p.category_id = c.id
-                                                                   LEFT JOIN OrderDetails od ON p.sku = od.sku
-                                                                   LEFT JOIN productDetail pd ON p.sku = pd.product_sku
-                                                                   where c.name = ?
+                                  SELECT COUNT(DISTINCT p.sku)
+                                                                                                      FROM Product p
+                                                                                                      LEFT JOIN Product_Author pa ON p.sku = pa.product_sku
+                                                                                                      LEFT JOIN Author a ON pa.author_id = a.id
+                                                                                                      LEFT JOIN Category c ON p.category_id = c.id
+                                                                                                      LEFT JOIN OrderDetails od ON p.sku = od.sku
+                                                                                                      LEFT JOIN productDetail pd ON p.sku = pd.product_sku
+                                                                                                      where c.name = ?
                                                                   
                                     """;
             

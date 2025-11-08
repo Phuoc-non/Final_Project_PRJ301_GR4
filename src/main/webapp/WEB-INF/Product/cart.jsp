@@ -19,7 +19,7 @@ Author     : Asus
                     <h1>All Products</h1>
                     <ol class="tg-breadcrumb">
                         <li><a href="book">home</a></li>
-                        <li><a href="ab?cate">Products</a></li>
+                        <li><a href="ab?cate=all">Products</a></li>
                         <li class="tg-active">Cart Here</li>
                     </ol>
                 </div>
